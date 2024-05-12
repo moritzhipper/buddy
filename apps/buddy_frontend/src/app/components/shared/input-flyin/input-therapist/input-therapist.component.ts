@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription, catchError, map, of, switchMap } from 'rxjs';
-import { fadeInFromZeroHeight } from '../../../animations';
-import { Therapist } from '../../../models';
-import { BackendAdapterService } from '../../../services/backend-adapter.service';
-import { InputService } from '../service/input.service';
+import { fadeInFromZeroHeight } from '../../../../animations';
+import { Therapist } from '../../../../models';
+import { BackendAdapterService } from '../../../../services/backend-adapter.service';
+import { InputService } from '../../../../services/input.service';
 
 
 @Component({

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { InputService } from '../service/input.service';
+import { InputService } from '../../../../services/input.service';
 
 @Component({
   selector: 'app-input-confirm',

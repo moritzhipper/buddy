@@ -3,16 +3,16 @@ import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { fadeOutAnimation } from "apps/buddy_frontend/src/app/animations";
 import { Appointment, Goal } from "apps/buddy_frontend/src/app/models";
-import { InputResolveTypes, InputService, InputTypes } from "apps/buddy_frontend/src/app/modules/input-flyin/service/input.service";
 import { appointmentActions, goalActions, noteActions, settingsActions } from "apps/buddy_frontend/src/app/store/buddy.actions";
 import { selectAppointments, selectGoals, selectNotes, selectSettings, selectUserProfile } from "apps/buddy_frontend/src/app/store/buddy.selectors";
 import { BuddyState } from "apps/buddy_frontend/src/app/store/buddy.state";
 import { isAppointmentInPast, remindableComparator } from "apps/buddy_frontend/src/app/utiles-time";
 import { trackById, vibrateInfo } from "apps/buddy_frontend/src/app/utils";
 import { Observable, combineLatest, filter, map } from "rxjs";
-import { PagePlaceholderTextComponent } from "../../../shared/page-placeholder-text/page-placeholder-text.component";
 import { NoteComponent } from "../../../shared/note-components/note/note.component";
+import { PagePlaceholderTextComponent } from "../../../shared/page-placeholder-text/page-placeholder-text.component";
 import { AppointmentCardComponent } from "../appointment-card/appointment-card.component";
+import { InputService, InputTypes, InputResolveTypes } from "apps/buddy_frontend/src/app/services/input.service";
 
 
 @Component({

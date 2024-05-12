@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Address } from '../../../models';
-import { InputService } from '../service/input.service';
+import { Address } from '../../../../models';
+import { InputService } from '../../../../services/input.service';
 
 @Component({
   selector: 'app-input-address',

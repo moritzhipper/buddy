@@ -3,12 +3,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { expandAnimation } from '../../../animations';
-import { ToastType } from '../../../models';
-import { ToastService } from '../../../services/toast.service';
-import { profileActions } from '../../../store/buddy.actions';
-import { BuddyState } from '../../../store/buddy.state';
-import { InputService } from '../service/input.service';
+import { expandAnimation } from '../../../../animations';
+import { ToastType } from '../../../../models';
+import { InputService } from '../../../../services/input.service';
+import { ToastService } from '../../../../services/toast.service';
+import { profileActions } from '../../../../store/buddy.actions';
+import { BuddyState } from '../../../../store/buddy.state';
 
 
 @Component({

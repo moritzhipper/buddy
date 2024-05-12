@@ -2,9 +2,9 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Remindable } from '../../../models';
-import { scrollToBottomIfChildrenOverflow } from '../../../utils';
-import { InputService } from '../service/input.service';
+import { Remindable } from '../../../../models';
+import { InputService } from '../../../../services/input.service';
+import { scrollToBottomIfChildrenOverflow } from '../../../../utils';
 
 
 @Component({

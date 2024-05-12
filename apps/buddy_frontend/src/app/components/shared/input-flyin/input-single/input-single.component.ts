@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputService, InputTypes } from '../service/input.service';
+import { InputService, InputTypes } from '../../../../services/input.service';
 
 @Component({
   selector: 'app-input-single',

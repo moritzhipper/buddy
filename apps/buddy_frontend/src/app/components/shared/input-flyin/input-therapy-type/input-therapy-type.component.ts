@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { TherapyTypeList } from "../../../models";
-import { scrollToBottomIfChildrenOverflow } from "../../../utils";
-import { InputService } from "../service/input.service";
+import { TherapyTypeList } from "../../../../models";
+import { InputService } from "../../../../services/input.service";
+import { scrollToBottomIfChildrenOverflow } from "../../../../utils";
 
 @Component({
   selector: 'app-input-therapy-type',

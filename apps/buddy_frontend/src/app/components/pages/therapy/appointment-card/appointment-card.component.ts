@@ -2,7 +2,7 @@ import { DatePipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input, inject } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Appointment } from "apps/buddy_frontend/src/app/models";
-import { InputResolveTypes, InputService, InputTypes } from "apps/buddy_frontend/src/app/modules/input-flyin/service/input.service";
+import { InputService, InputTypes, InputResolveTypes } from "apps/buddy_frontend/src/app/services/input.service";
 import { appointmentActions } from "apps/buddy_frontend/src/app/store/buddy.actions";
 
 

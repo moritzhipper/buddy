@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, Rende
 import { Store } from "@ngrx/store";
 import { expandAnimation } from "apps/buddy_frontend/src/app/animations";
 import { Remindable, Therapist, ToastType } from "apps/buddy_frontend/src/app/models";
-import { InputResolveTypes, InputResolver, InputService, InputTypes } from "apps/buddy_frontend/src/app/modules/input-flyin/service/input.service";
+import { InputService, InputTypes, InputResolveTypes, InputResolver } from "apps/buddy_frontend/src/app/services/input.service";
 import { ToastService } from "apps/buddy_frontend/src/app/services/toast.service";
 import { appointmentActions, therapistActions } from "apps/buddy_frontend/src/app/store/buddy.actions";
 import { selectUserProfile } from "apps/buddy_frontend/src/app/store/buddy.selectors";

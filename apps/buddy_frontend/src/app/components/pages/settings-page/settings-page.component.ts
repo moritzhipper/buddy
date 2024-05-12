@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { from, switchMap, take } from "rxjs";
 import { ToastType } from "../../../models";
-import { InputResolveTypes, InputService, InputTypes } from "../../../modules/input-flyin/service/input.service";
+import { InputResolveTypes, InputService, InputTypes } from "../../../services/input.service";
 import { ToastService } from "../../../services/toast.service";
 import { authActions, profileActions, settingsActions } from "../../../store/buddy.actions";
 import { selectSettings, selectUserProfile } from "../../../store/buddy.selectors";

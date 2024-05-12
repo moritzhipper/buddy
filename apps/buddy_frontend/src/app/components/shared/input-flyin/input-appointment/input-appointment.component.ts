@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, inject } 
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { Appointment } from '../../../models';
-import { InputService } from '../service/input.service';
+import { Appointment } from '../../../../models';
+import { InputService } from '../../../../services/input.service';
 
 
 @Component({

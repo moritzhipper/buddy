@@ -3,7 +3,8 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { vibrateInfo, vibrateWarning } from '../../../utils';
+import { InputService, InputTypes } from '../../../../services/input.service';
+import { vibrateInfo, vibrateWarning } from '../../../../utils';
 import { InputAddressComponent } from '../input-address/input-address.component';
 import { InputAppointmentComponent } from '../input-appointment/input-appointment.component';
 import { InputCallTimeComponent } from '../input-call-time/input-call-time.component';
@@ -12,7 +13,6 @@ import { InputPasswordComponent } from '../input-password/input-password.compone
 import { InputSingleComponent } from '../input-single/input-single.component';
 import { InputTherapistComponent } from '../input-therapist/input-therapist.component';
 import { InputTherapyTypeComponent } from '../input-therapy-type/input-therapy-type.component';
-import { InputService, InputTypes } from '../service/input.service';
 
 
 @Component({

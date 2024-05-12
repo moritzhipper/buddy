@@ -4,10 +4,6 @@ Hier halte ich fest, was ich gerade tue und in in naher und ferne Zukunft ergän
 
 ## Doing right now
 
-- pwa start reimplementieren
-- input module auflösen -> standalone regelt
-  https://web.dev/patterns/web-apps/richer-install-ui/
-
 ## Was jetzt passiert
 
 - input delay verringern über entkuppelung action -> backend -> reducer
@@ -27,8 +23,6 @@ Hier halte ich fest, was ich gerade tue und in in naher und ferne Zukunft ergän
 
 ## PWA
 
-- installieren auf macOS/iOS/Android spezifisch erklären
-- Icon type mascable setzen für alle
 - über service workers und timer benachrichtigungen setzen
 - icon als svg für alle sizes: https://developer.mozilla.org/en-US/docs/Web/Manifest/icons
 

@@ -1,10 +1,10 @@
 import { Directive, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Note } from '../../../models';
-import { InputResolveTypes, InputService, InputTypes } from '../../../modules/input-flyin/service/input.service';
+import { InputResolveTypes, InputService, InputTypes } from '../../../services/input.service';
 import { noteActions } from '../../../store/buddy.actions';
 import { BuddyState } from '../../../store/buddy.state';
 import { vibrateInfo } from '../../../utils';
-import { Store } from '@ngrx/store';
 
 
 @Directive()
