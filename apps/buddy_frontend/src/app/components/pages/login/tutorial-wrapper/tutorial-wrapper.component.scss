@@ -1,203 +1,203 @@
 @use '_index' as *;
 
 :host {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 
-
-    background-color: $accent-color-4;
+   background-color: $accent-color-4;
 }
 
 .pages-wrapper {
-    background-color: $background-color;
-    overflow: hidden;
-    display: grid;
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
+   background-color: $background-color;
+   overflow: hidden;
+   display: grid;
+   box-sizing: border-box;
+   height: 100%;
+   width: 100%;
 
+   @include medium-small-screen {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr auto auto;
 
-    @include medium-small-screen {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr auto auto;
+      .page-element-wrapper {
+         &.image img {
+            transform: translateX(-20vw);
+         }
 
-        .page-element-wrapper {
-            &.image img {
-                transform: translateX(-20vw);
-            }
+         &.text {
+            margin: 0 32px;
+         }
 
-            &.text {
-                margin: 0 32px;
-            }
+         &.buttons {
+            margin: 32px;
+         }
+      }
+   }
 
-            &.buttons {
-                margin: 32px;
-            }
-        }
-    }
+   @include medium-big-screen {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr auto;
+      gap: 64px;
 
-    @include medium-big-screen {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr auto;
-        gap: 64px;
+      padding: 64px;
+      margin: 64px;
+      height: 600px;
+      max-width: 1200px;
 
-        padding: 64px;
-        margin: 64px;
-        height: 600px;
-        max-width: 1200px;
+      border-radius: $border-radius-3;
+      @include shadow;
 
-        border-radius: $border-radius-3;
-        @include shadow;
-
-        .page-element-wrapper {
-            &.image {
-                grid-column: 1 / 2;
-                grid-row: 1 / span 2;
-
-                .overlay {
-                    opacity: .6;
-                }
-            }
-
-            &.text {
-                grid-column: 2 / 2;
-                grid-row: 1 / 1;
-            }
-
-            &.buttons {
-                grid-column: 2 / 2;
-                grid-row: 2 / 2;
-            }
-        }
-    }
-
-    .page-element-wrapper {
-        display: flex;
-        flex-flow: column;
-        justify-content: flex-end;
-
-        position: relative;
-        overflow: hidden;
-        box-sizing: border-box;
-
-        &.image {
-            img {
-                opacity: .7;
-                max-height: 100%;
-            }
+      .page-element-wrapper {
+         &.image {
+            grid-column: 1 / 2;
+            grid-row: 1 / span 2;
 
             .overlay {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                height: 300px;
-                z-index: 5;
-                background: linear-gradient(0deg, $background-color 4%, rgba(0, 0, 0, 0) 100%);
+               opacity: 0.6;
+            }
+         }
+
+         &.text {
+            grid-column: 2 / 2;
+            grid-row: 1 / 1;
+         }
+
+         &.buttons {
+            grid-column: 2 / 2;
+            grid-row: 2 / 2;
+         }
+      }
+   }
+
+   .page-element-wrapper {
+      display: flex;
+      flex-flow: column;
+      justify-content: flex-end;
+
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+
+      &.image {
+         img {
+            opacity: 0.7;
+            max-height: 100%;
+         }
+
+         .overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 300px;
+            z-index: 5;
+            background: linear-gradient(
+               0deg,
+               $background-color 4%,
+               rgba(0, 0, 0, 0) 100%
+            );
+         }
+
+         .qr-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            app-qr-code {
+               z-index: 6;
             }
 
-            .qr-wrapper {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            bottom: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+         }
+      }
 
-                app-qr-code {
-                    z-index: 6;
-                }
+      &.text {
+         h1,
+         h2 {
+            line-height: normal;
+            margin-bottom: 32px;
+         }
 
-                bottom: 0;
-                position: absolute;
-                width: 100%;
-                height: 100%;
+         p {
+            line-height: 1.5em;
+            margin: 4px 0;
+         }
+
+         ul {
+            margin: 0;
+            list-style-type: none;
+            padding-inline-start: 0;
+
+            li {
+               margin-bottom: 8px;
+               gap: 4px;
+               line-height: 1.5em;
+
+               &:before {
+                  content: '✔';
+               }
             }
-        }
+         }
+      }
 
-        &.text {
+      &.buttons {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 32px;
 
-            h1,
-            h2 {
-                line-height: normal;
-                margin-bottom: 32px;
+         animation: fadeIn 0.3s ease;
+
+         button {
+            padding: 20px 16px;
+            flex: 1;
+            font-size: $font-size-1;
+            border: none;
+
+            &.next {
+               border-radius: $border-radius-3;
+               color: $background-color;
+               background-color: dim($accent-color-3, bb);
+               font-weight: bold;
             }
 
-            p {
-                line-height: 1.5em;
-                margin: 4px 0;
+            &.back {
+               background-color: transparent;
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+
+               div {
+                  background-color: dim($accent-color-3, 33);
+                  border-radius: $border-radius-3;
+                  height: 8px;
+                  width: 8px;
+                  transition-property: width, background-color, height;
+                  transition-duration: 0.2s;
+
+                  &.active {
+                     width: 16px;
+                     height: 16px;
+                     background-color: dim($accent-color-3, 66);
+                  }
+               }
             }
-
-            ul {
-                margin: 0;
-                list-style-type: none;
-                padding-inline-start: 0;
-
-                li {
-                    margin-bottom: 8px;
-                    gap: 4px;
-                    line-height: 1.5em;
-
-                    &:before {
-                        content: "✔";
-                    }
-                }
-            }
-        }
-
-        &.buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-
-            animation: fadeIn .3s ease;
-
-            button {
-                padding: 20px 16px;
-                flex: 1;
-                font-size: $font-size-1;
-                border: none;
-
-
-                &.next {
-                    border-radius: $border-radius-3;
-                    color: $background-color;
-                    background-color: dim($accent-color-3, bb);
-                    font-weight: bold;
-                }
-
-                &.back {
-                    background-color: transparent;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    div {
-                        background-color: dim($accent-color-3, 33);
-                        border-radius: $border-radius-3;
-                        height: 8px;
-                        width: 8px;
-                        transition-property: width, background-color, height;
-                        transition-duration: .2s;
-
-                        &.active {
-                            width: 16px;
-                            height: 16px;
-                            background-color: dim($accent-color-3, 66);
-                        }
-                    }
-                }
-            }
-        }
-    }
+         }
+      }
+   }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
+   from {
+      opacity: 0;
+      transform: translateY(5px);
+   }
 
-    to {
-        opacity: 1;
-    }
+   to {
+      opacity: 1;
+   }
 }

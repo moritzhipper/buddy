@@ -3,14 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { NotificationSchedulerService } from './notification-scheduler.service';
 
 describe('NotificationSchedulerService', () => {
-  let service: NotificationSchedulerService;
+   let service: NotificationSchedulerService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(NotificationSchedulerService);
-  });
+   beforeEach(() => {
+      TestBed.configureTestingModule({});
+      service = TestBed.inject(NotificationSchedulerService);
+   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+   it('should be created', () => {
+      expect(service).toBeTruthy();
+   });
 });

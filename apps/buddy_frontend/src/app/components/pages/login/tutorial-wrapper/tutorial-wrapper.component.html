@@ -1,139 +1,150 @@
-<div class="pages-wrapper" [ngSwitch]="activePage" [@flyInList]="activePage" @fadeInOut>
-    <ng-container *ngSwitchCase="0">
-        <div class="page-element-wrapper image">
-            <img src="../../../../assets/graphics/undraw_welcoming_re_x0qo.svg">
-            <div class="overlay"></div>
+<div
+   class="pages-wrapper"
+   [ngSwitch]="activePage"
+   [@flyInList]="activePage"
+   @fadeInOut
+>
+   <ng-container *ngSwitchCase="0">
+      <div class="page-element-wrapper image">
+         <img src="../../../../assets/graphics/undraw_welcoming_re_x0qo.svg" />
+         <div class="overlay"></div>
+      </div>
+      <div class="page-element-wrapper text">
+         <h1>Hallo</h1>
+         <p>
+            Diese App Hilft dir einen Therapieplatz zu finden und begleitet dich
+            bei deiner Therapie.
+         </p>
+      </div>
+   </ng-container>
 
-        </div>
-        <div class="page-element-wrapper text">
-            <h1>Hallo</h1>
-            <p>
-                Diese App Hilft dir einen Therapieplatz zu finden und begleitet dich bei deiner Therapie.
-            </p>
-        </div>
-    </ng-container>
+   <ng-container *ngSwitchCase="1">
+      <div class="page-element-wrapper image">
+         <img src="../../../../assets/graphics/undraw_road_sign_re_3kc3.svg" />
+         <div class="overlay"></div>
+      </div>
+      <div class="page-element-wrapper text">
+         <h2>Diese App Hilft dir, einen Therapieplatz zu finden</h2>
+         <ul>
+            <li>verwalte Therapheut*innen</li>
+            <li>lass dich erinnern, wenn du sie anrufen kannst</li>
+            <li>organisiere Notizen, Anrufzeiten, Addressen und mehr</li>
+         </ul>
+      </div>
+   </ng-container>
 
-    <ng-container *ngSwitchCase="1">
-        <div class="page-element-wrapper image">
-            <img src="../../../../assets/graphics/undraw_road_sign_re_3kc3.svg">
-            <div class="overlay"></div>
-        </div>
-        <div class="page-element-wrapper text">
-            <h2>
-                Diese App Hilft dir, einen Therapieplatz zu finden
-            </h2>
-            <ul>
-                <li>
-                    verwalte Therapheut*innen
-                </li>
-                <li>
-                    lass dich erinnern, wenn du sie anrufen kannst
-                </li>
-                <li>
-                    organisiere Notizen, Anrufzeiten, Addressen und mehr
-                </li>
-            </ul>
-        </div>
-    </ng-container>
+   <ng-container *ngSwitchCase="2">
+      <div class="page-element-wrapper image">
+         <img src="../../../../assets/graphics/undraw_high_five_re_jy71.svg" />
+         <div class="overlay"></div>
+      </div>
+      <div class="page-element-wrapper text">
+         <h2>Diese App begleitet dich bei deiner Therapie</h2>
+         <ul>
+            <li>lege Notizen zu vergangen Stunden an</li>
+            <li>halte wichtige Themen und Ziele fest</li>
+         </ul>
+      </div>
+   </ng-container>
+   <ng-container *ngSwitchCase="3">
+      <div class="page-element-wrapper image">
+         <img
+            class="small"
+            src="../../../../assets/graphics/undraw_apps_re_ienc.svg"
+         />
+         <div class="overlay"></div>
+      </div>
+      <div class="page-element-wrapper text">
+         <h2>Diese App ist einfach zu installieren</h2>
+         <p>
+            Öffne einfach die Websitenoptionen über das
+            <b>Drei-Punkte - Menü</b> oben rechts und drücke
+            <b>App installieren</b>.
+         </p>
+      </div>
+   </ng-container>
+   <ng-container *ngSwitchCase="4">
+      <div class="page-element-wrapper image">
+         <img
+            class="share"
+            src="../../../../assets/graphics/undraw_showing_support_re_5f2v.svg"
+         />
+         <div class="overlay"></div>
+      </div>
+      <div class="page-element-wrapper text">
+         <h2>Datenschutz</h2>
+         <p>
+            Das Eintragen einer Therapeut*in hilft nicht nur dir einen Platz zu
+            finden, sondern unterstützt auch andere bei ihrer Suche.
+         </p>
+         <p>
+            Deine persönlichen Daten wie Notizen, Ziele, und Termine bleiben
+            privat.
+         </p>
+         <p>
+            <a routerLink="/">Zu den Datenschutzbestimmungen</a>
+         </p>
+      </div>
+   </ng-container>
+   <ng-container *ngSwitchCase="5">
+      <div class="page-element-wrapper image">
+         <img
+            class="small"
+            src="../../../../assets/graphics/undraw_walking_outside_re_56xo.svg"
+         />
+         <div class="overlay"></div>
+         <div class="qr-wrapper">
+            <app-qr-code [isBig]="true" />
+         </div>
+      </div>
 
-    <ng-container *ngSwitchCase="2">
-        <div class="page-element-wrapper image">
-            <img src="../../../../assets/graphics/undraw_high_five_re_jy71.svg">
-            <div class="overlay"></div>
+      <div class="page-element-wrapper text">
+         <h2>Keine komplizierte Anmeldung</h2>
+         <p>
+            Keine Komplizierte Anmeldung.<br />
+            Kopiere den Key als Text oder <b>Mache einen Screenshot</b>, damit
+            du deine Daten später wieder laden kannst.
+         </p>
+      </div>
+   </ng-container>
+   <div class="page-element-wrapper buttons">
+      <button class="back" (click)="goToLastPage()">
+         <div
+            *ngFor="let i of [0, 1, 2, 3, 4, 5]"
+            [ngClass]="{ active: activePage === i }"
+         ></div>
+      </button>
 
-        </div>
-        <div class="page-element-wrapper text">
-            <h2>
-                Diese App begleitet dich bei deiner Therapie
-            </h2>
-            <ul>
-                <li>
-                    lege Notizen zu vergangen Stunden an
-                </li>
-                <li>
-                    halte wichtige Themen und Ziele fest
-                </li>
-            </ul>
+      <button
+         class="next"
+         *ngIf="[0, 1, 2, 3].includes(activePage)"
+         (click)="goToNextPage()"
+      >
+         weiter
+      </button>
 
-        </div>
+      <button
+         class="next"
+         *ngIf="!(hasQRKey$ | async) && activePage === 4"
+         (click)="createQRKey()"
+      >
+         Zustimmen
+      </button>
 
-    </ng-container>
-    <ng-container *ngSwitchCase="3">
-        <div class="page-element-wrapper image">
-            <img class="small" src="../../../../assets/graphics/undraw_apps_re_ienc.svg">
-            <div class="overlay"></div>
-        </div>
-        <div class="page-element-wrapper text">
-            <h2>
-                Diese App ist einfach zu installieren
-            </h2>
-            <p>
-                Öffne einfach die Websitenoptionen über das <b>Drei-Punkte - Menü</b> oben rechts und drücke <b>App
-                    installieren</b>.
-            </p>
-        </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="4">
-        <div class="page-element-wrapper image">
-            <img class="share" src="../../../../assets/graphics/undraw_showing_support_re_5f2v.svg">
-            <div class="overlay"></div>
-        </div>
-        <div class="page-element-wrapper text">
-            <h2>
-                Datenschutz
-            </h2>
-            <p>
-                Das Eintragen einer Therapeut*in hilft nicht nur dir einen Platz zu finden, sondern unterstützt auch
-                andere bei ihrer Suche.
-            </p>
-            <p>
-                Deine persönlichen Daten wie Notizen, Ziele, und Termine bleiben privat.
-            </p>
-            <p>
-                <a routerLink="/">Zu den Datenschutzbestimmungen</a>
-            </p>
-        </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="5">
+      <button
+         class="next"
+         *ngIf="(hasQRKey$ | async) && activePage === 4"
+         (click)="goToNextPage()"
+      >
+         weiter
+      </button>
 
-        <div class="page-element-wrapper image">
-            <img class="small" src="../../../../assets/graphics/undraw_walking_outside_re_56xo.svg">
-            <div class="overlay"></div>
-            <div class="qr-wrapper">
-                <app-qr-code [isBig]="true" />
-            </div>
-        </div>
-
-        <div class="page-element-wrapper text">
-            <h2>
-                Keine komplizierte Anmeldung
-            </h2>
-            <p>
-                Keine Komplizierte Anmeldung.<br>
-                Kopiere den Key als Text oder <b>Mache einen Screenshot</b>, damit du deine Daten später wieder laden
-                kannst.
-            </p>
-        </div>
-    </ng-container>
-    <div class="page-element-wrapper buttons">
-        <button class="back" (click)="goToLastPage()">
-            <div *ngFor="let i of [0,1,2,3,4,5]" [ngClass]="{'active': activePage === i}"></div>
-        </button>
-
-        <button class="next" *ngIf="[0,1,2,3].includes(activePage)" (click)="goToNextPage()">
-            weiter
-        </button>
-
-        <button class="next" *ngIf="!(hasQRKey$ | async) && activePage === 4" (click)="createQRKey()">
-            Zustimmen
-        </button>
-
-        <button class="next" *ngIf="(hasQRKey$ | async) && activePage === 4" (click)="goToNextPage()">
-            weiter
-        </button>
-
-        <button *ngIf="(hasQRKey$ | async) && activePage === 5" class="next active" (click)="goToNextPage()">Los
-            gehts!
-        </button>
-    </div>
+      <button
+         *ngIf="(hasQRKey$ | async) && activePage === 5"
+         class="next active"
+         (click)="goToNextPage()"
+      >
+         Los gehts!
+      </button>
+   </div>
 </div>

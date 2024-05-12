@@ -1,36 +1,36 @@
 @use '_index' as *;
 
 .form-elements {
-    gap: 16px;
+   gap: 16px;
 }
 
 .option-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 
-    input[type=checkbox] {
-        display: none;
+   input[type='checkbox'] {
+      display: none;
 
-        +label {
-            background-color: dim($accent-color-2, 66);
-            color: $accent-color-3;
-            border-radius: $border-radius-2;
+      + label {
+         background-color: dim($accent-color-2, 66);
+         color: $accent-color-3;
+         border-radius: $border-radius-2;
 
-            padding: 10px 8px;
-            transition: background-color .2s, border-color .2s, box-shadow .2s;
-            width: 100%;
-            cursor: pointer;
-        }
+         padding: 10px 8px;
+         transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+         width: 100%;
+         cursor: pointer;
+      }
 
-        &:checked {
-            +label {
-                color: $background-color;
-                border-color: $background-color;
-                font-weight: bold;
-                background-color: $accent-color-1;
-                @include shadow_topdown;
-            }
-        }
-    }
+      &:checked {
+         + label {
+            color: $background-color;
+            border-color: $background-color;
+            font-weight: bold;
+            background-color: $accent-color-1;
+            @include shadow_topdown;
+         }
+      }
+   }
 }

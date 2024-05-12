@@ -1,162 +1,156 @@
 @use '_index' as *;
 
 :host {
-    z-index: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+   z-index: 0;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
 }
 
 app-tutorial-wrapper {
-    animation: slowAppear 1s;
+   animation: slowAppear 1s;
 }
 
-
 .video-wrapper {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: $border-radius-2;
-    border: 2px solid $accent-color-2;
-    background-color: dim($accent-color-2, 55);
-    @include shadow();
+   position: relative;
+   width: 300px;
+   height: 200px;
+   display: flex;
+   justify-content: center;
+   overflow: hidden;
+   border-radius: $border-radius-2;
+   border: 2px solid $accent-color-2;
+   background-color: dim($accent-color-2, 55);
+   @include shadow();
 
-
-    video,
-    span {
-        opacity: .6;
-        display: block;
-    }
+   video,
+   span {
+      opacity: 0.6;
+      display: block;
+   }
 }
 
 .tutorial-toggle {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    background-color: transparent;
-    border: none;
-    padding: 24px 24px;
-    font-size: 1em;
-    color: $font-color;
-    animation: flyIn 3s;
+   position: fixed;
+   top: 0;
+   right: 0;
+   z-index: 2;
+   background-color: transparent;
+   border: none;
+   padding: 24px 24px;
+   font-size: 1em;
+   color: $font-color;
+   animation: flyIn 3s;
 }
-
 
 h1 {
-    text-align: center;
-    margin-bottom: 16px;
+   text-align: center;
+   margin-bottom: 16px;
 }
-
-
 
 .selector {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 16px;
 
-    p {
-        margin: 0;
-        font-size: .9em;
-    }
+   p {
+      margin: 0;
+      font-size: 0.9em;
+   }
 
-    .option-selector {
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        gap: 8px;
-        width: 100%;
-        color: $font-color;
-        font-size: 1em;
-        border-radius: $border-radius-2;
-        border: none;
-        padding: 16px;
-        border: 2px solid $accent-color-2;
-    }
+   .option-selector {
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+      gap: 8px;
+      width: 100%;
+      color: $font-color;
+      font-size: 1em;
+      border-radius: $border-radius-2;
+      border: none;
+      padding: 16px;
+      border: 2px solid $accent-color-2;
+   }
 }
 
-
 .login-option {
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+   max-width: 300px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 16px;
 
-    input {
-        width: 300px;
-    }
+   input {
+      width: 300px;
+   }
 
-    .description {
-        @include info-box;
+   .description {
+      @include info-box;
 
-        text-align: center;
-        box-sizing: border-box;
-        width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
 
-        b {
-            display: block;
-            padding-bottom: 5px;
-        }
-    }
+      b {
+         display: block;
+         padding-bottom: 5px;
+      }
+   }
 
-    .button-wrapper {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 0 8px;
-        display: flex;
-        gap: 8px
-    }
+   .button-wrapper {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 8px;
+      display: flex;
+      gap: 8px;
+   }
 
-    button {
-        flex: 1;
-        border: none;
-        padding: 10px 16px;
-        font-size: 1em;
-        border-radius: $border-radius-1;
+   button {
+      flex: 1;
+      border: none;
+      padding: 10px 16px;
+      font-size: 1em;
+      border-radius: $border-radius-1;
 
-        &.ok {
-            background-color: dim($accent-color-3, cc);
-            color: $background-color;
-        }
+      &.ok {
+         background-color: dim($accent-color-3, cc);
+         color: $background-color;
+      }
 
-        &.back {
-            border: 1px solid dim($accent-color-3, cc);
-            color: $font-color;
-            background-color: transparent;
-        }
-    }
+      &.back {
+         border: 1px solid dim($accent-color-3, cc);
+         color: $font-color;
+         background-color: transparent;
+      }
+   }
 }
 
 @keyframes flyIn {
-    0% {
-        opacity: 0;
-        transform: translateX(10px);
-    }
+   0% {
+      opacity: 0;
+      transform: translateX(10px);
+   }
 
-    80% {
-        opacity: 0;
-        transform: translateX(10px);
-    }
+   80% {
+      opacity: 0;
+      transform: translateX(10px);
+   }
 
-    100% {
-        opacity: 1;
-        transform: translateX(0px);
-    }
+   100% {
+      opacity: 1;
+      transform: translateX(0px);
+   }
 }
 
 @keyframes slowAppear {
-    from {
-        opacity: 0;
-    }
+   from {
+      opacity: 0;
+   }
 
-    to {
-        opacity: 1;
-    }
+   to {
+      opacity: 1;
+   }
 }

@@ -8,45 +8,52 @@ import { SettingsPageComponent } from './components/pages/settings-page/settings
 import { TherapyPageComponent } from './components/pages/therapy/therapy-page/therapy-page.component';
 import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 
-const routes: Routes = [{
-  path: '',
-  children: [
-    {
-      path: 'login', component: LoginPageComponent,
-      title: 'Buddy | Login'
-    },
-    {
-      path: 'info', component: InfoPageComponent,
-      title: 'Buddy | Info'
-    },
-    {
-      path: 'find', component: FindPageComponent,
-      canActivate: [IsLoggedInGuard],
-      title: 'Buddy | Finden'
-    },
-    {
-      path: 'remember', component: RememberPageComponent,
-      canActivate: [IsLoggedInGuard],
-      title: 'Buddy | Merken'
-    },
-    {
-      path: 'therapy', component: TherapyPageComponent,
-      canActivate: [IsLoggedInGuard],
-      title: 'Buddy | Therapie'
-    },
-    {
-      path: 'settings', component: SettingsPageComponent,
-      canActivate: [IsLoggedInGuard],
-      title: 'Buddy | Einstellungen'
-    },
-    { path: '', redirectTo: '/find', pathMatch: 'full' },
-    { path: '**', redirectTo: '/find', pathMatch: 'full' }
-  ]
-}
+const routes: Routes = [
+   {
+      path: '',
+      children: [
+         {
+            path: 'login',
+            component: LoginPageComponent,
+            title: 'Buddy | Login',
+         },
+         {
+            path: 'info',
+            component: InfoPageComponent,
+            title: 'Buddy | Info',
+         },
+         {
+            path: 'find',
+            component: FindPageComponent,
+            canActivate: [IsLoggedInGuard],
+            title: 'Buddy | Finden',
+         },
+         {
+            path: 'remember',
+            component: RememberPageComponent,
+            canActivate: [IsLoggedInGuard],
+            title: 'Buddy | Merken',
+         },
+         {
+            path: 'therapy',
+            component: TherapyPageComponent,
+            canActivate: [IsLoggedInGuard],
+            title: 'Buddy | Therapie',
+         },
+         {
+            path: 'settings',
+            component: SettingsPageComponent,
+            canActivate: [IsLoggedInGuard],
+            title: 'Buddy | Einstellungen',
+         },
+         { path: '', redirectTo: '/find', pathMatch: 'full' },
+         { path: '**', redirectTo: '/find', pathMatch: 'full' },
+      ],
+   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+   imports: [RouterModule.forRoot(routes)],
+   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,120 +1,119 @@
 @use '_index' as *;
 
-
 .input-element-wrapper {
-    display: inline-flex;
-    flex-flow: column;
-    box-sizing: content-box;
+   display: inline-flex;
+   flex-flow: column;
+   box-sizing: content-box;
 
-    label {
-        text-align: left;
-        padding-left: 8px;
-        font-size: $font-size-0;
-        color: dim($accent-color-3, cc);
-        margin-bottom: 4px;
-        opacity: 0;
-        transform: translate(5px, 10px);
-        transition: transform .2s, opacity .2s;
-    }
+   label {
+      text-align: left;
+      padding-left: 8px;
+      font-size: $font-size-0;
+      color: dim($accent-color-3, cc);
+      margin-bottom: 4px;
+      opacity: 0;
+      transform: translate(5px, 10px);
+      transition: transform 0.2s, opacity 0.2s;
+   }
 
-    &:has(input:not(:placeholder-shown)) label {
-        transform: translate(0);
-        opacity: 1;
-    }
+   &:has(input:not(:placeholder-shown)) label {
+      transform: translate(0);
+      opacity: 1;
+   }
 }
 
 //must contain radio-buttons input having input and label elements
 .horizontal-radio-input {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 16px;
+   display: flex;
+   justify-content: space-evenly;
+   margin: 16px;
 
-    input[type=radio] {
-        display: none;
+   input[type='radio'] {
+      display: none;
 
-        +label {
-            font-size: $font-size-2;
-            padding: 0 8px;
-            cursor: pointer;
-            color: $font-color;
-        }
+      + label {
+         font-size: $font-size-2;
+         padding: 0 8px;
+         cursor: pointer;
+         color: $font-color;
+      }
 
-        &:checked+label {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-    }
+      &:checked + label {
+         font-weight: bold;
+         text-decoration: underline;
+      }
+   }
 }
 
 .horizontal-from-to-inputs {
-    display: flex;
+   display: flex;
 
-    .time-wrapper {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
+   .time-wrapper {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
 
-        &:first-of-type {
-            padding-right: 16px;
-        }
+      &:first-of-type {
+         padding-right: 16px;
+      }
 
-        label {
-            text-align: left;
-            padding-left: 8px;
-            font-size: $font-size-0;
-            color: dim($accent-color-3, cc);
-        }
+      label {
+         text-align: left;
+         padding-left: 8px;
+         font-size: $font-size-0;
+         color: dim($accent-color-3, cc);
+      }
 
-        input {
-            width: 100%;
-            text-align: center;
-        }
-    }
+      input {
+         width: 100%;
+         text-align: center;
+      }
+   }
 }
 
 form,
 .form-wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
 
-    .form-elements {
-        padding: 16px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: safe center;
-        overflow: auto;
-        position: relative;
-    }
+   .form-elements {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: safe center;
+      overflow: auto;
+      position: relative;
+   }
 
-    .confirm-buttons-wrapper {
-        padding: 32px;
-        display: flex;
-        gap: 32px;
+   .confirm-buttons-wrapper {
+      padding: 32px;
+      display: flex;
+      gap: 32px;
 
-        button {
-            width: 100%;
-            padding: 16px;
-            border-radius: $border-radius-2;
-            border: none;
-            font-size: $font-size-1;
-            transition: opacity .3s;
+      button {
+         width: 100%;
+         padding: 16px;
+         border-radius: $border-radius-2;
+         border: none;
+         font-size: $font-size-1;
+         transition: opacity 0.3s;
 
-            &:first-of-type {
-                color: $font-color;
-                background-color: transparent;
-            }
+         &:first-of-type {
+            color: $font-color;
+            background-color: transparent;
+         }
 
-            &:nth-of-type(2) {
-                font-weight: bold;
-                background-color: dim($accent-color-3, cc);
-                color: $background-color;
-            }
+         &:nth-of-type(2) {
+            font-weight: bold;
+            background-color: dim($accent-color-3, cc);
+            color: $background-color;
+         }
 
-            &:disabled {
-                opacity: .2;
-            }
-        }
-    }
+         &:disabled {
+            opacity: 0.2;
+         }
+      }
+   }
 }

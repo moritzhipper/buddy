@@ -1,8 +1,7 @@
 <div class="wrapper" (click)="editAppointment()">
-    @if(appointment.isRepeating) {
-
-    Jeden {{appointment.weekday}} von {{appointment.from}} bis {{appointment.to}}
-    } @else {
-    {{appointment.date | date: 'dd. MMMM yyyy'}}
-    }
+   @if(appointment.isRepeating) { Jeden {{ appointment.weekday }} von
+   {{ appointment.from }} bis {{ appointment.to }}
+   } @else {
+   {{ appointment.date | date : 'dd. MMMM yyyy' }}
+   }
 </div>

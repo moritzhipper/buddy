@@ -1,88 +1,81 @@
 @use '_index' as *;
 
-
 .main-wrapper {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    left: 0;
-    bottom: 0;
-    z-index: 9;
-    background-color: #0006;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+   position: fixed;
+   width: 100vw;
+   height: 100vh;
+   left: 0;
+   bottom: 0;
+   z-index: 9;
+   background-color: #0006;
+   justify-content: center;
+   align-items: center;
+   display: flex;
 
+   .content-wrapper {
+      width: calc(100% - 16px);
+      margin: 8px;
+      border-radius: $border-radius-2;
+      position: absolute;
+      display: flex;
+      flex-flow: column;
+      background-color: $background-color;
+      box-shadow: 0px 10px 42px -10px dim($accent-color-3, 60);
+      overflow: hidden;
+      max-width: 500px;
+      max-height: 90vh;
 
-    .content-wrapper {
-        width: calc(100% - 16px);
-        margin: 8px;
-        border-radius: $border-radius-2;
-        position: absolute;
-        display: flex;
-        flex-flow: column;
-        background-color: $background-color;
-        box-shadow: 0px 10px 42px -10px dim($accent-color-3, 60);
-        overflow: hidden;
-        max-width: 500px;
-        max-height: 90vh;
+      @include small-screen {
+         bottom: 0;
+      }
 
+      &.big {
+         height: 800px;
+      }
 
-        @include small-screen {
-            bottom: 0;
-        }
+      &.medium {
+         height: 500px;
+      }
 
+      .header-wrapper {
+         padding: 16px;
+         display: flex;
+         justify-content: space-between;
+         align-items: flex-start;
+         border-bottom: 1px solid $line-color;
 
+         .header .description {
+            margin-top: 8px;
+            font-size: $font-size-1;
+            font-weight: normal;
+         }
 
-        &.big {
-            height: 800px;
-        }
+         button {
+            border: none;
+            background-color: #0000;
+            padding: 0 0 0 16px;
 
-        &.medium {
-            height: 500px;
+            svg {
+               transition: transform 0.2s;
 
-        }
+               path {
+                  fill: dim($accent-color-3, 60);
+               }
 
-        .header-wrapper {
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid $line-color;
+               &.bigger {
+                  transform: scale(1.6);
 
-            .header .description {
-                margin-top: 8px;
-                font-size: $font-size-1;
-                font-weight: normal;
+                  path {
+                     fill: dim($accent-color-3, 90);
+                  }
+               }
             }
+         }
+      }
 
-
-            button {
-                border: none;
-                background-color: #0000;
-                padding: 0 0 0 16px;
-
-                svg {
-                    transition: transform .2s;
-
-                    path {
-                        fill: dim($accent-color-3, 60);
-                    }
-
-                    &.bigger {
-                        transform: scale(1.6);
-
-                        path {
-                            fill: dim($accent-color-3, 90);
-                        }
-                    }
-                }
-            }
-        }
-
-        .input-wrapper {
-            height: 100%;
-            overflow: hidden;
-        }
-    }
+      .input-wrapper {
+         height: 100%;
+         overflow: hidden;
+      }
+   }
 }

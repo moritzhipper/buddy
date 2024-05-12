@@ -1,94 +1,89 @@
 @use '_index' as *;
 
-
 .call-time-element {
-    position: relative;
-    display: flex;
-    flex-direction: row;
+   position: relative;
+   display: flex;
+   flex-direction: row;
 
-    &.deletion-mode-on {
-        .time-picker-wrapper {
-            opacity: .5;
-            pointer-events: none;
-            transform: scale(.95) translateX(-20px);
-        }
+   &.deletion-mode-on {
+      .time-picker-wrapper {
+         opacity: 0.5;
+         pointer-events: none;
+         transform: scale(0.95) translateX(-20px);
+      }
 
-        .delete-button {
-            opacity: 1;
-            pointer-events: all;
-            transform: scale(1);
-        }
-    }
+      .delete-button {
+         opacity: 1;
+         pointer-events: all;
+         transform: scale(1);
+      }
+   }
 
+   .separator {
+      border-bottom: 1px solid $line-color-light;
+      margin: 0 32px;
+   }
 
-    .separator {
-        border-bottom: 1px solid $line-color-light;
-        margin: 0 32px;
-    }
+   .delete-button {
+      pointer-events: none;
+      overflow: hidden;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: scale(0.8);
+      margin: 48px 8px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      @include shadow-topdown;
+      padding: 8px;
+      border: none;
+      border-radius: $border-radius-2;
+      background-color: dim($accent-color-3, cc);
+      color: $accent-color-0;
+   }
 
+   .time-picker-wrapper {
+      transition: opacity 0.2s, transform 0.2s;
+      width: 100%;
+      position: relative;
+      padding-bottom: 24px;
+   }
 
-    .delete-button {
-        pointer-events: none;
-        overflow: hidden;
-        transition: opacity .2s, transform .2s;
-        transform: scale(.8);
-        margin: 48px 8px;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        opacity: 0;
-        @include shadow-topdown;
-        padding: 8px;
-        border: none;
-        border-radius: $border-radius-2;
-        background-color: dim($accent-color-3, cc);
-        color: $accent-color-0;
-    }
-
-    .time-picker-wrapper {
-        transition: opacity .2s, transform .2s;
-        width: 100%;
-        position: relative;
-        padding-bottom: 24px;
-    }
-
-    .horizontal-from-to-inputs {
-        margin-bottom: 44px;
-    }
+   .horizontal-from-to-inputs {
+      margin-bottom: 44px;
+   }
 }
 
-
-
 .button-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 16px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 16px;
 
-    .single-button-wrapper {
-        width: 50%;
+   .single-button-wrapper {
+      width: 50%;
 
-        &:first-child * {
-            float: right;
-        }
+      &:first-child * {
+         float: right;
+      }
 
-        button {
-            background-color: #0000;
-            border: 1px solid $accent-color-1;
-            border-radius: 50%;
-            color: $accent-color-1;
-            margin: 8px;
+      button {
+         background-color: #0000;
+         border: 1px solid $accent-color-1;
+         border-radius: 50%;
+         color: $accent-color-1;
+         margin: 8px;
 
-            &.add {
-                font-size: $font-size-3;
-                width: 54px;
-                height: 54px;
-            }
+         &.add {
+            font-size: $font-size-3;
+            width: 54px;
+            height: 54px;
+         }
 
-            &.delete {
-                width: 32px;
-                height: 32px;
-            }
-        }
-    }
+         &.delete {
+            width: 32px;
+            height: 32px;
+         }
+      }
+   }
 }

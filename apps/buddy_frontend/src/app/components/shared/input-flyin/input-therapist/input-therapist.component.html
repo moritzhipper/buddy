@@ -1,53 +1,59 @@
 <form [formGroup]="therapistForm" (ngSubmit)="submit()">
-    <div class="form-elements">
-        <div class="input-element-wrapper street">
-            <label for="name">Name</label>
-            <input type="text" id="therapist" formControlName="therapist" autocomplete="off" placeholder="Name">
-        </div>
+   <div class="form-elements">
+      <div class="input-element-wrapper street">
+         <label for="name">Name</label>
+         <input
+            type="text"
+            id="therapist"
+            formControlName="therapist"
+            autocomplete="off"
+            placeholder="Name"
+         />
+      </div>
 
-        @if (hasSuggestions || suggestionsAreExpanded ) {
-        <div class="suggestion-wrapper" @fadeInFromZero>
-            <div class="suggestions-header">
-                <span class="text">
-                    Vorschläge
-                </span>
-                <button type="button" (click)="suggestionsAreExpanded = !suggestionsAreExpanded">
-                    {{suggestionsAreExpanded ? 'einklappen' : 'ausklappen'}}
-                </button>
-            </div>
-            @if (hasSuggestions) {
-            <div class="suggestion-elements" [class.expanded]="suggestionsAreExpanded">
-                <button class="suggestion" type="button" *ngFor="let therapist of suggestions;"
-                    (click)="selectTherapist(therapist.id)">
-                    <div class="name">
-                        {{therapist.name}}
-                    </div>
-                    <div class="city">
-                        70197 Stuttgart
-                    </div>
-                    <div class="select">
-                        +
-                    </div>
-                </button>
-            </div>
-            } @else {
-            <div class="placeholder">
-                <p>
-                    Keine Vorschläge gefunden
-                </p>
-            </div>
-            }
-
-        </div>
-        }
-    </div>
-    <div class=" confirm-buttons-wrapper">
-        <button type="button" (click)="discard()">Abbrechen</button>
-        <button type="submit" [disabled]="!therapistForm.valid">Neu Anlegen</button>
-    </div>
+      @if (hasSuggestions || suggestionsAreExpanded ) {
+      <div class="suggestion-wrapper" @fadeInFromZero>
+         <div class="suggestions-header">
+            <span class="text"> Vorschläge </span>
+            <button
+               type="button"
+               (click)="suggestionsAreExpanded = !suggestionsAreExpanded"
+            >
+               {{ suggestionsAreExpanded ? 'einklappen' : 'ausklappen' }}
+            </button>
+         </div>
+         @if (hasSuggestions) {
+         <div
+            class="suggestion-elements"
+            [class.expanded]="suggestionsAreExpanded"
+         >
+            <button
+               class="suggestion"
+               type="button"
+               *ngFor="let therapist of suggestions"
+               (click)="selectTherapist(therapist.id)"
+            >
+               <div class="name">
+                  {{ therapist.name }}
+               </div>
+               <div class="city">70197 Stuttgart</div>
+               <div class="select">+</div>
+            </button>
+         </div>
+         } @else {
+         <div class="placeholder">
+            <p>Keine Vorschläge gefunden</p>
+         </div>
+         }
+      </div>
+      }
+   </div>
+   <div class="confirm-buttons-wrapper">
+      <button type="button" (click)="discard()">Abbrechen</button>
+      <button type="submit" [disabled]="!therapistForm.valid">
+         Neu Anlegen
+      </button>
+   </div>
 </form>
 
-
-<ng-template #findExisting>
-
-</ng-template>
+<ng-template #findExisting> </ng-template>

@@ -1,11 +1,17 @@
 <button class="wrapper" (click)="editNote()">
-
-    <div class="header-wrapper">
-        <h2>
-            <span class="header" *ngIf="noteHeader">{{noteHeader}}</span>
-            <span class="date">{{noteFromInput.createdAt | date: 'dd.MM.yy'}}</span>
-        </h2>
-        <button class="reminder" (click)="toggleReminder(); $event.stopPropagation()">entfernen</button>
-    </div>
-    <div class="body">{{noteBody}}</div>
+   <div class="header-wrapper">
+      <h2>
+         <span class="header" *ngIf="noteHeader">{{ noteHeader }}</span>
+         <span class="date">{{
+            noteFromInput.createdAt | date : 'dd.MM.yy'
+         }}</span>
+      </h2>
+      <button
+         class="reminder"
+         (click)="toggleReminder(); $event.stopPropagation()"
+      >
+         entfernen
+      </button>
+   </div>
+   <div class="body">{{ noteBody }}</div>
 </button>
