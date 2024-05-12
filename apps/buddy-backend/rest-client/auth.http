@@ -1,0 +1,36 @@
+@base = http://localhost:5200
+@email = wasgeht@test.com
+@password = asam,sdnm,123
+
+###
+
+@name = createUser
+POST {{base}}/user
+
+###
+
+@name = getUser
+GET {{base}}/user
+
+###
+
+@name = setupBA
+POST {{base}}/auth/cred
+
+{
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
+
+###
+
+@name = createSessionWithSecret
+GET {{base}}/auth/sessions
+Buddy-Secret: ZmUxN2NlYjMtZjhhMS00MTkzLWE0M2YtMTliNjRhZjc0MTQx
+
+###
+
+@name = createSessionWithBasicAuth
+GET {{base}}/auth/sessions
+Authorization: name password
+

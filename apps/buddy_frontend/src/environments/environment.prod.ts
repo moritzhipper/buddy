@@ -1,4 +1,4 @@
-import { BuddyEnvironment } from './buddy-environment-typing';
+import { BuddyEnvironment } from './buddy-environment-interface';
 
 export const environment: BuddyEnvironment = {
    production: true,

@@ -1,0 +1,4 @@
+@base = http://localhost:5200
+
+GET {{base}}/user
+sessionID: fe039101-ae4f-4ff7-bc60-27a6901a84a3

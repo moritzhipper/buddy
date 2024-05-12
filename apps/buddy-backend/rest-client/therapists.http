@@ -1,0 +1,20 @@
+@base = http://localhost:5200
+@sessionID = 9dfc6e5d-8abb-4bc8-9b68-fbf480219672
+
+### 
+
+POST {{base}}/therapists/find
+sessionID: {{sessionID}}
+content-type: application/json
+
+{
+    "name": "Fel"
+}
+
+###
+
+GET {{base}}/therapists
+sessionID: 9dfc6e5d-8abb-4bc8-9b68-fbf480219672
+
+
+
