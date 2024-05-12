@@ -1,0 +1,154 @@
+@use '_index' as *;
+
+@include small-screen {
+    .header-wrapper {
+        display: inline-flex;
+        width: 100%;
+
+        button.calendar {
+            svg {
+                display: block;
+                width: 36px;
+                height: 36px;
+                color: $font-color;
+                opacity: .8;
+            }
+
+            background-color: transparent;
+            border: none;
+            position: relative;
+            margin-left: auto;
+
+            .notification {
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 2;
+                background-color: $accent-color-2;
+                width: 20px;
+                height: 20px;
+                font-size: 14px;
+                line-height: 20px;
+                transform: translate(5px, -5px);
+                color: $font-color;
+                border-radius: $border-radius-1;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .therapists-wrapper {
+        animation: fade-in-top .3s;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    app-therapist-calendar {
+        animation: fade-in-down .3s;
+
+        &.hide {
+            display: none;
+        }
+
+        max-width: 100%;
+    }
+
+    // they need to be defined inside of the media query because prod build does not work well with media query and in file defined animations
+@keyframes fade-in-top {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes fade-in-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+}
+
+@include big-screen {
+    .header-wrapper button {
+        display: none;
+    }
+
+    .body-wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: start;
+        gap: 32px;
+    }
+
+    .therapists-wrapper {
+        min-width: none;
+    }
+
+    app-therapist-calendar {
+        position: sticky;
+        top: 32px;
+        max-width: 350px;
+        min-width: 300px;
+    }
+}
+
+.header-wrapper {
+    box-sizing: border-box;
+    padding: 40px 16px 36px 16px;
+}
+
+.body-wrapper {
+    padding: 16px 32px;
+}
+
+.add-item-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.therapists-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.placeholder-text {
+    p {
+        margin: 0;
+    }
+
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+button.add {
+    background-color: #0000;
+    border: 1px solid $accent-color-1;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: $font-size-4;
+    color: $accent-color-1;
+
+    &.empty-page {
+        margin-top: 32px;
+        @include shimmer-animation;
+    }
+}
+
+
+

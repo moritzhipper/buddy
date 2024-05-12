@@ -1,0 +1,13 @@
+<form [formGroup]="therapyTypeForm" (ngSubmit)="submit()">
+    <div class="form-elements" #htmlFormElements>
+        <div class="option-wrapper" *ngFor="let therapyType of TherapyTypeList; let i = index;">
+            <input [formControlName]="therapyType" type="checkbox" [id]="'therapyType-' + i" [id]="'type-' + i"
+                multiple>
+            <label [for]="'type-' + i">{{therapyType}}</label>
+        </div>
+    </div>
+    <div class="confirm-buttons-wrapper">
+        <button type="button" (click)="discard()">Abbrechen</button>
+        <button type="submit" [disabled]="!therapyTypeForm.valid">Speichern</button>
+    </div>
+</form>

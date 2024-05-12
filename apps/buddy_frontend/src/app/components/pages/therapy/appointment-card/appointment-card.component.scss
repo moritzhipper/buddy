@@ -1,0 +1,13 @@
+@use '_index' as *;
+
+
+.wrapper {
+    cursor: pointer;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: $border-radius-3;
+    width: 100%;
+    border: 1px solid dim($accent-color-0, 70);
+    background-color: dim($accent-color-0, 44);
+    text-align: center;
+}

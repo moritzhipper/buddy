@@ -1,0 +1,81 @@
+@function dim($color, $opacity) {
+    @return $color+#{$opacity};
+}
+
+@mixin ellipsis-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+@mixin shadow {
+    box-shadow: 0px 7px 9px -8px dim($accent-color-1, 65);
+}
+
+@mixin shadow_topdown {
+    box-shadow: 0px 7px 15px -5px dim($accent-color-2, cc);
+}
+
+@mixin resetButton {
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: $font-color;
+    display: block;
+}
+
+@mixin info-box-light {
+    padding: 16px;
+    border: 1px solid $line-color;
+    border-radius: $border-radius-3;
+}
+
+@mixin info-box {
+    padding: 16px;
+    border: 1px solid $line-color;
+    border-radius: $border-radius-1;
+    background-color: dim($accent-color-2, 22);
+}
+
+@mixin shimmer-animation {
+    background: linear-gradient(-45deg, transparent 40%, dim($accent-color-0, 77) 50%, transparent 60%);
+    background-size: 300%;
+    background-position-x: 100%;
+    animation: shimmer 7s infinite linear;
+}
+
+/**
+    Responsiveness
+    Only use as pairs for clear distinction between styles. Sometimes style differences between windowsizes are a little bit more extensive 
+    Pairs are: (small-screen, big-screen) or (medium-small-screen, medium-big-screen)
+
+**/
+// smallsplit
+@mixin small-screen {
+    @media (max-width: 700px) {
+        @content;
+    }
+}
+
+@mixin big-screen {
+    @media (min-width: 701px) {
+        @content;
+    }
+}
+
+
+// medium split
+@mixin medium-small-screen {
+    @media (max-width: 900px) {
+        @content;
+    }
+}
+
+@mixin medium-big-screen {
+    @media (min-width: 901px) {
+        @content;
+    }
+}

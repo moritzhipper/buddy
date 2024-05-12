@@ -1,0 +1,41 @@
+@import '../input-styles.scss';
+
+:host {
+    width: 100%;
+}
+
+input[type='date'] {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.appear-left {
+    animation: appear-left .2s ease-out;
+}
+
+.appear-right {
+    animation: appear-right .2s ease-out;
+}
+
+
+@keyframes appear-left {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes appear-right {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}

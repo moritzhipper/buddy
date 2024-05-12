@@ -1,0 +1,13 @@
+<div class="toast-wrapper" *ngIf="toasts$ | async as toast" @fade>
+    <div class="toast-body">
+        <div class="icon" *ngIf="toast.type === ToastType.ERROR">
+            <img src="assets/symbols/exclamationmark.svg">
+        </div>
+        <div class="icon" *ngIf="toast.type === ToastType.SUCCESS">
+            <img src="assets/symbols/success.svg">
+        </div>
+        <div class="text">
+            {{toast.text}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+@import '../input-styles.scss';
+
+.form-elements {
+    align-items: center;
+    gap: 16px;
+    margin: 32px;
+    text-align: center;
+    line-height: 24px;
+
+    svg {
+        height: 42px;
+        width: 42px;
+    }
+}

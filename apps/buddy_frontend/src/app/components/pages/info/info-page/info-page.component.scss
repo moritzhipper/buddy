@@ -1,0 +1,93 @@
+@use '_index' as *;
+
+
+.header-wrapper {
+    padding: 40px 16px 16px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    svg {
+        margin-top: 6px;
+        fill: $font-color;
+    }
+}
+
+.body-wrapper {
+    padding: 0 16px 16px 16px;
+
+
+    h3 {
+        font-weight: bold;
+    }
+
+    p.important {
+        display: flex;
+        align-items: center;
+
+        span:first-child {
+            margin-right: 10px;
+            font-size: 2em;
+        }
+    }
+
+    app-accordion {
+        padding: 16px 0;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid dim($accent-color-2, bb);
+        }
+    }
+
+    a.page {
+        text-decoration: underline;
+        font-weight: bold;
+        color: $font-color;
+    }
+
+    .how-to-wrapper {
+        width: 100%;
+        gap: 16px;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 16px;
+        box-sizing: border-box;
+
+        .how-to-element {
+
+            position: relative;
+            @include info-box;
+            width: 150px;
+            height: 150px;
+            aspect-ratio: 1/1;
+
+
+            .counter {
+                position: absolute;
+                font-size: $font-size-4;
+                transform: scale(2) translate(-10px, -10px);
+                font-weight: bold;
+                opacity: .5;
+            }
+
+            .description-wrapper {
+                text-align: center;
+                display: flex;
+                gap: 4px;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+
+                a.contact {
+                    color: $font-color;
+                    width: 100%;
+                    box-sizing: border-box;
+                    border-radius: $border-radius-1;
+                }
+
+            }
+        }
+    }
+}

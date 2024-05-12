@@ -17,10 +17,14 @@
         "tsConfig": "apps/buddy_frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/buddy_frontend/src/favicon.ico",
           "apps/buddy_frontend/src/assets"
         ],
-        "styles": ["apps/buddy_frontend/src/styles.scss"],
+        "styles": ["apps/buddy_frontend/src/style/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "apps/buddy_frontend/src/style"
+          ]
+        },
         "scripts": []
       },
       "configurations": {

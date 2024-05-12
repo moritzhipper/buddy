@@ -1,0 +1,16 @@
+{
+  "name": "Buddy",
+  "short_name": "Buddy",
+  "theme_color": "#cfcfc2",
+  "background_color": "#cfcfc2",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/icons/app_icon.svg",
+      "sizes": "any",
+      "purpose": "monochrome maskable"
+    }
+  ]
+}

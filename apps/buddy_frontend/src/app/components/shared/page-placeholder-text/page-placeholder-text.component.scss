@@ -1,0 +1,29 @@
+@use '_index' as *;
+
+
+:host {
+
+    .content-wrapper {
+        position: relative;
+        padding: 0 16px;
+        display: block;
+
+        h2 {
+            margin-bottom: 24px;
+        }
+    }
+
+    @include big-screen {
+        margin-top: 20vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .content-wrapper {
+            max-width: 700px;
+            @include info-box;
+            box-sizing: border-box;
+        }
+
+    }
+}

@@ -1,0 +1,43 @@
+<form [formGroup]="callTimesForm" (ngSubmit)="submit()">
+    <div class="form-elements" #htmlFormElements>
+
+        <div class="call-time-element" formArrayName="callTimes"
+            *ngFor="let item of callTimesFormArray.controls; let i = index"
+            [ngClass]="{'deletion-mode-on':deletionModeIsOn}" @fade>
+
+            <div class="time-picker-wrapper" [formGroupName]="i">
+                <div class="horizontal-radio-input">
+                    <ng-container *ngFor="let day of weekdays">
+                        <input formControlName="weekday" type="radio" [value]="day" [id]="day + '-' + i">
+                        <label [for]="day + '-' + i">{{day}}</label>
+                    </ng-container>
+                </div>
+                <div class="horizontal-from-to-inputs">
+                    <div class="time-wrapper">
+                        <label for="from-{{i}}">von</label>
+                        <input type="time" formControlName="from" id="from-{{i}}">
+                    </div>
+                    <div class="time-wrapper">
+                        <label for="to-{{i}}">bis</label>
+                        <input type="time" formControlName="to" id="to-{{i}}">
+                    </div>
+                </div>
+                <div class="separator"></div>
+            </div>
+
+            <button class="delete-button" type="button" (click)="deleteCallTimeFormElement(i)">löschen</button>
+        </div>
+        <div class="button-wrapper">
+            <div class="single-button-wrapper">
+                <button type="button" class="delete" (click)="toggleDeletionMode()">-</button>
+            </div>
+            <div class="single-button-wrapper">
+                <button type="button" class="add" (click)="addCallTimeFormElement()">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="confirm-buttons-wrapper">
+        <button type="button" (click)="discard()">Abbrechen</button>
+        <button type="submit" [disabled]="!callTimesForm.valid">Speichern</button>
+    </div>
+</form>

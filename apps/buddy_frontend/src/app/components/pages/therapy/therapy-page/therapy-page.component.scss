@@ -1,0 +1,230 @@
+@use '_index' as *;
+
+.header-wrapper {
+  padding: 40px 16px 36px 16px;
+  display: flex;
+  justify-content: space-between;
+
+  h3 {
+    transition: font-size 0.2s, opacity 0.2s;
+    opacity: 0.7;
+
+    &.reminder-is-on {
+      opacity: 1;
+    }
+
+    &:not(.reminder-is-on) {
+      font-size: $font-size-1;
+    }
+  }
+
+  button {
+    background-color: #0000;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    font-size: $font-size-0;
+    color: $accent-color-2;
+    padding-top: 2px;
+
+    svg {
+      transition: all 0.3s;
+      fill: $accent-color-2;
+      transform: rotate(-25deg);
+      width: 48px;
+      height: 48px;
+    }
+
+    &.activated {
+      color: $accent-color-0;
+
+      svg {
+        fill: $accent-color-0;
+        animation: wiggle 1s;
+      }
+    }
+  }
+}
+
+.top-level-padding-single {
+  padding: 0 16px 16px;
+}
+
+.placeholder-text {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  p {
+    &.no-password {
+
+      @include big-screen {
+
+        border-radius: $border-radius-1;
+        padding: 8px;
+        border: 1px solid $accent-color-2;
+        background-color: dim($accent-color-3, 11);
+      }
+    }
+
+    margin: 0;
+  }
+}
+
+
+
+.actions-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  overflow-x: scroll;
+  white-space: nowrap;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &.page-is-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    padding-left: 0;
+    width: 100%;
+
+    flex-direction: column;
+
+    @include big-screen {
+      flex-direction: row;
+    }
+
+    .action {
+      margin: 8px;
+      padding: 8px;
+      width: 200px;
+      @include shimmer-animation;
+
+      &:nth-of-type(2) {
+        animation-delay: 1s;
+      }
+
+      &:nth-of-type(3) {
+        animation-delay: 2s;
+      }
+    }
+  }
+
+
+  .action {
+    border-radius: $border-radius-2;
+    font-size: $font-size-1;
+    padding: 8px 16px;
+    margin-right: 8px;
+    cursor: pointer;
+    background-color: #0000;
+    border: 1px solid $accent-color-1;
+    color: $accent-color-1;
+    display: inline-block;
+  }
+}
+
+.section {
+  margin: 32px 16px;
+  box-sizing: content-box;
+
+  h3 {
+    margin: 0 0 16px 0;
+  }
+
+  p.placeholder {
+    opacity: .8;
+  }
+
+
+
+  .elements-wrapper {
+    display: grid;
+    gap: 16px;
+
+
+    @include small-screen {
+      grid-template-columns: 1fr;
+
+      &.topics {
+        grid-template-columns: 1fr 1fr;
+
+      }
+
+    }
+
+    @include big-screen {
+      grid-template-columns: 1fr 1fr 1fr;
+
+      &.notes {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      }
+    }
+
+
+    .topic {
+      color: $accent-color-3;
+
+      border-radius: $border-radius-3;
+      cursor: pointer;
+      background-color: $accent-color-4;
+      @include shadow;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid dim($accent-color-1, 77);
+      text-align: center;
+      padding: 16px;
+      min-height: 40px;
+      word-break: keep-all;
+
+    }
+
+    app-note {
+      min-width: 0;
+    }
+
+    app-appointment-card {
+
+      &.past {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(-25deg);
+  }
+
+  20% {
+    transform: rotate(-35deg);
+  }
+
+  40% {
+    transform: rotate(-15deg);
+  }
+
+  60% {
+    transform: rotate(-35deg);
+  }
+
+  80% {
+    transform: rotate(-15deg);
+  }
+
+  100% {
+    transform: rotate(-25deg);
+  }
+}

@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+@use '_index' as *;
+
+@font-face {
+    font-family: "Public Sans";
+    src: local("Public Sans"), url(./../assets/fonts/PublicSans-Light.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Chivo Mono";
+    src: local("Chivo Mono"), url(./../assets/fonts/ChivoMono-Light.ttf) format("truetype");
+}
+
+@keyframes shimmer {
+    0% {
+        background-position-x: 100%
+    }
+
+    90% {
+        background-position-x: 100%
+    }
+
+    100% {
+        background-position-x: 0%
+    }
+}
+
+
+body {
+    margin: 0px;
+    background-color: $background-color;
+    font-family: $font-standard;
+    color: $font-color;
+
+    h1 {
+        font-weight: bold;
+        font-size: $font-size-4;
+    }
+
+    h2 {
+        font-weight: bold;
+        font-size: $font-size-2;
+    }
+
+    h3,
+    h4 {
+        font-weight: normal;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 0;
+        color: $font-color;
+    }
+
+    button {
+        cursor: pointer;
+        font-family: $font-standard
+    }
+
+    textarea,
+    input {
+        font-family: $font-standard;
+        border: 2px solid $accent-color-2;
+        background-color: dim($accent-color-2, cc);
+        color: $font-color;
+        border-radius: $border-radius-2;
+        @include shadow;
+        padding: 16px;
+        font-size: $font-size-1;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    p,
+    li {
+        line-height: 1.5em;
+    }
+
+    a {
+        font-weight: bold;
+        color: $font-color;
+    }
+
+}
+

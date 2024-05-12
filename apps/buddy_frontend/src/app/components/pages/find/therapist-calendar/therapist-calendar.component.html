@@ -1,0 +1,59 @@
+<h2>Anrufkalender</h2>
+
+@if ((calendarItems$ | async).length === 0) {
+<div class="placeholder">
+    <p>
+        Hier siehst du übersichtlich <b>alle Anrufzeiten</b> aller deiner Therapeut*innen, um keine zu verpassen.
+    </p>
+    <p>
+        Sobald du zu einer Person Anrufzeiten gespeichert hast,
+        tauchen hier Einträge auf.
+    </p>
+    <p>
+        <b>Rufe einfach eine Therapeut*in an.</b>
+        Die Bandansage wird dir die aktuellen Anrufzeiten verraten.
+    </p>
+</div>
+} @else {
+<div class="callable-now" *ngIf="hasNowCallableItems$ | async">
+    <h3 class="header">Jetzt anrufbar</h3>
+
+    <div class="call-items-wrapper callable">
+        <a href="tel:{{item.phone}}" class="call-item" *ngFor="let item of nowCallableItems$ | async">
+            <span class="time-wrapper">
+                {{item.callTime.from}} - {{item.callTime.to}}
+            </span>
+            <span class="name">
+                {{item.therapistName}}
+            </span>
+            @if(item.phone) {
+            <span class="number">
+                {{item.phone }}
+            </span>
+            } @else {
+            <span class="number empty">
+                keine Nummer hinterlegt
+            </span>
+
+            }
+        </a>
+    </div>
+</div>
+
+<div class="day-wrapper" *ngFor="let day of calendarItemsByDays$ | async">
+    <h3 class="header">
+
+        {{getFullDayName(day.weekday)}}
+    </h3>
+    <div class="call-items-wrapper">
+        <div class="call-item" *ngFor="let item of day.items">
+            <span class="time-wrapper">
+                {{item.callTime.from}} - {{item.callTime.to}}
+            </span>
+            <span class="name">
+                {{item.therapistName}}
+            </span>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,32 @@
+<form [formGroup]="addressForm" (ngSubmit)="submit()">
+
+    <div class="form-elements">
+        <div class="line-wrapper street">
+            <div class="input-element-wrapper street">
+                <label for="street">Straße</label>
+                <input formControlName="street" type="text" id="street" placeholder="Straße">
+            </div>
+
+            <div class="input-element-wrapper number">
+                <label for="number">Nummer</label>
+                <input formControlName="number" type="text" id="number" placeholder="Nummer">
+            </div>
+        </div>
+
+        <div class="line-wrapper city">
+            <div class="input-element-wrapper city">
+                <label for="city">Stadt</label>
+                <input formControlName="city" type="text" id="city" placeholder="Stadt">
+            </div>
+
+            <div class="input-element-wrapper postal-code">
+                <label for="postalCode">PLZ</label>
+                <input formControlName="postalCode" type="number" id="postalCode" placeholder="PLZ">
+            </div>
+        </div>
+    </div>
+    <div class="confirm-buttons-wrapper">
+        <button type="button" (click)="discard()">Abbrechen</button>
+        <button type="submit" [disabled]="!addressForm.valid">Speichern</button>
+    </div>
+</form>

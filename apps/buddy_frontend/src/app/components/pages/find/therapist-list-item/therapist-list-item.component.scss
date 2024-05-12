@@ -1,0 +1,278 @@
+@use '_index' as *;
+
+
+:host {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.reminder-note-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    z-index: 0;
+    margin: 4px;
+    transform: translate(-32px, -32px);
+
+    .clock {
+        width: 60px;
+        height: 60px;
+        fill: $accent-color-0;
+
+        &.callable {
+            animation: ring 3s infinite;
+        }
+    }
+
+    .free-from-wrapper {
+        margin-top: 10px;
+        font-size: $font-size-0;
+        color: $accent-color-1;
+    }
+}
+
+
+
+.main-wrapper {
+    position: relative;
+    border-radius: $border-radius-3;
+    color: $accent-color-3;
+    background-color: $accent-color-2;
+    @include shadow;
+
+    .header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        user-select: none;
+
+        .name-wrapper {
+            @include resetButton;
+            cursor: pointer;
+            width: 100%;
+            padding: 24px;
+            font-weight: bold;
+            text-align: left;
+            font-size: $font-size-3;
+
+            @include medium-small-screen {
+                font-size: $font-size-2;
+            }
+        }
+
+        .icon-wrapper {
+            display: flex;
+            flex-flow: row;
+            padding: 16px;
+
+
+            a {
+                opacity: .6;
+            }
+
+            @include medium-small-screen {
+                gap: 8px;
+                font-size: $font-size-0;
+
+                svg {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+
+            @include medium-big-screen {
+                gap: 16px;
+
+                svg {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+        }
+    }
+
+    .body-overlay {
+        overflow: hidden;
+        transition: height .3s;
+
+        .body-wrapper {
+            padding: 0 24px 24px 24px;
+
+            .section {
+                width: 100%;
+                animation: fadeIn .5s ease-out;
+                color: $font-color;
+
+                &:not(:last-of-type) {
+                    margin-bottom: 24px;
+                }
+
+                &.notes {
+                    cursor: pointer;
+                }
+
+                button {
+                    padding: 6px;
+                    cursor: pointer;
+                    font-size: $font-size-1;
+
+                    border-radius: $border-radius-2;
+
+                    @include medium-small-screen {
+
+                        width: 100%;
+                        text-align: center;
+                    }
+
+                }
+
+                .calltimes-wrapper {
+                    margin-top: 4px;
+                    gap: 8px;
+
+                    display: grid;
+
+                    @include medium-small-screen {
+                        grid-template-columns: 1fr 1fr;
+
+                        .calltime {
+                            padding: 2px;
+                            gap: 2px;
+
+                            span {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    @include medium-big-screen {
+                        grid-template-columns: 1fr 1fr 1fr;
+
+                        .calltime {
+                            padding: 5px 4px;
+                            gap: 4px;
+                        }
+                    }
+
+                    button.calltime {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        box-sizing: border-box;
+                        background-color: transparent;
+
+                        color: $font-color;
+                        border: 1px solid $font-color;
+
+                        &.selected {
+                            border-color: $accent-color-1;
+                            background-color: $accent-color-1;
+                            color: $accent-color-2;
+                        }
+                    }
+                }
+
+                &.describe-items-wrapper {
+                    display: flex;
+                    gap: 8px;
+                    flex-wrap: wrap;
+
+                    button.describe-item {
+                        background-color: transparent;
+                        border: 1px solid $accent-color-1;
+                        color: $accent-color-1;
+                        white-space: nowrap;
+                        animation: fadeIn .5s;
+
+                        &.expand {
+                            border: none;
+                        }
+
+                        &.delete {
+                            font-weight: bold;
+                            border: none;
+                            background-color: dim($accent-color-3, 55);
+                            color: $accent-color-2;
+                        }
+                    }
+                }
+
+                &.footer {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    font-size: $font-size-0;
+                    color: dim($accent-color-3, 90);
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(5deg);
+
+    }
+
+    15% {
+        transform: rotate(-5deg);
+
+    }
+
+    20% {
+        transform: rotate(5deg);
+    }
+
+    25% {
+        transform: rotate(-5deg);
+    }
+
+    30% {
+        transform: rotate(5deg);
+    }
+
+    35% {
+        transform: rotate(-5deg);
+    }
+
+    40% {
+        transform: rotate(5deg);
+    }
+
+    45% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    55% {
+        transform: rotate(-5deg);
+    }
+
+    60% {
+        transform: rotate(5deg);
+    }
+
+    65% {
+        transform: rotate(0deg);
+    }
+}

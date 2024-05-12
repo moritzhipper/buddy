@@ -1,0 +1,46 @@
+<div class="header-wrapper">
+    <h1>Finden</h1>
+    <button *ngIf="hasTherapists$ | async" class="calendar" (click)="toggleCalendar()">
+        <div *ngIf="tharpistCallable$ | async" class="notification">!</div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -3 24 24" width="28" fill="currentColor">
+            <path
+                d="M17 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3v2a2 2 0 1 0 4 0V2h1v2a2 2 0 1 0 4 0V2h1v2a2 2 0 1 0 4 0V2zM3 8v2h2V8H3zm0 4v2h2v-2H3zm12 0v2h2v-2h-2zm0-4v2h2V8h-2zM7 8v2h2V8H7zm4 0v2h2V8h-2zm0 4v2h2v-2h-2zm-4 0v2h2v-2H7zM5 0a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1zm10 0a1 1 0 0 1 1 1v3a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1zm-5 0a1 1 0 0 1 1 1v3a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1z">
+            </path>
+        </svg>
+    </button>
+</div>
+
+@if(!(hasTherapists$ | async)) {
+<app-page-placeholder-text>
+    <ng-container header>
+        Verwalte hier Therapeut*innen, die interessant für dich sind
+    </ng-container>
+    <ng-container body>
+        <div class="placeholder-text">
+            <p>
+                Organisiere sie, stelle dir Erinnerungen und erkenne schnell , wann du kontakt
+                aufnehmen kannst.
+            </p>
+            <p>
+                Drücke den Plus - Button, um eine Therapet*in in deine Liste aufzunehmen.
+            </p>
+        </div>
+    </ng-container>
+</app-page-placeholder-text>
+<div class="add-item-wrapper">
+    <button class="add empty-page" (click)="addTherapist()">+</button>
+</div>
+} @else {
+<div class="body-wrapper">
+    <div class="therapists-wrapper" [class.hide]="calendarIsVisible">
+        @for (therapist of therapists$ | async; track therapist.id) {
+        <app-therapist-list-item [therapist]="therapist" @fadeOut @fadeIn />
+        }
+        <div class="add-item-wrapper">
+            <button class="add" (click)="addTherapist()">+</button>
+        </div>
+    </div>
+    <app-therapist-calendar [class.hide]="!calendarIsVisible" />
+</div>
+}
+<div class="spacer"></div>

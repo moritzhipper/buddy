@@ -1,1 +1,14 @@
-<app-nx-welcome></app-nx-welcome> <router-outlet></router-outlet>
+<div class="debug" *ngIf="showDebugButtons">
+    <button (click)="sendNotification()">notify</button>
+    <button (click)="sendToast()">toast</button>
+    <button (click)="showDebugButtons = !showDebugButtons">hide</button>
+  </div>
+  <div class="offline-note" *ngIf="isOffline">Du bist nicht mit dem Internet verbunden.</div>
+  <div class="content-wrapper">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <app-navigation-bar></app-navigation-bar>
+  <app-input-wrapper></app-input-wrapper>
+  <app-toast></app-toast>
