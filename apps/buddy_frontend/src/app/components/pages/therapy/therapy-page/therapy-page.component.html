@@ -1,106 +1,137 @@
 <div class="header-wrapper">
-    <div class="text">
-        <h1>Therapie</h1>
-        <h3 *ngIf="(nextAppointment$ | async) as appointment"
-            [ngClass]="{'reminder-is-on': appointmentsReminderIsOn$ | async}">
-
-            @if(!appointment.isRepeating) {
-            {{appointment.date | date: 'dd.MM.'}}, {{appointment.from}}h - {{appointment.to}}h
-            } @else {
-            {{appointment.weekday}}, {{appointment.from}} - {{appointment.to}}h
-            }
-        </h3>
-    </div>
-    <button (click)="toggleReminder()" *ngIf="(appointments$ | async).length > 0"
-        [ngClass]="{'activated': appointmentsReminderIsOn$ | async}">
-        <svg width="60" height="60" version="1.1" viewBox="0 0 15.875 15.875" xmlns="http://www.w3.org/2000/svg">
-            <g transform="matrix(1.2651 .62996 -.62996 1.2651 4.157 -3.7215)">
-                <path
-                    d="m6.5883 0.4372c-0.041832 0.018832-0.083193 0.039656-0.12362 0.063214-0.046378 0.026547-0.092678 0.054376-0.13842 0.084313-0.36426 0.24303-0.68901 0.62558-0.92632 1.1297-0.091406 0.19404 0.055097 0.41599 0.26944 0.40822 1.0036-0.036943 2.0187 0.12983 3.0514 0.49877 0.20293 0.072953 0.41063-0.096066 0.38045-0.30959-0.16579-1.1766-0.82106-1.9113-1.6119-2.0195-0.30277-0.041404-0.61018 0.0095377-0.90111 0.14468zm-5.1393 2.6726c-0.34252 0.1624-0.60395 0.41155-0.76037 0.72379-0.3575 0.71369-0.12951 1.6618 0.67178 2.4364 0.15414 0.14933 0.41169 0.082318 0.4735-0.1232 0.28884-0.96188 0.77396-1.8689 1.4564-2.7275 0.13393-0.16855 0.040949-0.41904-0.17049-0.45945-0.58357-0.11134-1.1019-0.071342-1.5191 0.085701-0.052118 0.019659-0.10273 0.041203-0.15178 0.064147zm3.2167-0.01809c-2.0428 1.0364-2.862 3.5302-1.8318 5.5761 0.53893 1.0702 1.5135 1.8558 2.6738 2.1552 0 0 1.2525 0.13522 1.0594 0.13168 0.64224-0.0031 1.275-0.15508 1.8486-0.44389 0.59458-0.29941 1.1086-0.73736 1.4986-1.2769l0.51008-0.94022c0.42206-1.0947 0.36183-2.3167-0.1658-3.3646-1.0324-2.0503-3.5313-2.8754-5.5816-1.8431-0.00381 0.00201-0.0076 0.00381-0.011483 0.00572zm0.51562 1.0001c0.00114-5.713e-4 0.00229-0.00116 0.00258-0.00116 0.26169-0.13155 0.58049-0.025976 0.71213 0.23566l1.1245 2.2333c0.16987 0.33736-0.057368 0.73913-0.434 0.76762l-1.3728 0.10317c-0.29248 0.022172-0.54745-0.19722-0.5692-0.48973-0.021857-0.29231 0.19749-0.54694 0.48981-0.56865l0.58216-0.043378-0.768-1.5252c-0.13144-0.26104-0.027229-0.57922 0.23328-0.71171z"
-                    style="stop-color:#000000;" />
-            </g>
-        </svg>
-        {{ (appointmentsReminderIsOn$ | async) ? 'aktiv' : 'inaktiv'}}
-    </button>
+   <div class="text">
+      <h1>Therapie</h1>
+      <h3
+         *ngIf="nextAppointment$ | async as appointment"
+         [ngClass]="{ 'reminder-is-on': appointmentsReminderIsOn$ | async }"
+      >
+         @if(!appointment.isRepeating) {
+         {{ appointment.date | date : 'dd.MM.' }}, {{ appointment.from }}h -
+         {{ appointment.to }}h } @else { {{ appointment.weekday }},
+         {{ appointment.from }} - {{ appointment.to }}h }
+      </h3>
+   </div>
+   <button
+      (click)="toggleReminder()"
+      *ngIf="(appointments$ | async).length > 0"
+      [ngClass]="{ activated: appointmentsReminderIsOn$ | async }"
+   >
+      <svg
+         width="60"
+         height="60"
+         version="1.1"
+         viewBox="0 0 15.875 15.875"
+         xmlns="http://www.w3.org/2000/svg"
+      >
+         <g transform="matrix(1.2651 .62996 -.62996 1.2651 4.157 -3.7215)">
+            <path
+               d="m6.5883 0.4372c-0.041832 0.018832-0.083193 0.039656-0.12362 0.063214-0.046378 0.026547-0.092678 0.054376-0.13842 0.084313-0.36426 0.24303-0.68901 0.62558-0.92632 1.1297-0.091406 0.19404 0.055097 0.41599 0.26944 0.40822 1.0036-0.036943 2.0187 0.12983 3.0514 0.49877 0.20293 0.072953 0.41063-0.096066 0.38045-0.30959-0.16579-1.1766-0.82106-1.9113-1.6119-2.0195-0.30277-0.041404-0.61018 0.0095377-0.90111 0.14468zm-5.1393 2.6726c-0.34252 0.1624-0.60395 0.41155-0.76037 0.72379-0.3575 0.71369-0.12951 1.6618 0.67178 2.4364 0.15414 0.14933 0.41169 0.082318 0.4735-0.1232 0.28884-0.96188 0.77396-1.8689 1.4564-2.7275 0.13393-0.16855 0.040949-0.41904-0.17049-0.45945-0.58357-0.11134-1.1019-0.071342-1.5191 0.085701-0.052118 0.019659-0.10273 0.041203-0.15178 0.064147zm3.2167-0.01809c-2.0428 1.0364-2.862 3.5302-1.8318 5.5761 0.53893 1.0702 1.5135 1.8558 2.6738 2.1552 0 0 1.2525 0.13522 1.0594 0.13168 0.64224-0.0031 1.275-0.15508 1.8486-0.44389 0.59458-0.29941 1.1086-0.73736 1.4986-1.2769l0.51008-0.94022c0.42206-1.0947 0.36183-2.3167-0.1658-3.3646-1.0324-2.0503-3.5313-2.8754-5.5816-1.8431-0.00381 0.00201-0.0076 0.00381-0.011483 0.00572zm0.51562 1.0001c0.00114-5.713e-4 0.00229-0.00116 0.00258-0.00116 0.26169-0.13155 0.58049-0.025976 0.71213 0.23566l1.1245 2.2333c0.16987 0.33736-0.057368 0.73913-0.434 0.76762l-1.3728 0.10317c-0.29248 0.022172-0.54745-0.19722-0.5692-0.48973-0.021857-0.29231 0.19749-0.54694 0.48981-0.56865l0.58216-0.043378-0.768-1.5252c-0.13144-0.26104-0.027229-0.57922 0.23328-0.71171z"
+               style="stop-color: #000000"
+            />
+         </g>
+      </svg>
+      {{ (appointmentsReminderIsOn$ | async) ? 'aktiv' : 'inaktiv' }}
+   </button>
 </div>
 
-
 <app-page-placeholder-text *ngIf="pageIsEmpty$ | async">
-    <ng-container header>
-        Du hast einen Therapieplatz gefunden? Herzlichen Glückwunsch!
-    </ng-container>
-    <div class="placeholder-text" body>
-        <p>
-            Hier kannst du <b>Ziele</b>, <b>Notizen</b> und <b>Termine</b> verwalten, um deinen Prozess nicht aus den
-            Augen zu verlieren.
-        </p>
-        <p class="no-password" *ngIf="!(isFullUser$ | async)">
-            Bevor du persönliche Daten speichern kannst, musst du dein Profil zur Sicherheit zusätzlich mit einem
-            Passwort schützen.
-        </p>
-    </div>
+   <ng-container header>
+      Du hast einen Therapieplatz gefunden? Herzlichen Glückwunsch!
+   </ng-container>
+   <div class="placeholder-text" body>
+      <p>
+         Hier kannst du <b>Ziele</b>, <b>Notizen</b> und
+         <b>Termine</b> verwalten, um deinen Prozess nicht aus den Augen zu
+         verlieren.
+      </p>
+      <p class="no-password" *ngIf="!(isFullUser$ | async)">
+         Bevor du persönliche Daten speichern kannst, musst du dein Profil zur
+         Sicherheit zusätzlich mit einem Passwort schützen.
+      </p>
+   </div>
 </app-page-placeholder-text>
-<div *ngIf="(isFullUser$ | async)" class="actions-wrapper" [ngClass]="{'page-is-empty': pageIsEmpty$ | async}">
-    <button (click)="addTopic()" class="action">Ziel hinzufügen</button>
-    <button (click)="addNote()" class="action">Notiz anlegen</button>
-    <button (click)="addSessionDate()" class="action">Termin hinzufügen</button>
+<div
+   *ngIf="isFullUser$ | async"
+   class="actions-wrapper"
+   [ngClass]="{ 'page-is-empty': pageIsEmpty$ | async }"
+>
+   <button (click)="addTopic()" class="action">Ziel hinzufügen</button>
+   <button (click)="addNote()" class="action">Notiz anlegen</button>
+   <button (click)="addSessionDate()" class="action">Termin hinzufügen</button>
 </div>
 
 <div class="actions-wrapper page-is-empty" *ngIf="!(isFullUser$ | async)">
-    <button (click)="createPassword()" class="action">Passwort vergeben</button>
+   <button (click)="createPassword()" class="action">Passwort vergeben</button>
 </div>
-
 
 @if (!(pageIsEmpty$ |async)) {
 <div class="section">
-    <h3>Das möchte ich thematisieren</h3>
-    @if (hasGoals$ | async) {
-    <div class="elements-wrapper topics">
-        <div class="topic" *ngFor="let goal of goals$ | async; trackBy: trackById" (click)="editTopic(goal)" @fadeOut>
-            <div class="text">
-                {{goal.body}}
-            </div>
-        </div>
-    </div>
-    } @else {
-    <p class="placeholder">
+   <h3>Das möchte ich thematisieren</h3>
+   @if (hasGoals$ | async) {
+   <div class="elements-wrapper topics">
+      <div
+         class="topic"
+         *ngFor="let goal of goals$ | async; trackBy: trackById"
+         (click)="editTopic(goal)"
+         @fadeOut
+      >
+         <div class="text">
+            {{ goal.body }}
+         </div>
+      </div>
+   </div>
+   } @else {
+   <p class="placeholder">
+      Halte fest, was du mit deiner Therapie erreichen möchtest.
+   </p>
 
-        Halte fest, was du mit deiner Therapie erreichen möchtest.
-    </p>
-
-    }
+   }
 </div>
 
 <div class="section">
-    <h3>Das nehme ich mit</h3>
-    @if (hasNotes$ | async) {
-    <div class="elements-wrapper notes">
-        <app-note *ngFor="let note of notes$ | async; trackBy: trackById" [note]="note" @fadeOut></app-note>
-    </div>
-    } @else {
-    <p class="placeholder">
-        Notiere Erkenntnisse und Dinge, die du im Kopf behalten möchtest.
-    </p>
-    }
+   <h3>Das nehme ich mit</h3>
+   @if (hasNotes$ | async) {
+   <div class="elements-wrapper notes">
+      <app-note
+         *ngFor="let note of notes$ | async; trackBy: trackById"
+         [note]="note"
+         @fadeOut
+      ></app-note>
+   </div>
+   } @else {
+   <p class="placeholder">
+      Notiere Erkenntnisse und Dinge, die du im Kopf behalten möchtest.
+   </p>
+   }
 </div>
 
 <div class="section">
-    <h3>Termine</h3>
+   <h3>Termine</h3>
 
-    @if(hasAppointments$ | async) {
-    <div class="elements-wrapper">
+   @if(hasAppointments$ | async) {
+   <div class="elements-wrapper">
+      <app-appointment-card
+         [appointment]="appointment"
+         *ngFor="
+            let appointment of futureAppointments$ | async;
+            trackBy: trackById
+         "
+      />
 
-        <app-appointment-card [appointment]="appointment"
-            *ngFor="let appointment of futureAppointments$ | async; trackBy: trackById" />
-
-        <app-appointment-card [appointment]="appointment" class="past"
-            *ngFor="let appointment of pastAppointments$ | async; trackBy: trackById" />
-
-    </div>
-    } @else {
-    <p class="placeholder">
-        Füge deine Termine hinzu um schnell zu sehen, wann deine nächste Stunde ist.
-    </p>
-    }
+      <app-appointment-card
+         [appointment]="appointment"
+         class="past"
+         *ngFor="
+            let appointment of pastAppointments$ | async;
+            trackBy: trackById
+         "
+      />
+   </div>
+   } @else {
+   <p class="placeholder">
+      Füge deine Termine hinzu um schnell zu sehen, wann deine nächste Stunde
+      ist.
+   </p>
+   }
 </div>
 }

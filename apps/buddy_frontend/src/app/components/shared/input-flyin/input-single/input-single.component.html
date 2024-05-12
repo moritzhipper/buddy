@@ -1,23 +1,51 @@
 <form [formGroup]="singleInputForm" (ngSubmit)="submit()">
-    <div class="form-elements">
-        <div class="input-element-wrapper">
-            <label *ngIf="label">{{ label }}</label>
-            <input type="date" formControlName="date" *ngIf="this.singleInputForm.get('date')">
-            <input formControlName="phone" [placeholder]="label || ''" *ngIf="this.singleInputForm.get('phone')">
-            <input type="email" formControlName="mail" [placeholder]="label || ''"
-                *ngIf="this.singleInputForm.get('mail')">
-            <input formControlName="textShort" [placeholder]="label || ''"
-                *ngIf="this.singleInputForm.get('textShort')">
-            <input type="number" formControlName="number" [placeholder]="label || ''"
-                *ngIf="this.singleInputForm.get('number')">
-            <input type="password" formControlName="password" [placeholder]="label || ''"
-                *ngIf="this.singleInputForm.get('password')">
-        </div>
-        <textarea formControlName="textLong" placeholder="Hier Text eingeben..."
-            *ngIf="this.singleInputForm.get('textLong')"></textarea>
-    </div>
-    <div class="confirm-buttons-wrapper">
-        <button type="button" (click)="discard()">Abbrechen</button>
-        <button type="submit" [disabled]="!singleInputForm.valid">Speichern</button>
-    </div>
+   <div class="form-elements">
+      <div class="input-element-wrapper">
+         <label *ngIf="label">{{ label }}</label>
+         <input
+            type="date"
+            formControlName="date"
+            *ngIf="this.singleInputForm.get('date')"
+         />
+         <input
+            formControlName="phone"
+            [placeholder]="label || ''"
+            *ngIf="this.singleInputForm.get('phone')"
+         />
+         <input
+            type="email"
+            formControlName="mail"
+            [placeholder]="label || ''"
+            *ngIf="this.singleInputForm.get('mail')"
+         />
+         <input
+            formControlName="textShort"
+            [placeholder]="label || ''"
+            *ngIf="this.singleInputForm.get('textShort')"
+         />
+         <input
+            type="number"
+            formControlName="number"
+            [placeholder]="label || ''"
+            *ngIf="this.singleInputForm.get('number')"
+         />
+         <input
+            type="password"
+            formControlName="password"
+            [placeholder]="label || ''"
+            *ngIf="this.singleInputForm.get('password')"
+         />
+      </div>
+      <textarea
+         formControlName="textLong"
+         placeholder="Hier Text eingeben..."
+         *ngIf="this.singleInputForm.get('textLong')"
+      ></textarea>
+   </div>
+   <div class="confirm-buttons-wrapper">
+      <button type="button" (click)="discard()">Abbrechen</button>
+      <button type="submit" [disabled]="!singleInputForm.valid">
+         Speichern
+      </button>
+   </div>
 </form>

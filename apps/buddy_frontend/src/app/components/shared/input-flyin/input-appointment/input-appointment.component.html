@@ -1,42 +1,66 @@
 <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
-    <div class="form-elements">
-        <div class="input-element-wrapper">
-            <div class="horizontal-radio-input">
-                <input formControlName="isRepeating" type="radio" name="isRepeating" id="once" [value]="false">
-                <label for="once">Einmalig</label>
-                <input formControlName="isRepeating" type="radio" name="isRepeating" id="repeating" [value]="true">
-                <label for="repeating">Wöchentlich</label>
+   <div class="form-elements">
+      <div class="input-element-wrapper">
+         <div class="horizontal-radio-input">
+            <input
+               formControlName="isRepeating"
+               type="radio"
+               name="isRepeating"
+               id="once"
+               [value]="false"
+            />
+            <label for="once">Einmalig</label>
+            <input
+               formControlName="isRepeating"
+               type="radio"
+               name="isRepeating"
+               id="repeating"
+               [value]="true"
+            />
+            <label for="repeating">Wöchentlich</label>
+         </div>
+      </div>
+      <div
+         class="input-element-wrapper appear-right day"
+         *ngIf="appointmentForm.value.isRepeating === false"
+      >
+         <label for="date">Datum</label>
+         <input formControlName="date" type="date" />
+      </div>
+      <div
+         class="input-element-wrapper appear-left day"
+         *ngIf="appointmentForm.value.isRepeating === true"
+      >
+         <div class="horizontal-radio-input">
+            <ng-container *ngFor="let weekday of weekdays">
+               <input
+                  formControlName="weekday"
+                  type="radio"
+                  [value]="weekday"
+                  [id]="weekday"
+               />
+               <label [for]="weekday">{{ weekday }}</label>
+            </ng-container>
+         </div>
+      </div>
+      <div class="input-element-wrapper">
+         <div class="horizontal-from-to-inputs">
+            <div class="time-wrapper">
+               <label for="from">Von</label>
+               <input formControlName="from" type="time" />
             </div>
+            <div class="time-wrapper">
+               <label for="to">Bis</label>
+               <input formControlName="to" type="time" />
+            </div>
+         </div>
+      </div>
+   </div>
 
-        </div>
-        <div class="input-element-wrapper appear-right day" *ngIf="appointmentForm.value.isRepeating === false">
-            <label for="date">Datum</label>
-            <input formControlName="date" type="date">
-        </div>
-        <div class="input-element-wrapper appear-left day" *ngIf="appointmentForm.value.isRepeating === true">
-            <div class="horizontal-radio-input">
-                <ng-container *ngFor="let weekday of weekdays">
-                    <input formControlName="weekday" type="radio" [value]="weekday" [id]="weekday">
-                    <label [for]="weekday">{{weekday}}</label>
-                </ng-container>
-            </div>
-        </div>
-        <div class="input-element-wrapper">
-            <div class="horizontal-from-to-inputs">
-                <div class="time-wrapper">
-                    <label for="from">Von</label>
-                    <input formControlName="from" type="time">
-                </div>
-                <div class="time-wrapper">
-                    <label for="to">Bis</label>
-                    <input formControlName="to" type="time">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="confirm-buttons-wrapper">
-        <button type="button" (click)="discard()">Abbrechen</button>
-        <button type="submit" [disabled]="!appointmentForm.valid">Speichern</button>
-    </div>
+   <div class="confirm-buttons-wrapper">
+      <button type="button" (click)="discard()">Abbrechen</button>
+      <button type="submit" [disabled]="!appointmentForm.valid">
+         Speichern
+      </button>
+   </div>
 </form>

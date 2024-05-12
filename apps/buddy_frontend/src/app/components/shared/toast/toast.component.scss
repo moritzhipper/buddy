@@ -1,29 +1,29 @@
 @use '_index' as *;
 
 .toast-wrapper {
-    position: fixed;
-    bottom: 84px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+   position: fixed;
+   bottom: 84px;
+   width: 100%;
+   display: flex;
+   justify-content: center;
 
-    .toast-body {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        gap: 16px;
-        padding: 16px;
-        margin: 16px;
-        max-width: 500px;
-        background-color: $font-color;
-        color: $background-color;
-        backdrop-filter: blur(10px);
-        border-radius: $border-radius-3;
-        z-index: 25;
-        @include shadow();
-    }
+   .toast-body {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 16px;
+      padding: 16px;
+      margin: 16px;
+      max-width: 500px;
+      background-color: $font-color;
+      color: $background-color;
+      backdrop-filter: blur(10px);
+      border-radius: $border-radius-3;
+      z-index: 25;
+      @include shadow();
+   }
 
-    .text {
-        user-select: none;
-    }
+   .text {
+      user-select: none;
+   }
 }

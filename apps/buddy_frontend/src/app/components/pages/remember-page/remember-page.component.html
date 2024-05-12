@@ -1,33 +1,35 @@
 <div class="page-header-wrapper">
-    <h1>Merken</h1>
+   <h1>Merken</h1>
 </div>
 
 @if((notesToRemember$ | async).length === 0) {
 
 <app-page-placeholder-text>
-    <ng-container header>
+   <ng-container header>
+      Hier findest du Notizen, die dir besonders wichtig sind
+   </ng-container>
+   <ng-container body>
+      <p>
+         Gehe zu der Seite <a routerLink="/therapy">Therapie </a>und markiere
+         eine Notiz über den "Merken"-Knopf oben rechts.<br />
+         Es bieten sich an:
+      </p>
 
-        Hier findest du Notizen, die dir besonders wichtig sind
-
-    </ng-container>
-    <ng-container body>
-        <p>
-            Gehe zu der Seite <a routerLink="/therapy">Therapie </a>und markiere eine Notiz über den "Merken"-Knopf
-            oben
-            rechts.<br>
-            Es bieten sich an:
-
-        </p>
-
-        <ul>
-            <li>Besondere Erkenntnisse über dich oder andere</li>
-            <li>Dinge, die du im Gedächtnis behalten willst</li>
-            <li>Verhaltensweisen oder Denkmuster, auf die du genauer achten möchtest</li>
-        </ul>
-    </ng-container>
+      <ul>
+         <li>Besondere Erkenntnisse über dich oder andere</li>
+         <li>Dinge, die du im Gedächtnis behalten willst</li>
+         <li>
+            Verhaltensweisen oder Denkmuster, auf die du genauer achten möchtest
+         </li>
+      </ul>
+   </ng-container>
 </app-page-placeholder-text>
 } @else {
 <div class="body-wrapper" @fadeOut>
-    <app-note-detailed *ngFor="let note of (notesToRemember$ | async); trackBy: trackById" [note]="note" @fadeOut />
+   <app-note-detailed
+      *ngFor="let note of notesToRemember$ | async; trackBy: trackById"
+      [note]="note"
+      @fadeOut
+   />
 </div>
 }

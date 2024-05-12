@@ -5,19 +5,19 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-navigation-bar',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.scss']
+   selector: 'app-navigation-bar',
+   standalone: true,
+   imports: [CommonModule, RouterModule],
+   templateUrl: './navigation-bar.component.html',
+   styleUrls: ['./navigation-bar.component.scss'],
 })
 export class NavigationBarComponent {
+   activeRoute: Observable<string>;
 
-  activeRoute: Observable<string>;
-
-  constructor(private _router: Router) {
-    this.activeRoute = this._router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => event.urlAfterRedirects));
-  }
+   constructor(private _router: Router) {
+      this.activeRoute = this._router.events.pipe(
+         filter((event) => event instanceof NavigationEnd),
+         map((event: NavigationEnd) => event.urlAfterRedirects)
+      );
+   }
 }

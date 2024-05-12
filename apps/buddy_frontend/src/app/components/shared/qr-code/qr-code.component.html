@@ -1,9 +1,14 @@
 <div class="codes-center" [class.is-big]="isBigLayout">
-    <qrcode *ngIf="secret$ | async as secret; else loading" [qrdata]="secret" [width]="sizePX" [colorLight]="'#0000'"
-        [colorDark]="'0008'" [margin]="2" [elementType]="'svg'" />
-    <ng-template #loading>
-        <div class="placeholder">
-            no QR-Key :(
-        </div>
-    </ng-template>
+   <qrcode
+      *ngIf="secret$ | async as secret; else loading"
+      [qrdata]="secret"
+      [width]="sizePX"
+      [colorLight]="'#0000'"
+      [colorDark]="'0008'"
+      [margin]="2"
+      [elementType]="'svg'"
+   />
+   <ng-template #loading>
+      <div class="placeholder">no QR-Key :(</div>
+   </ng-template>
 </div>

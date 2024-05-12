@@ -1,27 +1,23 @@
 @import '../input-styles.scss';
 
 .line-wrapper {
-    display: grid;
-    gap: 16px;
+   display: grid;
+   gap: 16px;
 
+   &.street {
+      grid-template-columns: 3fr 1fr;
+   }
 
-    &.street {
-        grid-template-columns: 3fr 1fr;
+   &.city {
+      grid-template-columns: 2fr 1fr;
+   }
 
-    }
-
-    &.city {
-        grid-template-columns: 2fr 1fr;
-
-    }
-
-    input {
-        width: 100%;
-    }
+   input {
+      width: 100%;
+   }
 }
 
 .form-elements {
-    display: flex;
-    gap: 16px;
-
+   display: flex;
+   gap: 16px;
 }

@@ -1,39 +1,39 @@
 @use 'colors' as *;
 
 :host {
-    overflow: hidden;
-    display: block;
+   overflow: hidden;
+   display: block;
 }
 
 .header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    text-align: left;
-    background-color: #0000;
-    border: none;
-    font-size: inherit;
-    padding: 0;
-    gap: 16px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   text-align: left;
+   background-color: #0000;
+   border: none;
+   font-size: inherit;
+   padding: 0;
+   gap: 16px;
 
-    .header-text {
-        margin: 16px 0;
-    }
+   .header-text {
+      margin: 16px 0;
+   }
 
-    .arrow {
-        transition: transform .3s;
+   .arrow {
+      transition: transform 0.3s;
 
-        svg {
-            fill: $font-color;
-        }
+      svg {
+         fill: $font-color;
+      }
 
-        &.expanded {
-            transform: rotate(180deg);
-        }
-    }
+      &.expanded {
+         transform: rotate(180deg);
+      }
+   }
 }
 
 .content-wrapper {
-    overflow: hidden;
+   overflow: hidden;
 }
