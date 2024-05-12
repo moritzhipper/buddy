@@ -1,7 +1,8 @@
 import { Injectable, inject } from "@angular/core";
+import { BackendAdapterService } from "../../../services/backend-adapter.service";
 import { appointmentActions, goalActions, noteActions, therapistActions } from "../../buddy.actions";
 import { CrudEffectsGenerator } from "./crud-effects-generator";
-import { BackendAdapterService } from "./services/backend-adapter.service";
+
 
 @Injectable()
 export class CrudEffects {

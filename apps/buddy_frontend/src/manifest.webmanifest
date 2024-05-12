@@ -1,6 +1,7 @@
 {
   "name": "Buddy",
   "short_name": "Buddy",
+  "description": "Finde schnell und einfach einen Therapieplatz",
   "theme_color": "#cfcfc2",
   "background_color": "#cfcfc2",
   "display": "standalone",

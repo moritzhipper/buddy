@@ -1,8 +1,8 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, switchMap } from "rxjs";
+import { BackendAdapterService } from "../../../services/backend-adapter.service";
 import { httpErrorActions, loadAllDataActions } from "../../buddy.actions";
-import { BackendAdapterService } from "./services/backend-adapter.service";
 
 export class CrudEffectsGenerator {
 

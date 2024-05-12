@@ -9,6 +9,4 @@ import { AccordionComponent } from '../accordion/accordion.component';
   standalone: true,
   imports: [AccordionComponent, RouterModule]
 })
-export class InfoPageComponent {
-  closed = false;
-}
+export class InfoPageComponent {}

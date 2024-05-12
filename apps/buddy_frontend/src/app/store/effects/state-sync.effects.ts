@@ -2,11 +2,12 @@ import { Injectable, inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, tap, withLatestFrom } from "rxjs/operators";
+import { ToastType } from "../../models";
+import { ToastService } from "../../services/toast.service";
 import { authActions, httpErrorActions, loadAllDataActions, profileActions } from "../buddy.actions";
 import { selectUserProfile } from "../buddy.selectors";
 import { BuddyState } from "../buddy.state";
-import { ToastType } from "./models";
-import { ToastService } from "./services/toast.service";
+
 
 @Injectable()
 export class StateSyncEffects {

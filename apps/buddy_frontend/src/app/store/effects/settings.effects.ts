@@ -6,8 +6,9 @@ import { catchError, map, switchMap, take } from "rxjs/operators";
 import { httpErrorActions, loadAllDataActions, settingsActions } from "../buddy.actions";
 import { selectSettings } from "../buddy.selectors";
 import { BuddyState } from "../buddy.state";
-import { Settings } from "./models";
-import { BackendAdapterService } from "./services/backend-adapter.service";
+import { Settings } from "../../models";
+import { BackendAdapterService } from "../../services/backend-adapter.service";
+
 
 @Injectable()
 export class SettingsEffects {

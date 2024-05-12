@@ -2,8 +2,9 @@ import { Injectable, inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, switchMap } from "rxjs";
 import { authActions, httpErrorActions, profileActions } from "../buddy.actions";
-import { UserProfile } from "./models";
-import { BackendAdapterService } from "./services/backend-adapter.service";
+import { UserProfile } from "../../models";
+import { BackendAdapterService } from "../../services/backend-adapter.service";
+
 
 @Injectable()
 export class ProfileEffects {

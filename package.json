@@ -13,6 +13,8 @@
     "@angular/platform-browser": "~17.3.0",
     "@angular/platform-browser-dynamic": "~17.3.0",
     "@angular/router": "~17.3.0",
+    "@angular/service-worker": "^17.3.8",
+    "@ngrx/effects": "^17.2.0",
     "@ngrx/store": "^17.2.0",
     "@nx/angular": "19.0.2",
     "angularx-qrcode": "^17.0.1",

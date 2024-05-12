@@ -17,7 +17,8 @@
         "tsConfig": "apps/buddy_frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/buddy_frontend/src/assets"
+          "apps/buddy_frontend/src/assets",
+          "apps/buddy_frontend/src/manifest.webmanifest"
         ],
         "styles": ["apps/buddy_frontend/src/style/styles.scss"],
         "stylePreprocessorOptions": {
@@ -29,6 +30,12 @@
       },
       "configurations": {
         "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/buddy_frontend/src/environments/environment.ts",
+              "with": "apps/buddy_frontend/src/environments/environment.prod.ts"
+            }
+          ],
           "budgets": [
             {
               "type": "initial",
@@ -38,10 +45,12 @@
             {
               "type": "anyComponentStyle",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumError": "5kb"
             }
           ],
-          "outputHashing": "all"
+          "optimization": true,
+          "serviceWorker": true,
+          "ngswConfigPath": "apps/buddy_frontend/src/ngsw-config.json"
         },
         "development": {
           "buildOptimizer": false,
@@ -88,6 +97,13 @@
         "buildTarget": "buddy_frontend:build",
         "port": 4200,
         "spa": true
+      }
+    },
+    "serve-pwa-prod": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "buddy_frontend:build:production",
+        "port": 8080
       }
     }
   }
