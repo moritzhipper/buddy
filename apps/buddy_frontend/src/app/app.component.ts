@@ -46,12 +46,8 @@ export class AppComponent implements OnInit {
    profilePageIsOpen$: Observable<boolean>;
    private _store = inject(Store<BuddyState>);
 
-   constructor(
-      private _notificationService: NotificationService,
-      private _toastService: ToastService
-   ) {
-      //this._notificationScheduler.turnOnNotifications();
-   }
+   private notificationService = inject(NotificationService);
+   private toastService = inject(ToastService);
 
    ngOnInit(): void {
       this.updateOnlineStatus();
@@ -63,13 +59,13 @@ export class AppComponent implements OnInit {
       this.isOffline = !window.navigator.onLine;
 
       if (!this.isOffline) {
-         this._toastService.sendToast({ text: 'Du bist wieder online' });
+         this.toastService.sendToast({ text: 'Du bist wieder online' });
       }
    }
 
    sendNotification() {
-      this._notificationService.askPermission();
-      this._notificationService.send({
+      this.notificationService.askPermission();
+      this.notificationService.send({
          title: 'Test notification header',
          body: 'Test notification bodytext',
       });
@@ -78,14 +74,14 @@ export class AppComponent implements OnInit {
    sendToast() {
       switch (this._toastIterator) {
          case 1: {
-            this._toastService.sendToast({
+            this.toastService.sendToast({
                text: 'Dies ist eine Toastbenachrichtigung mit einem mittellangen Textinhalt',
             });
             this._toastIterator++;
             break;
          }
          case 2: {
-            this._toastService.sendToast({
+            this.toastService.sendToast({
                text: 'Dies ist ein Toasterror mit einem mittellangen Textinhalt',
                type: ToastType.ERROR,
             });
@@ -93,7 +89,7 @@ export class AppComponent implements OnInit {
             break;
          }
          case 3: {
-            this._toastService.sendToast({
+            this.toastService.sendToast({
                text: 'Dies ist ein Toastsuccess mit mittellangen Textinhalt',
                type: ToastType.SUCCESS,
             });

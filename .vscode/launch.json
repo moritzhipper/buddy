@@ -1,0 +1,10 @@
+{
+   "configurations": [
+      {
+         "type": "node",
+         "name": "backend",
+         "request": "attach",
+         "address": "ws://localhost:9229/d4a4e30e-ff77-4680-9b99-f611e462a2c6"
+      }
+   ]
+}

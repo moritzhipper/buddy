@@ -2,7 +2,12 @@
    "name": "@buddy-mono/source",
    "version": "0.0.0",
    "license": "MIT",
-   "scripts": {},
+   "scripts": {
+      "backend-dev": "nx run buddy-backend:serve:development",
+      "frontend-dev": "nx run buddy_frontend:serve:development",
+      "all-dev": "nx run-many -t serve development -p buddy-backend buddy_frontend",
+      "pwa-prod": ""
+   },
    "private": true,
    "dependencies": {
       "@angular/animations": "~17.3.0",
