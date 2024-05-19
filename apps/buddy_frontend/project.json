@@ -101,7 +101,8 @@
          "executor": "@nx/web:file-server",
          "options": {
             "buildTarget": "buddy_frontend:build:production",
-            "port": 8080
+            "port": 8080,
+            "spa": true
          }
       }
    }

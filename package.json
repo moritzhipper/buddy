@@ -4,9 +4,10 @@
    "license": "MIT",
    "scripts": {
       "backend-dev": "nx run buddy-backend:serve:development",
+      "backend-prod": "nx run buddy-backend:serve:production",
       "frontend-dev": "nx run buddy_frontend:serve:development",
-      "all-dev": "nx run-many -t serve development -p buddy-backend buddy_frontend",
-      "pwa-prod": ""
+      "frontend-prod": "nx run buddy_frontend:serve-pwa-prod",
+      "all-dev": "nx run-many -t serve  -p buddy-backend buddy_frontend"
    },
    "private": true,
    "dependencies": {
