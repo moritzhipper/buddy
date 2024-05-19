@@ -3,11 +3,11 @@
    "version": "0.0.0",
    "license": "MIT",
    "scripts": {
-      "backend-dev": "nx run buddy-backend:serve:development",
-      "backend-prod": "nx run buddy-backend:serve:production",
-      "frontend-dev": "nx run buddy_frontend:serve:development",
-      "frontend-prod": "nx run buddy_frontend:serve-pwa-prod",
-      "all-dev": "nx run-many -t serve  -p buddy-backend buddy_frontend"
+      "backend-dev": "nx run backend:serve:development",
+      "backend-prod": "nx run backend:serve:production",
+      "frontend-dev": "nx run frontend:serve:development",
+      "frontend-prod": "nx run frontend:serve-pwa-prod",
+      "all-dev": "nx run-many -t serve  -p backend frontend"
    },
    "private": true,
    "dependencies": {
