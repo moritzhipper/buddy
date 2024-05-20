@@ -15,7 +15,10 @@
       "skipLibCheck": true,
       "skipDefaultLibCheck": true,
       "baseUrl": ".",
-      "paths": {}
+      "paths": {
+         "@buddy/base": ["libs/base-utils/src/index.ts"],
+         "@buddy/base-utils": ["libs/base-utils/src/index.ts"]
+      }
    },
    "exclude": ["node_modules", "tmp"]
 }
