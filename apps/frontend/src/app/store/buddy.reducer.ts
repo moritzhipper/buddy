@@ -1,5 +1,6 @@
+import { UniqueItem } from '@buddy/base-utils'
 import { ActionReducer, createReducer, INIT, MetaReducer, on, UPDATE } from '@ngrx/store'
-import { Auth, Settings, UniqueItem, UserProfile } from '../models'
+import { Auth, Settings, UserProfile } from '../models'
 import { appointmentActions, authActions, goalActions, noteActions, profileActions, settingsActions, therapistActions } from './buddy.actions'
 
 // Works with states of type <any extends UniqueItem>[]

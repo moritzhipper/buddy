@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http'
+import { UniqueItem } from '@buddy/base-utils'
 import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store'
 import { Appointment, Goal, Note, Settings, Therapist, UserLogin, UserProfile } from '../models'
 
@@ -12,8 +13,8 @@ const createCrudActions = <T>(name: string) =>
          Update: props<{ props: T }>(),
          Save: props<{ props: T }>(),
          'Save Many': props<{ props: T[] }>(),
-         Delete: props<{ id: string }>(),
-         'Delete Success': props<{ id: string }>(),
+         Delete: props<UniqueItem>(),
+         'Delete Success': props<UniqueItem>(),
       },
    })
 

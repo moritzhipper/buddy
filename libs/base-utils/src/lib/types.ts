@@ -22,8 +22,8 @@ export type Appointment = z.infer<typeof AppointmentSchema>
 export type UserCredentials = z.infer<typeof UserCredentialsSchema>
 
 type TherapistID = { therapistID: string }
-type ID = { id: string }
+export type UniqueItem = { id?: string }
 
 export type CalltimeHavingID = CallTime & TherapistID
-export type TherapistHavingID = Therapist & ID
+export type TherapistHavingID = Therapist & UniqueItem
 export type AddressHavingID = Address & TherapistID

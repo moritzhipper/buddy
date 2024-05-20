@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { UniqueItem } from '@buddy/base-utils'
 import { Observable, map } from 'rxjs'
 import { environment } from '../../environments/environment'
-import { Settings, Therapist, UniqueItem, UserLogin } from '../models'
+import { Settings, Therapist, UserLogin } from '../models'
 
 @Injectable({
    providedIn: 'root',

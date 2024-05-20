@@ -7,7 +7,7 @@
 -  types in shared lib auslagern
 -  types in projekte importieren
 
-   -  frontend fehlt
+   -  frontend models.ts schrittweise löschen
 
 ### Soon
 

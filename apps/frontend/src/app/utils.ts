@@ -1,4 +1,4 @@
-import { UniqueItem } from './models'
+import { UniqueItem } from '@buddy/base-utils'
 
 // used as trackBy function in HTML template to correctly trigger angular templateupdates of ngFor Directives
 export function trackById(index, uniqueItem: UniqueItem) {

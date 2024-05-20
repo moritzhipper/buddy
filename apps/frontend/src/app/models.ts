@@ -1,3 +1,5 @@
+import { UniqueItem } from '@buddy/base-utils'
+
 export enum ToastType {
    ERROR,
    SUCCESS,
@@ -6,10 +8,6 @@ export enum ToastType {
 export interface Toast {
    text: string
    type?: ToastType
-}
-
-export interface UniqueItem {
-   id?: string
 }
 
 export interface CalendarItem {
@@ -47,23 +45,6 @@ export interface Therapist extends UniqueItem {
    phone?: string
    callTimes?: Remindable[]
    therapyTypes?: string[]
-}
-
-const furniture = ['chair', 'table', 'lamp'] as const
-type Furniture = (typeof furniture)[number]
-
-export enum TherapyType {
-   ANALYTISCH = 'analytisch',
-   GESPRAECH = 'gespraech',
-   GESTALT = 'gestalt',
-   GRUPPE = 'gruppe',
-   KINDER = 'kinder',
-   MUSIK = 'musik',
-   PAAR = 'paar',
-   PSYCHOANALYSE = 'psychoanalyse',
-   SYSTEMISCH = 'systemisch',
-   TIEFENPSYCHFUNDIERT = 'tiefenpsychfundiert',
-   VERHALTEN = 'verhalten',
 }
 
 export const TherapyTypeList: string[] = [

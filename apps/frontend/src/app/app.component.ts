@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'
 import { InputWrapperComponent } from './components/shared/input-flyin/input-wrapper/input-wrapper.component'
 import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
 import { ToastComponent } from './components/shared/toast/toast.component'
-import { Appointment, Goal, Note, Therapist, TherapyType, ToastType, UserProfile } from './models'
+import { Appointment, Goal, Note, Therapist, ToastType, UserProfile } from './models'
 import { NotificationService } from './services/notification.service'
 import { ToastService } from './services/toast.service'
 import { appointmentActions, goalActions, noteActions, therapistActions } from './store/buddy.actions'
@@ -86,7 +86,6 @@ export class AppComponent implements OnInit {
             email: 'wiedeman@psychologieonline.de',
             note: 'Hier stehen weitere Notizen. Herr Wiedemann war sympathisch, aber zu professionell/ distanziert. Trotzdem in Erwägung ziehen.',
             phone: '0711 2394732',
-            therapyTypes: [TherapyType.ANALYTISCH, TherapyType.GESTALT],
             address: {
                street: 'gutenbergstr.',
                number: '110',
