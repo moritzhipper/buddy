@@ -1,8 +1,15 @@
 # BuddyMono
 
-## Importan Infos
+## Local Setup
 
--  Handling of environment file cascade: [Docu](https://nx.dev/recipes/tips-n-tricks/define-environment-variables)
+### Set environment Variables
+
+See [Docu](https://nx.dev/recipes/tips-n-tricks/define-environment-variables)
+
+-  Duplicate `.env.local-TEMPLATE`, rename to `.env.local`
+-  Fill out
+
+## Important Infos
 
 ## Integrate with editors
 
