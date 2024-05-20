@@ -1,11 +1,10 @@
+import { BuddySecretSchema, UserCredentials } from '@buddy/base-utils'
 import { NextFunction, Request, Response } from 'express'
 import createHttpError from 'http-errors'
 import pgPromise from 'pg-promise'
+import { Routes } from '../controller/route-names'
 import { buddyDB } from './buddy-db'
 import { logger } from './logger'
-import { Routes } from './routes/route-names'
-import { UserCredentials } from './types-and-schemas/types'
-import { BuddySecretSchema } from './types-and-schemas/validation-schemas'
 
 // these Routes are only accessible via email and password credentials
 const FULL_USER_ONLY_ROUTES = [Routes.GOALS, Routes.APPOINTMENTS, Routes.NOTES]
@@ -144,4 +143,8 @@ function decoodeBuddySecret(encodedSecret: string): string {
 
 export function getSessionIDFromRequest(req: Request): string {
    return req.cookies.sessionID || req.get('SessionID')
+}
+
+export function encodeUUID(uuid: string): string {
+   return Buffer.from(uuid).toString('base64url')
 }

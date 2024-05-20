@@ -1,11 +1,22 @@
+import {
+   AddTherapistSchema,
+   AddressHavingID,
+   CallTime,
+   CalltimeHavingID,
+   Therapist,
+   TherapistHavingID,
+   TherapistSchema,
+   TherapistSearch,
+   TherapistSearchSchema,
+} from '@buddy/base-utils'
+import { Address } from 'cluster'
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
-import { buddyDB, pgp } from '../buddy-db'
-import { logger } from '../logger'
-import { remapKeys } from '../mapper'
-import { Address, AddressHavingID, CallTime, CalltimeHavingID, Therapist, TherapistHavingID, TherapistSearch } from '../types-and-schemas/types'
-import { AddTherapistSchema, TherapistSchema, TherapistSearchSchema, validateReqBody, validateReqUUID } from '../types-and-schemas/validation-schemas'
+import { buddyDB, pgp } from '../utils/buddy-db'
+import { logger } from '../utils/logger'
+import { remapKeys } from '../utils/mapper'
+import { validateReqBody, validateReqUUID } from '../utils/schema-validation'
 
 const therapistsRoute = express.Router()
 

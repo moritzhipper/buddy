@@ -1,10 +1,10 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
-import { buddyDB, pgp } from '../buddy-db'
-import { remapKeys } from '../mapper'
-import { Appointment } from '../types-and-schemas/types'
-import { AppointmentSchema, validateReqBody, validateReqUUID } from '../types-and-schemas/validation-schemas'
+import { buddyDB, pgp } from '../utils/buddy-db'
+import { remapKeys } from '../utils/mapper'
+import { validateReqBody, validateReqUUID } from '../utils/schema-validation'
+import { Appointment, AppointmentSchema } from '@buddy/base-utils'
 
 const appointmentsRoute = express.Router()
 

@@ -9,7 +9,7 @@ import {
    TherapistSchema,
    TherapistSearchSchema,
    UserCredentialsSchema,
-} from './validation-schemas'
+} from './schemes'
 
 export type Therapist = z.infer<typeof TherapistSchema>
 export type CallTime = z.infer<typeof CallTimeSchema>

@@ -3,6 +3,7 @@ import pino from 'pino'
 import environment from './environment-adapter'
 
 export const logger = pino({ level: environment.logLevel })
+
 export function loggerMiddleware(req: Request, res: Response, next: NextFunction) {
    if (logger.isLevelEnabled('trace')) {
       logger.trace(req)

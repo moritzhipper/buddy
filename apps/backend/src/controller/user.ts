@@ -1,9 +1,9 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
-import { buddyDB } from '../buddy-db'
-import { remapKeys } from '../mapper'
-import { encodeUUID } from '../utils'
+import { encodeUUID } from '../utils/authoriztion-utils'
+import { buddyDB } from '../utils/buddy-db'
+import { remapKeys } from '../utils/mapper'
 
 const userRoute = express.Router()
 

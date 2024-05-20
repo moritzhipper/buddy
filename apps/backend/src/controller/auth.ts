@@ -1,11 +1,10 @@
+import { UserCredentials, UserCredentialsSchema, UserEmailSchema, UserPasswordSchema } from '@buddy/base-utils'
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
-import { getSessionIDFromRequest, getUserAuth } from '../authoriztion-utils'
-import { buddyDB, pgp } from '../buddy-db'
-import { UserCredentials } from '../types-and-schemas/types'
-import { UserCredentialsSchema, UserEmailSchema, UserPasswordSchema, validateReqBody } from '../types-and-schemas/validation-schemas'
-import { encodeUUID } from '../utils'
+import { encodeUUID, getSessionIDFromRequest, getUserAuth } from '../utils/authoriztion-utils'
+import { buddyDB, pgp } from '../utils/buddy-db'
+import { validateReqBody } from '../utils/schema-validation'
 
 const authRoute = express.Router()
 

@@ -1,8 +1,9 @@
+import { SettingsSchema } from '@buddy/base-utils'
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
-import { buddyDB, pgp } from '../buddy-db'
-import { remapKeys } from '../mapper'
-import { SettingsSchema, validateReqBody } from '../types-and-schemas/validation-schemas'
+import { buddyDB, pgp } from '../utils/buddy-db'
+import { remapKeys } from '../utils/mapper'
+import { validateReqBody } from '../utils/schema-validation'
 
 const settingsRoute = express.Router()
 

@@ -16,7 +16,6 @@
       "skipDefaultLibCheck": true,
       "baseUrl": ".",
       "paths": {
-         "@buddy/base": ["libs/base-utils/src/index.ts"],
          "@buddy/base-utils": ["libs/base-utils/src/index.ts"]
       }
    },
