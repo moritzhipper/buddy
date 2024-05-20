@@ -1,4 +1,4 @@
 export interface BuddyEnvironment {
-   production: boolean;
-   backendUrl?: string;
+   production: boolean
+   backendUrl?: string
 }

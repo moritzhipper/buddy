@@ -1,74 +1,54 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Store, StoreModule } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { InputWrapperComponent } from './components/shared/input-flyin/input-wrapper/input-wrapper.component';
-import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component';
-import { ToastComponent } from './components/shared/toast/toast.component';
-import {
-   Appointment,
-   Goal,
-   Note,
-   Therapist,
-   TherapyType,
-   ToastType,
-   UserProfile,
-} from './models';
-import { NotificationService } from './services/notification.service';
-import { ToastService } from './services/toast.service';
-import {
-   appointmentActions,
-   goalActions,
-   noteActions,
-   therapistActions,
-} from './store/buddy.actions';
-import { BuddyState } from './store/buddy.state';
+import { CommonModule } from '@angular/common'
+import { Component, OnInit, inject } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { Store, StoreModule } from '@ngrx/store'
+import { Observable } from 'rxjs'
+import { InputWrapperComponent } from './components/shared/input-flyin/input-wrapper/input-wrapper.component'
+import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
+import { ToastComponent } from './components/shared/toast/toast.component'
+import { Appointment, Goal, Note, Therapist, TherapyType, ToastType, UserProfile } from './models'
+import { NotificationService } from './services/notification.service'
+import { ToastService } from './services/toast.service'
+import { appointmentActions, goalActions, noteActions, therapistActions } from './store/buddy.actions'
+import { BuddyState } from './store/buddy.state'
 
 @Component({
    selector: 'app-root',
    standalone: true,
-   imports: [
-      RouterModule,
-      StoreModule,
-      ToastComponent,
-      InputWrapperComponent,
-      NavigationBarComponent,
-      CommonModule,
-   ],
+   imports: [RouterModule, StoreModule, ToastComponent, InputWrapperComponent, NavigationBarComponent, CommonModule],
    templateUrl: './app.component.html',
    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-   showDebugButtons = false;
-   private _toastIterator = 1;
-   isOffline = false;
-   profilePageIsOpen$: Observable<boolean>;
-   private _store = inject(Store<BuddyState>);
+   showDebugButtons = false
+   private _toastIterator = 1
+   isOffline = false
+   profilePageIsOpen$: Observable<boolean>
+   private _store = inject(Store<BuddyState>)
 
-   private notificationService = inject(NotificationService);
-   private toastService = inject(ToastService);
+   private notificationService = inject(NotificationService)
+   private toastService = inject(ToastService)
 
    ngOnInit(): void {
-      this.updateOnlineStatus();
-      window.addEventListener('online', this.updateOnlineStatus.bind(this));
-      window.addEventListener('offline', this.updateOnlineStatus.bind(this));
+      this.updateOnlineStatus()
+      window.addEventListener('online', this.updateOnlineStatus.bind(this))
+      window.addEventListener('offline', this.updateOnlineStatus.bind(this))
    }
 
    private updateOnlineStatus(): void {
-      this.isOffline = !window.navigator.onLine;
+      this.isOffline = !window.navigator.onLine
 
       if (!this.isOffline) {
-         this.toastService.sendToast({ text: 'Du bist wieder online' });
+         this.toastService.sendToast({ text: 'Du bist wieder online' })
       }
    }
 
    sendNotification() {
-      this.notificationService.askPermission();
+      this.notificationService.askPermission()
       this.notificationService.send({
          title: 'Test notification header',
          body: 'Test notification bodytext',
-      });
+      })
    }
 
    sendToast() {
@@ -76,25 +56,25 @@ export class AppComponent implements OnInit {
          case 1: {
             this.toastService.sendToast({
                text: 'Dies ist eine Toastbenachrichtigung mit einem mittellangen Textinhalt',
-            });
-            this._toastIterator++;
-            break;
+            })
+            this._toastIterator++
+            break
          }
          case 2: {
             this.toastService.sendToast({
                text: 'Dies ist ein Toasterror mit einem mittellangen Textinhalt',
                type: ToastType.ERROR,
-            });
-            this._toastIterator++;
-            break;
+            })
+            this._toastIterator++
+            break
          }
          case 3: {
             this.toastService.sendToast({
                text: 'Dies ist ein Toastsuccess mit mittellangen Textinhalt',
                type: ToastType.SUCCESS,
-            });
-            this._toastIterator = 1;
-            break;
+            })
+            this._toastIterator = 1
+            break
          }
       }
    }
@@ -148,7 +128,7 @@ export class AppComponent implements OnInit {
          {
             name: 'Hr. Dipl. Psych. Wiedeman',
          },
-      ];
+      ]
 
       const notes: Note[] = [
          {
@@ -169,7 +149,7 @@ export class AppComponent implements OnInit {
             body: 'test texsdfsdfsdfsdfsdfsft xcxöxcölxcölö xcö',
             createdAt: new Date(),
          },
-      ];
+      ]
 
       const goals: Goal[] = [
          {
@@ -181,7 +161,7 @@ export class AppComponent implements OnInit {
          {
             body: 'ich habe angst vor zugfahrten',
          },
-      ];
+      ]
 
       const appointments: Appointment[] = [
          {
@@ -196,26 +176,18 @@ export class AppComponent implements OnInit {
             to: '10:00',
             isRepeating: true,
          },
-      ];
+      ]
 
       const profile: UserProfile = {
          name: 'Testname',
          secret: 'sadasdasdasdasdasdasddddiiiii',
          email: 'sdsdsdsdsd',
-      };
+      }
 
-      therapists.forEach((v) =>
-         this._store.dispatch(therapistActions.create({ props: v }))
-      );
-      notes.forEach((v) =>
-         this._store.dispatch(noteActions.create({ props: v }))
-      );
-      goals.forEach((v) =>
-         this._store.dispatch(goalActions.create({ props: v }))
-      );
-      appointments.forEach((v) =>
-         this._store.dispatch(appointmentActions.create({ props: v }))
-      );
+      therapists.forEach((v) => this._store.dispatch(therapistActions.create({ props: v })))
+      notes.forEach((v) => this._store.dispatch(noteActions.create({ props: v })))
+      goals.forEach((v) => this._store.dispatch(goalActions.create({ props: v })))
+      appointments.forEach((v) => this._store.dispatch(appointmentActions.create({ props: v })))
    }
 
    reset() {}

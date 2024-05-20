@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { AccordionComponent } from '../accordion/accordion.component';
+import { Component } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { AccordionComponent } from '../accordion/accordion.component'
 
 @Component({
    selector: 'app-info-page',

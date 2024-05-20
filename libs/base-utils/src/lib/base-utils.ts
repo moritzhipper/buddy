@@ -1,3 +1,3 @@
 export function baseUtils(): string {
-   return 'base-utils';
+   return 'base-utils'
 }

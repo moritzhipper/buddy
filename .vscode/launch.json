@@ -4,7 +4,7 @@
          "type": "node",
          "name": "backend",
          "request": "attach",
-         "address": "ws://localhost:9229/d4a4e30e-ff77-4680-9b99-f611e462a2c6"
+         "address": "ws://localhost:9229/9a707a20-bdeb-454e-91cf-244f79d47f1b"
       }
    ]
 }

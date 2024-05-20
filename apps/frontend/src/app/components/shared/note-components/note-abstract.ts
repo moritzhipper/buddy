@@ -1,34 +1,27 @@
-import { Directive, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Note } from '../../../models';
-import {
-   InputResolveTypes,
-   InputService,
-   InputTypes,
-} from '../../../services/input.service';
-import { noteActions } from '../../../store/buddy.actions';
-import { BuddyState } from '../../../store/buddy.state';
-import { vibrateInfo } from '../../../utils';
+import { Directive, Input } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { Note } from '../../../models'
+import { InputResolveTypes, InputService, InputTypes } from '../../../services/input.service'
+import { noteActions } from '../../../store/buddy.actions'
+import { BuddyState } from '../../../store/buddy.state'
+import { vibrateInfo } from '../../../utils'
 
 @Directive()
 export abstract class NoteAbstract {
    @Input() set note(note: Note) {
       if (note) {
-         const { body, header } = this.splitNoteBody(note.body);
-         this.noteHeader = header;
-         this.noteBody = body;
-         this.noteFromInput = note;
+         const { body, header } = this.splitNoteBody(note.body)
+         this.noteHeader = header
+         this.noteBody = body
+         this.noteFromInput = note
       }
    }
 
-   noteHeader: string;
-   noteBody: string;
-   noteFromInput: Note;
+   noteHeader: string
+   noteBody: string
+   noteFromInput: Note
 
-   constructor(
-      private _inputService: InputService,
-      private _store: Store<BuddyState>
-   ) {}
+   constructor(private _inputService: InputService, private _store: Store<BuddyState>) {}
 
    editNote() {
       this._inputService
@@ -44,17 +37,15 @@ export abstract class NoteAbstract {
                   noteActions.update({
                      props: { body: v.value, id: this.noteFromInput.id },
                   })
-               );
+               )
             } else if (v.type === InputResolveTypes.DELETE) {
-               this._store.dispatch(
-                  noteActions.delete({ id: this.noteFromInput.id })
-               );
+               this._store.dispatch(noteActions.delete({ id: this.noteFromInput.id }))
             }
-         });
+         })
    }
 
    toggleReminder() {
-      vibrateInfo();
+      vibrateInfo()
       this._store.dispatch(
          noteActions.update({
             props: {
@@ -62,21 +53,16 @@ export abstract class NoteAbstract {
                isImportant: !this.noteFromInput.isImportant,
             },
          })
-      );
+      )
    }
 
    splitNoteBody(body: string): { header: string; body: string } {
-      const headerEndPosition = body.search(/\n/g);
-      const isHeaderShortEnough =
-         headerEndPosition < 30 && headerEndPosition > 0;
-      const noteHeader = isHeaderShortEnough
-         ? body.substring(0, headerEndPosition)
-         : '';
+      const headerEndPosition = body.search(/\n/g)
+      const isHeaderShortEnough = headerEndPosition < 30 && headerEndPosition > 0
+      const noteHeader = isHeaderShortEnough ? body.substring(0, headerEndPosition) : ''
       // add 3 to index to skip \n char
-      const noteBody = isHeaderShortEnough
-         ? body.substring(headerEndPosition + 1)
-         : body;
+      const noteBody = isHeaderShortEnough ? body.substring(headerEndPosition + 1) : body
 
-      return { header: noteHeader, body: noteBody };
+      return { header: noteHeader, body: noteBody }
    }
 }

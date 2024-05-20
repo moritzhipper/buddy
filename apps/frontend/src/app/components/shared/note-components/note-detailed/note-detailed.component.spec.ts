@@ -1,22 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NoteDetailedComponent } from './note-detailed.component';
+import { NoteDetailedComponent } from './note-detailed.component'
 
 describe('NoteDetailedComponent', () => {
-   let component: NoteDetailedComponent;
-   let fixture: ComponentFixture<NoteDetailedComponent>;
+   let component: NoteDetailedComponent
+   let fixture: ComponentFixture<NoteDetailedComponent>
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
          imports: [NoteDetailedComponent],
-      }).compileComponents();
+      }).compileComponents()
 
-      fixture = TestBed.createComponent(NoteDetailedComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-   });
+      fixture = TestBed.createComponent(NoteDetailedComponent)
+      component = fixture.componentInstance
+      fixture.detectChanges()
+   })
 
    it('should create', () => {
-      expect(component).toBeTruthy();
-   });
-});
+      expect(component).toBeTruthy()
+   })
+})

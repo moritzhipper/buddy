@@ -1,22 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import {
-   createAction,
-   createActionGroup,
-   emptyProps,
-   props,
-} from '@ngrx/store';
-import {
-   Appointment,
-   Goal,
-   Note,
-   Settings,
-   Therapist,
-   UserLogin,
-   UserProfile,
-} from '../models';
+import { HttpErrorResponse } from '@angular/common/http'
+import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store'
+import { Appointment, Goal, Note, Settings, Therapist, UserLogin, UserProfile } from '../models'
 
 // Crud
-type CrudResources = 'Therapist' | 'Note' | 'Goal' | 'Appointment';
+type CrudResources = 'Therapist' | 'Note' | 'Goal' | 'Appointment'
 const createCrudActions = <T>(name: string) =>
    createActionGroup({
       source: name as CrudResources,
@@ -28,17 +15,14 @@ const createCrudActions = <T>(name: string) =>
          Delete: props<{ id: string }>(),
          'Delete Success': props<{ id: string }>(),
       },
-   });
+   })
 
-export const getTherapistSuggestions = createAction(
-   '[Therapist] Suggestion',
-   props<{ filter: { name: string } }>
-);
+export const getTherapistSuggestions = createAction('[Therapist] Suggestion', props<{ filter: { name: string } }>)
 
-export const therapistActions = createCrudActions<Therapist>('Therapist');
-export const noteActions = createCrudActions<Note>('Note');
-export const goalActions = createCrudActions<Goal>('Goal');
-export const appointmentActions = createCrudActions<Appointment>('Appointment');
+export const therapistActions = createCrudActions<Therapist>('Therapist')
+export const noteActions = createCrudActions<Note>('Note')
+export const goalActions = createCrudActions<Goal>('Goal')
+export const appointmentActions = createCrudActions<Appointment>('Appointment')
 
 // Settings related
 export const settingsActions = createActionGroup({
@@ -48,7 +32,7 @@ export const settingsActions = createActionGroup({
       Update: props<{ props: Settings }>(),
       Save: props<{ props: Settings }>(),
    },
-});
+})
 
 // Profile related
 export const profileActions = createActionGroup({
@@ -64,7 +48,7 @@ export const profileActions = createActionGroup({
       'Delete Profile Success': emptyProps(),
       'Profile not existing': emptyProps(),
    },
-});
+})
 
 // Auth related
 // Silent Login is used to refresh session without userinteraction silently for non full users
@@ -78,7 +62,7 @@ export const authActions = createActionGroup({
       Logout: emptyProps(),
       'Logout Success': emptyProps(),
    },
-});
+})
 
 export const loadAllDataActions = createActionGroup({
    source: 'Load Data',
@@ -86,7 +70,7 @@ export const loadAllDataActions = createActionGroup({
       'Basic User': emptyProps(),
       'Full User': emptyProps(),
    },
-});
+})
 
 // Error
 export const httpErrorActions = createActionGroup({
@@ -95,4 +79,4 @@ export const httpErrorActions = createActionGroup({
       Handle: props<{ error: HttpErrorResponse }>(),
       'Handle Unspecific': props<{ error: HttpErrorResponse }>(),
    },
-});
+})

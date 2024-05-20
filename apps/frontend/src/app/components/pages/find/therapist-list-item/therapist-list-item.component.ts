@@ -1,35 +1,15 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { CommonModule } from '@angular/common';
-import {
-   ChangeDetectionStrategy,
-   Component,
-   ElementRef,
-   Input,
-   OnDestroy,
-   Renderer2,
-   ViewChild,
-   inject,
-} from '@angular/core';
-import { Store } from '@ngrx/store';
-import { expandAnimation } from 'apps/frontend/src/app/animations';
-import { Remindable, Therapist, ToastType } from 'apps/frontend/src/app/models';
-import {
-   InputResolveTypes,
-   InputResolver,
-   InputService,
-   InputTypes,
-} from 'apps/frontend/src/app/services/input.service';
-import { ToastService } from 'apps/frontend/src/app/services/toast.service';
-import {
-   appointmentActions,
-   therapistActions,
-} from 'apps/frontend/src/app/store/buddy.actions';
-import { selectUserProfile } from 'apps/frontend/src/app/store/buddy.selectors';
-import { BuddyState } from 'apps/frontend/src/app/store/buddy.state';
-import {
-   isCurrentTimeInRange,
-   remindableComparator,
-} from 'apps/frontend/src/app/utiles-time';
+import { animate, style, transition, trigger } from '@angular/animations'
+import { CommonModule } from '@angular/common'
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, Renderer2, ViewChild, inject } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { expandAnimation } from 'apps/frontend/src/app/animations'
+import { Remindable, Therapist, ToastType } from 'apps/frontend/src/app/models'
+import { InputResolveTypes, InputResolver, InputService, InputTypes } from 'apps/frontend/src/app/services/input.service'
+import { ToastService } from 'apps/frontend/src/app/services/toast.service'
+import { appointmentActions, therapistActions } from 'apps/frontend/src/app/store/buddy.actions'
+import { selectUserProfile } from 'apps/frontend/src/app/store/buddy.selectors'
+import { BuddyState } from 'apps/frontend/src/app/store/buddy.state'
+import { isCurrentTimeInRange, remindableComparator } from 'apps/frontend/src/app/utiles-time'
 
 @Component({
    selector: 'app-therapist-list-item',
@@ -43,36 +23,28 @@ import {
       trigger('fade', [
          transition(':enter', [
             style({ opacity: 0, transform: 'translate(-28px, -28px)' }),
-            animate(
-               '200ms ease-out',
-               style({ opacity: 1, transform: 'translate(-32px, -32px)' })
-            ),
+            animate('200ms ease-out', style({ opacity: 1, transform: 'translate(-32px, -32px)' })),
          ]),
-         transition(':leave', [
-            animate(
-               '100ms ease-in',
-               style({ opacity: 0, transform: 'translate(-20px, -20px)' })
-            ),
-         ]),
+         transition(':leave', [animate('100ms ease-in', style({ opacity: 0, transform: 'translate(-20px, -20px)' }))]),
       ]),
    ],
 })
 export class TherapistListItemComponent implements OnDestroy {
-   @Input() therapist: Therapist;
+   @Input() therapist: Therapist
 
-   @ViewChild('bodyOverlay') bodyOverlay: ElementRef<HTMLElement>;
-   @ViewChild('bodyWrapper') bodyWrapper: ElementRef<HTMLElement>;
+   @ViewChild('bodyOverlay') bodyOverlay: ElementRef<HTMLElement>
+   @ViewChild('bodyWrapper') bodyWrapper: ElementRef<HTMLElement>
 
-   expanded = false;
-   editSectionOpen = false;
+   expanded = false
+   editSectionOpen = false
 
-   private _animationTimeout = 300;
+   private _animationTimeout = 300
 
-   private _removeHeightAttributeTimeOut;
-   private _setHeightToAutoTimeOut;
+   private _removeHeightAttributeTimeOut
+   private _setHeightToAutoTimeOut
 
-   private subscription;
-   private isFullUser = false;
+   private subscription
+   private isFullUser = false
 
    constructor(
       private _renderer: Renderer2,
@@ -83,11 +55,11 @@ export class TherapistListItemComponent implements OnDestroy {
       this.subscription = inject(Store)
          .select(selectUserProfile)
          .subscribe((profile) => {
-            this.isFullUser = profile.isFullUser;
-         });
+            this.isFullUser = profile.isFullUser
+         })
    }
    ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+      this.subscription.unsubscribe()
    }
 
    editName() {
@@ -98,7 +70,7 @@ export class TherapistListItemComponent implements OnDestroy {
             preset: this.therapist.name,
             label: 'Name',
          })
-         .then((v) => this._updateValueResolve(v, 'name'));
+         .then((v) => this._updateValueResolve(v, 'name'))
    }
 
    editNote() {
@@ -110,7 +82,7 @@ export class TherapistListItemComponent implements OnDestroy {
             preset: this.therapist.note,
             canRemove: !!this.therapist.note,
          })
-         .then((v) => this._updateValueResolve(v, 'note'));
+         .then((v) => this._updateValueResolve(v, 'note'))
    }
 
    editPhone() {
@@ -122,7 +94,7 @@ export class TherapistListItemComponent implements OnDestroy {
             label: 'Nummer',
             canRemove: !!this.therapist.phone,
          })
-         .then((v) => this._updateValueResolve(v, 'phone'));
+         .then((v) => this._updateValueResolve(v, 'phone'))
    }
 
    editMail() {
@@ -134,7 +106,7 @@ export class TherapistListItemComponent implements OnDestroy {
             preset: this.therapist.email,
             canRemove: !!this.therapist.email,
          })
-         .then((v) => this._updateValueResolve(v, 'email'));
+         .then((v) => this._updateValueResolve(v, 'email'))
    }
 
    editFreeFrom() {
@@ -147,7 +119,7 @@ export class TherapistListItemComponent implements OnDestroy {
             label: 'Datum',
             canRemove: !!this.therapist.freeFrom,
          })
-         .then((v) => this._updateValueResolve(v, 'freeFrom'));
+         .then((v) => this._updateValueResolve(v, 'freeFrom'))
    }
 
    editCallTimes() {
@@ -160,8 +132,8 @@ export class TherapistListItemComponent implements OnDestroy {
             canRemove: !!this.therapist.callTimes,
          })
          .then((v) => {
-            this._updateValueResolve(v, 'callTimes');
-         });
+            this._updateValueResolve(v, 'callTimes')
+         })
    }
 
    editAddress() {
@@ -172,7 +144,7 @@ export class TherapistListItemComponent implements OnDestroy {
             preset: this.therapist.address,
             canRemove: !!this.therapist.address,
          })
-         .then((v) => this._updateValueResolve(v, 'address'));
+         .then((v) => this._updateValueResolve(v, 'address'))
    }
 
    editTherapyTypes() {
@@ -183,7 +155,7 @@ export class TherapistListItemComponent implements OnDestroy {
             preset: this.therapist.therapyTypes,
             canRemove: !!this.therapist.therapyTypes,
          })
-         .then((v) => this._updateValueResolve(v, 'therapyTypes'));
+         .then((v) => this._updateValueResolve(v, 'therapyTypes'))
    }
 
    deleteTherapist() {
@@ -195,31 +167,26 @@ export class TherapistListItemComponent implements OnDestroy {
          })
          .then((v) => {
             if (v.type === InputResolveTypes.CONFIRM) {
-               this._store.dispatch(
-                  therapistActions.delete({ id: this.therapist.id })
-               );
+               this._store.dispatch(therapistActions.delete({ id: this.therapist.id }))
                this._toastService.sendToast({
                   type: ToastType.SUCCESS,
                   text: `${this.therapist.name} gelöscht`,
-               });
+               })
             }
-         });
+         })
    }
 
    toggleCallTimeReminder(index: number) {
-      let updatedCallTimesArray = [...this.therapist.callTimes];
-      let updatedCallTime = updatedCallTimesArray[index];
+      let updatedCallTimesArray = [...this.therapist.callTimes]
+      let updatedCallTime = updatedCallTimesArray[index]
 
       updatedCallTime = {
          ...updatedCallTime,
          reminder: !updatedCallTime.reminder,
-      };
-      updatedCallTimesArray[index] = updatedCallTime;
+      }
+      updatedCallTimesArray[index] = updatedCallTime
 
-      this._updateValueResolve(
-         { type: InputResolveTypes.CONFIRM, value: updatedCallTimesArray },
-         'callTimes'
-      );
+      this._updateValueResolve({ type: InputResolveTypes.CONFIRM, value: updatedCallTimesArray }, 'callTimes')
    }
 
    addAppointment() {
@@ -229,134 +196,96 @@ export class TherapistListItemComponent implements OnDestroy {
                header: 'Termin anlegen',
                type: InputTypes.APPOINTMENT,
             })
-            .then(
-               (v) =>
-                  v.type === InputResolveTypes.CONFIRM &&
-                  this._store.dispatch(
-                     appointmentActions.create({ props: v.value })
-                  )
-            );
+            .then((v) => v.type === InputResolveTypes.CONFIRM && this._store.dispatch(appointmentActions.create({ props: v.value })))
       } else {
          this.inputservice.openInputDialogue({
             header: 'Herzlichen Glückwunsch!',
-            description:
-               'Du willst deinen ersten Termin anlegen? Vergebe vorher ein Passwort, um deine Profilsicherheit zu erhöhen.',
+            description: 'Du willst deinen ersten Termin anlegen? Vergebe vorher ein Passwort, um deine Profilsicherheit zu erhöhen.',
             type: InputTypes.PASSWORD,
-         });
+         })
       }
    }
 
-   private _updateValueResolve(
-      inputResolver: InputResolver,
-      attributeName: string
-   ) {
-      if (
-         inputResolver.type === InputResolveTypes.CONFIRM ||
-         inputResolver.type === InputResolveTypes.DELETE
-      ) {
-         const therapist = { [attributeName]: inputResolver.value || null };
+   private _updateValueResolve(inputResolver: InputResolver, attributeName: string) {
+      if (inputResolver.type === InputResolveTypes.CONFIRM || inputResolver.type === InputResolveTypes.DELETE) {
+         const therapist = { [attributeName]: inputResolver.value || null }
          this._store.dispatch(
             therapistActions.update({
                props: { ...therapist, id: this.therapist.id },
             })
-         );
+         )
       }
    }
 
    toggleEditSectionOpen() {
       // set fixed height
-      const overlayHeight = this.bodyOverlay.nativeElement.offsetHeight;
-      this._renderer.setStyle(
-         this.bodyOverlay.nativeElement,
-         'height',
-         overlayHeight + 'px'
-      );
+      const overlayHeight = this.bodyOverlay.nativeElement.offsetHeight
+      this._renderer.setStyle(this.bodyOverlay.nativeElement, 'height', overlayHeight + 'px')
 
       //toggle openstate
-      this.editSectionOpen = !this.editSectionOpen;
+      this.editSectionOpen = !this.editSectionOpen
 
       //set full height
-      setTimeout(() => this._setFullHeight(), 2);
+      setTimeout(() => this._setFullHeight(), 2)
    }
 
    toggleExpansion() {
-      this.expanded = !this.expanded;
+      this.expanded = !this.expanded
    }
 
    reminderIsNow(): boolean {
-      if (!this.therapist.callTimes) return false;
-      return this.therapist?.callTimes
-         ?.filter((callTime) => callTime.reminder)
-         .some(isCurrentTimeInRange);
+      if (!this.therapist.callTimes) return false
+      return this.therapist?.callTimes?.filter((callTime) => callTime.reminder).some(isCurrentTimeInRange)
    }
 
    getNextCallTime(): Remindable {
-      const sorted = this.therapist?.callTimes
-         ?.filter((callTime) => callTime?.reminder)
-         .sort(remindableComparator);
+      const sorted = this.therapist?.callTimes?.filter((callTime) => callTime?.reminder).sort(remindableComparator)
       if (sorted) {
-         return sorted[0];
+         return sorted[0]
       } else {
-         return null;
+         return null
       }
    }
 
    getTherapyTypes(): string {
-      return this.therapist?.therapyTypes.join(', ');
+      return this.therapist?.therapyTypes.join(', ')
    }
 
    generateGoogleMapsLink() {
-      const mapsBaseUrl = 'https://www.google.de/maps/place/';
+      const mapsBaseUrl = 'https://www.google.de/maps/place/'
       if (!this.therapist?.address) {
-         return null;
+         return null
       } else {
          const addressString = Object.keys(this.therapist.address)
             .filter((v) => !!v)
             .map((v) => this.therapist.address[v])
-            .join(' ');
+            .join(' ')
 
-         return mapsBaseUrl + encodeURI(addressString);
+         return mapsBaseUrl + encodeURI(addressString)
       }
    }
 
    private _appendStrings(...elements: any[]): string {
-      return elements.filter((v) => !!v).join(' ');
+      return elements.filter((v) => !!v).join(' ')
    }
 
    generateAddressFooter = () =>
       [
-         this._appendStrings(
-            this.therapist?.address?.city,
-            this.therapist?.address?.postalCode
-         ),
-         this._appendStrings(
-            this.therapist?.address?.street,
-            this.therapist?.address?.number
-         ),
+         this._appendStrings(this.therapist?.address?.city, this.therapist?.address?.postalCode),
+         this._appendStrings(this.therapist?.address?.street, this.therapist?.address?.number),
       ]
          .filter((v) => !!v)
-         .join(', ');
+         .join(', ')
 
-   generateContactFooter = () =>
-      [this.therapist.phone, this.therapist.email]
-         .filter((v) => !!v)
-         .join(', ');
+   generateContactFooter = () => [this.therapist.phone, this.therapist.email].filter((v) => !!v).join(', ')
 
    private _setFullHeight() {
-      const wrapperHeight = this.bodyWrapper.nativeElement.offsetHeight;
+      const wrapperHeight = this.bodyWrapper.nativeElement.offsetHeight
 
-      this._renderer.setStyle(
-         this.bodyOverlay.nativeElement,
-         'height',
-         wrapperHeight + 'px'
-      );
-      clearTimeout(this._removeHeightAttributeTimeOut);
+      this._renderer.setStyle(this.bodyOverlay.nativeElement, 'height', wrapperHeight + 'px')
+      clearTimeout(this._removeHeightAttributeTimeOut)
       this._setHeightToAutoTimeOut = setTimeout(() => {
-         this._renderer.setStyle(
-            this.bodyOverlay.nativeElement,
-            'height',
-            'auto'
-         );
-      }, this._animationTimeout);
+         this._renderer.setStyle(this.bodyOverlay.nativeElement, 'height', 'auto')
+      }, this._animationTimeout)
    }
 }

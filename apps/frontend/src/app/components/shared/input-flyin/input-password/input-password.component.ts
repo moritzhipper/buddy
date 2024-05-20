@@ -1,20 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-   FormBuilder,
-   FormGroup,
-   FormsModule,
-   ReactiveFormsModule,
-   Validators,
-} from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { expandAnimation } from '../../../../animations';
-import { ToastType } from '../../../../models';
-import { InputService } from '../../../../services/input.service';
-import { ToastService } from '../../../../services/toast.service';
-import { profileActions } from '../../../../store/buddy.actions';
-import { BuddyState } from '../../../../store/buddy.state';
+import { CommonModule } from '@angular/common'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
+import { expandAnimation } from '../../../../animations'
+import { ToastType } from '../../../../models'
+import { InputService } from '../../../../services/input.service'
+import { ToastService } from '../../../../services/toast.service'
+import { profileActions } from '../../../../store/buddy.actions'
+import { BuddyState } from '../../../../store/buddy.state'
 
 @Component({
    selector: 'app-input-password',
@@ -25,32 +19,27 @@ import { BuddyState } from '../../../../store/buddy.state';
    animations: [expandAnimation],
 })
 export class InputPasswordComponent implements OnInit, OnDestroy {
-   private readonly CHECK_FOR_NUMBER_REGEX = new RegExp('.*[0-9].*');
-   private readonly CHECK_FOR_STRING_REGEX = new RegExp('.*[a-zA-ZäöüßÄÖÜ].*');
-   readonly PASSWORD_MIN_LENGTH = 12;
+   private readonly CHECK_FOR_NUMBER_REGEX = new RegExp('.*[0-9].*')
+   private readonly CHECK_FOR_STRING_REGEX = new RegExp('.*[a-zA-ZäöüßÄÖÜ].*')
+   readonly PASSWORD_MIN_LENGTH = 12
 
-   passwordForm: FormGroup;
-   password: string;
-   repeatPassword: string;
+   passwordForm: FormGroup
+   password: string
+   repeatPassword: string
 
-   repeatPasswordIsNotEmpty = false;
+   repeatPasswordIsNotEmpty = false
 
-   currentStep = 0;
+   currentStep = 0
 
    validationErrors = {
       hasNumber: false,
       hasLetter: false,
       hasMinLength: false,
-   };
+   }
 
-   private subscription: Subscription;
+   private subscription: Subscription
 
-   constructor(
-      private _fb: FormBuilder,
-      private _is: InputService,
-      private _store: Store<BuddyState>,
-      private _ts: ToastService
-   ) {}
+   constructor(private _fb: FormBuilder, private _is: InputService, private _store: Store<BuddyState>, private _ts: ToastService) {}
 
    ngOnInit(): void {
       this.passwordForm = this._fb.group({
@@ -64,15 +53,15 @@ export class InputPasswordComponent implements OnInit, OnDestroy {
             ],
          ],
          email: ['', [Validators.required, Validators.email]],
-      });
+      })
 
       this.subscription = this.passwordForm.valueChanges.subscribe((v) => {
-         this.updateValidationErrors(v.password);
-      });
+         this.updateValidationErrors(v.password)
+      })
    }
 
    ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+      this.subscription.unsubscribe()
    }
 
    updateValidationErrors(password: string) {
@@ -80,35 +69,34 @@ export class InputPasswordComponent implements OnInit, OnDestroy {
          hasNumber: this.CHECK_FOR_NUMBER_REGEX.test(password),
          hasLetter: this.CHECK_FOR_STRING_REGEX.test(password),
          hasMinLength: password.length >= this.PASSWORD_MIN_LENGTH,
-      };
+      }
    }
 
    approveStepOne() {
       if (this.passwordForm.valid) {
-         this.currentStep = 1;
+         this.currentStep = 1
       }
    }
 
    approveStepTwo() {
-      const passwordRepeatedCorrectly =
-         this.repeatPassword === this.passwordForm.value.password;
+      const passwordRepeatedCorrectly = this.repeatPassword === this.passwordForm.value.password
       if (passwordRepeatedCorrectly) {
-         this.submit();
+         this.submit()
       } else {
-         alert('repeat password is wrong');
+         alert('repeat password is wrong')
          this._ts.sendToast({
             type: ToastType.ERROR,
             text: 'shit',
-         });
+         })
       }
    }
 
    setRepeatPassword($event: Event) {
-      this.repeatPassword = ($event.target as HTMLInputElement).value;
+      this.repeatPassword = ($event.target as HTMLInputElement).value
    }
 
    navigateToStepOne() {
-      this.currentStep = 0;
+      this.currentStep = 0
    }
 
    submit() {
@@ -118,12 +106,12 @@ export class InputPasswordComponent implements OnInit, OnDestroy {
             profileActions.createCredentials({
                login: { ...this.passwordForm.value },
             })
-         );
-         this._is.confirmValue();
+         )
+         this._is.confirmValue()
       }
    }
 
    discard() {
-      this._is.discardValueChanges();
+      this._is.discardValueChanges()
    }
 }

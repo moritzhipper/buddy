@@ -1,18 +1,9 @@
-import { DatePipe } from '@angular/common';
-import {
-   ChangeDetectionStrategy,
-   Component,
-   Input,
-   inject,
-} from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Appointment } from 'apps/frontend/src/app/models';
-import {
-   InputResolveTypes,
-   InputService,
-   InputTypes,
-} from 'apps/frontend/src/app/services/input.service';
-import { appointmentActions } from 'apps/frontend/src/app/store/buddy.actions';
+import { DatePipe } from '@angular/common'
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { Appointment } from 'apps/frontend/src/app/models'
+import { InputResolveTypes, InputService, InputTypes } from 'apps/frontend/src/app/services/input.service'
+import { appointmentActions } from 'apps/frontend/src/app/store/buddy.actions'
 
 @Component({
    selector: 'app-appointment-card',
@@ -23,10 +14,10 @@ import { appointmentActions } from 'apps/frontend/src/app/store/buddy.actions';
    standalone: true,
 })
 export class AppointmentCardComponent {
-   @Input() appointment: Appointment;
+   @Input() appointment: Appointment
 
-   inputService = inject(InputService);
-   store = inject(Store);
+   inputService = inject(InputService)
+   store = inject(Store)
 
    editAppointment() {
       this.inputService
@@ -42,11 +33,8 @@ export class AppointmentCardComponent {
                   appointmentActions.update({
                      props: { ...v.value, id: this.appointment.id },
                   })
-               );
-            v.type === InputResolveTypes.DELETE &&
-               this.store.dispatch(
-                  appointmentActions.delete({ id: this.appointment.id })
-               );
-         });
+               )
+            v.type === InputResolveTypes.DELETE && this.store.dispatch(appointmentActions.delete({ id: this.appointment.id }))
+         })
    }
 }

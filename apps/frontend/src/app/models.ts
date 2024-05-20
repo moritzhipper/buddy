@@ -4,18 +4,18 @@ export enum ToastType {
 }
 
 export interface Toast {
-   text: string;
-   type?: ToastType;
+   text: string
+   type?: ToastType
 }
 
 export interface UniqueItem {
-   id?: string;
+   id?: string
 }
 
 export interface CalendarItem {
-   callTime: Remindable;
-   phone: string;
-   therapistName: string;
+   callTime: Remindable
+   phone: string
+   therapistName: string
 }
 
 export enum weekdays {
@@ -36,21 +36,21 @@ export const WeekdaysMap: { [key in weekdays]: string } = {
    [weekdays.DO]: 'Donnerstag',
    [weekdays.FR]: 'Freitag',
    [weekdays.SA]: 'Samstag',
-};
-
-export interface Therapist extends UniqueItem {
-   name?: string;
-   address?: Address;
-   freeFrom?: string;
-   note?: string;
-   email?: string;
-   phone?: string;
-   callTimes?: Remindable[];
-   therapyTypes?: string[];
 }
 
-const furniture = ['chair', 'table', 'lamp'] as const;
-type Furniture = (typeof furniture)[number];
+export interface Therapist extends UniqueItem {
+   name?: string
+   address?: Address
+   freeFrom?: string
+   note?: string
+   email?: string
+   phone?: string
+   callTimes?: Remindable[]
+   therapyTypes?: string[]
+}
+
+const furniture = ['chair', 'table', 'lamp'] as const
+type Furniture = (typeof furniture)[number]
 
 export enum TherapyType {
    ANALYTISCH = 'analytisch',
@@ -82,62 +82,62 @@ export const TherapyTypeList: string[] = [
    'Musiktherapie',
    'Tanztherapie',
    'Achtsamkeitsbasierte Therapieansätze',
-];
+]
 
 export interface Note extends UniqueItem {
-   body?: string;
-   createdAt?: Date;
-   isImportant?: boolean;
+   body?: string
+   createdAt?: Date
+   isImportant?: boolean
 }
 
 export interface Goal extends UniqueItem {
-   createdAt?: Date;
-   body?: string;
+   createdAt?: Date
+   body?: string
 }
 
 export interface Address {
-   street?: string;
-   number?: string;
-   city?: string;
-   postalCode?: number;
+   street?: string
+   number?: string
+   city?: string
+   postalCode?: number
 }
 
 export interface Remindable extends UniqueItem {
-   weekday: string;
-   from: string;
-   to: string;
-   reminder?: boolean;
+   weekday: string
+   from: string
+   to: string
+   reminder?: boolean
 }
 
 export interface Appointment extends Remindable {
-   date?: string;
-   isRepeating: boolean;
+   date?: string
+   isRepeating: boolean
 }
 
 export interface Settings {
-   callPrecautionTime?: number;
-   appointmentPrecautionTime?: number;
-   shareTherapistData?: boolean;
-   remindNextAppointment?: boolean;
+   callPrecautionTime?: number
+   appointmentPrecautionTime?: number
+   shareTherapistData?: boolean
+   remindNextAppointment?: boolean
 }
 
 // holding info about user
 export interface UserProfile {
-   name?: string;
-   email?: string;
-   secret?: string;
-   isFullUser?: boolean;
+   name?: string
+   email?: string
+   secret?: string
+   isFullUser?: boolean
 }
 
 // holding short term data to create session
 export interface UserLogin {
-   password?: string;
-   email?: string;
-   secret?: string;
+   password?: string
+   email?: string
+   secret?: string
 }
 
 // holding auth data
 export interface Auth {
-   secretNeedingPassword?: string;
-   session?: string;
+   secretNeedingPassword?: string
+   session?: string
 }

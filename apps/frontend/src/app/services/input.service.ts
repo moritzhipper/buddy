@@ -1,17 +1,17 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-import deepEqual from 'deep-equal';
-import { BehaviorSubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common'
+import { Inject, Injectable } from '@angular/core'
+import { NavigationStart, Router } from '@angular/router'
+import deepEqual from 'deep-equal'
+import { BehaviorSubject } from 'rxjs'
+import { filter } from 'rxjs/operators'
 
 export class InputServiceConfig {
-   header: string;
-   type: InputTypes;
-   canRemove?: boolean;
-   description?: string;
-   preset?: any;
-   label?: string;
+   header: string
+   type: InputTypes
+   canRemove?: boolean
+   description?: string
+   preset?: any
+   label?: string
 }
 
 export enum InputTypes {
@@ -37,32 +37,27 @@ export enum InputResolveTypes {
 }
 
 export class InputResolver {
-   type: InputResolveTypes;
-   value?: any;
+   type: InputResolveTypes
+   value?: any
 }
 
 @Injectable({
    providedIn: 'root',
 })
 export class InputService {
-   configSubject = new BehaviorSubject<InputServiceConfig>(null);
-   resolveValuePromise;
+   configSubject = new BehaviorSubject<InputServiceConfig>(null)
+   resolveValuePromise
 
-   constructor(
-      private _router: Router,
-      @Inject(DOCUMENT) private document: Document
-   ) {
+   constructor(private _router: Router, @Inject(DOCUMENT) private document: Document) {
       this.document.addEventListener('keydown', (event: KeyboardEvent) => {
          if (event.key === 'Escape') {
-            this.discardValueChanges();
+            this.discardValueChanges()
          }
-      });
+      })
       // close inout on routechange
-      this._router.events
-         .pipe(filter((event) => event instanceof NavigationStart))
-         .subscribe((v) => {
-            this.discardValueChanges();
-         });
+      this._router.events.pipe(filter((event) => event instanceof NavigationStart)).subscribe((v) => {
+         this.discardValueChanges()
+      })
    }
 
    // return new value
@@ -70,28 +65,25 @@ export class InputService {
       // if value is set, check if it changed or is same as before
       // if no value is set, it means confirm dialogue was selected
       if (value) {
-         const valueEqualsPreset = deepEqual(
-            this.configSubject.getValue()?.preset,
-            value
-         );
+         const valueEqualsPreset = deepEqual(this.configSubject.getValue()?.preset, value)
          if (!valueEqualsPreset) {
-            console.log('resolve with new value');
+            console.log('resolve with new value')
 
             this.resolveValuePromise({
                type: InputResolveTypes.CONFIRM,
                value,
-            });
-            this.closeInputDialogue();
+            })
+            this.closeInputDialogue()
          } else {
-            console.log('resolve with unchanged value => disgard');
-            this.discardValueChanges();
+            console.log('resolve with unchanged value => disgard')
+            this.discardValueChanges()
          }
       } else {
-         console.log('resolve without value');
+         console.log('resolve without value')
          this.resolveValuePromise({
             type: InputResolveTypes.CONFIRM,
-         });
-         this.closeInputDialogue();
+         })
+         this.closeInputDialogue()
       }
    }
 
@@ -99,8 +91,8 @@ export class InputService {
    deleteValue() {
       this.resolveValuePromise({
          type: InputResolveTypes.DELETE,
-      });
-      this.closeInputDialogue();
+      })
+      this.closeInputDialogue()
    }
 
    //communicate discard of changes made in input
@@ -108,23 +100,21 @@ export class InputService {
       this.resolveValuePromise &&
          this.resolveValuePromise({
             type: InputResolveTypes.DISCARD,
-         });
+         })
 
-      this.closeInputDialogue();
+      this.closeInputDialogue()
    }
 
    //input config-object
    openInputDialogue(config: InputServiceConfig): Promise<InputResolver> {
       if (!config.preset) {
-         config.preset = '';
+         config.preset = ''
       }
-      this.configSubject.next(config);
-      return new Promise<InputResolver>(
-         (resolve) => (this.resolveValuePromise = resolve)
-      );
+      this.configSubject.next(config)
+      return new Promise<InputResolver>((resolve) => (this.resolveValuePromise = resolve))
    }
 
    closeInputDialogue() {
-      this.configSubject.next(null);
+      this.configSubject.next(null)
    }
 }

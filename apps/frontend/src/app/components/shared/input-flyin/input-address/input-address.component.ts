@@ -1,18 +1,7 @@
-import {
-   ChangeDetectionStrategy,
-   Component,
-   Input,
-   OnInit,
-} from '@angular/core';
-import {
-   FormBuilder,
-   FormGroup,
-   FormsModule,
-   ReactiveFormsModule,
-   Validators,
-} from '@angular/forms';
-import { Address } from '../../../../models';
-import { InputService } from '../../../../services/input.service';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Address } from '../../../../models'
+import { InputService } from '../../../../services/input.service'
 
 @Component({
    selector: 'app-input-address',
@@ -23,8 +12,8 @@ import { InputService } from '../../../../services/input.service';
    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputAddressComponent implements OnInit {
-   @Input() preset?: Address;
-   addressForm: FormGroup;
+   @Input() preset?: Address
+   addressForm: FormGroup
 
    constructor(private _fb: FormBuilder, private _is: InputService) {}
 
@@ -34,14 +23,14 @@ export class InputAddressComponent implements OnInit {
          number: [this.preset?.number || '', Validators.required],
          city: [this.preset?.city || '', Validators.required],
          postalCode: [this.preset?.postalCode || '', Validators.required],
-      });
+      })
    }
 
    submit() {
-      this.addressForm.valid && this._is.confirmValue(this.addressForm.value);
+      this.addressForm.valid && this._is.confirmValue(this.addressForm.value)
    }
 
    discard() {
-      this._is.discardValueChanges();
+      this._is.discardValueChanges()
    }
 }

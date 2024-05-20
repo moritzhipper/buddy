@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { InputService } from '../../../../services/input.service';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { InputService } from '../../../../services/input.service'
 
 @Component({
    selector: 'app-input-confirm',
@@ -9,15 +9,15 @@ import { InputService } from '../../../../services/input.service';
    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputConfirmComponent {
-   @Input() description: string;
+   @Input() description: string
 
    constructor(private _is: InputService) {}
 
    submit() {
-      this._is.confirmValue();
+      this._is.confirmValue()
    }
 
    discard() {
-      this._is.discardValueChanges();
+      this._is.discardValueChanges()
    }
 }

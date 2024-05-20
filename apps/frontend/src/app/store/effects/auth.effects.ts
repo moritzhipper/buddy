@@ -1,21 +1,17 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
-import { BackendAdapterService } from '../../services/backend-adapter.service';
-import {
-   authActions,
-   httpErrorActions,
-   profileActions,
-} from '../buddy.actions';
+import { HttpErrorResponse } from '@angular/common/http'
+import { Injectable, inject } from '@angular/core'
+import { Router } from '@angular/router'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { of } from 'rxjs'
+import { catchError, filter, map, switchMap, tap } from 'rxjs/operators'
+import { BackendAdapterService } from '../../services/backend-adapter.service'
+import { authActions, httpErrorActions, profileActions } from '../buddy.actions'
 
 @Injectable()
 export class AuthEffects {
-   private actions$ = inject(Actions);
-   private backendAdapter = inject(BackendAdapterService);
-   private router = inject(Router);
+   private actions$ = inject(Actions)
+   private backendAdapter = inject(BackendAdapterService)
+   private router = inject(Router)
 
    login$ = createEffect(() =>
       this.actions$.pipe(
@@ -29,24 +25,23 @@ export class AuthEffects {
                   })
                ),
                catchError((error: HttpErrorResponse) => {
-                  const is401 = error?.status === 401;
-                  const userNeedsToProvidePassword =
-                     error?.error?.message.includes('Bitte gib');
+                  const is401 = error?.status === 401
+                  const userNeedsToProvidePassword = error?.error?.message.includes('Bitte gib')
 
                   if (is401 && userNeedsToProvidePassword) {
                      return of(
                         authActions.requestPassword({
                            secret: action.login.secret,
                         })
-                     );
+                     )
                   } else {
-                     return of(httpErrorActions.handle({ error }));
+                     return of(httpErrorActions.handle({ error }))
                   }
                })
             )
          )
       )
-   );
+   )
 
    // enable logout regardless of session validity. Ignore errors on logout api call
    logout$ = createEffect(() =>
@@ -59,7 +54,7 @@ export class AuthEffects {
             )
          )
       )
-   );
+   )
 
    goToFind = createEffect(
       () =>
@@ -67,11 +62,11 @@ export class AuthEffects {
             ofType(authActions.loginSuccess),
             filter((action) => action.redirect),
             tap(() => {
-               this.router.navigateByUrl('/find');
+               this.router.navigateByUrl('/find')
             })
          ),
       { dispatch: false }
-   );
+   )
 
    goToLogin = createEffect(
       () =>
@@ -84,9 +79,9 @@ export class AuthEffects {
                authActions.requestPassword
             ),
             tap(() => {
-               this.router.navigateByUrl('/login');
+               this.router.navigateByUrl('/login')
             })
          ),
       { dispatch: false }
-   );
+   )
 }
