@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Therapist, UniqueItem } from '@buddy/base-utils'
+import { BuddyRoutes, Therapist, UniqueItem, UserProfile } from '@buddy/base-utils'
 import { Observable, map } from 'rxjs'
 import { environment } from '../../environments/environment'
 
@@ -9,19 +9,16 @@ import { environment } from '../../environments/environment'
 })
 export class BackendAdapterService {
    private readonly SERVICE_URL: string
-   readonly ROUTE_THERAPIST = '/therapists'
-   readonly ROUTE_APPOINTMENT = '/appointments'
-   readonly ROUTE_NOTES = '/notes'
-   readonly ROUTE_GOALS = '/goals'
-   readonly ROUTE_SETTINGS = '/settings'
-   readonly ROUTE_USER_PROFILE = '/user'
-   readonly ROUTE_AUTH = '/auth'
 
    constructor(private _httpClient: HttpClient) {
       this.SERVICE_URL = environment.backendUrl
    }
 
-   postUniqueItem<T>(resource: T, route: string): Observable<T & UniqueItem> {
+   get<T>(route: string): Observable<T> {
+      return this._httpClient.get<T>(this.SERVICE_URL + route)
+   }
+
+   addTherapist<T>(resource: T, route: string): Observable<T & UniqueItem> {
       return this._httpClient.post<T & UniqueItem>(this.SERVICE_URL + route, resource)
    }
 
@@ -34,31 +31,27 @@ export class BackendAdapterService {
       return this._httpClient.patch<Therapist>(this.SERVICE_URL + route + '/' + id, resourceClone).pipe(map(() => therapist))
    }
 
-   deleteUniqueItem(id: string, route: string): Observable<string> {
+   deleteTherapist(id: string, route: string): Observable<string> {
       return this._httpClient.delete(this.SERVICE_URL + route + '/' + id).pipe(map(() => id))
    }
 
-   get<T>(route: string): Observable<T> {
-      return this._httpClient.get<T>(this.SERVICE_URL + route)
+   getSuggestions(filter: any): Observable<Therapist[]> {
+      return this._httpClient.post<Therapist[]>(this.SERVICE_URL + BuddyRoutes.THERAPISTS + '/find', filter)
    }
 
-   post<T>(route: string, resource: T): Observable<T> {
-      return this._httpClient.post<T>(this.SERVICE_URL + route, resource)
+   createProfile(): Observable<UserProfile> {
+      return this._httpClient.post<UserProfile>(this.SERVICE_URL + BuddyRoutes.PROFILE, null)
    }
 
-   patch<T>(resource: T, route: string): Observable<T> {
-      return this._httpClient.patch(this.SERVICE_URL + route, resource).pipe(map(() => resource))
-   }
-
-   deleteProfile(): Observable<any> {
-      return this._httpClient.delete(this.SERVICE_URL + this.ROUTE_USER_PROFILE)
+   updateProfile(profile: UserProfile): Observable<UserProfile> {
+      return this._httpClient.patch(this.SERVICE_URL + BuddyRoutes.PROFILE, profile).pipe(map(() => profile))
    }
 
    rotateQRkey(): Observable<{ secret: string }> {
-      return this._httpClient.patch<{ secret: string }>(this.SERVICE_URL + this.ROUTE_AUTH + '/key', null)
+      return this._httpClient.patch<{ secret: string }>(this.SERVICE_URL + BuddyRoutes.PROFILE + '/key', null)
    }
 
-   getSuggestions(filter: any): Observable<Therapist[]> {
-      return this._httpClient.post<Therapist[]>(this.SERVICE_URL + this.ROUTE_THERAPIST + '/find', filter)
+   deleteProfile(): Observable<any> {
+      return this._httpClient.delete(this.SERVICE_URL + BuddyRoutes.PROFILE)
    }
 }

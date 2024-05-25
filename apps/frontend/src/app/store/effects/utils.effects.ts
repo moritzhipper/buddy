@@ -47,7 +47,7 @@ export class StateSyncEffects {
    goToLogin = createEffect(
       () =>
          this.actions$.pipe(
-            ofType(profileActions.logout),
+            ofType(profileActions.logout, profileActions.deleteProfileSuccess),
             tap(() => {
                this.router.navigateByUrl('/login')
             })

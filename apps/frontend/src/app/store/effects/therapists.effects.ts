@@ -15,7 +15,7 @@ export class TherapistsEffects {
       this.actions$.pipe(
          ofType(therapistActions.create),
          switchMap((action) =>
-            this.backendAdapter.postUniqueItem(action.props, this.route).pipe(
+            this.backendAdapter.addTherapist(action.props, this.route).pipe(
                map((therapist) => therapistActions.save({ props: therapist })),
                catchError((error) => of(httpErrorAction({ error })))
             )
@@ -51,7 +51,7 @@ export class TherapistsEffects {
       this.actions$.pipe(
          ofType(therapistActions.delete),
          switchMap((action) =>
-            this.backendAdapter.deleteUniqueItem(action.id, this.route).pipe(
+            this.backendAdapter.deleteTherapist(action.id, this.route).pipe(
                map((id) => therapistActions.deleteSuccess({ id })),
                catchError((error) => of(httpErrorAction({ error })))
             )

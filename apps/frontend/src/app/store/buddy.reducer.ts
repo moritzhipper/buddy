@@ -11,7 +11,8 @@ export const therapistsReducer = createReducer(
 
 export const profileReducer = createReducer(
    {},
-   on(profileActions.createProfileSuccess, profileActions.loadProfileSuccess, (state, { profile }) => profile)
+   on(profileActions.createProfileSuccess, profileActions.loadProfileSuccess, (state, { profile }) => profile),
+   on(profileActions.updateSuccess, (state, { profile }) => ({ ...state, ...profile }))
 )
 
 export function storeSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {

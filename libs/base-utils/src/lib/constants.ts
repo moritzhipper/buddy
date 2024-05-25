@@ -17,3 +17,8 @@ export const TherapyTypeList = [
 ] as const
 
 export const Weekdays = ['mo', 'di', 'mi', 'do', 'fr', 'sa', 'so'] as const
+
+export enum BuddyRoutes {
+   THERAPISTS = '/therapists',
+   PROFILE = '/profile',
+}

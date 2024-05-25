@@ -1,7 +1,6 @@
-import { BuddySecretSchema } from '@buddy/base-utils'
+import { BuddyRoutes, BuddySecretSchema } from '@buddy/base-utils'
 import { NextFunction, Request, Response } from 'express'
 import createHttpError from 'http-errors'
-import { Routes } from '../controller/route-names'
 import { buddyDB } from './buddy-db'
 
 /**
@@ -10,8 +9,8 @@ import { buddyDB } from './buddy-db'
  * - Check if user with secret exists
  */
 export async function authorize(req: Request, res: Response, next: NextFunction) {
-   const isCreateProfileRequest = req.path === Routes.PROFILE && req.method === 'POST'
-   const isLoadProfileRequest = req.path.startsWith(Routes.PROFILE) && req.method === 'GET'
+   const isCreateProfileRequest = req.path === BuddyRoutes.PROFILE && req.method === 'POST'
+   const isLoadProfileRequest = req.path.startsWith(BuddyRoutes.PROFILE) && req.method === 'GET'
 
    const secret = getSecretFromRequest(req)
 

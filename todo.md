@@ -11,6 +11,9 @@
 
 ### Soon
 
+-  qr-key auch in tutorial als text kopieren
+-  aus tutorial therapie begleiten seite entfernen (in tutorial direkt auch datenschutz zustimmung drin haben?)
+-  coole datenschutz bestätigen animation
 -  therapytypes allowed in zod schemes
 
 -  tests vom be umziehen, dann types importieren

@@ -85,7 +85,7 @@ export class SettingsPageComponent {
       this._inputService
          .openInputDialogue({
             header: 'Neuen QR-Key generieren',
-            description: 'Dieser Schritt ist nicht revidierbar.',
+            description: 'Dein alter Code ist danach nicht mehr benutzbar.',
             type: InputTypes.CONFIRM,
          })
          .then((v) => {
