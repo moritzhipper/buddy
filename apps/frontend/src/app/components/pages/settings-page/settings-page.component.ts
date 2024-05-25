@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
-import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { from, switchMap, take } from 'rxjs'
 import { ToastType } from '../../../models'
 import { InputResolveTypes, InputService, InputTypes } from '../../../services/input.service'
 import { ToastService } from '../../../services/toast.service'
-import { authActions, profileActions, settingsActions } from '../../../store/buddy.actions'
-import { selectSettings, selectUserProfile } from '../../../store/buddy.selectors'
+import { profileActions } from '../../../store/buddy.actions'
+import { selectUserProfile } from '../../../store/buddy.selectors'
 import { BuddyState } from '../../../store/buddy.state'
 import { vibrateWarning } from '../../../utils'
 import { QrCodeComponent } from '../../shared/qr-code/qr-code.component'
@@ -26,16 +25,10 @@ export class AppSettings {
    styleUrls: ['./settings-page.component.scss'],
 })
 export class SettingsPageComponent {
-   appSettings$ = this._store.select(selectSettings)
    userProfile$ = this._store.select(selectUserProfile)
    openTabIndex = 0
 
-   constructor(
-      private _inputService: InputService,
-      private _store: Store<BuddyState>,
-      private _toastService: ToastService,
-      private _router: Router
-   ) {}
+   constructor(private _inputService: InputService, private _store: Store<BuddyState>, private _toastService: ToastService) {}
 
    changeCalltimeRimender(preset: number) {
       this._inputService
@@ -50,39 +43,11 @@ export class SettingsPageComponent {
             (v) =>
                v.type === InputResolveTypes.CONFIRM &&
                this._store.dispatch(
-                  settingsActions.update({
-                     props: { callPrecautionTime: v.value },
+                  profileActions.update({
+                     profile: { callPrecautionTime: v.value },
                   })
                )
          )
-   }
-
-   changeAppointmentreminder(preset: number) {
-      this._inputService
-         .openInputDialogue({
-            header: 'Terminerinnerung',
-            description: 'Wie viele Minuten vor Beginn der Therapiesitzung willst du erinnert werden?',
-            type: InputTypes.NUMBER,
-            label: 'Minuten',
-            preset,
-         })
-         .then(
-            (v) =>
-               v.type === InputResolveTypes.CONFIRM &&
-               this._store.dispatch(
-                  settingsActions.update({
-                     props: { appointmentPrecautionTime: v.value },
-                  })
-               )
-         )
-   }
-
-   toggleShareData(isShareDataEnabled: boolean) {
-      this._store.dispatch(
-         settingsActions.update({
-            props: { shareTherapistData: isShareDataEnabled },
-         })
-      )
    }
 
    deleteAllUserData() {
@@ -102,10 +67,6 @@ export class SettingsPageComponent {
                })
             }
          })
-   }
-
-   login() {
-      // serviceaufruf: LoginService
    }
 
    copyToClipboard() {
@@ -135,33 +96,6 @@ export class SettingsPageComponent {
          })
    }
 
-   changePassword() {
-      this._inputService
-         .openInputDialogue({
-            header: 'Neues Passwort eingeben',
-            type: InputTypes.TEXT_SHORT,
-            label: 'Passwort',
-         })
-         .then((v) => v.type === InputResolveTypes.CONFIRM && alert(1))
-   }
-
-   changeEmail() {
-      this._inputService
-         .openInputDialogue({
-            header: 'Neue Email angeben',
-            type: InputTypes.TEXT_SHORT,
-            label: 'Email',
-         })
-         .then((v) => v.type === InputResolveTypes.CONFIRM && alert(1))
-   }
-
-   async addPassword() {
-      await this._inputService.openInputDialogue({
-         header: 'Passwort vergeben',
-         type: InputTypes.PASSWORD,
-      })
-   }
-
    logout() {
       this._inputService
          .openInputDialogue({
@@ -171,7 +105,7 @@ export class SettingsPageComponent {
          })
          .then((v) => {
             if (v.type === InputResolveTypes.CONFIRM) {
-               this._store.dispatch(authActions.logout())
+               this._store.dispatch(profileActions.logout())
             }
          })
    }

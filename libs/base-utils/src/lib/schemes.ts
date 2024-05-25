@@ -28,18 +28,6 @@ export const EmailSchema = z.string().email()
 export const PasswordSchema = z.string().min(12)
 export const BuddySecretSchema = z.string().length(48)
 
-export const UserEmailSchema = z
-   .object({
-      email: EmailSchema,
-   })
-   .strict()
-
-export const UserPasswordSchema = z
-   .object({
-      password: PasswordSchema,
-   })
-   .strict()
-
 export const UserCredentialsSchema = z
    .object({
       email: EmailSchema.optional(),
@@ -50,32 +38,6 @@ export const UserCredentialsSchema = z
 
 // Appointment
 const WeekdayScheme = z.enum(['mo', 'di', 'mi', 'do', 'fr', 'sa', 'so'])
-
-export const AppointmentSchema = z
-   .object({
-      therapistID: z.string().uuid().optional(),
-      isRepeating: z.boolean().optional(),
-      weekday: WeekdayScheme.nullable().optional(),
-      date: JustDateSchema.nullable().optional(),
-      from: z.string().optional(),
-      to: z.string().optional(),
-   })
-   .strict()
-
-// Note
-export const NoteSchema = z
-   .object({
-      body: z.string().optional(),
-      isImportant: z.boolean().optional(),
-   })
-   .strict()
-
-// Goal
-export const GoalSchema = z
-   .object({
-      body: z.string().max(60),
-   })
-   .strict()
 
 // Therapist
 export const CallTimeSchema = z
@@ -106,6 +68,7 @@ export const TherapistSchema = z
       therapyTypes: z.array(z.string().min(3).max(40)).max(20).nullable().optional(),
       callTimes: z.array(CallTimeSchema).nullable().optional(),
       freeFrom: JustDateSchema.nullable().optional(),
+      id: UUIDSchema.optional(),
    })
    .strict()
 

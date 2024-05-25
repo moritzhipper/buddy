@@ -1,37 +1,19 @@
 import { HttpErrorResponse } from '@angular/common/http'
-import { UniqueItem } from '@buddy/base-utils'
+import { Therapist, UniqueItem } from '@buddy/base-utils'
 import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store'
-import { Appointment, Goal, Note, Settings, Therapist, UserLogin, UserProfile } from '../models'
-
-// Crud
-type CrudResources = 'Therapist' | 'Note' | 'Goal' | 'Appointment'
-const createCrudActions = <T>(name: string) =>
-   createActionGroup({
-      source: name as CrudResources,
-      events: {
-         Create: props<{ props: T }>(),
-         Update: props<{ props: T }>(),
-         Save: props<{ props: T }>(),
-         'Save Many': props<{ props: T[] }>(),
-         Delete: props<UniqueItem>(),
-         'Delete Success': props<UniqueItem>(),
-      },
-   })
+import { UserProfile } from '../models'
 
 export const getTherapistSuggestions = createAction('[Therapist] Suggestion', props<{ filter: { name: string } }>)
 
-export const therapistActions = createCrudActions<Therapist>('Therapist')
-export const noteActions = createCrudActions<Note>('Note')
-export const goalActions = createCrudActions<Goal>('Goal')
-export const appointmentActions = createCrudActions<Appointment>('Appointment')
-
-// Settings related
-export const settingsActions = createActionGroup({
-   source: 'Settings',
+export const therapistActions = createActionGroup({
+   source: 'Therapists',
    events: {
-      'Toggle Appointment': emptyProps(),
-      Update: props<{ props: Settings }>(),
-      Save: props<{ props: Settings }>(),
+      Create: props<{ props: Therapist }>(),
+      Update: props<{ props: Therapist }>(),
+      Save: props<{ props: Therapist }>(),
+      'Save Many': props<{ props: Therapist[] }>(),
+      Delete: props<UniqueItem>(),
+      'Delete Success': props<UniqueItem>(),
    },
 })
 
@@ -39,45 +21,18 @@ export const settingsActions = createActionGroup({
 export const profileActions = createActionGroup({
    source: 'Profile',
    events: {
-      'Create Secret': emptyProps(),
-      'Create Secret Success': props<{ login: UserLogin }>(),
-      'Create Credentials': props<{ login: UserLogin }>(),
-      'Create Credentials Success': props<{ login: UserLogin }>(),
+      'Create Profile': emptyProps(),
+      'Create Profile Success': props<{ profile: UserProfile }>(),
+      'Load Profile': props<{ secret: string }>(),
+      'Load Profile Success': props<{ profile: UserProfile }>(),
       'Rotate Secret': emptyProps(),
-      'Save Credentials': props<{ profile: UserProfile }>(),
+      'Rotate Secret Success': props<{ secret: string }>(),
+      Update: props<{ profile: UserProfile }>(),
       'Delete Profile': emptyProps(),
       'Delete Profile Success': emptyProps(),
-      'Profile not existing': emptyProps(),
-   },
-})
-
-// Auth related
-// Silent Login is used to refresh session without userinteraction silently for non full users
-export const authActions = createActionGroup({
-   source: 'Auth',
-   events: {
-      'Handle invalid Session': emptyProps(),
-      'Request Password': props<{ secret: string }>(),
-      Login: props<{ login: UserLogin; redirect?: boolean }>(),
-      'Login Success': props<{ session: string; redirect?: boolean }>(),
       Logout: emptyProps(),
-      'Logout Success': emptyProps(),
    },
 })
 
-export const loadAllDataActions = createActionGroup({
-   source: 'Load Data',
-   events: {
-      'Basic User': emptyProps(),
-      'Full User': emptyProps(),
-   },
-})
-
-// Error
-export const httpErrorActions = createActionGroup({
-   source: 'Auth',
-   events: {
-      Handle: props<{ error: HttpErrorResponse }>(),
-      'Handle Unspecific': props<{ error: HttpErrorResponse }>(),
-   },
-})
+export const httpErrorAction = createAction('Http Error', props<{ error: HttpErrorResponse }>())
+export const errorToastAction = createAction('Error Toast', props<{ message: string }>())

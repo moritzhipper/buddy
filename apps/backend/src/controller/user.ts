@@ -1,9 +1,8 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
-import { encodeUUID } from '../utils/authoriztion-utils'
+import { encodeBuddySecret } from '../utils/authoriztion-utils'
 import { buddyDB } from '../utils/buddy-db'
-import { remapKeys } from '../utils/mapper'
 
 const userRoute = express.Router()
 
@@ -11,27 +10,26 @@ const userRoute = express.Router()
 userRoute.post(
    '/',
    expressAsyncHandler(async (req, res) => {
-      const secret = await buddyDB.tx(async (t) => {
-         const result = await buddyDB.one('INSERT INTO users(id, secret) VALUES (DEFAULT, DEFAULT) RETURNING id, secret')
-         await buddyDB.none('INSERT INTO app_settings(user_id) VALUES ($1)', result.id)
-
-         return encodeUUID(result.secret)
-      })
+      const secret = await buddyDB.one('INSERT INTO users(id, secret) VALUES (DEFAULT, DEFAULT) RETURNING secret', null, (res) =>
+         encodeBuddySecret(res.secret)
+      )
 
       res.send({ secret })
    })
 )
 
-// Get userdata
-userRoute.get(
-   '/',
+// rotate Buddy-Secret
+userRoute.patch(
+   '/key',
    expressAsyncHandler(async (req, res) => {
-      const result = await buddyDB.one('SELECT email, secret, is_full_user FROM users WHERE id=$1', res.locals.userID, (res) => ({
-         ...res,
-         secret: encodeUUID(res.secret),
-      }))
+      const newSecret = await buddyDB.one(
+         'UPDATE users SET secret=DEFAULT WHERE id=$1 returning secret',
+         res.locals.userID,
+         (result) => result.secret
+      )
 
-      res.send(remapKeys(result, false))
+      const encodedSecret = encodeBuddySecret(newSecret)
+      res.send({ secret: encodedSecret })
    })
 )
 

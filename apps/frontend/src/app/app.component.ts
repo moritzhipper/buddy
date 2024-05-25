@@ -6,10 +6,10 @@ import { Observable } from 'rxjs'
 import { InputWrapperComponent } from './components/shared/input-flyin/input-wrapper/input-wrapper.component'
 import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
 import { ToastComponent } from './components/shared/toast/toast.component'
-import { Appointment, Goal, Note, Therapist, ToastType, UserProfile } from './models'
+import { Goal, Note, Therapist, ToastType } from './models'
 import { NotificationService } from './services/notification.service'
 import { ToastService } from './services/toast.service'
-import { appointmentActions, goalActions, noteActions, therapistActions } from './store/buddy.actions'
+import { therapistActions } from './store/buddy.actions'
 import { BuddyState } from './store/buddy.state'
 
 @Component({
@@ -162,31 +162,7 @@ export class AppComponent implements OnInit {
          },
       ]
 
-      const appointments: Appointment[] = [
-         {
-            weekday: 'mo',
-            from: '11:11',
-            to: '12:12',
-            isRepeating: true,
-         },
-         {
-            weekday: 'di',
-            from: '09:22',
-            to: '10:00',
-            isRepeating: true,
-         },
-      ]
-
-      const profile: UserProfile = {
-         name: 'Testname',
-         secret: 'sadasdasdasdasdasdasddddiiiii',
-         email: 'sdsdsdsdsd',
-      }
-
       therapists.forEach((v) => this._store.dispatch(therapistActions.create({ props: v })))
-      notes.forEach((v) => this._store.dispatch(noteActions.create({ props: v })))
-      goals.forEach((v) => this._store.dispatch(goalActions.create({ props: v })))
-      appointments.forEach((v) => this._store.dispatch(appointmentActions.create({ props: v })))
    }
 
    reset() {}

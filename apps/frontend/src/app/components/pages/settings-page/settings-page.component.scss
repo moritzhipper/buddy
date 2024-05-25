@@ -4,35 +4,6 @@
    padding: 40px 16px;
 }
 
-.navigation-wrapper {
-   margin: 0 16px 24px 16px;
-   padding-bottom: 8px;
-   display: flex;
-   scroll-behavior: auto;
-   box-sizing: border-box;
-   gap: 16px;
-   overflow-x: auto;
-   border-bottom: 1px solid $line-color;
-
-   button {
-      @include resetButton;
-
-      &.active h2 {
-         font-weight: bold;
-         opacity: 1;
-      }
-
-      h2 {
-         opacity: 0.7;
-         display: block;
-         white-space: nowrap;
-         cursor: pointer;
-         font-weight: normal;
-         font-size: $font-size-3;
-      }
-   }
-}
-
 .body-wrapper {
    padding: 0 16px 16px;
 

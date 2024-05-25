@@ -26,6 +26,12 @@
          "options": {
             "jestConfig": "apps/backend/jest.config.ts"
          }
+      },
+      "start-database": {
+         "command": "sudo docker compose -f apps/backend/database/docker-compose.yml up -d --renew-anon-volumes"
+      },
+      "stop-database": {
+         "command": "sudo docker compose -f apps/backend/database/docker-compose.yml down -v"
       }
    }
 }

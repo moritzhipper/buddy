@@ -2,7 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations'
 import { CommonModule } from '@angular/common'
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { Remindable } from '../../../../models'
+import { CallTime } from '@buddy/base-utils'
 import { InputService } from '../../../../services/input.service'
 import { scrollToBottomIfChildrenOverflow } from '../../../../utils'
 
@@ -28,7 +28,7 @@ import { scrollToBottomIfChildrenOverflow } from '../../../../utils'
    ],
 })
 export class InputCallTimeComponent implements OnInit, AfterViewInit {
-   @Input() preset?: Remindable[]
+   @Input() preset?: CallTime[]
    @ViewChild('htmlFormElements', { static: false })
    htmlFormElements: ElementRef<HTMLElement>
 
@@ -69,7 +69,7 @@ export class InputCallTimeComponent implements OnInit, AfterViewInit {
       this.deletionModeIsOn = false
    }
 
-   createCalltimeFormElement(preset?: Remindable): FormGroup {
+   createCalltimeFormElement(preset?: CallTime): FormGroup {
       return this._fb.group({
          weekday: [preset?.weekday || '', Validators.required],
          from: [preset?.from || '', Validators.required],

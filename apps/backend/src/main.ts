@@ -2,12 +2,7 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express, { Express } from 'express'
-import appointmentsRoute from './controller/appointments'
-import authRoute from './controller/auth'
-import goalsRoute from './controller/goals'
-import notesRoute from './controller/notes'
 import { Routes } from './controller/route-names'
-import settingsRoute from './controller/settings'
 import therapistsRoute from './controller/therapists'
 import userRoute from './controller/user'
 import { authorize } from './utils/authoriztion-utils'
@@ -35,11 +30,6 @@ app.use(loggerMiddleware)
 app.use(authorize)
 app.use(Routes.USER, userRoute)
 app.use(Routes.THERAPISTS, therapistsRoute)
-app.use(Routes.SETTINGS, settingsRoute)
-app.use(Routes.NOTES, notesRoute)
-app.use(Routes.GOALS, goalsRoute)
-app.use(Routes.APPOINTMENTS, appointmentsRoute)
-app.use(Routes.AUTH, authRoute)
 app.use(errorHandler)
 
 const server = app.listen(PORT, async () => {

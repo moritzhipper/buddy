@@ -1,13 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations'
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, Renderer2, ViewChild, inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core'
+import { CallTime, Therapist } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
 import { expandAnimation } from 'apps/frontend/src/app/animations'
-import { Remindable, Therapist, ToastType } from 'apps/frontend/src/app/models'
+import { ToastType } from 'apps/frontend/src/app/models'
 import { InputResolveTypes, InputResolver, InputService, InputTypes } from 'apps/frontend/src/app/services/input.service'
 import { ToastService } from 'apps/frontend/src/app/services/toast.service'
-import { appointmentActions, therapistActions } from 'apps/frontend/src/app/store/buddy.actions'
-import { selectUserProfile } from 'apps/frontend/src/app/store/buddy.selectors'
+import { therapistActions } from 'apps/frontend/src/app/store/buddy.actions'
 import { BuddyState } from 'apps/frontend/src/app/store/buddy.state'
 import { isCurrentTimeInRange, remindableComparator } from 'apps/frontend/src/app/utiles-time'
 
@@ -29,7 +29,7 @@ import { isCurrentTimeInRange, remindableComparator } from 'apps/frontend/src/ap
       ]),
    ],
 })
-export class TherapistListItemComponent implements OnDestroy {
+export class TherapistListItemComponent {
    @Input() therapist: Therapist
 
    @ViewChild('bodyOverlay') bodyOverlay: ElementRef<HTMLElement>
@@ -43,24 +43,12 @@ export class TherapistListItemComponent implements OnDestroy {
    private _removeHeightAttributeTimeOut
    private _setHeightToAutoTimeOut
 
-   private subscription
-   private isFullUser = false
-
    constructor(
       private _renderer: Renderer2,
       public inputservice: InputService,
       private _store: Store<BuddyState>,
       private _toastService: ToastService
-   ) {
-      this.subscription = inject(Store)
-         .select(selectUserProfile)
-         .subscribe((profile) => {
-            this.isFullUser = profile.isFullUser
-         })
-   }
-   ngOnDestroy(): void {
-      this.subscription.unsubscribe()
-   }
+   ) {}
 
    editName() {
       this.inputservice
@@ -189,23 +177,6 @@ export class TherapistListItemComponent implements OnDestroy {
       this._updateValueResolve({ type: InputResolveTypes.CONFIRM, value: updatedCallTimesArray }, 'callTimes')
    }
 
-   addAppointment() {
-      if (this.isFullUser) {
-         this.inputservice
-            .openInputDialogue({
-               header: 'Termin anlegen',
-               type: InputTypes.APPOINTMENT,
-            })
-            .then((v) => v.type === InputResolveTypes.CONFIRM && this._store.dispatch(appointmentActions.create({ props: v.value })))
-      } else {
-         this.inputservice.openInputDialogue({
-            header: 'Herzlichen Glückwunsch!',
-            description: 'Du willst deinen ersten Termin anlegen? Vergebe vorher ein Passwort, um deine Profilsicherheit zu erhöhen.',
-            type: InputTypes.PASSWORD,
-         })
-      }
-   }
-
    private _updateValueResolve(inputResolver: InputResolver, attributeName: string) {
       if (inputResolver.type === InputResolveTypes.CONFIRM || inputResolver.type === InputResolveTypes.DELETE) {
          const therapist = { [attributeName]: inputResolver.value || null }
@@ -238,7 +209,7 @@ export class TherapistListItemComponent implements OnDestroy {
       return this.therapist?.callTimes?.filter((callTime) => callTime.reminder).some(isCurrentTimeInRange)
    }
 
-   getNextCallTime(): Remindable {
+   getNextCallTime(): CallTime {
       const sorted = this.therapist?.callTimes?.filter((callTime) => callTime?.reminder).sort(remindableComparator)
       if (sorted) {
          return sorted[0]

@@ -1,3 +1,11 @@
 {
-   "configurations": []
+   "configurations": [
+      {
+         "name": "Debug Node App",
+         "type": "node",
+         "request": "attach",
+         "port": 9229,
+         "cwd": "${workspaceFolder}/apps/backend"
+      }
+   ]
 }

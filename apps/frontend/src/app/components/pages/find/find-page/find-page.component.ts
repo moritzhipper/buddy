@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { fadeInAnimation, fadeOutAnimation } from 'apps/frontend/src/app/animations'
-import { Therapist } from 'apps/frontend/src/app/models'
 import { InputResolveTypes, InputService, InputTypes } from 'apps/frontend/src/app/services/input.service'
 import { therapistActions } from 'apps/frontend/src/app/store/buddy.actions'
 import { selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
@@ -12,6 +11,7 @@ import { map } from 'rxjs'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { TherapistCalendarComponent } from '../therapist-calendar/therapist-calendar.component'
 import { TherapistListItemComponent } from '../therapist-list-item/therapist-list-item.component'
+import { Therapist } from '@buddy/base-utils'
 
 @Component({
    selector: 'app-find-page',

@@ -1,4 +1,4 @@
-import { UniqueItem } from '@buddy/base-utils'
+import { CallTime, UniqueItem } from '@buddy/base-utils'
 
 export enum ToastType {
    ERROR,
@@ -11,7 +11,7 @@ export interface Toast {
 }
 
 export interface CalendarItem {
-   callTime: Remindable
+   callTime: CallTime
    phone: string
    therapistName: string
 }
@@ -43,7 +43,7 @@ export interface Therapist extends UniqueItem {
    note?: string
    email?: string
    phone?: string
-   callTimes?: Remindable[]
+   callTimes?: CallTime[]
    therapyTypes?: string[]
 }
 
@@ -83,42 +83,8 @@ export interface Address {
    postalCode?: number
 }
 
-export interface Remindable extends UniqueItem {
-   weekday: string
-   from: string
-   to: string
-   reminder?: boolean
-}
-
-export interface Appointment extends Remindable {
-   date?: string
-   isRepeating: boolean
-}
-
-export interface Settings {
-   callPrecautionTime?: number
-   appointmentPrecautionTime?: number
-   shareTherapistData?: boolean
-   remindNextAppointment?: boolean
-}
-
 // holding info about user
 export interface UserProfile {
-   name?: string
-   email?: string
    secret?: string
-   isFullUser?: boolean
-}
-
-// holding short term data to create session
-export interface UserLogin {
-   password?: string
-   email?: string
-   secret?: string
-}
-
-// holding auth data
-export interface Auth {
-   secretNeedingPassword?: string
-   session?: string
+   callPrecautionTime?: number
 }

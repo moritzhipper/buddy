@@ -1,9 +1,4 @@
-<div
-   class="pages-wrapper"
-   [ngSwitch]="activePage"
-   [@flyInList]="activePage"
-   @fadeInOut
->
+<div class="pages-wrapper" [ngSwitch]="activePage" [@flyInList]="activePage" @fadeInOut>
    <ng-container *ngSwitchCase="0">
       <div class="page-element-wrapper image">
          <img src="../../../../assets/graphics/undraw_welcoming_re_x0qo.svg" />
@@ -11,10 +6,7 @@
       </div>
       <div class="page-element-wrapper text">
          <h1>Hallo</h1>
-         <p>
-            Diese App Hilft dir einen Therapieplatz zu finden und begleitet dich
-            bei deiner Therapie.
-         </p>
+         <p>Diese App Hilft dir einen Therapieplatz zu finden und begleitet dich bei deiner Therapie.</p>
       </div>
    </ng-container>
 
@@ -48,39 +40,26 @@
    </ng-container>
    <ng-container *ngSwitchCase="3">
       <div class="page-element-wrapper image">
-         <img
-            class="small"
-            src="../../../../assets/graphics/undraw_apps_re_ienc.svg"
-         />
+         <img class="small" src="../../../../assets/graphics/undraw_apps_re_ienc.svg" />
          <div class="overlay"></div>
       </div>
       <div class="page-element-wrapper text">
          <h2>Diese App ist einfach zu installieren</h2>
          <p>
             Öffne einfach die Websitenoptionen über das
-            <b>Drei-Punkte - Menü</b> oben rechts und drücke
-            <b>App installieren</b>.
+            <b>Drei-Punkte - Menü</b> oben rechts und drücke <b>App installieren</b>.
          </p>
       </div>
    </ng-container>
    <ng-container *ngSwitchCase="4">
       <div class="page-element-wrapper image">
-         <img
-            class="share"
-            src="../../../../assets/graphics/undraw_showing_support_re_5f2v.svg"
-         />
+         <img class="share" src="../../../../assets/graphics/undraw_showing_support_re_5f2v.svg" />
          <div class="overlay"></div>
       </div>
       <div class="page-element-wrapper text">
          <h2>Datenschutz</h2>
-         <p>
-            Das Eintragen einer Therapeut*in hilft nicht nur dir einen Platz zu
-            finden, sondern unterstützt auch andere bei ihrer Suche.
-         </p>
-         <p>
-            Deine persönlichen Daten wie Notizen, Ziele, und Termine bleiben
-            privat.
-         </p>
+         <p>Das Eintragen einer Therapeut*in hilft nicht nur dir einen Platz zu finden, sondern unterstützt auch andere bei ihrer Suche.</p>
+         <p>Deine persönlichen Daten wie Notizen, Ziele, und Termine bleiben privat.</p>
          <p>
             <a routerLink="/">Zu den Datenschutzbestimmungen</a>
          </p>
@@ -88,10 +67,7 @@
    </ng-container>
    <ng-container *ngSwitchCase="5">
       <div class="page-element-wrapper image">
-         <img
-            class="small"
-            src="../../../../assets/graphics/undraw_walking_outside_re_56xo.svg"
-         />
+         <img class="small" src="../../../../assets/graphics/undraw_walking_outside_re_56xo.svg" />
          <div class="overlay"></div>
          <div class="qr-wrapper">
             <app-qr-code [isBig]="true" />
@@ -102,49 +78,21 @@
          <h2>Keine komplizierte Anmeldung</h2>
          <p>
             Keine Komplizierte Anmeldung.<br />
-            Kopiere den Key als Text oder <b>Mache einen Screenshot</b>, damit
-            du deine Daten später wieder laden kannst.
+            Kopiere den Key als Text oder <b>Mache einen Screenshot</b>, damit du deine Daten später wieder laden kannst.
          </p>
       </div>
    </ng-container>
    <div class="page-element-wrapper buttons">
       <button class="back" (click)="goToLastPage()">
-         <div
-            *ngFor="let i of [0, 1, 2, 3, 4, 5]"
-            [ngClass]="{ active: activePage === i }"
-         ></div>
+         <div *ngFor="let i of [0, 1, 2, 3, 4, 5]" [ngClass]="{ active: activePage === i }"></div>
       </button>
 
-      <button
-         class="next"
-         *ngIf="[0, 1, 2, 3].includes(activePage)"
-         (click)="goToNextPage()"
-      >
-         weiter
-      </button>
+      <button class="next" *ngIf="[0, 1, 2, 3].includes(activePage)" (click)="goToNextPage()">weiter</button>
 
-      <button
-         class="next"
-         *ngIf="!(hasQRKey$ | async) && activePage === 4"
-         (click)="createQRKey()"
-      >
-         Zustimmen
-      </button>
+      <button class="next" *ngIf="!(hasQRKey$ | async) && activePage === 4" (click)="createQRKey()">Zustimmen</button>
 
-      <button
-         class="next"
-         *ngIf="(hasQRKey$ | async) && activePage === 4"
-         (click)="goToNextPage()"
-      >
-         weiter
-      </button>
+      <button class="next" *ngIf="(hasQRKey$ | async) && activePage === 4" (click)="goToNextPage()">weiter</button>
 
-      <button
-         *ngIf="(hasQRKey$ | async) && activePage === 5"
-         class="next active"
-         (click)="goToNextPage()"
-      >
-         Los gehts!
-      </button>
+      <button *ngIf="(hasQRKey$ | async) && activePage === 5" class="next active" (click)="goToNextPage()">Los gehts!</button>
    </div>
 </div>

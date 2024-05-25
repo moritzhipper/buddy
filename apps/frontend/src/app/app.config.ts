@@ -10,21 +10,10 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { provideEffects } from '@ngrx/effects'
 import { environment } from '../environments/environment'
 import { authInterceptorFn } from './interceptors/auth-interceptor-fn'
-import {
-   appointmentsReducer,
-   authReducer,
-   goalsReducer,
-   metaReducers,
-   notesReducer,
-   settingsReducer,
-   therapistsReducer,
-   userProfileReducer,
-} from './store/buddy.reducer'
-import { AuthEffects } from './store/effects/auth.effects'
-import { CrudEffects } from './store/effects/crud/crud-effects'
+import { metaReducers, profileReducer, therapistsReducer } from './store/buddy.reducer'
 import { ProfileEffects } from './store/effects/profile.effects'
-import { SettingsEffects } from './store/effects/settings.effects'
-import { StateSyncEffects } from './store/effects/state-sync.effects'
+import { TherapistsEffects } from './store/effects/therapists.effects'
+import { StateSyncEffects } from './store/effects/utils.effects'
 
 export const appConfig: ApplicationConfig = {
    providers: [
@@ -32,16 +21,11 @@ export const appConfig: ApplicationConfig = {
       provideStore(
          {
             therapists: therapistsReducer,
-            notes: notesReducer,
-            goals: goalsReducer,
-            appointments: appointmentsReducer,
-            settings: settingsReducer,
-            profile: userProfileReducer,
-            auth: authReducer,
+            profile: profileReducer,
          },
          { metaReducers }
       ),
-      provideEffects(CrudEffects, SettingsEffects, StateSyncEffects, AuthEffects, ProfileEffects),
+      provideEffects(StateSyncEffects, ProfileEffects, TherapistsEffects),
       provideStoreDevtools(),
       provideAnimations(),
       provideHttpClient(withInterceptors([authInterceptorFn])),

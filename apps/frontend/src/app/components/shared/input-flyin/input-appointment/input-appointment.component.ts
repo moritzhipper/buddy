@@ -3,8 +3,16 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, inject } 
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Subscription } from 'rxjs'
 import { distinctUntilChanged, map } from 'rxjs/operators'
-import { Appointment } from '../../../../models'
 import { InputService } from '../../../../services/input.service'
+
+export interface Appointment {
+   date?: string
+   isRepeating: boolean
+   weekday: string
+   from: string
+   to: string
+   reminder?: boolean
+}
 
 @Component({
    selector: 'app-input-appointment',

@@ -1,155 +1,51 @@
 <div class="header-wrapper">
    <h1>Einstellungen</h1>
 </div>
-<div class="navigation-wrapper">
-   <button
-      [ngClass]="{ active: openTabIndex === 0 }"
-      (click)="openTabIndex = 0"
-   >
-      <h2>Meine Daten</h2>
-   </button>
-   <button
-      [ngClass]="{ active: openTabIndex === 1 }"
-      (click)="openTabIndex = 1"
-   >
-      <h2>Timer</h2>
-   </button>
-</div>
-<div
-   class="body-wrapper"
-   *ngIf="appSettings$ | async as appSettings"
-   [ngSwitch]="openTabIndex"
->
-   <ng-container *ngSwitchCase="0">
-      <div class="settings-element-wrapper personal-info">
-         <div class="qr-key">
-            <div class="details-wrapper">
-               <span>
-                  <h3>
-                     QR-Key
-                     <button (click)="copyToClipboard()" class="change">
-                        als Text kopieren
-                     </button>
-                  </h3>
-               </span>
-               <p>
-                  Speichere ihn als Screenshot oder Text. Mit ihm kannst dich
-                  später wieder anmelden
-               </p>
-            </div>
-            <app-qr-code />
+
+<div class="body-wrapper" *ngIf="userProfile$ | async as profile">
+   <div class="settings-element-wrapper personal-info">
+      <div class="qr-key">
+         <div class="details-wrapper">
+            <span>
+               <h3>
+                  QR-Key
+                  <button (click)="copyToClipboard()" class="change">als Text kopieren</button>
+               </h3>
+            </span>
+            <p>Speichere ihn als Screenshot oder Text. Mit ihm kannst dich später wieder anmelden</p>
          </div>
-         <div class="email" *ngIf="(userProfile$ | async).email as email">
-            <h3>Zurücksetz-Email</h3>
-            <p>
-               Wenn du dein Passwort vergessen hast, wird ein link zum
-               zurücksetzen an diese Adresse gesendet
-            </p>
-            <p>
-               <b>{{ email }}</b>
-            </p>
-         </div>
+         <app-qr-code />
       </div>
+   </div>
 
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>QR-Key neu generieren</h3>
-            <button class="change" (click)="generateNewQrCode()">
-               generieren
-            </button>
-         </span>
-         Generiere einen Neuen QR-Key, um deinen alten unbenutzbar zu machen.
-      </div>
+   <div class="settings-element-wrapper">
+      <span>
+         <h3>Anruferinnerung</h3>
+         <button class="change" (click)="changeCalltimeRimender(profile.callPrecautionTime)">ändern</button>
+      </span>
+      <b>{{ profile.callPrecautionTime }}</b> Minuten früher
+   </div>
 
-      @if ((userProfile$ | async).isFullUser) {
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Passwort ändern</h3>
-            <button class="change" (click)="changePassword()">ändern</button>
-         </span>
-         Ändere dein Passwort
-      </div>
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Email ändern</h3>
-            <button class="change" (click)="changeEmail()">ändern</button>
-         </span>
-         Ändere deine Email adresse.
-      </div>
-      } @else {
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Passwort vergeben</h3>
-            <button class="change" (click)="addPassword()">vergeben</button>
-         </span>
-         Gib ein Passwort an, damit du Notizen zu deiner Therapie speichern
-         kannst.
-      </div>
-      }
+   <div class="settings-element-wrapper">
+      <span>
+         <h3>QR-Key neu generieren</h3>
+         <button class="change" (click)="generateNewQrCode()">generieren</button>
+      </span>
+      Generiere einen Neuen QR-Key, um deinen alten unbenutzbar zu machen.
+   </div>
 
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Abmelden</h3>
-            <button class="change" (click)="logout()">abmelden</button>
-         </span>
-         Nutze einen QR-Key, um ein anderes profil zu verbinden
-      </div>
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Profil löschen</h3>
-            <button class="change delete" (click)="deleteAllUserData()">
-               löschen
-            </button>
-         </span>
-         Lösche alle deine Persönlichen Daten
-      </div>
-   </ng-container>
-
-   <ng-container *ngSwitchCase="1">
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Anruferinnerung</h3>
-            <button
-               class="change"
-               (click)="changeCalltimeRimender(appSettings.callPrecautionTime)"
-            >
-               ändern
-            </button>
-         </span>
-         <b>{{ appSettings.callPrecautionTime }}</b> Minuten früher
-      </div>
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Terminerinnerung</h3>
-            <button
-               class="change"
-               (click)="
-                  changeAppointmentreminder(
-                     appSettings.appointmentPrecautionTime
-                  )
-               "
-            >
-               ändern
-            </button>
-         </span>
-         <b>{{ appSettings.appointmentPrecautionTime }}</b> Minuten früher
-      </div>
-      <div class="settings-element-wrapper">
-         <span>
-            <h3>Therapeut*Innen teilen</h3>
-            <button
-               class="change"
-               (click)="toggleShareData(!appSettings.shareTherapistData)"
-            >
-               {{
-                  !appSettings.shareTherapistData
-                     ? 'aktivieren'
-                     : 'deaktivieren'
-               }}
-            </button>
-         </span>
-
-         <p>Möchtest du andere Nutzer mit deiner Recherche unterstützen?</p>
-      </div>
-   </ng-container>
+   <div class="settings-element-wrapper">
+      <span>
+         <h3>Abmelden</h3>
+         <button class="change" (click)="logout()">abmelden</button>
+      </span>
+      Nutze einen QR-Key, um ein anderes profil zu verbinden
+   </div>
+   <div class="settings-element-wrapper">
+      <span>
+         <h3>Profil löschen</h3>
+         <button class="change delete" (click)="deleteAllUserData()">löschen</button>
+      </span>
+      Lösche alle deine Persönlichen Daten
+   </div>
 </div>

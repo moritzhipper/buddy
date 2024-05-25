@@ -7,7 +7,6 @@ import { expandAnimation } from '../../../../animations'
 import { ToastType } from '../../../../models'
 import { InputService } from '../../../../services/input.service'
 import { ToastService } from '../../../../services/toast.service'
-import { profileActions } from '../../../../store/buddy.actions'
 import { BuddyState } from '../../../../store/buddy.state'
 
 @Component({
@@ -100,13 +99,9 @@ export class InputPasswordComponent implements OnInit, OnDestroy {
    }
 
    submit() {
-      //todo -> backend call hier, dann ladespinner, wenn 200er, dann erfolgsmeldung animation, dann resolve in store
+      // todo -> backend call hier, dann ladespinner, wenn 200er, dann erfolgsmeldung animation, dann resolve in store
       if (this.passwordForm.valid) {
-         this._store.dispatch(
-            profileActions.createCredentials({
-               login: { ...this.passwordForm.value },
-            })
-         )
+         // save password via backend service
          this._is.confirmValue()
       }
    }

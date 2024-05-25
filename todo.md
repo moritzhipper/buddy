@@ -11,6 +11,8 @@
 
 ### Soon
 
+-  therapytypes allowed in zod schemes
+
 -  tests vom be umziehen, dann types importieren
 
 -  Shared Prod and Env Environment for both projects: [text](https://nx.dev/recipes/tips-n-tricks/define-environment-variables)

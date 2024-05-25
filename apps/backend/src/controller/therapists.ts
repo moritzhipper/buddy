@@ -4,7 +4,6 @@ import {
    CallTime,
    CalltimeHavingID,
    Therapist,
-   TherapistHavingID,
    TherapistSchema,
    TherapistSearch,
    TherapistSearchSchema,
@@ -25,7 +24,7 @@ therapistsRoute.get(
    '/',
    expressAsyncHandler(async (req, res) => {
       const therapists = await buddyDB.task(async (t) => {
-         let therapistBasics: TherapistHavingID[] = await t.manyOrNone(generateUsersTherapistsQuery(res.locals.userID))
+         let therapistBasics: Therapist[] = await t.manyOrNone(generateUsersTherapistsQuery(res.locals.userID))
 
          if (therapistBasics.length > 0) {
             const therapistIDList = therapistBasics.map((ther) => ther.id)
@@ -63,7 +62,7 @@ therapistsRoute.post(
       } else if (id) {
          therapist = await buddyDB.tx(async (t) => {
             //  move shared therapist to users_therapist
-            const baseTherapist = await t.one<TherapistHavingID>(
+            const baseTherapist = await t.one<Therapist>(
                `
                 INSERT INTO users_therapists (user_id, name, email, phone, therapy_types)
                 SELECT $1, name, email, phone, therapy_types FROM shared_therapists
@@ -254,7 +253,7 @@ function generateUsersAddressesQuery(therapistIDs: string[]): string {
    return query
 }
 
-function mergeTherapistsWithCallTimes(therapists: TherapistHavingID[], callTimes: CalltimeHavingID[]): TherapistHavingID[] {
+function mergeTherapistsWithCallTimes(therapists: Therapist[], callTimes: CalltimeHavingID[]): Therapist[] {
    const selectCorrectCT = (thID, cts) =>
       cts
          .filter((ct) => ct.therapistID === thID)
@@ -273,7 +272,7 @@ function mergeTherapistsWithCallTimes(therapists: TherapistHavingID[], callTimes
    })
 }
 
-function mergeTherapistsWithAddress(therapists: TherapistHavingID[], address: AddressHavingID[]): TherapistHavingID[] {
+function mergeTherapistsWithAddress(therapists: Therapist[], address: AddressHavingID[]): Therapist[] {
    return therapists.map((th) => {
       const addressOfTh = address.find((ad) => ad.therapistID === th.id)
 

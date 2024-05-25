@@ -63,6 +63,6 @@ export class TutorialWrapperComponent {
    }
 
    createQRKey() {
-      this.store.dispatch(profileActions.createSecret())
+      this.store.dispatch(profileActions.createProfile())
    }
 }

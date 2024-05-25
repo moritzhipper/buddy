@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common'
 import { Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { Auth, ToastType, UserLogin, UserProfile } from 'apps/frontend/src/app/models'
+import { ToastType, UserProfile } from 'apps/frontend/src/app/models'
 import { ToastService } from 'apps/frontend/src/app/services/toast.service'
-import { authActions } from 'apps/frontend/src/app/store/buddy.actions'
-import { selectAuth, selectUserProfile } from 'apps/frontend/src/app/store/buddy.selectors'
+import { profileActions } from 'apps/frontend/src/app/store/buddy.actions'
+import { selectUserProfile } from 'apps/frontend/src/app/store/buddy.selectors'
 import { BuddyState } from 'apps/frontend/src/app/store/buddy.state'
 import QrScanner from 'qr-scanner'
 import { Subscription } from 'rxjs'
@@ -32,30 +32,25 @@ export class LoginPageComponent implements OnDestroy {
 
    private store = inject(Store<BuddyState>)
    private profile$ = this.store.select(selectUserProfile)
-   private auth$ = this.store.select(selectAuth)
 
    profile: UserProfile
-   auth: Auth
    profileExists: boolean
 
-   private subscriptions: Subscription[] = []
+   private subscription: Subscription
    private tutorialStateWasSetOnce = false
 
    private router = inject(Router)
 
    constructor(private _toastService: ToastService) {
-      this.subscriptions.push(
-         this.profile$.subscribe((profile) => {
-            this.profile = profile
-            this.profileExists = !!profile.secret
+      this.subscription = this.profile$.subscribe((profile) => {
+         this.profile = profile
+         this.profileExists = !!profile.secret
 
-            if (!this.tutorialStateWasSetOnce) {
-               this.tutorialIsOpen = !this.profileExists
-               this.tutorialStateWasSetOnce = true
-            }
-         }),
-         this.auth$.subscribe((auth) => (this.auth = auth))
-      )
+         if (!this.tutorialStateWasSetOnce) {
+            this.tutorialIsOpen = !this.profileExists
+            this.tutorialStateWasSetOnce = true
+         }
+      })
    }
 
    ngOnDestroy(): void {
@@ -63,7 +58,7 @@ export class LoginPageComponent implements OnDestroy {
          this.scanner.destroy()
       }
 
-      this.subscriptions.forEach((s) => s.unsubscribe())
+      this.subscription.unsubscribe()
    }
 
    allLoginOptionsClosed() {
@@ -113,21 +108,12 @@ export class LoginPageComponent implements OnDestroy {
          })
    }
 
-   loginViaCredentials(password: string) {
-      let login: UserLogin = {
-         password,
-         secret: this.auth.secretNeedingPassword,
-      }
-      this.store.dispatch(authActions.login({ login, redirect: true }))
-   }
-
    private loginViaQRKey(qrKey: string): void {
-      debugger
-      this.store.dispatch(authActions.login({ login: { secret: qrKey }, redirect: true }))
+      this.store.dispatch(profileActions.loadProfile({ secret: qrKey }))
    }
 
    logOut() {
-      this.store.dispatch(authActions.logout())
+      this.store.dispatch(profileActions.logout())
    }
 
    goToApp() {

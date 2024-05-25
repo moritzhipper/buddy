@@ -1,13 +1,9 @@
-import { Appointment, Remindable } from './models'
-
-export function isAppointmentInPast(appointment: Appointment): boolean {
-   return remindableToDate(appointment) < new Date()
-}
+import { CallTime } from '@buddy/base-utils'
 
 const weekdays = ['so', 'mo', 'di', 'mi', 'do', 'fr', 'sa']
 
 // Function to check if the current time is within the timerange
-export function isCurrentTimeInRange(remindable: Remindable): boolean {
+export function isCurrentTimeInRange(remindable: CallTime): boolean {
    const now = new Date()
    const currentMinutes = now.getHours() * 60 + now.getMinutes()
 
@@ -27,29 +23,20 @@ export function isCurrentTimeInRange(remindable: Remindable): boolean {
    return currentDay === weekdays.indexOf(remindable.weekday) && currentMinutes >= fromMinutes && currentMinutes <= toMinutes
 }
 
-export function remindableToDate(remindable: Remindable | Appointment): Date {
+export function callTimeToDate(remindable: CallTime): Date {
    // Weekdays starting from Sunday as '0'
    const now = new Date()
 
-   let nextOccurrence: Date
+   let nextOccurrence = new Date()
+   const dayIndex = weekdays.indexOf(remindable.weekday)
 
-   // if repeating, calculate next occurence
-   // if one time, read date from field date
-   const remindableAppt = remindable as Appointment
-   if (remindableAppt.isRepeating === true || !remindableAppt?.date) {
-      nextOccurrence = new Date()
-
-      const dayIndex = weekdays.indexOf(remindable.weekday)
-      // Calculate the difference between today and the target weekday
-      let daysToAdd = dayIndex - now.getDay()
-      // If it's the same day but the time has already passed, or if daysToAdd is negative (meaning the day has passed this week), schedule for the next week
-      if (daysToAdd < 0 || (daysToAdd === 0 && nextOccurrence <= now)) {
-         daysToAdd += 7
-      }
-      nextOccurrence.setDate(now.getDate() + daysToAdd)
-   } else {
-      nextOccurrence = new Date(remindableAppt.date)
+   // Calculate the difference between today and the target weekday
+   let daysToAdd = dayIndex - now.getDay()
+   // If it's the same day but the time has already passed, or if daysToAdd is negative (meaning the day has passed this week), schedule for the next week
+   if (daysToAdd < 0 || (daysToAdd === 0 && nextOccurrence <= now)) {
+      daysToAdd += 7
    }
+   nextOccurrence.setDate(now.getDate() + daysToAdd)
 
    const [hours, minutes] = remindable.from.split(':').map(Number)
    nextOccurrence.setHours(hours, minutes, 0, 0)
@@ -57,8 +44,8 @@ export function remindableToDate(remindable: Remindable | Appointment): Date {
    return nextOccurrence
 }
 
-export function remindableComparator(a: Remindable | Appointment, b: Remindable | Appointment): number {
-   const nextOccurrenceA = remindableToDate(a)
-   const nextOccurrenceB = remindableToDate(b)
+export function remindableComparator(a: CallTime, b: CallTime): number {
+   const nextOccurrenceA = callTimeToDate(a)
+   const nextOccurrenceB = callTimeToDate(b)
    return nextOccurrenceA.getTime() - nextOccurrenceB.getTime()
 }

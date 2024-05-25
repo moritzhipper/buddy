@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
+import { Therapist } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
-import { CalendarItem, Therapist, WeekdaysMap } from 'apps/frontend/src/app/models'
+import { CalendarItem, WeekdaysMap } from 'apps/frontend/src/app/models'
 import { selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
-import { isCurrentTimeInRange, remindableToDate } from 'apps/frontend/src/app/utiles-time'
+import { callTimeToDate, isCurrentTimeInRange } from 'apps/frontend/src/app/utiles-time'
 import { Observable, map } from 'rxjs'
 
 @Component({
@@ -56,8 +57,8 @@ export class TherapistCalendarComponent {
    }
 
    private calendarItemsComparator(a: CalendarItem, b: CalendarItem) {
-      const nextOccurrenceA = remindableToDate(a.callTime)
-      const nextOccurrenceB = remindableToDate(b.callTime)
+      const nextOccurrenceA = callTimeToDate(a.callTime)
+      const nextOccurrenceB = callTimeToDate(b.callTime)
       return nextOccurrenceA.getTime() - nextOccurrenceB.getTime()
    }
 }
