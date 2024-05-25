@@ -1,25 +1,45 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
-import { encodeBuddySecret } from '../utils/authoriztion-utils'
+import { decoodeBuddySecret, encodeBuddySecret } from '../utils/authoriztion-utils'
 import { buddyDB } from '../utils/buddy-db'
+import { validateReqSecret } from '../utils/schema-validators'
 
-const userRoute = express.Router()
+// YjU4NTdkZDMtMjA1MC00NmM4LWI1MGEtOTA4YTIyMjgxMTEx
+const profileRoute = express.Router()
 
 // creates a new Buddy-Secret for a new Profile
-userRoute.post(
+profileRoute.post(
    '/',
    expressAsyncHandler(async (req, res) => {
-      const secret = await buddyDB.one('INSERT INTO users(id, secret) VALUES (DEFAULT, DEFAULT) RETURNING secret', null, (res) =>
-         encodeBuddySecret(res.secret)
+      const secret = await buddyDB.one(
+         'INSERT INTO users(id, secret, call_precaution_time) VALUES (DEFAULT, DEFAULT, DEFAULT) RETURNING secret',
+         null,
+         (res) => encodeBuddySecret(res.secret)
       )
 
       res.send({ secret })
    })
 )
 
+// reads Profile if existing
+profileRoute.get(
+   '/:secret',
+   validateReqSecret,
+   expressAsyncHandler(async (req, res) => {
+      const decodedSecret = decoodeBuddySecret(req.params.secret)
+      const callPrecautionTime = await buddyDB.one(
+         'SELECT call_precaution_time FROM users WHERE secret = $1',
+         decodedSecret,
+         (res) => res.callPrecautionTime
+      )
+
+      res.send({ callPrecautionTime })
+   })
+)
+
 // rotate Buddy-Secret
-userRoute.patch(
+profileRoute.patch(
    '/key',
    expressAsyncHandler(async (req, res) => {
       const newSecret = await buddyDB.one(
@@ -34,7 +54,7 @@ userRoute.patch(
 )
 
 // delete account
-userRoute.delete(
+profileRoute.delete(
    '/',
    expressAsyncHandler(async (req, res) => {
       let deletedEntryCount = await buddyDB.result('DELETE FROM users WHERE id=$1', res.locals.userID, (result) => result.rowCount)
@@ -45,4 +65,4 @@ userRoute.delete(
    })
 )
 
-export = userRoute
+export = profileRoute

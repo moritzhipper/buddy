@@ -15,7 +15,7 @@ import createHttpError from 'http-errors'
 import { buddyDB, pgp } from '../utils/buddy-db'
 import { logger } from '../utils/logger'
 import { remapKeys } from '../utils/mapper'
-import { validateReqBody, validateReqUUID } from '../utils/schema-validation'
+import { validateReqBody, validateReqUUID } from '../utils/schema-validators'
 
 const therapistsRoute = express.Router()
 

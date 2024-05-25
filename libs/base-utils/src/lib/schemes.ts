@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { TherapyTypeList, Weekdays } from './constants'
 
 // Date String
 const JustDateSchema = z.string().regex(/\b\d{4}-\d{2}-\d{2}\b/)
@@ -28,16 +29,15 @@ export const EmailSchema = z.string().email()
 export const PasswordSchema = z.string().min(12)
 export const BuddySecretSchema = z.string().length(48)
 
-export const UserCredentialsSchema = z
+export const UserProfileScheme = z
    .object({
-      email: EmailSchema.optional(),
       secret: BuddySecretSchema.optional(),
-      password: PasswordSchema.optional(),
+      callPrecautionTime: z.number().optional(),
    })
    .strict()
 
 // Appointment
-const WeekdayScheme = z.enum(['mo', 'di', 'mi', 'do', 'fr', 'sa', 'so'])
+const WeekdayScheme = z.enum(Weekdays)
 
 // Therapist
 export const CallTimeSchema = z
@@ -65,7 +65,7 @@ export const TherapistSchema = z
       phone: z.string().nullable().optional(),
       email: EmailSchema.nullable().optional(),
       address: AddressSchema.nullable().optional(),
-      therapyTypes: z.array(z.string().min(3).max(40)).max(20).nullable().optional(),
+      therapyTypes: z.array(z.enum(TherapyTypeList)).nullable().optional(),
       callTimes: z.array(CallTimeSchema).nullable().optional(),
       freeFrom: JustDateSchema.nullable().optional(),
       id: UUIDSchema.optional(),

@@ -1,6 +1,5 @@
-import { Therapist } from '@buddy/base-utils'
+import { Therapist, UserProfile } from '@buddy/base-utils'
 import { createSelector } from '@ngrx/store'
-import { UserProfile } from '../models'
 import { BuddyState } from './buddy.state'
 
 export const selectTherapists = createSelector(

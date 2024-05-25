@@ -1,11 +1,17 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
-import { Therapist } from '@buddy/base-utils'
+import { CallTime, Therapist } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
-import { CalendarItem, WeekdaysMap } from 'apps/frontend/src/app/models'
+import { WeekdaysMap } from 'apps/frontend/src/app/models'
 import { selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
 import { callTimeToDate, isCurrentTimeInRange } from 'apps/frontend/src/app/utiles-time'
 import { Observable, map } from 'rxjs'
+
+type CalendarItem = {
+   callTime: CallTime
+   phone: string
+   therapistName: string
+}
 
 @Component({
    selector: 'app-therapist-calendar',

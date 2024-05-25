@@ -26,7 +26,6 @@ export class AppSettings {
 })
 export class SettingsPageComponent {
    userProfile$ = this._store.select(selectUserProfile)
-   openTabIndex = 0
 
    constructor(private _inputService: InputService, private _store: Store<BuddyState>, private _toastService: ToastService) {}
 

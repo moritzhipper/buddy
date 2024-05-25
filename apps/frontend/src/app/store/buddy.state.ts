@@ -1,5 +1,4 @@
-import { Therapist } from '@buddy/base-utils'
-import { UserProfile } from '../models'
+import { Therapist, UserProfile } from '@buddy/base-utils'
 
 export class BuddyState {
    therapists: Therapist[]

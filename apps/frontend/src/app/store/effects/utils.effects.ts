@@ -54,4 +54,15 @@ export class StateSyncEffects {
          ),
       { dispatch: false }
    )
+
+   goToFind = createEffect(
+      () =>
+         this.actions$.pipe(
+            ofType(profileActions.loadProfileSuccess),
+            tap(() => {
+               this.router.navigateByUrl('/find')
+            })
+         ),
+      { dispatch: false }
+   )
 }

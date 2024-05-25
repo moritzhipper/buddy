@@ -2,14 +2,15 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express, { Express } from 'express'
+import profileRoute from './controller/profile'
 import { Routes } from './controller/route-names'
 import therapistsRoute from './controller/therapists'
-import userRoute from './controller/user'
 import { authorize } from './utils/authoriztion-utils'
 import { testDBConnection } from './utils/buddy-db'
 import environment from './utils/environment-adapter'
 import { errorHandler } from './utils/error-handler'
 import { logger, loggerMiddleware } from './utils/logger'
+import { validateSecretFromHeaderOrCookie as validateSecret } from './utils/schema-validators'
 
 const app: Express = express()
 const PORT = environment.port
@@ -27,8 +28,9 @@ if (ENVIRONMENT === 'development') {
 }
 
 app.use(loggerMiddleware)
+app.use(validateSecret)
 app.use(authorize)
-app.use(Routes.USER, userRoute)
+app.use(Routes.PROFILE, profileRoute)
 app.use(Routes.THERAPISTS, therapistsRoute)
 app.use(errorHandler)
 

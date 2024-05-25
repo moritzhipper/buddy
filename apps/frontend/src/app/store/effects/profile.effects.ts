@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
+import { UserProfile } from '@buddy/base-utils'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, map, of, switchMap } from 'rxjs'
-import { UserProfile } from '../../models'
 import { BackendAdapterService } from '../../services/backend-adapter.service'
 import { httpErrorAction, profileActions } from '../buddy.actions'
 
@@ -39,9 +39,9 @@ export class ProfileEffects {
    loadProfile = createEffect(() =>
       this.actions$.pipe(
          ofType(profileActions.loadProfile),
-         switchMap(() =>
-            this.backendAdapter.get<UserProfile>(this.backendAdapter.ROUTE_USER_PROFILE).pipe(
-               map((profile) => profileActions.loadProfileSuccess({ profile })),
+         switchMap((action) =>
+            this.backendAdapter.get<UserProfile>(this.backendAdapter.ROUTE_USER_PROFILE + `/${action.secret}`).pipe(
+               map((profile) => profileActions.loadProfileSuccess({ profile: { secret: action.secret, ...profile } })),
                catchError((error) => of(httpErrorAction({ error })))
             )
          )

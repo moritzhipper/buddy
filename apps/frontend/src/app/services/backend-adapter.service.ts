@@ -22,7 +22,6 @@ export class BackendAdapterService {
    }
 
    postUniqueItem<T>(resource: T, route: string): Observable<T & UniqueItem> {
-      debugger
       return this._httpClient.post<T & UniqueItem>(this.SERVICE_URL + route, resource)
    }
 

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit, inject } from '@angular/core'
 import { RouterModule } from '@angular/router'
+import { Therapist } from '@buddy/base-utils'
 import { Store, StoreModule } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { InputWrapperComponent } from './components/shared/input-flyin/input-wrapper/input-wrapper.component'
 import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
 import { ToastComponent } from './components/shared/toast/toast.component'
-import { Goal, Note, Therapist, ToastType } from './models'
+import { ToastType } from './models'
 import { NotificationService } from './services/notification.service'
 import { ToastService } from './services/toast.service'
 import { therapistActions } from './store/buddy.actions'
@@ -126,39 +127,6 @@ export class AppComponent implements OnInit {
          },
          {
             name: 'Hr. Dipl. Psych. Wiedeman',
-         },
-      ]
-
-      const notes: Note[] = [
-         {
-            body: 'Grenzen ziehen \n ölkdsföldskf öl ködsfj sfd sdölfk sf f sölf gf sddfsdfsdfsft xcxöxcölxcölö xcö',
-            createdAt: new Date(),
-         },
-         {
-            body: 'test dss v cxvxc vxc  texsdfsdfsdfsdfsdfsft xcxöxcölxcölö xcö',
-            createdAt: new Date(),
-            isImportant: true,
-         },
-         {
-            body: 'test texsdfsdfsdf yxycxxc. xyycx.  ycxcyxc .sdfs dfsft xcxöxcölxcölö xcö',
-            createdAt: new Date(),
-            isImportant: true,
-         },
-         {
-            body: 'test texsdfsdfsdfsdfsdfsft xcxöxcölxcölö xcö',
-            createdAt: new Date(),
-         },
-      ]
-
-      const goals: Goal[] = [
-         {
-            body: 'Traum mit Dino',
-         },
-         {
-            body: 'sie lässt mich nie ausreden',
-         },
-         {
-            body: 'ich habe angst vor zugfahrten',
          },
       ]
 

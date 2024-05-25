@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { Address } from '../../../../models'
+import { Address } from '@buddy/base-utils'
 import { InputService } from '../../../../services/input.service'
 
 @Component({

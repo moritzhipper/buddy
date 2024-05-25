@@ -10,14 +10,17 @@ import { buddyDB } from './buddy-db'
  * - Check if user with secret exists
  */
 export async function authorize(req: Request, res: Response, next: NextFunction) {
-   const isCreateUserRequest = req.path === Routes.USER && req.method === 'POST'
+   const isCreateProfileRequest = req.path === Routes.PROFILE && req.method === 'POST'
+   const isLoadProfileRequest = req.path.startsWith(Routes.PROFILE) && req.method === 'GET'
+
    const secret = getSecretFromRequest(req)
 
-   if (!isCreateUserRequest && !secret) {
+   if (!isCreateProfileRequest && !secret && !isLoadProfileRequest) {
+      console.log(req)
       return next(createHttpError(401))
    }
 
-   if (isCreateUserRequest) {
+   if (isCreateProfileRequest || isLoadProfileRequest) {
       return next()
    }
 
@@ -48,7 +51,7 @@ export function getSecretFromRequest(req: Request): string {
    return req.cookies.secret || req.get('secret')
 }
 
-function decoodeBuddySecret(encodedSecret: string): string {
+export function decoodeBuddySecret(encodedSecret: string): string {
    const buddySecretDecoded = BuddySecretSchema.parse(encodedSecret)
    return Buffer.from(buddySecretDecoded, 'base64url').toString()
 }

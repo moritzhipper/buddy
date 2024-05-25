@@ -1,13 +1,6 @@
 type BeFeValueMap = [string, string][]
 
-// mappings are plite for better clarity
-const settingsFeBeMap: BeFeValueMap = [
-   ['appointment_precaution_time', 'appointmentPrecautionTime'],
-   ['share_therapist_data', 'shareTherapistData'],
-   ['remind_next_appointment', 'remindNextAppointment'],
-   ['call_precaution_time', 'callPrecautionTime'],
-   ['remind_appointment', 'remindAppointment'],
-]
+// mappings are split for better clarity
 
 const therapistFeBeMap: BeFeValueMap = [
    ['free_from', 'freeFrom'],
@@ -17,29 +10,11 @@ const therapistFeBeMap: BeFeValueMap = [
    ['therapist_id', 'therapistID'],
 ]
 
-const notesAndGoalsFeBeMap: BeFeValueMap = [
-   ['is_important', 'isImportant'],
-   ['created_at', 'createdAt'],
-   ['goal_id', 'goalID'],
-]
-
-const appointmentFeBeMap: BeFeValueMap = [
-   ['therapist_id', 'therapistID'],
-   ['is_repeating', 'isRepeating'],
-]
-
-const userFeBeMap: BeFeValueMap = [['is_full_user', 'isFullUser']]
+const userFeBeMap: BeFeValueMap = [['call_precaution_time', 'callPrecautionTime']]
 
 const addressFeBeMap: BeFeValueMap = [['street_number', 'streetNumber']]
 
-const allMaps: BeFeValueMap = [
-   ...appointmentFeBeMap,
-   ...notesAndGoalsFeBeMap,
-   ...therapistFeBeMap,
-   ...settingsFeBeMap,
-   ...userFeBeMap,
-   ...addressFeBeMap,
-]
+const allMaps: BeFeValueMap = [...therapistFeBeMap, ...userFeBeMap, ...addressFeBeMap]
 
 /**
  * Remap object key names from fronted to values used by DBs tables and vice versa

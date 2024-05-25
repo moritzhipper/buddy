@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http'
-import { Therapist, UniqueItem } from '@buddy/base-utils'
+import { Therapist, UniqueItem, UserProfile } from '@buddy/base-utils'
 import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store'
-import { UserProfile } from '../models'
 
 export const getTherapistSuggestions = createAction('[Therapist] Suggestion', props<{ filter: { name: string } }>)
 
@@ -25,9 +24,10 @@ export const profileActions = createActionGroup({
       'Create Profile Success': props<{ profile: UserProfile }>(),
       'Load Profile': props<{ secret: string }>(),
       'Load Profile Success': props<{ profile: UserProfile }>(),
+      Update: props<{ profile: UserProfile }>(),
+      'Update Success': props<{ profile: UserProfile }>(),
       'Rotate Secret': emptyProps(),
       'Rotate Secret Success': props<{ secret: string }>(),
-      Update: props<{ profile: UserProfile }>(),
       'Delete Profile': emptyProps(),
       'Delete Profile Success': emptyProps(),
       Logout: emptyProps(),
