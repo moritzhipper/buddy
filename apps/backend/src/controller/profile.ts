@@ -1,14 +1,15 @@
+import { UserProfileScheme } from '@buddy/base-utils'
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
 import { decoodeBuddySecret, encodeBuddySecret } from '../utils/authoriztion-utils'
 import { buddyDB } from '../utils/buddy-db'
-import { validateReqSecret } from '../utils/schema-validators'
+import { validateReqBody, validateReqSecret } from '../utils/schema-validators'
 
 // YjU4NTdkZDMtMjA1MC00NmM4LWI1MGEtOTA4YTIyMjgxMTEx
 const profileRoute = express.Router()
 
-// creates a new Buddy-Secret for a new Profile
+// creates a new Profile
 profileRoute.post(
    '/',
    expressAsyncHandler(async (req, res) => {
@@ -38,7 +39,7 @@ profileRoute.get(
    })
 )
 
-// rotate Buddy-Secret
+// rotates Buddy-Secret
 profileRoute.patch(
    '/key',
    expressAsyncHandler(async (req, res) => {
@@ -50,6 +51,25 @@ profileRoute.patch(
 
       const encodedSecret = encodeBuddySecret(newSecret)
       res.send({ secret: encodedSecret })
+   })
+)
+
+// update Profile
+profileRoute.patch(
+   '/',
+   validateReqBody(UserProfileScheme),
+   expressAsyncHandler(async (req, res) => {
+      const { callPrecautionTime } = req.body
+
+      if (!callPrecautionTime) throw createHttpError(400)
+
+      const affectedRows = await buddyDB.result(
+         'UPDATE users SET call_precaution_time = $1 WHERE id=$2',
+         [callPrecautionTime, res.locals.userID],
+         (result) => result.rowCount
+      )
+
+      res.send()
    })
 )
 

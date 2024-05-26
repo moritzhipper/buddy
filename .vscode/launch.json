@@ -1,11 +1,20 @@
 {
+   "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
    "configurations": [
       {
-         "name": "Debug Node App",
+         "name": "Backend",
          "type": "node",
-         "request": "attach",
-         "port": 9229,
-         "cwd": "${workspaceFolder}/apps/backend"
+         "request": "launch",
+         "runtimeExecutable": "npx",
+         "runtimeArgs": ["nx", "run", "backend:serve"],
+         "outputCapture": "std",
+         "internalConsoleOptions": "openOnSessionStart",
+         "console": "internalConsole",
+         "env": {
+            "TS_NODE_IGNORE": "false",
+            "TS_NODE_PROJECT": "${workspaceFolder}/apps/backend/tsconfig.json"
+         },
+         "cwd": "${workspaceFolder}/apps/backend/"
       }
    ]
 }

@@ -14,7 +14,6 @@ Table users_therapists {
   }
 }
 
-
 Table users_call_times {
   therapist_id uuid [not null]
   from VARCHAR(5) [not null]
@@ -26,7 +25,6 @@ Table users_call_times {
     therapist_id
   }
 }
-
 
 Table users_addresses {
   therapist_id uuid [unique]
@@ -46,6 +44,10 @@ Table shared_therapists {
   email VARCHAR(50)
   phone VARCHAR(50)
   therapy_types "VARCHAR(50)[]"
+  
+  Indexes {
+    name
+  }
 }
 
 Table shared_call_times {
@@ -97,7 +99,6 @@ Ref: users.id < sessions.user_id [delete: cascade]
 
 Ref: users_therapists.id <  users_call_times.therapist_id [delete: cascade]
 Ref: users_therapists.id - users_addresses.therapist_id [delete: cascade]
-
 
 Ref: shared_therapists.id - shared_addresses.therapist_id [delete: cascade]
 Ref: shared_therapists.id < shared_call_times.therapist_id [delete: cascade]
