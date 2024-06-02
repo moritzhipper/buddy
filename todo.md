@@ -4,7 +4,8 @@
 
 ### Right now
 
--  tutorial an therapie nicht begleiten anpassen
+-  added search page
+-  rename find page to 'Meine Liste'
 
 ### Soon
 
