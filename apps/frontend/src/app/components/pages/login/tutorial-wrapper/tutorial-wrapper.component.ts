@@ -1,12 +1,12 @@
 import { animate, group, query, stagger, style, transition, trigger } from '@angular/animations'
 import { CommonModule } from '@angular/common'
-import { Component, inject } from '@angular/core'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { Router, RouterModule } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { profileActions } from 'apps/frontend/src/app/store/buddy.actions'
 import { selectUserProfile } from 'apps/frontend/src/app/store/buddy.selectors'
 import { BuddyState } from 'apps/frontend/src/app/store/buddy.state'
-import { Observable, map } from 'rxjs'
+import { Subscription } from 'rxjs'
 import { QrCodeComponent } from '../../../shared/qr-code/qr-code.component'
 
 @Component({
@@ -38,31 +38,40 @@ import { QrCodeComponent } from '../../../shared/qr-code/qr-code.component'
       ]),
    ],
 })
-export class TutorialWrapperComponent {
-   activePage = 0
-   pagesCount = 6
+export class TutorialWrapperComponent implements OnInit, OnDestroy {
    private store = inject(Store<BuddyState>)
-   hasQRKey$: Observable<boolean>
+   private subscription: Subscription
+   hasQRKey: boolean = false
    router = inject(Router)
 
-   constructor() {
-      this.hasQRKey$ = this.store.select(selectUserProfile).pipe(map((profile) => !!profile.secret))
+   activePage = 0
+   pagesCount = 6
+   userIsAllowedToGoToNextPage = () => [0, 1, 2, 3].includes(this.activePage) || (this.activePage === 4 && this.hasQRKey)
+   userIsOnLastPage = () => this.activePage === this.pagesCount - 1
+   userNeedsToAcceptDataprivacy = () => this.activePage === 4 && !this.hasQRKey
+
+   ngOnInit(): void {
+      this.subscription = this.store.select(selectUserProfile).subscribe((profile) => (this.hasQRKey = !!profile.secret))
    }
+
+   ngOnDestroy(): void {
+      this.subscription.unsubscribe()
+   }
+
+   constructor() {}
 
    goToLastPage() {
       this.activePage !== 0 && this.activePage--
    }
 
    goToNextPage() {
-      if (this.activePage !== this.pagesCount - 1) {
+      if (this.userIsAllowedToGoToNextPage()) {
          this.activePage++
-      } else if (this.activePage === this.pagesCount - 1) {
+      } else if (this.userNeedsToAcceptDataprivacy()) {
+         this.store.dispatch(profileActions.createProfile())
+      } else if (this.userIsOnLastPage()) {
          this.router.navigate(['/find'])
          this.activePage = 0
       }
-   }
-
-   createQRKey() {
-      this.store.dispatch(profileActions.createProfile())
    }
 }

@@ -6,7 +6,7 @@
       </div>
       <div class="page-element-wrapper text">
          <h1>Hallo</h1>
-         <p>Diese App Hilft dir, bundesweit schnell einen Therapieplatz zu finden.</p>
+         <p>Diese App Hilft dir, schnell einen Therapieplatz zu finden.</p>
       </div>
    </ng-container>
 
@@ -30,12 +30,12 @@
          <div class="overlay"></div>
       </div>
       <div class="page-element-wrapper text">
-         <h2>Gemeinsam stark</h2>
+         <h2>Diese App macht uns Gemeinsam stark</h2>
          <p>
-            Diese App basiert auf dem <b>Prinzip der Solidarität</b>, indem sie eine umfassende Therapeuten-Datenbank aus den Einträgen aller Nutzer
-            erstellt.
+            Diese App basiert auf dem <b>Prinzip der Solidarität</b>, indem sie eine umfassende Datenbank aus Therapeut*innen aus den Einträgen aller
+            Nutzer*innen erstellt.
          </p>
-         <p><b>So helfen wir uns gegenseitig, schneller den passenden Therapieplatz zu finden.</b></p>
+         <p><b>So helfen wir uns gegenseitig, schneller einen Therapieplatz zu finden.</b></p>
       </div>
    </ng-container>
    <ng-container *ngSwitchCase="3">
@@ -44,7 +44,7 @@
          <div class="overlay"></div>
       </div>
       <div class="page-element-wrapper text">
-         <h2>Diese Website ist auch eine App</h2>
+         <h2>Diese App ist einfach zu installieren</h2>
          <p>
             Installiere sie über das
             <b>Drei-Punkte - Menü</b> oben rechts und drücke <b>App installieren</b>.
@@ -58,7 +58,11 @@
       </div>
       <div class="page-element-wrapper text">
          <h2>Datenschutz</h2>
-         <p>Deine persönlichen Daten wie Notizen bleiben privat. Die Therapeut*innen - Datenbank wird nur aus nicht privaten Daten aufgebaut.</p>
+         <p>Diese App geht verantwortungsvoll mit deinen Daten um</p>
+         <p>
+            So bleiben zum beispiel deine Notizen privat. Außerdem wird die gemeinsame Therapeut*innen - Datenbank nur aus öffentlic zugänglichen
+            Daten aufgebaut.
+         </p>
          <p>
             <a routerLink="/">Zu den Datenschutzbestimmungen</a>
          </p>
@@ -83,12 +87,15 @@
          <div *ngFor="let i of [0, 1, 2, 3, 4, 5]" [ngClass]="{ active: activePage === i }"></div>
       </button>
 
-      <button class="next" *ngIf="[0, 1, 2, 3].includes(activePage)" (click)="goToNextPage()">weiter</button>
+      <button class="next" [class.accept-privacy]="userNeedsToAcceptDataprivacy()" (click)="goToNextPage()">
+         @if (userIsOnLastPage()) { los gehts } @else if (userIsAllowedToGoToNextPage()) { weiter } @else if (userNeedsToAcceptDataprivacy) {
+         einwilligen }
+      </button>
 
-      <button class="next" *ngIf="!(hasQRKey$ | async) && activePage === 4" (click)="createQRKey()">Zustimmen</button>
+      <!-- <button class="next" *ngIf="!hasQRKey && activePage === 4" (click)="createQRKey()">Einwilligen</button>
 
-      <button class="next" *ngIf="(hasQRKey$ | async) && activePage === 4" (click)="goToNextPage()">weiter</button>
+      <button class="next" *ngIf="hasQRKey && activePage === 4" (click)="goToNextPage()">weiter</button>
 
-      <button *ngIf="(hasQRKey$ | async) && activePage === 5" class="next active" (click)="goToNextPage()">Los gehts!</button>
+      <button *ngIf="hasQRKey && activePage === 5" class="next active" (click)="goToNextPage()">Los gehts!</button> -->
    </div>
 </div>

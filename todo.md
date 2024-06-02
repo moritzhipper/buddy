@@ -21,6 +21,8 @@
 
 -  projecte umbenennen in frontend, backend, push-service
 
+-  gemeinsames helfen an erste stelle schreiben: du hilfst anderen durch eintröge. teile mit deinen freunden, damit sie auch teil haben. beteilige dich an dem projekt auf github!
+
 ## Frontend
 
 -  info page: wie funktioniert das? -> Therapeuten Prozess erklären

@@ -115,7 +115,7 @@
       &.text {
          h1,
          h2 {
-            line-height: normal;
+            line-height: 32px;
             margin-bottom: 32px;
          }
 
@@ -157,10 +157,16 @@
             border: none;
 
             &.next {
+               transition: background-color 0.3s;
                border-radius: $border-radius-3;
                color: $background-color;
-               background-color: dim($accent-color-3, bb);
                font-weight: bold;
+               background-color: dim($accent-color-3, bb);
+
+               &.accept-privacy {
+                  color: dim($accent-color-3, bb);
+                  background-color: dim($accent-color-3, 22);
+               }
             }
 
             &.back {
