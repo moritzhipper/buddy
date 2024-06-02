@@ -1,6 +1,34 @@
 .header-wrapper {
-   padding: 40px 16px 16px 16px;
+   padding: 40px 16px 40px 16px;
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
+}
+.body-wrapper {
+   padding: 0 16px 16px 16px;
+}
+
+.search-fields {
+   margin-top: 20vh;
+   transition: margin 0.3s;
+   display: grid;
+   grid-template-columns: auto 120px;
+   gap: 8px;
+
+   input#searchName {
+      grid-column: -1/1;
+   }
+   input:not(#searchName) {
+      padding: 8px 16px;
+      opacity: 0.6;
+   }
+
+   input:hover {
+      background-color: black;
+      opacity: 1;
+   }
+
+   &:focus-within {
+      margin-top: 0;
+   }
 }
