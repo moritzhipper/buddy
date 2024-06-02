@@ -4,10 +4,7 @@
 
 ### Right now
 
--  types in shared lib auslagern
--  types in projekte importieren
-
-   -  frontend models.ts schrittweise löschen
+-  tutorial an therapie nicht begleiten anpassen
 
 ### Soon
 
@@ -29,6 +26,7 @@
 -  info page: wie funktioniert das? -> Therapeuten Prozess erklären
 -  therapeutendaten teilen ausbauen
 -  e2e tests auf playwright umstellen?
+   q
 
 ## Backend
 
