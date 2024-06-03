@@ -6,6 +6,9 @@
 
 -  added search page
 -  rename find page to 'Meine Liste'
+-  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
+-  löschen nur zeigen, wenn preset nicht null
+-  suche in store schreiben
 
 ### Soon
 

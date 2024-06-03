@@ -1,11 +1,31 @@
 <div class="header-wrapper">
    <h1>Suche</h1>
+   <h2>{{ filterCity }} {{ filterPostal }} {{ filterType }}</h2>
 </div>
+
+@if (allFiltersEmpty()) {
+<app-page-placeholder-text>
+   <ng-container header>Durchsuche die Datenbank </ng-container>
+   <ng-container body>
+      <div class="placeholder-text">
+         <p>Gib deine Stadt, Postletzahl oder die Art der Therapie an.</p>
+         <p>
+            Findest du hier nichts, kannst die hier und hier suchen. Übertrage deinen Fund dann in diese App und lass dich erinnern, sobald du anrufen
+            kannst.
+         </p>
+      </div>
+   </ng-container>
+</app-page-placeholder-text>
+} @else {
 <div class="body-wrapper">
-   <div class="search-fields">
-      <input type="text" name="" id="searchName" placeholder="Name" />
-      <input type="text" name="" id="" placeholder="Stadt" />
-      <input type="text" name="" id="" placeholder="PLZ" />
+   <div class="placeholder">
+      <button (click)="addTherapist()">anlegen</button>
+      Du findest die Person hier nicht? Lege sie einfach selber an
    </div>
-   Du findest die Person hier nicht? Lege sie einfach selber an ( Button )
+</div>
+}
+<div class="search-buttons">
+   <button (click)="addFilterCity()">Stadt angeben</button>
+   <button (click)="addFilterPostal()">Postletzahl angeben</button>
+   <button (click)="addFilterType()">Therapierarten angeben</button>
 </div>

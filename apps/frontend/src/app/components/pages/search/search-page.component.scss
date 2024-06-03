@@ -1,34 +1,53 @@
+@use '_index' as *;
+
 .header-wrapper {
-   padding: 40px 16px 40px 16px;
-   display: flex;
-   justify-content: space-between;
-   align-items: flex-start;
+   padding: 40px 16px 36px 16px;
 }
 .body-wrapper {
    padding: 0 16px 16px 16px;
 }
 
-.search-fields {
-   margin-top: 20vh;
+@include small-screen {
+   .search-fields {
+      grid-template-columns: min-content auto;
+      margin-top: 0vh;
+      #searchCity {
+         grid-column: -1/1;
+      }
+
+      &.filter-open {
+         #searchPostalCode,
+         #searchType {
+            border: 1px solid black;
+            grid-column: -1/1;
+         }
+      }
+   }
+}
+
+@include big-screen {
+   .search-fields {
+      grid-template-columns: auto min-content min-content;
+      margin-top: 20vh;
+   }
+}
+.search-buttons {
    transition: margin 0.3s;
-   display: grid;
-   grid-template-columns: auto 120px;
+   display: flex;
+   justify-content: center;
+   margin-top: 16px;
+
    gap: 8px;
 
-   input#searchName {
-      grid-column: -1/1;
-   }
-   input:not(#searchName) {
+   button {
+      @include shimmer-animation;
+      @include resetButton;
+      border: 1px solid $accent-color-1;
+      border-radius: $border-radius-2;
       padding: 8px 16px;
-      opacity: 0.6;
    }
+}
 
-   input:hover {
-      background-color: black;
-      opacity: 1;
-   }
-
-   &:focus-within {
-      margin-top: 0;
-   }
+p {
+   margin-bottom: 0;
 }
