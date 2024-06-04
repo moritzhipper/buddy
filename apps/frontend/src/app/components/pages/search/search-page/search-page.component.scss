@@ -17,6 +17,9 @@
 }
 .body-wrapper {
    padding: 0 16px 16px 16px;
+   display: flex;
+   flex-direction: column;
+   gap: 32px;
 }
 
 @include small-screen {
@@ -29,12 +32,24 @@
          font-size: $font-size-1;
       }
    }
+   .placeholder-wrapper {
+      flex-direction: column;
+   }
 }
 
 @include big-screen {
    .search-buttons {
       flex-direction: row;
       margin: 16px;
+   }
+   .placeholder-wrapper {
+      flex-direction: row;
+      justify-content: center;
+      align-items: start;
+
+      .note {
+         max-width: 400px;
+      }
    }
 }
 .search-buttons {
@@ -77,14 +92,21 @@ p {
 
 .placeholder-wrapper {
    display: flex;
-   justify-content: center;
 
-   .placeholder-no-results {
-      p {
+   gap: 16px;
+
+   .note {
+      h3 {
+         font-weight: bold;
          margin: 0 0 16px 0;
+         font-size: $font-size-1;
+      }
+      p {
+         margin-bottom: 0;
       }
       @include info-box;
       button {
+         white-space: nowrap;
          @include resetButton;
          padding: 8px 32px;
          border: 1px solid $accent-color-1;

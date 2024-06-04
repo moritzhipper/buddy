@@ -1,6 +1,20 @@
 @use '_index' as *;
 
-table {
+@include small-screen {
+   .table {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+   }
+}
+
+@include big-screen {
+   .table {
+      display: grid;
+      grid-template-columns: min-content 1fr 1fr 1fr 1fr;
+   }
+}
+
+.table {
    border-collapse: collapse;
    width: 100%;
 
