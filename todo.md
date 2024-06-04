@@ -7,9 +7,11 @@
 -  added search page
 -  rename find page to 'Meine Liste'
 -  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
--  löschen nur zeigen, wenn preset nicht null
 -  suche in store schreiben
 -  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
+
+-  input-wrapper
+   -  löschen nur zeigen, wenn preset nicht null
 
 ### Soon
 
@@ -33,7 +35,8 @@
 -  info page: wie funktioniert das? -> Therapeuten Prozess erklären
 -  therapeutendaten teilen ausbauen
 -  e2e tests auf playwright umstellen?
-   q
+-  reset button zentral
+-  button styles definieren (line, voll bestätigen zurück)
 
 ## Backend
 

@@ -28,6 +28,7 @@
 
 @if(!allFiltersEmpty()) {
 <div class="body-wrapper">
+   <app-search-results [therapists]="therapists | async" />
    <div class="placeholder-wrapper">
       <div class="placeholder-no-results">
          <p><b> Du findest die Person hier nicht? </b></p>

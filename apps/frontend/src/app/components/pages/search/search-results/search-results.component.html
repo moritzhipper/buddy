@@ -1,0 +1,23 @@
+<table>
+   <tr class="header">
+      <th class="add"></th>
+      <th class="intro">Name</th>
+      <th class="types">Fach</th>
+      <th class="contact">Kontakt</th>
+      <th class="adress">Adresse</th>
+   </tr>
+   @for (therapist of therapists; track $index) {
+   <tr>
+      <td class="add"><button>+</button></td>
+      <td class="intro">{{ therapist.name }}</td>
+      <td class="types">
+         @for (type of therapist.therapyTypes; track $index) { <span>{{ type }}</span> }
+      </td>
+      <td class="contact">
+         {{ therapist.email }}
+         {{ therapist.phone }}
+      </td>
+      <td class="adress">hier adressdaten</td>
+   </tr>
+   }
+</table>

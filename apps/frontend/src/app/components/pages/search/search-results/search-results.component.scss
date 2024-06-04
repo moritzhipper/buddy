@@ -1,0 +1,28 @@
+@use '_index' as *;
+
+table {
+   border-collapse: collapse;
+   width: 100%;
+
+   .header {
+      border-bottom: 2px solid $line-color;
+      th {
+         text-align: left;
+         padding: 8px 4px 8px 4px;
+      }
+   }
+
+   td {
+      padding: 4px;
+      &.types {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 4px;
+         span {
+            padding: 4px 8px;
+            border-radius: $border-radius-3;
+            background-color: dim($accent-color-3, 11);
+         }
+      }
+   }
+}

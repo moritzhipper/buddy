@@ -2,15 +2,17 @@ import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
 import { TherapyTypeList } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
-import { InputResolveTypes, InputService, InputTypes } from '../../../services/input.service'
-import { ToastService } from '../../../services/toast.service'
-import { therapistActions } from '../../../store/buddy.actions'
-import { PagePlaceholderTextComponent } from '../../shared/page-placeholder-text/page-placeholder-text.component'
+import { InputResolveTypes, InputService, InputTypes } from '../../../../services/input.service'
+import { ToastService } from '../../../../services/toast.service'
+import { therapistActions } from '../../../../store/buddy.actions'
+import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
+import { SearchResultsComponent } from '../search-results/search-results.component'
+import { selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
 
 @Component({
    selector: 'app-search-page',
    standalone: true,
-   imports: [CommonModule, PagePlaceholderTextComponent],
+   imports: [CommonModule, PagePlaceholderTextComponent, SearchResultsComponent],
    templateUrl: './search-page.component.html',
    styleUrl: './search-page.component.scss',
 })
@@ -26,6 +28,9 @@ export class SearchPageComponent {
    filterType: string[] = []
 
    allFiltersEmpty = () => !(!!this.filterCity || !!this.filterPostal || this.filterType?.length > 0)
+
+   // replace with search results
+   therapists = inject(Store).select(selectTherapists)
 
    addFilterCity() {
       this.inputService
