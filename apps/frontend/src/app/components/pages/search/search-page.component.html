@@ -1,6 +1,8 @@
 <div class="header-wrapper">
-   <h1>Suche</h1>
-   <h2>{{ filterCity }} {{ filterPostal }} {{ filterType }}</h2>
+   <h1>
+      <span class="main">Suche @if(getCityFilterAsProse() || getTypesFilterAsProse()){ nach Therapeut*innen} {{ getCityFilterAsProse() }}</span>
+      <span class="sub">{{ getTypesFilterAsProse() }}</span>
+   </h1>
 </div>
 
 @if (allFiltersEmpty()) {
@@ -8,7 +10,7 @@
    <ng-container header>Durchsuche die Datenbank </ng-container>
    <ng-container body>
       <div class="placeholder-text">
-         <p>Gib deine Stadt, Postletzahl oder die Art der Therapie an.</p>
+         <p>Gib deine Stadt, Postletzahl oder die Art der Therapie an, die du suchst.</p>
          <p>
             Findest du hier nichts, kannst die hier und hier suchen. Übertrage deinen Fund dann in diese App und lass dich erinnern, sobald du anrufen
             kannst.
@@ -16,7 +18,15 @@
       </div>
    </ng-container>
 </app-page-placeholder-text>
-} @else {
+}
+
+<div class="search-buttons" [class.something-set]="!allFiltersEmpty()">
+   <button (click)="addFilterCity()">{{ filterCity ? 'Stadt ändern' : 'Stadt angeben' }}</button>
+   <button (click)="addFilterPostal()">{{ filterPostal ? 'Postleitzahl ändern' : 'Postleitzahl angeben' }}</button>
+   <button (click)="addFilterType()">{{ filterType?.length > 0 ? 'Therapierarten ändern' : 'Therapierarten angeben' }}</button>
+</div>
+
+@if(!allFiltersEmpty()) {
 <div class="body-wrapper">
    <div class="placeholder">
       <button (click)="addTherapist()">anlegen</button>
@@ -24,8 +34,3 @@
    </div>
 </div>
 }
-<div class="search-buttons">
-   <button (click)="addFilterCity()">Stadt angeben</button>
-   <button (click)="addFilterPostal()">Postletzahl angeben</button>
-   <button (click)="addFilterType()">Therapierarten angeben</button>
-</div>

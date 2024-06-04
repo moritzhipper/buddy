@@ -2,49 +2,67 @@
 
 .header-wrapper {
    padding: 40px 16px 36px 16px;
+
+   h1 {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .sub {
+         width: 100%;
+         font-size: $font-size-2;
+      }
+   }
 }
 .body-wrapper {
    padding: 0 16px 16px 16px;
 }
 
 @include small-screen {
-   .search-fields {
-      grid-template-columns: min-content auto;
-      margin-top: 0vh;
-      #searchCity {
-         grid-column: -1/1;
-      }
-
-      &.filter-open {
-         #searchPostalCode,
-         #searchType {
-            border: 1px solid black;
-            grid-column: -1/1;
-         }
-      }
+   .search-buttons {
+      flex-direction: column;
+      margin: 32px 16px;
    }
 }
 
 @include big-screen {
-   .search-fields {
-      grid-template-columns: auto min-content min-content;
-      margin-top: 20vh;
+   .search-buttons {
+      flex-direction: row;
+      margin: 16px;
    }
 }
 .search-buttons {
-   transition: margin 0.3s;
+   gap: 8px;
    display: flex;
    justify-content: center;
-   margin-top: 16px;
 
-   gap: 8px;
+   &.something-set {
+      justify-content: start;
+      flex-direction: row;
+      overflow-x: scroll;
+      margin: 0;
+      padding: 0 16px 8px 16px;
+      button {
+         animation: none;
+      }
+   }
 
    button {
       @include shimmer-animation;
       @include resetButton;
       border: 1px solid $accent-color-1;
       border-radius: $border-radius-2;
-      padding: 8px 16px;
+      padding: 8px 32px;
+      white-space: nowrap;
+
+      &:nth-child(2) {
+         animation-delay: 0.6s;
+      }
+
+      &:nth-child(3) {
+         animation-delay: 1.2s;
+      }
    }
 }
 

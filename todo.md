@@ -9,6 +9,7 @@
 -  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
 -  löschen nur zeigen, wenn preset nicht null
 -  suche in store schreiben
+-  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
 
 ### Soon
 

@@ -23,14 +23,14 @@ export class SearchPageComponent {
 
    filterCity: string
    filterPostal: string
-   filterType: string[]
+   filterType: string[] = []
 
    allFiltersEmpty = () => !(!!this.filterCity || !!this.filterPostal || this.filterType?.length > 0)
 
    addFilterCity() {
       this.inputService
          .openInputDialogue({
-            header: 'Stadt angeben',
+            header: 'In Welcher Stadt suchst du?',
             label: 'Stadt',
             type: InputTypes.TEXT_SHORT,
             canRemove: true,
@@ -47,9 +47,9 @@ export class SearchPageComponent {
    addFilterPostal() {
       this.inputService
          .openInputDialogue({
-            header: 'Postleitzahl angeben',
+            header: 'Spezifiziere die Postleitzahl',
             label: 'Postleitzahl',
-            type: InputTypes.NUMBER,
+            type: InputTypes.TEXT_SHORT,
             canRemove: true,
          })
          .then((v) => {
@@ -65,6 +65,7 @@ export class SearchPageComponent {
       this.inputService
          .openInputDialogue({
             header: 'Therapiearten angeben',
+            description: 'Wurden dir bei der Anamnese Empfehlungen ausgesprochen?',
             type: InputTypes.THERAPYTYPE,
             canRemove: true,
             preset: this.filterType,
@@ -91,5 +92,25 @@ export class SearchPageComponent {
                this.toastService.sendToast({ text: 'Du findest deine Therapet*innen unter "Finden"' })
             }
          })
+   }
+
+   getCityFilterAsProse(): string {
+      const cityString = [this.filterPostal, this.filterCity].filter(Boolean).join(', ')
+
+      if (cityString) {
+         return `in ${cityString}`
+      } else {
+         return null
+      }
+   }
+
+   getTypesFilterAsProse(): string {
+      const typesString = this.filterType.filter(Boolean).join(', ')
+
+      if (typesString) {
+         return `mit den Fachgebieten ${typesString}`
+      } else {
+         return null
+      }
    }
 }
