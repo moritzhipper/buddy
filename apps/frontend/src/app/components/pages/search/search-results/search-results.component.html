@@ -1,22 +1,23 @@
 <div class="table">
-   <div class="add"></div>
-   <div class="intro">Name</div>
-   <div class="types">Fach</div>
-   <div class="contact">Kontakt</div>
-   <div class="adress">Adresse</div>
-
+   <div class="header">
+      <div class="intro">Name</div>
+      <div class="types">Fach</div>
+      <div class="contact">Kontakt</div>
+      <div class="adress">Adresse</div>
+      <div class="add"></div>
+   </div>
    @for (therapist of therapists; track $index) {
-
-   <div class="add"><button>+</button></div>
-   <div class="intro">{{ therapist.name }}</div>
-   <div class="types">
-      @for (type of therapist.therapyTypes; track $index) { <span>{{ type }}</span> }
+   <div class="row">
+      <div class="intro">{{ therapist.name }}</div>
+      <div class="types">
+         @for (type of therapist.therapyTypes; track $index) { <span>{{ type }}</span> }
+      </div>
+      <div class="contact">
+         {{ therapist.email }}
+         {{ therapist.phone }}
+      </div>
+      <div class="adress">hier adressdaten</div>
+      <div class="add"><button>+</button></div>
    </div>
-   <div class="contact">
-      {{ therapist.email }}
-      {{ therapist.phone }}
-   </div>
-   <div class="adress">hier adressdaten</div>
-
    }
 </div>

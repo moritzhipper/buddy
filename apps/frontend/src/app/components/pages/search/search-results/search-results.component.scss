@@ -1,42 +1,51 @@
 @use '_index' as *;
 
 @include small-screen {
+   .header {
+      display: none;
+   }
    .table {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr;
+      gap: 8px;
+
+      .row {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+      }
+
+      .add,
+      .types {
+         grid-column: 1/-1;
+      }
    }
 }
 
 @include big-screen {
-   .table {
+   .header {
+      border-bottom: 2px solid $line-color;
+   }
+
+   .header,
+   .row {
       display: grid;
-      grid-template-columns: min-content 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 150px 40px;
    }
 }
 
 .table {
-   border-collapse: collapse;
    width: 100%;
 
-   .header {
-      border-bottom: 2px solid $line-color;
-      th {
-         text-align: left;
-         padding: 8px 4px 8px 4px;
-      }
-   }
+   .types {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: start;
+      gap: 4px;
 
-   td {
-      padding: 4px;
-      &.types {
-         display: flex;
-         flex-wrap: wrap;
-         gap: 4px;
-         span {
-            padding: 4px 8px;
-            border-radius: $border-radius-3;
-            background-color: dim($accent-color-3, 11);
-         }
+      span {
+         padding: 4px 8px;
+         border-radius: $border-radius-3;
+         background-color: dim($accent-color-3, 11);
       }
    }
 }
