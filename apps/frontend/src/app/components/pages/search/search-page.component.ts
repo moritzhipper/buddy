@@ -105,12 +105,20 @@ export class SearchPageComponent {
    }
 
    getTypesFilterAsProse(): string {
-      const typesString = this.filterType.filter(Boolean).join(', ')
+      const types = [...this.filterType] || []
+      let sentence = 'mit den Fachgebieten '
 
-      if (typesString) {
-         return `mit den Fachgebieten ${typesString}`
-      } else {
+      if (types.length === 0) {
          return null
+      } else if (types.length === 1) {
+         sentence += `${types[0]}`
+      } else if (types.length === 2) {
+         sentence += `${types[0]} und ${types[1]}`
+      } else if (this.filterType.length > 2) {
+         const lastType = types.pop()
+         sentence += `${types.join(', ')} und ${lastType}`
       }
+
+      return sentence
    }
 }

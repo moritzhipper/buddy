@@ -7,7 +7,7 @@
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 16px;
 
       .sub {
          width: 100%;
@@ -23,6 +23,11 @@
    .search-buttons {
       flex-direction: column;
       margin: 32px 16px;
+
+      &.something-set button {
+         padding: 4px 8px;
+         font-size: $font-size-1;
+      }
    }
 }
 
@@ -57,11 +62,11 @@
       white-space: nowrap;
 
       &:nth-child(2) {
-         animation-delay: 0.6s;
+         animation-delay: 1s;
       }
 
       &:nth-child(3) {
-         animation-delay: 1.2s;
+         animation-delay: 2s;
       }
    }
 }

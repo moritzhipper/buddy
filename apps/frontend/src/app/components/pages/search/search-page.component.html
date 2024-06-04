@@ -1,7 +1,7 @@
 <div class="header-wrapper">
    <h1>
       <span class="main">Suche @if(getCityFilterAsProse() || getTypesFilterAsProse()){ nach Therapeut*innen} {{ getCityFilterAsProse() }}</span>
-      <span class="sub">{{ getTypesFilterAsProse() }}</span>
+      <span class="sub" *ngIf="getTypesFilterAsProse()">{{ getTypesFilterAsProse() }}</span>
    </h1>
 </div>
 
