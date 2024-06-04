@@ -54,8 +54,8 @@
    }
 
    button {
-      @include shimmer-animation;
       @include resetButton;
+      @include shimmer-animation;
       border: 1px solid $accent-color-1;
       border-radius: $border-radius-2;
       padding: 8px 32px;
@@ -73,4 +73,21 @@
 
 p {
    margin-bottom: 0;
+}
+.placeholder-wrapper {
+   display: flex;
+   justify-content: center;
+   .placeholder-no-results {
+      p {
+         margin: 0 0 16px 0;
+      }
+      @include info-box;
+      button {
+         @include resetButton;
+         padding: 8px 32px;
+         border: 1px solid $accent-color-1;
+         border-radius: $border-radius-2;
+         width: 100%;
+      }
+   }
 }

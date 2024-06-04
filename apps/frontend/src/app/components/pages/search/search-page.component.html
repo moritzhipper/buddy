@@ -28,9 +28,11 @@
 
 @if(!allFiltersEmpty()) {
 <div class="body-wrapper">
-   <div class="placeholder">
-      <button (click)="addTherapist()">anlegen</button>
-      Du findest die Person hier nicht? Lege sie einfach selber an
+   <div class="placeholder-wrapper">
+      <div class="placeholder-no-results">
+         <p><b> Du findest die Person hier nicht? </b></p>
+         <button (click)="addTherapist()">Lege sie einfach selber an</button>
+      </div>
    </div>
 </div>
 }

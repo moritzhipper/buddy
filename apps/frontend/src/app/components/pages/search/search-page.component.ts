@@ -89,7 +89,7 @@ export class SearchPageComponent {
          .then((v) => {
             if (v.type === InputResolveTypes.CONFIRM) {
                this.store.dispatch(therapistActions.create({ props: v.value }))
-               this.toastService.sendToast({ text: 'Du findest deine Therapet*innen unter "Finden"' })
+               this.toastService.sendToast({ text: 'Du findest deine Therapeut*innen unter "Finden"' })
             }
          })
    }
