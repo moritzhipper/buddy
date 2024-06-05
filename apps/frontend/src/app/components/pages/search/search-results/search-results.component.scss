@@ -11,8 +11,6 @@
          display: grid;
          gap: 16px;
          grid-template-columns: 1fr min-content;
-         border: 1px solid $line-color;
-         padding: 16px;
          border-radius: $border-radius-2;
          grid-template-areas:
             'a b'
@@ -50,9 +48,7 @@
       display: grid;
       gap: 16px;
       grid-template-columns: 1fr min-content;
-      border: 1px solid $line-color;
       border-radius: $border-radius-2;
-      padding: 16px;
    }
 
    .row {
@@ -71,6 +67,11 @@
          display: block;
          opacity: 0.8;
       }
+   }
+
+   .row {
+      border: 1px solid $line-color;
+      padding: 16px;
    }
 
    .types {
