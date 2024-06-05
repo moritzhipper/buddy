@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
 import { TherapyTypeList } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
+import { selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
 import { InputResolveTypes, InputService, InputTypes } from '../../../../services/input.service'
 import { ToastService } from '../../../../services/toast.service'
 import { therapistActions } from '../../../../store/buddy.actions'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { SearchResultsComponent } from '../search-results/search-results.component'
-import { selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
 
 @Component({
    selector: 'app-search-page',
@@ -23,7 +23,7 @@ export class SearchPageComponent {
    therapyTypes = TherapyTypeList
    isFilterOpen = false
 
-   filterCity: string
+   filterCity: string = 'stuttgart'
    filterPostal: string
    filterType: string[] = []
 

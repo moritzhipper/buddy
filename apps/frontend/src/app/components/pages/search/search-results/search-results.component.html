@@ -1,23 +1,31 @@
 <div class="table">
    <div class="header">
-      <div class="intro">Name</div>
-      <div class="types">Fach</div>
-      <div class="contact">Kontakt</div>
-      <div class="adress">Adresse</div>
-      <div class="add"></div>
+      <div class="cell intro">Name</div>
+      <div class="cell types">Fach</div>
+      <div class="cell contact">Kontakt</div>
+      <div class="cell adress">Adresse</div>
+      <div class="cell add"></div>
    </div>
    @for (therapist of therapists; track $index) {
    <div class="row">
-      <div class="intro">{{ therapist.name }}</div>
-      <div class="types">
+      <div class="cell intro">{{ therapist.name }}</div>
+      <div class="cell types">
          @for (type of therapist.therapyTypes; track $index) { <span>{{ type }}</span> }
       </div>
-      <div class="contact">
+      <div class="cell contact">
          {{ therapist.email }}
          {{ therapist.phone }}
       </div>
-      <div class="adress">hier adressdaten</div>
-      <div class="add"><button>+</button></div>
+      <div class="cell adress">hier adressdaten</div>
+      <div class="cell add">
+         <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" fill="currentColor">
+               <path
+                  d="M11 11h4a1 1 0 0 0 0-2h-4V5a1 1 0 0 0-2 0v4H5a1 1 0 1 0 0 2h4v4a1 1 0 0 0 2 0v-4zm-1 9C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z"
+               ></path>
+            </svg>
+         </button>
+      </div>
    </div>
    }
 </div>
