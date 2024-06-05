@@ -31,15 +31,15 @@
    <app-search-results [therapists]="therapists | async" />
    <div class="placeholder-wrapper">
       <div class="note">
+         <h3>Du findest die Person hier nicht?</h3>
+         <button (click)="addTherapist()">Lege sie einfach selber an</button>
+      </div>
+      <div class="note">
          <h3>Daten von Eintragen fehlen oder haben Fehler?</h3>
          <p>
             Da die Datenbank organisch wächst, können Einträge potentiell unvollständig oder fehlerhaft sein. Importieren sie trotzdem und bessere sie
             nach oder ergänze sie.
          </p>
-      </div>
-      <div class="note">
-         <h3>Du findest die Person hier nicht?</h3>
-         <button (click)="addTherapist()">Lege sie einfach selber an</button>
       </div>
    </div>
 </div>

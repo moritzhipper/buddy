@@ -11,4 +11,9 @@ import { Therapist } from '@buddy/base-utils'
 })
 export class SearchResultsComponent {
    @Input() therapists: Therapist[]
+
+   addTherapist(therapist: Therapist) {
+      //hier popup 'Therapeut übernehmen?'
+      console.log(therapist.name, therapist.id)
+   }
 }

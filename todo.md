@@ -5,6 +5,7 @@
 ### Right now
 
 -  added search page
+   -hellere placeholder wenn wete nicht da auf therapeuthenoage
 -  suchtabell im desktop wie tabelle anzeigen und mobil header ausblenden und dafür kompakte therapeutenansicht bauen
 -  rename find page to 'Meine Liste'
 -  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
