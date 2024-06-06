@@ -24,7 +24,6 @@
       }
       .intro {
          grid-area: a;
-         font-weight: bold;
          font-size: $font-size-2;
       }
 
@@ -65,13 +64,43 @@
       @include resetButton;
       svg {
          display: block;
-         opacity: 0.8;
+         opacity: 0.7;
       }
    }
 
    .row {
       border: 1px solid $line-color;
       padding: 16px;
+      transition-property: transform, box-shadow, background-color;
+      transition-duration: 0.3s;
+      position: relative;
+      button {
+         overflow: hidden;
+      }
+
+      .add {
+         overflow: visible;
+      }
+
+      &:hover,
+      &:focus,
+      &:focus-within {
+         @include shadow;
+         background-color: dim($accent-color-2, 66);
+         transform: translateY(-2px);
+
+         button {
+            transform: scale(1.2);
+            @include shadow;
+            border: 2px solid $line-color;
+            @include shimmer-animation;
+         }
+      }
+      button {
+         border: 2px solid transparent;
+         border-radius: 100%;
+         transition: transform 0.3s, border 0.3s;
+      }
    }
 
    .types {
@@ -79,6 +108,7 @@
       flex-wrap: wrap;
       align-items: flex-start;
       gap: 4px;
+
       span {
          font-size: $font-size-1;
          text-align: center;
@@ -86,5 +116,8 @@
          border-radius: $border-radius-3;
          background-color: dim($accent-color-3, 11);
       }
+   }
+   .intro {
+      font-weight: bold;
    }
 }
