@@ -5,11 +5,9 @@
 ### Right now
 
 -  added search page
-   -hellere placeholder wenn wete nicht da auf therapeuthenoage
--  suchtabell im desktop wie tabelle anzeigen und mobil header ausblenden und dafür kompakte therapeutenansicht bauen
 -  rename find page to 'Meine Liste'
--  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
 -  suche in store schreiben
+-  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
 -  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
 
 -  input-wrapper
@@ -17,10 +15,16 @@
 
 ### Soon
 
+-  merken seite refaktoren: oben a la search: therapeut anlegen
+-  therapeutensektionen: frei in der zukunf
+-  bin auf warteliste
+-  print button (du suchst für eine andere person? Drucke deine Suche aus!)
+-  wie man schnell einen therapieplatz findet zusammenfassen? ist gedoppelte inf. und eventuell aus akkordeon raus bewegen
 -  qr-key auch in tutorial als text kopieren
 -  aus tutorial therapie begleiten seite entfernen (in tutorial direkt auch datenschutz zustimmung drin haben?)
 -  coole datenschutz bestätigen animation
 -  therapytypes allowed in zod schemes
+-  therapeut teilen
 
 -  tests vom be umziehen, dann types importieren
 

@@ -23,9 +23,9 @@ export class SearchPageComponent {
    therapyTypes = TherapyTypeList
    isFilterOpen = false
 
-   filterCity: string = 'stuttgart'
+   filterCity: string
    filterPostal: string
-   filterType: string[] = []
+   filterType: string[]
 
    allFiltersEmpty = () => !(!!this.filterCity || !!this.filterPostal || this.filterType?.length > 0)
 
@@ -39,6 +39,7 @@ export class SearchPageComponent {
             label: 'Stadt',
             type: InputTypes.TEXT_SHORT,
             canRemove: true,
+            preset: this.filterCity,
          })
          .then((v) => {
             if (v.type === InputResolveTypes.CONFIRM) {
@@ -56,6 +57,7 @@ export class SearchPageComponent {
             label: 'Postleitzahl',
             type: InputTypes.TEXT_SHORT,
             canRemove: true,
+            preset: this.filterPostal,
          })
          .then((v) => {
             if (v.type === InputResolveTypes.CONFIRM) {
@@ -110,7 +112,7 @@ export class SearchPageComponent {
    }
 
    getTypesFilterAsProse(): string {
-      const types = [...this.filterType] || []
+      const types = !!this.filterType?.length ? [...this.filterType] : []
       let sentence = 'mit den Fachgebieten '
 
       if (types.length === 0) {

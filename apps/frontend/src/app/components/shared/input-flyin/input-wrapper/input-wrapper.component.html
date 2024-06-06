@@ -4,9 +4,7 @@
       class="content-wrapper"
       [ngClass]="{
          big: [inputTypes.CALL_TIMES].includes(config.type),
-         medium: [inputTypes.TEXT_LONG, inputTypes.THERAPYTYPE].includes(
-            config.type
-         )
+         medium: [inputTypes.TEXT_LONG, inputTypes.THERAPYTYPE].includes(config.type)
       }"
    >
       <div class="header-wrapper">
@@ -14,14 +12,11 @@
             <h2>
                {{ config.header }}
             </h2>
-            <h3
-               *ngIf="config.description && config.type !== inputTypes.CONFIRM"
-               class="description"
-            >
+            <h3 *ngIf="config.description && config.type !== inputTypes.CONFIRM" class="description">
                {{ config.description }}
             </h3>
          </div>
-         <button *ngIf="config.canRemove" (click)="removeEntryButtonClick()">
+         <button *ngIf="config.canRemove && config.preset" (click)="removeEntryButtonClick()">
             <svg
                xmlns="http://www.w3.org/2000/svg"
                viewBox="-3 -2 24 24"
@@ -38,41 +33,21 @@
          </button>
       </div>
       <div class="input-wrapper" [ngSwitch]="config.type">
-         <app-input-confirm
-            *ngSwitchCase="inputTypes.CONFIRM"
-            [description]="config.description"
-         />
+         <app-input-confirm *ngSwitchCase="inputTypes.CONFIRM" [description]="config.description" />
 
          <app-input-therapist *ngSwitchCase="inputTypes.THERAPIST" />
 
          <app-input-password *ngSwitchCase="inputTypes.PASSWORD" />
 
-         <app-input-address
-            *ngSwitchCase="inputTypes.ADDRESS"
-            [preset]="config.preset"
-         />
+         <app-input-address *ngSwitchCase="inputTypes.ADDRESS" [preset]="config.preset" />
 
-         <app-input-call-time
-            *ngSwitchCase="inputTypes.CALL_TIMES"
-            [preset]="config.preset"
-         />
+         <app-input-call-time *ngSwitchCase="inputTypes.CALL_TIMES" [preset]="config.preset" />
 
-         <app-input-appointment
-            *ngSwitchCase="inputTypes.APPOINTMENT"
-            [preset]="config.preset"
-         />
+         <app-input-appointment *ngSwitchCase="inputTypes.APPOINTMENT" [preset]="config.preset" />
 
-         <app-input-therapy-type
-            *ngSwitchCase="inputTypes.THERAPYTYPE"
-            [preset]="config.preset"
-         />
+         <app-input-therapy-type *ngSwitchCase="inputTypes.THERAPYTYPE" [preset]="config.preset" />
 
-         <app-input-single
-            *ngIf="isSingleInput(config.type)"
-            [preset]="config.preset"
-            [type]="config.type"
-            [label]="config.label"
-         />
+         <app-input-single *ngIf="isSingleInput(config.type)" [preset]="config.preset" [type]="config.type" [label]="config.label" />
       </div>
    </div>
 </div>

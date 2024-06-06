@@ -26,11 +26,6 @@
    .search-buttons {
       flex-direction: column;
       margin: 32px 16px;
-
-      &.something-set button {
-         padding: 4px 8px;
-         font-size: $font-size-1;
-      }
    }
    .placeholder-wrapper {
       flex-direction: column;
@@ -64,6 +59,8 @@
       margin: 0;
       padding: 0 16px 8px 16px;
       button {
+         padding: 6px 16px;
+
          animation: none;
       }
    }
@@ -94,6 +91,8 @@ p {
    display: flex;
 
    gap: 16px;
+   border-top: 1px solid $line-color;
+   padding-top: 32px;
 
    .note {
       h3 {
