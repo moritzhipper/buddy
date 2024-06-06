@@ -3,13 +3,28 @@
    <div class="row">
       <div class="cell intro">{{ therapist.name }}</div>
       <div class="cell types">
-         @for (type of therapist.therapyTypes; track $index) { <span>{{ type }}</span> }
+         @if (therapist?.therapyTypes?.length > 0) { @for (type of therapist.therapyTypes; track $index) { <span>{{ type }}</span> } } @else {
+         <span class="empty"> keine Fachgebiete hinterlegt </span>
+         }
+      </div>
+      <div class="cell adress">
+         @if (therapist?.address) {
+         <span>{{ therapist.address.postalCode }} {{ therapist.address.city }}</span>
+         <span></span>
+         <span>{{ therapist.address.street }} {{ therapist.address.number }}</span>
+         } @else {
+         <span class="empty">keine Adresse hinterlegt </span>
+         }
       </div>
       <div class="cell contact">
-         {{ therapist.email }} |
-         {{ therapist.phone }}
+         @if (therapist.phone) {
+         <span>{{ therapist.phone }}</span>
+         } @if (therapist.email) {
+         <span>{{ therapist.email }}</span>
+         } @if (!therapist.email || !therapist.phone) {
+         <span class="empty"> keine Kontaktdaten hinterlegt </span>
+         }
       </div>
-      <div class="cell adress">hier adressdaten</div>
       <div class="cell add">
          <button (click)="addTherapist(therapist)">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" fill="currentColor">

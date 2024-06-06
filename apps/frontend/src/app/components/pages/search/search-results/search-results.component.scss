@@ -74,8 +74,30 @@
       transition-property: transform, box-shadow, background-color;
       transition-duration: 0.3s;
       position: relative;
-      button {
-         overflow: hidden;
+
+      .cell {
+         display: flex;
+         flex-direction: column;
+         gap: 4px;
+         min-width: 0;
+
+         span.empty {
+            opacity: 0.7;
+         }
+
+         &.types {
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 8px;
+
+            span:not(.empty) {
+               text-align: center;
+               padding: 4px 8px;
+               background-color: dim($accent-color-2, 50);
+               border-radius: $border-radius-2;
+            }
+         }
       }
 
       .add {
@@ -91,7 +113,6 @@
 
          button {
             transform: scale(1.2);
-            @include shadow;
             border: 2px solid $line-color;
             @include shimmer-animation;
          }
@@ -102,20 +123,8 @@
          transition: transform 0.3s, border 0.3s;
       }
    }
-
    .types {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      gap: 4px;
-
-      span {
-         font-size: $font-size-1;
-         text-align: center;
-         padding: 4px 8px;
-         border-radius: $border-radius-3;
-         background-color: dim($accent-color-3, 11);
-      }
+      flex-direction: row;
    }
    .intro {
       font-weight: bold;
