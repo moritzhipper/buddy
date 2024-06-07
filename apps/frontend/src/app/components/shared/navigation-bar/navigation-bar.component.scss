@@ -8,8 +8,9 @@
    justify-content: center;
    z-index: 3;
    backdrop-filter: blur(10px);
-   background-color: dim($background-color, 99);
+   background-color: dim($background-color, aa);
 
+   border-top: 1px solid $line-color;
    .bar-wrapper {
       display: flex;
       padding: 8px 16px;
@@ -18,11 +19,10 @@
       align-items: center;
       flex-direction: row;
       width: 100%;
-      border-top: 1px solid $line-color;
 
       @include big-screen {
          width: 600px;
-         border: none;
+         // border: none;
       }
 
       .link {

@@ -1,0 +1,17 @@
+:host {
+   //    box-sizing: content-box;
+   z-index: -1;
+   right: 0;
+   bottom: 76px;
+   position: fixed;
+   padding: 0 16px 0 16px;
+   max-width: 100vw;
+   img {
+      user-select: none;
+
+      max-height: 60vh;
+      //   display: block;
+      width: 100%;
+      opacity: 0.3;
+   }
+}

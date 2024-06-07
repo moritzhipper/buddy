@@ -8,11 +8,12 @@ import { ToastService } from '../../../../services/toast.service'
 import { therapistActions } from '../../../../store/buddy.actions'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { SearchResultsComponent } from '../search-results/search-results.component'
+import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 
 @Component({
    selector: 'app-search-page',
    standalone: true,
-   imports: [CommonModule, PagePlaceholderTextComponent, SearchResultsComponent],
+   imports: [CommonModule, PagePlaceholderTextComponent, SearchResultsComponent, BackgroundPictureComponent],
    templateUrl: './search-page.component.html',
    styleUrl: './search-page.component.scss',
 })

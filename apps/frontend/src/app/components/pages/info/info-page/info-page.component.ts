@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { RouterModule } from '@angular/router'
+import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 import { AccordionComponent } from '../accordion/accordion.component'
 
 @Component({
@@ -7,6 +8,6 @@ import { AccordionComponent } from '../accordion/accordion.component'
    templateUrl: './info-page.component.html',
    styleUrls: ['./info-page.component.scss'],
    standalone: true,
-   imports: [AccordionComponent, RouterModule],
+   imports: [AccordionComponent, RouterModule, BackgroundPictureComponent],
 })
 export class InfoPageComponent {}
