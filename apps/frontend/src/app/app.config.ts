@@ -12,6 +12,7 @@ import { environment } from '../environments/environment'
 import { authInterceptorFn } from './interceptors/auth-interceptor-fn'
 import { metaReducers, profileReducer, searchReducer, therapistsReducer } from './store/buddy.reducer'
 import { ProfileEffects } from './store/effects/profile.effects'
+import { SearchEffects } from './store/effects/searchEffects'
 import { TherapistsEffects } from './store/effects/therapists.effects'
 import { StateSyncEffects } from './store/effects/utils.effects'
 
@@ -26,7 +27,7 @@ export const appConfig: ApplicationConfig = {
          },
          { metaReducers }
       ),
-      provideEffects(StateSyncEffects, ProfileEffects, TherapistsEffects),
+      provideEffects(StateSyncEffects, ProfileEffects, TherapistsEffects, SearchEffects),
       provideStoreDevtools(),
       provideAnimations(),
       provideHttpClient(withInterceptors([authInterceptorFn])),

@@ -18,8 +18,9 @@ export const profileReducer = createReducer(
 
 export const searchReducer = createReducer(
    {} as SearchState,
-   on(searchActions.saveSearch, (state, { props }) => ({ ...state, ...{ parameters: props } })),
-   on(searchActions.saveSearchResults, (state, { results }) => ({ ...state, ...{ results } }))
+   on(searchActions.saveSearch, (state, { props }) => ({ ...state, ...{ parameters: { ...state.parameters, ...props } } })),
+   on(searchActions.saveSearchResults, (state, { results }) => ({ ...state, ...{ results } })),
+   on(searchActions.resetFilter, () => ({}))
 )
 
 export function storeSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {

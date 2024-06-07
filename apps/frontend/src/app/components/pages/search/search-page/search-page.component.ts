@@ -36,17 +36,22 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
    ngOnInit(): void {
       this.subscription = this.store.select(selectSearch).subscribe((searchState) => {
-         const { parameters } = searchState
-         this.allFiltersEmpty = !parameters.city && !parameters.postalCode && !parameters?.therapyTypes?.length
          this.results = searchState.results
-         this.city = parameters.city
-         this.postalCode = parameters.postalCode
-         this.types = parameters.therapyTypes
+         const parameters = searchState.parameters || {}
+
+         this.allFiltersEmpty = !parameters.city && !parameters.postalCode && !parameters?.therapyTypes?.length
+         this.city = parameters?.city
+         this.postalCode = parameters?.postalCode
+         this.types = parameters?.therapyTypes
       })
    }
 
    ngOnDestroy(): void {
       this.subscription.unsubscribe()
+   }
+
+   resetFilters() {
+      this.store.dispatch(searchActions.resetFilter())
    }
 
    addFilterCity() {

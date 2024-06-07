@@ -4,9 +4,9 @@
 
 ### Right now
 
--  added search page
 -  rename find page to 'Meine Liste'
--  suche in store schreiben
+-  suche umsetzen in therapist controller
+-  saveSearch sucht nur nach neueste ränderung
 -  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
 -  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
 

@@ -42,27 +42,28 @@
    }
 }
 .body-wrapper {
-   padding: 16px;
+   padding: 8px 16px 16px 16px;
    display: flex;
    flex-direction: column;
    align-items: center;
-   gap: 16px;
 
    .search-wrapper {
       border-top: 1px solid $line-color;
       border-bottom: 1px solid $line-color;
       padding: 32px 0;
       width: 100%;
+
       .no-results {
          text-align: center;
          opacity: 0.7;
+         margin: 32px 0;
       }
    }
 
    .placeholder-wrapper {
       display: flex;
       width: 100%;
-
+      margin-top: 16px;
       gap: 16px;
 
       .note {

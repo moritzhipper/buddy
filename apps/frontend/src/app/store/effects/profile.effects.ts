@@ -45,6 +45,7 @@ export class ProfileEffects {
          )
       )
    )
+
    // fetch missing email or secret after login
    loadProfile = createEffect(() =>
       this.actions$.pipe(
@@ -58,7 +59,7 @@ export class ProfileEffects {
       )
    )
 
-   resetUserDataBackend$ = createEffect(() =>
+   deleteProfile$ = createEffect(() =>
       this.actions$.pipe(
          ofType(profileActions.deleteProfile),
          switchMap(() =>
