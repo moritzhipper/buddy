@@ -76,6 +76,7 @@ export const TherapistSearchSchema = z
    .object({
       name: z.string().optional(),
       city: z.string().optional(),
+      postalCode: z.string().optional(),
       therapyTypes: z.array(z.enum(TherapyTypeList)).optional(),
    })
    .strict()

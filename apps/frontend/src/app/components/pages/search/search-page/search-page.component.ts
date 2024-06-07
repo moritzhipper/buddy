@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject } from '@angular/core'
-import { TherapyTypeList } from '@buddy/base-utils'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import { Therapist, TherapistSearch } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
-import { selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
+import { selectSearch, selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
+import { Subscription } from 'rxjs'
 import { InputResolveTypes, InputService, InputTypes } from '../../../../services/input.service'
 import { ToastService } from '../../../../services/toast.service'
-import { therapistActions } from '../../../../store/buddy.actions'
+import { searchActions, therapistActions } from '../../../../store/buddy.actions'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { SearchResultsComponent } from '../search-results/search-results.component'
 
@@ -16,21 +17,37 @@ import { SearchResultsComponent } from '../search-results/search-results.compone
    templateUrl: './search-page.component.html',
    styleUrl: './search-page.component.scss',
 })
-export class SearchPageComponent {
+export class SearchPageComponent implements OnInit, OnDestroy {
    inputService = inject(InputService)
-   store = inject(Store)
    toastService = inject(ToastService)
-   therapyTypes = TherapyTypeList
-   isFilterOpen = false
-
-   filterCity: string
-   filterPostal: string
-   filterType: string[]
-
-   allFiltersEmpty = () => !(!!this.filterCity || !!this.filterPostal || this.filterType?.length > 0)
+   store = inject(Store)
 
    // replace with search results
-   therapists = inject(Store).select(selectTherapists)
+   therapists = this.store.select(selectTherapists)
+
+   city: string
+   postalCode: string
+   types: string[]
+   results: Therapist[]
+
+   subscription: Subscription
+
+   allFiltersEmpty = true
+
+   ngOnInit(): void {
+      this.subscription = this.store.select(selectSearch).subscribe((searchState) => {
+         const { parameters } = searchState
+         this.allFiltersEmpty = !parameters.city && !parameters.postalCode && !parameters?.therapyTypes?.length
+         this.results = searchState.results
+         this.city = parameters.city
+         this.postalCode = parameters.postalCode
+         this.types = parameters.therapyTypes
+      })
+   }
+
+   ngOnDestroy(): void {
+      this.subscription.unsubscribe()
+   }
 
    addFilterCity() {
       this.inputService
@@ -39,13 +56,11 @@ export class SearchPageComponent {
             label: 'Stadt',
             type: InputTypes.TEXT_SHORT,
             canRemove: true,
-            preset: this.filterCity,
+            preset: this.city,
          })
          .then((v) => {
-            if (v.type === InputResolveTypes.CONFIRM) {
-               this.filterCity = v.value
-            } else if (v.type === InputResolveTypes.DELETE) {
-               this.filterCity = null
+            if (v.type !== InputResolveTypes.DISCARD) {
+               this.updateSearch({ city: v.value })
             }
          })
    }
@@ -57,13 +72,11 @@ export class SearchPageComponent {
             label: 'Postleitzahl',
             type: InputTypes.TEXT_SHORT,
             canRemove: true,
-            preset: this.filterPostal,
+            preset: this.postalCode,
          })
          .then((v) => {
-            if (v.type === InputResolveTypes.CONFIRM) {
-               this.filterPostal = v.value
-            } else if (v.type === InputResolveTypes.DELETE) {
-               this.filterPostal = null
+            if (v.type !== InputResolveTypes.DISCARD) {
+               this.updateSearch({ postalCode: v.value })
             }
          })
    }
@@ -75,15 +88,17 @@ export class SearchPageComponent {
             description: 'Wurden dir bei der Anamnese Empfehlungen ausgesprochen?',
             type: InputTypes.THERAPYTYPE,
             canRemove: true,
-            preset: this.filterType,
+            preset: this.types,
          })
          .then((v) => {
-            if (v.type === InputResolveTypes.CONFIRM) {
-               this.filterType = v.value
-            } else if (v.type === InputResolveTypes.DELETE) {
-               this.filterType = null
+            if (v.type !== InputResolveTypes.DISCARD) {
+               this.updateSearch({ therapyTypes: v.value })
             }
          })
+   }
+
+   private updateSearch(search: TherapistSearch) {
+      this.store.dispatch(searchActions.saveSearch({ props: { ...search } }))
    }
 
    addTherapist() {
@@ -102,7 +117,7 @@ export class SearchPageComponent {
    }
 
    getCityFilterAsProse(): string {
-      const cityString = [this.filterPostal, this.filterCity].filter(Boolean).join(', ')
+      const cityString = [this.postalCode, this.city].filter(Boolean).join(', ')
 
       if (cityString) {
          return `in ${cityString}`
@@ -112,7 +127,7 @@ export class SearchPageComponent {
    }
 
    getTypesFilterAsProse(): string {
-      const types = !!this.filterType?.length ? [...this.filterType] : []
+      const types = !!this.types?.length ? [...this.types] : []
       let sentence = 'mit den Fachgebieten '
 
       if (types.length === 0) {
@@ -121,7 +136,7 @@ export class SearchPageComponent {
          sentence += `${types[0]}`
       } else if (types.length === 2) {
          sentence += `${types[0]} und ${types[1]}`
-      } else if (this.filterType.length > 2) {
+      } else if (this.types.length > 2) {
          const lastType = types.pop()
          sentence += `${types.join(', ')} und ${lastType}`
       }

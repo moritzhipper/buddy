@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http'
-import { Therapist, UniqueItem, UserProfile } from '@buddy/base-utils'
+import { Therapist, TherapistSearch, UniqueItem, UserProfile } from '@buddy/base-utils'
 import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store'
 
 export const getTherapistSuggestions = createAction('[Therapist] Suggestion', props<{ filter: { name: string } }>)
@@ -30,6 +30,14 @@ export const profileActions = createActionGroup({
       'Delete Profile': emptyProps(),
       'Delete Profile Success': emptyProps(),
       Logout: emptyProps(),
+   },
+})
+
+export const searchActions = createActionGroup({
+   source: 'Search',
+   events: {
+      'Save Search': props<{ props: TherapistSearch }>(),
+      'Save Search Results': props<{ results: Therapist[] }>(),
    },
 })
 
