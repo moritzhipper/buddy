@@ -5,6 +5,8 @@
 ### Right now
 
 -  rename find page to 'Meine Liste'
+-  suche in be controller wie das:[text](https://stackoverflow.com/questions/64850555/select-statement-with-dynamic-columns-for-where-condition)
+-  suche per name ergänzen
 -  suche umsetzen in therapist controller
 -  saveSearch sucht nur nach neueste ränderung
 -  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie

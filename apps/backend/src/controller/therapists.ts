@@ -1,5 +1,6 @@
 import {
    AddTherapistSchema,
+   Address,
    AddressHavingID,
    CallTime,
    CalltimeHavingID,
@@ -8,7 +9,6 @@ import {
    TherapistSearch,
    TherapistSearchSchema,
 } from '@buddy/base-utils'
-import { Address } from 'cluster'
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
@@ -192,24 +192,23 @@ therapistsRoute.post(
    expressAsyncHandler(async (req, res) => {
       const searchParams: TherapistSearch = req.body
 
-      const therapists = await buddyDB.manyOrNone(generateFindSharedTherapistsQuery(searchParams.name))
+      const flatTherapistList = await buddyDB.manyOrNone<Therapist & Address>(generateFindSharedTherapistsQuery(searchParams))
+      // const addresses = await buddyDB.manyOrNone(generateSharedAddressesQuery(therapists))
 
-      res.send(therapists)
+      const unflattenedTherapist = flatTherapistList.map((t) => unflattenTherapist(t))
+      res.send(unflattenedTherapist)
    })
 )
 
 // Helpers
 // shared
-function generateFindSharedTherapistsQuery(name: string): string {
-   const query = pgp.as.format(
-      `
-        SELECT name, email, phone, therapy_types, id
-        FROM shared_therapists
-        WHERE name ILIKE $1 LIMIT 9`,
-      `%${name}%`
+function generateFindSharedTherapistsQuery(searchParams: TherapistSearch): string {
+   const query2 = pgp.as.format(
+      `SELECT * FROM shared_therapists t LEFT JOIN shared_addresses a ON t.id = a.therapist_id WHERE name ILIKE $1`,
+      `%${searchParams.name}%`
    )
 
-   return query
+   return query2
 }
 
 function generateSharedCallTimesQuery(therapistIDs: string[]): string {
@@ -282,6 +281,17 @@ function mergeTherapistsWithAddress(therapists: Therapist[], address: AddressHav
       }
       return th
    })
+}
+
+/**
+ * because it was necessary to join to table for the search, the response object is flat.
+ * This function remaps the adress attributes in its own attribute
+ */
+function unflattenTherapist(flatTher: Therapist & Address): Therapist {
+   const { postalCode, city, street, number }: Address = flatTher
+   const { name, therapyTypes, phone, email }: Therapist = flatTher
+
+   return { name, therapyTypes, phone, email, address: { postalCode, city, street, number } }
 }
 
 export = therapistsRoute

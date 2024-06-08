@@ -18,13 +18,14 @@ export const appRoutes: Route[] = [
          {
             path: 'info',
             component: InfoPageComponent,
+            canActivate: [IsLoggedInGuard],
             title: 'Buddy | Info',
          },
          {
             path: 'find',
             component: ListPageComponent,
             canActivate: [IsLoggedInGuard],
-            title: 'Buddy | Finden',
+            title: 'Buddy | Liste',
          },
          {
             path: 'search',
