@@ -15,6 +15,7 @@
 
 ### Soon
 
+-  auf datenschutzseite Feld: Was speichern wir von dir? mit feldbasierter antwort. Verweis auf datenschutzpage
 -  merken seite refaktoren: oben a la search: therapeut anlegen
 -  therapeutensektionen: frei in der zukunf
 -  bin auf warteliste

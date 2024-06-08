@@ -7,8 +7,12 @@
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 8px;
 
+      .city,
+      .sub {
+         font-weight: normal;
+      }
       .sub {
          width: 100%;
          font-size: $font-size-2;

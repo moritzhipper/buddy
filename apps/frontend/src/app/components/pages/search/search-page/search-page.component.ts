@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { Therapist, TherapistSearch } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
-import { selectSearch, selectTherapists } from 'apps/frontend/src/app/store/buddy.selectors'
+import { selectSearch } from 'apps/frontend/src/app/store/buddy.selectors'
 import { Subscription } from 'rxjs'
 import { InputResolveTypes, InputService, InputTypes } from '../../../../services/input.service'
 import { ToastService } from '../../../../services/toast.service'
@@ -22,17 +22,19 @@ export class SearchPageComponent implements OnInit, OnDestroy {
    toastService = inject(ToastService)
    store = inject(Store)
 
-   // replace with search results
-   therapists = this.store.select(selectTherapists)
-
+   // 'raw' filters
    city: string
    postalCode: string
    types: string[]
    results: Therapist[]
 
-   subscription: Subscription
+   // 'prose' filters
+   citiyAsProse: string
+   typesAsProse: string
 
    allFiltersEmpty = true
+
+   private subscription: Subscription
 
    ngOnInit(): void {
       this.subscription = this.store.select(selectSearch).subscribe((searchState) => {
@@ -43,6 +45,8 @@ export class SearchPageComponent implements OnInit, OnDestroy {
          this.city = parameters?.city
          this.postalCode = parameters?.postalCode
          this.types = parameters?.therapyTypes
+
+         this.mapFiltersToProse(parameters)
       })
    }
 
@@ -121,31 +125,22 @@ export class SearchPageComponent implements OnInit, OnDestroy {
          })
    }
 
-   getCityFilterAsProse(): string {
-      const cityString = [this.postalCode, this.city].filter(Boolean).join(', ')
+   private mapFiltersToProse(params: TherapistSearch): void {
+      // set city
+      const cityString = [params.postalCode, params.city].filter(Boolean).join(', ')
+      this.citiyAsProse = cityString ? `in ${cityString}` : null
 
-      if (cityString) {
-         return `in ${cityString}`
-      } else {
-         return null
-      }
-   }
-
-   getTypesFilterAsProse(): string {
+      // set types
       const types = !!this.types?.length ? [...this.types] : []
-      let sentence = 'mit den Fachgebieten '
-
       if (types.length === 0) {
-         return null
+         this.typesAsProse = null
       } else if (types.length === 1) {
-         sentence += `${types[0]}`
+         this.typesAsProse = `nach ${types[0]}`
       } else if (types.length === 2) {
-         sentence += `${types[0]} und ${types[1]}`
+         this.typesAsProse = `nach ${types[0]} und ${types[1]}`
       } else if (this.types.length > 2) {
          const lastType = types.pop()
-         sentence += `${types.join(', ')} und ${lastType}`
+         this.typesAsProse = `nach ${types.join(', ')} und ${lastType}`
       }
-
-      return sentence
    }
 }

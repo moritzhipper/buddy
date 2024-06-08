@@ -1,7 +1,11 @@
 <div class="header-wrapper">
    <h1>
-      <span class="main">Suche @if(getCityFilterAsProse() || getTypesFilterAsProse()){ nach Therapeut*innen} {{ getCityFilterAsProse() }}</span>
-      <span class="sub" *ngIf="getTypesFilterAsProse()">{{ getTypesFilterAsProse() }}</span>
+      <span class="main">
+         <span>Suche</span>
+         <span class="city" *ngIf="citiyAsProse"> {{ citiyAsProse }}</span>
+      </span>
+
+      <span class="sub" *ngIf="typesAsProse">{{ typesAsProse }}</span>
    </h1>
 </div>
 
@@ -12,8 +16,8 @@
       <div class="placeholder-text">
          <p>Finde hier Therapeut*innen und speichere sie über den Plus-Button ab.</p>
          <p>
-            Gib deine Stadt, Postletzahl oder die Art der Therapie an, die du suchst. Findest du hier nichts, kannst die hier und hier suchen.
-            Übertrage deinen Fund dann in diese App und lass dich erinnern, sobald du anrufen kannst.
+            Gib einfach deine Suchkriterien an. Findest du hier nichts, kannst die hier und hier suchen. Übertrage deinen Fund dann in diese App und
+            lass dich erinnern, sobald du anrufen kannst.
          </p>
       </div>
    </ng-container>
