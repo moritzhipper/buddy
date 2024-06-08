@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FindPageComponent } from './find-page.component'
+import { ListPageComponent } from './list-page.component'
 
 describe('FindPageComponent', () => {
-   let component: FindPageComponent
-   let fixture: ComponentFixture<FindPageComponent>
+   let component: ListPageComponent
+   let fixture: ComponentFixture<ListPageComponent>
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [FindPageComponent],
+         declarations: [ListPageComponent],
       }).compileComponents()
    })
 
    beforeEach(() => {
-      fixture = TestBed.createComponent(FindPageComponent)
+      fixture = TestBed.createComponent(ListPageComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
    })

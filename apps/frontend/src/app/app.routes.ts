@@ -1,5 +1,5 @@
 import { Route } from '@angular/router'
-import { FindPageComponent } from './components/pages/find/find-page/find-page.component'
+import { ListPageComponent } from './components/pages/find/flist-page/list-page.component'
 import { InfoPageComponent } from './components/pages/info/info-page/info-page.component'
 import { LoginPageComponent } from './components/pages/login/login-page/login-page.component'
 import { SearchPageComponent } from './components/pages/search/search-page/search-page.component'
@@ -22,7 +22,7 @@ export const appRoutes: Route[] = [
          },
          {
             path: 'find',
-            component: FindPageComponent,
+            component: ListPageComponent,
             canActivate: [IsLoggedInGuard],
             title: 'Buddy | Finden',
          },

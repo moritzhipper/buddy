@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
+import { Therapist } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
 import { fadeInAnimation, fadeOutAnimation } from 'apps/frontend/src/app/animations'
 import { InputResolveTypes, InputService, InputTypes } from 'apps/frontend/src/app/services/input.service'
@@ -11,17 +12,16 @@ import { map } from 'rxjs'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { TherapistCalendarComponent } from '../therapist-calendar/therapist-calendar.component'
 import { TherapistListItemComponent } from '../therapist-list-item/therapist-list-item.component'
-import { Therapist } from '@buddy/base-utils'
 
 @Component({
-   selector: 'app-find-page',
-   templateUrl: './find-page.component.html',
-   styleUrls: ['./find-page.component.scss'],
+   selector: 'app-list-page',
+   templateUrl: './list-page.component.html',
+   styleUrls: ['./list-page.component.scss'],
    standalone: true,
    imports: [CommonModule, PagePlaceholderTextComponent, TherapistCalendarComponent, TherapistListItemComponent],
    animations: [fadeOutAnimation, fadeInAnimation],
 })
-export class FindPageComponent {
+export class ListPageComponent {
    calendarIsVisible = false
 
    store = inject(Store)
