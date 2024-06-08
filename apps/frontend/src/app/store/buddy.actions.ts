@@ -37,6 +37,7 @@ export const searchActions = createActionGroup({
    source: 'Search',
    events: {
       'Save Search': props<{ props: TherapistSearch }>(),
+      'Fetch Search Results': emptyProps(),
       'Save Search Results': props<{ results: Therapist[] }>(),
       'Reset Filter': emptyProps(),
    },

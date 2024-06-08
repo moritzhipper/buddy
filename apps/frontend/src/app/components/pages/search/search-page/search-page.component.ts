@@ -42,10 +42,10 @@ export class SearchPageComponent implements OnInit, OnDestroy {
          const parameters = searchState.parameters || {}
 
          this.allFiltersEmpty = !parameters.city && !parameters.postalCode && !parameters?.therapyTypes?.length
+
          this.city = parameters?.city
          this.postalCode = parameters?.postalCode
          this.types = parameters?.therapyTypes
-
          this.mapFiltersToProse(parameters)
       })
    }
