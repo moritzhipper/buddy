@@ -235,9 +235,9 @@ function generateAndConditionsForSearch(params: TherapistSearch) {
       whereStatements.push(pgp.as.format('postal_code = $1', params.postalCode))
    }
 
-   // check contains all selected values
+   // check contains one of selected values
    if (params?.therapyTypes?.length > 0) {
-      whereStatements.push(pgp.as.format('therapy_types @> ARRAY[$1:csv]::varchar[]', [params.therapyTypes]))
+      whereStatements.push(pgp.as.format('therapy_types && ARRAY[$1:csv]::varchar[]', [params.therapyTypes]))
    }
 
    return whereStatements.join(' AND ')

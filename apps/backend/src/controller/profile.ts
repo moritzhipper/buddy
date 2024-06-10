@@ -1,4 +1,4 @@
-import { UserProfileScheme } from '@buddy/base-utils'
+import { UserProfile, UserProfileScheme } from '@buddy/base-utils'
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
@@ -13,13 +13,11 @@ const profileRoute = express.Router()
 profileRoute.post(
    '/',
    expressAsyncHandler(async (req, res) => {
-      const secret = await buddyDB.one(
-         'INSERT INTO users(id, secret, call_precaution_time) VALUES (DEFAULT, DEFAULT, DEFAULT) RETURNING secret',
-         null,
-         (res) => encodeBuddySecret(res.secret)
+      const profile = await buddyDB.one<UserProfile>(
+         'INSERT INTO users(id, secret, call_precaution_time) VALUES (DEFAULT, DEFAULT, DEFAULT) RETURNING secret, call_precaution_time'
       )
 
-      res.send({ secret })
+      res.send({ ...profile, secret: encodeBuddySecret(profile.secret) })
    })
 )
 

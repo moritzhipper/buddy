@@ -71,12 +71,13 @@
          background-color: dim($background-color, 44);
          backdrop-filter: blur(10px);
          border: 1px solid transparent;
+         @include shadow-topdown;
+         border: 1px solid $line-color;
 
          &:hover,
          &.active,
          &:focus {
-            @include shadow-topdown;
-            border: 1px solid $line-color;
+            background-color: dim($accent-color-3, '22');
          }
       }
    }

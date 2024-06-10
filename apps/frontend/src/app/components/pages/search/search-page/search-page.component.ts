@@ -7,13 +7,14 @@ import { Subscription } from 'rxjs'
 import { InputResolveTypes, InputService, InputTypes } from '../../../../services/input.service'
 import { ToastService } from '../../../../services/toast.service'
 import { searchActions, therapistActions } from '../../../../store/buddy.actions'
+import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { SearchResultsComponent } from '../search-results/search-results.component'
 
 @Component({
    selector: 'app-search-page',
    standalone: true,
-   imports: [CommonModule, PagePlaceholderTextComponent, SearchResultsComponent],
+   imports: [CommonModule, PagePlaceholderTextComponent, SearchResultsComponent, BackgroundPictureComponent],
    templateUrl: './search-page.component.html',
    styleUrl: './search-page.component.scss',
 })
