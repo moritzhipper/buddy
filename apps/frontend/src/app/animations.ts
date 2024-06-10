@@ -9,7 +9,7 @@ export const expandAnimation = trigger('expanded', [
 ])
 
 export const fadeOutAnimation = trigger('fadeOut', [
-   transition(':leave', [animate('200ms ease', style({ opacity: 0 })), animate('300ms ease-in', style({ height: 0 }))]),
+   transition(':leave', [animate('300ms ease', style({ opacity: 0 })), animate('300ms ease-in', style({ height: 0 }))]),
 ])
 
 export const fadeInAnimation = trigger('fadeIn', [transition(':enter', [style({ opacity: 0 }), animate('200ms', style({ opacity: 1 }))])])

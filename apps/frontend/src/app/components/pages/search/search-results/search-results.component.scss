@@ -78,7 +78,7 @@
       transition-property: transform, box-shadow, background-color;
       text-align: left;
       transition-duration: 0.2s;
-      background-color: dim($accent-color-2, 44);
+      background-color: dim($accent-color-2, aa);
 
       .cell {
          display: flex;
@@ -116,7 +116,8 @@
       &:hover,
       &:focus-within {
          @include shadow;
-         background-color: dim($accent-color-2, aa);
+         background-color: $accent-color-2;
+
          transform: translateY(-2px);
 
          svg {
