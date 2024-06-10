@@ -101,6 +101,10 @@
    display: flex;
    justify-content: center;
 
+   &::-webkit-scrollbar {
+      display: none;
+   }
+
    &.something-set {
       justify-content: start;
       flex-direction: row;
