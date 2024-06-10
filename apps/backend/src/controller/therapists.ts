@@ -1,5 +1,6 @@
 import {
    AddTherapistSchema,
+   Address,
    AddressHavingID,
    CallTime,
    CalltimeHavingID,
@@ -8,7 +9,6 @@ import {
    TherapistSearch,
    TherapistSearchSchema,
 } from '@buddy/base-utils'
-import { Address } from 'cluster'
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import createHttpError from 'http-errors'
@@ -33,7 +33,7 @@ therapistsRoute.get(
             therapistBasics = mergeTherapistsWithCallTimes(therapistBasics, callTimes)
 
             let addresses: AddressHavingID[] = await t.manyOrNone(generateUsersAddressesQuery(therapistIDList))
-            therapistBasics = mergeTherapistsWithAddress(therapistBasics, addresses)
+            therapistBasics = mergeTherapistsWithAddresses(therapistBasics, addresses)
          }
 
          return therapistBasics
@@ -187,46 +187,77 @@ therapistsRoute.delete(
 //get therapistlist by namesegment for therapistssearch
 // TODO: implement filters
 therapistsRoute.post(
-   '/find',
+   '/search',
    validateReqBody(TherapistSearchSchema),
    expressAsyncHandler(async (req, res) => {
       const searchParams: TherapistSearch = req.body
 
-      const therapists = await buddyDB.manyOrNone(generateFindSharedTherapistsQuery(searchParams.name))
+      const flatTherapistList = await buddyDB.manyOrNone<Therapist & Address>(
+         `SELECT * FROM shared_therapists t LEFT JOIN shared_addresses a ON t.id = a.therapist_id WHERE $1`,
+         [getAndConditionsAsRawtype(searchParams)]
+      )
 
-      res.send(therapists)
+      const unflattenedTherapist = flatTherapistList.map((t) => unflattenTherapist(t))
+      res.send(unflattenedTherapist)
    })
 )
 
 // Helpers
-// shared
-function generateFindSharedTherapistsQuery(name: string): string {
-   const query = pgp.as.format(
-      `
-        SELECT name, email, phone, therapy_types, id
-        FROM shared_therapists
-        WHERE name ILIKE $1 LIMIT 9`,
-      `%${name}%`
-   )
 
-   return query
+/**
+ * pg-promise specific functionality that allows inserting procedurally built query
+ * see:https://github.com/vitaly-t/pg-promise#custom-type-formatting
+ *
+ * @param params
+ * @returns
+ */
+const getAndConditionsAsRawtype = (params: TherapistSearch) => ({
+   rawType: true,
+   toPostgres: () => generateAndConditionsForSearch(params),
+})
+
+function generateAndConditionsForSearch(params: TherapistSearch) {
+   let whereStatements = []
+
+   // check contains
+   if (params.city) {
+      whereStatements.push(pgp.as.format('city ILIKE $1', `%${params.city}%`))
+   }
+
+   //check contains
+   if (params.name) {
+      whereStatements.push(pgp.as.format('name ILIKE $1', `%${params.name}%`))
+   }
+
+   // check equals
+   if (params.postalCode) {
+      // todo: add in, when search for postal array is implemented
+      whereStatements.push(pgp.as.format('postal_code = $1', params.postalCode))
+   }
+
+   // check contains all selected values
+   if (params?.therapyTypes?.length > 0) {
+      whereStatements.push(pgp.as.format('therapy_types @> ARRAY[$1:csv]::varchar[]', [params.therapyTypes]))
+   }
+
+   return whereStatements.join(' AND ')
 }
 
-function generateSharedCallTimesQuery(therapistIDs: string[]): string {
-   const whereClause = pgp.as.format('WHERE therapist_id IN ($1:csv)', [therapistIDs])
-   const query = `SELECT "from", "to", "weekday", "therapist_id" FROM shared_call_times ${whereClause}`
+/**
+ * Because it was necessary to join to table for the search, the response object has a depth of one containing all adress and therapist values
+ * This function remaps the adress attributes in its own attribute
+ *
+ * @param flatTher
+ * @returns
+ */
+function unflattenTherapist(flatTher: Therapist & Address): Therapist {
+   const { postalCode, city, street, number }: Address = flatTher
+   const { id, name, therapyTypes, phone, email }: Therapist = flatTher
 
-   return query
+   return { id, name, therapyTypes, phone, email, address: { postalCode, city, street, number } }
 }
 
-function generateSharedAddressesQuery(therapistIDs: string[]): string {
-   const whereClause = pgp.as.format('WHERE therapist_id IN ($1:csv)', [therapistIDs])
-   const query = `SELECT * FROM shared_address ${whereClause}`
-
-   return query
-}
-
-//users
+// user specific helper functions
 function generateUsersTherapistsQuery(userID: string): string {
    const query = pgp.as.format(
       `
@@ -272,7 +303,7 @@ function mergeTherapistsWithCallTimes(therapists: Therapist[], callTimes: Callti
    })
 }
 
-function mergeTherapistsWithAddress(therapists: Therapist[], address: AddressHavingID[]): Therapist[] {
+function mergeTherapistsWithAddresses(therapists: Therapist[], address: AddressHavingID[]): Therapist[] {
    return therapists.map((th) => {
       const addressOfTh = address.find((ad) => ad.therapistID === th.id)
 

@@ -1,0 +1,37 @@
+<div class="table">
+   @for (therapist of therapists; track $index) {
+   <button class="row" (click)="addTherapist(therapist)">
+      <div class="cell intro">{{ therapist.name }}</div>
+      <div class="cell types">
+         @if (therapist?.therapyTypes?.length > 0) { @for (type of therapist.therapyTypes; track $index) { <span>{{ type }}</span> } } @else {
+         <span class="empty"> keine Fachgebiete hinterlegt </span>
+         }
+      </div>
+      <div class="cell adress">
+         @if (therapist?.address) {
+         <span>{{ therapist.address.postalCode }} {{ therapist.address.city }}</span>
+         <span></span>
+         <span>{{ therapist.address.street }} {{ therapist.address.number }}</span>
+         } @else {
+         <span class="empty">keine Adresse hinterlegt </span>
+         }
+      </div>
+      <div class="cell contact">
+         @if (therapist.phone) {
+         <span>{{ therapist.phone }}</span>
+         } @if (therapist.email) {
+         <span>{{ therapist.email }}</span>
+         } @if (!therapist.email || !therapist.phone) {
+         <span class="empty"> keine Kontaktdaten hinterlegt </span>
+         }
+      </div>
+      <div class="cell add">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" fill="currentColor">
+            <path
+               d="M11 11h4a1 1 0 0 0 0-2h-4V5a1 1 0 0 0-2 0v4H5a1 1 0 1 0 0 2h4v4a1 1 0 0 0 2 0v-4zm-1 9C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z"
+            ></path>
+         </svg>
+      </div>
+   </button>
+   }
+</div>

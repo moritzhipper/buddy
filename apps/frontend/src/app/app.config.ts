@@ -10,8 +10,9 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { provideEffects } from '@ngrx/effects'
 import { environment } from '../environments/environment'
 import { authInterceptorFn } from './interceptors/auth-interceptor-fn'
-import { metaReducers, profileReducer, therapistsReducer } from './store/buddy.reducer'
+import { metaReducers, profileReducer, searchReducer, therapistsReducer } from './store/buddy.reducer'
 import { ProfileEffects } from './store/effects/profile.effects'
+import { SearchEffects } from './store/effects/search.effects'
 import { TherapistsEffects } from './store/effects/therapists.effects'
 import { StateSyncEffects } from './store/effects/utils.effects'
 
@@ -22,10 +23,11 @@ export const appConfig: ApplicationConfig = {
          {
             therapists: therapistsReducer,
             profile: profileReducer,
+            search: searchReducer,
          },
          { metaReducers }
       ),
-      provideEffects(StateSyncEffects, ProfileEffects, TherapistsEffects),
+      provideEffects(StateSyncEffects, ProfileEffects, TherapistsEffects, SearchEffects),
       provideStoreDevtools(),
       provideAnimations(),
       provideHttpClient(withInterceptors([authInterceptorFn])),

@@ -4,14 +4,22 @@
 
 ### Right now
 
--  tutorial an therapie nicht begleiten anpassen
-
 ### Soon
 
+-  Loading spinner für suche
+-  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
+-  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie -> wie umgehen, wenn therapieart nicht angegeben?
+-  auf datenschutzseite Feld: Was speichern wir von dir? mit feldbasierter antwort. Verweis auf datenschutzpage
+-  merken seite refaktoren: oben a la search: therapeut anlegen
+-  therapeutensektionen: frei in der zukunf
+-  bin auf warteliste
+-  print button (du suchst für eine andere person? Drucke deine Suche aus!)
+-  wie man schnell einen therapieplatz findet zusammenfassen? ist gedoppelte inf. und eventuell aus akkordeon raus bewegen
 -  qr-key auch in tutorial als text kopieren
 -  aus tutorial therapie begleiten seite entfernen (in tutorial direkt auch datenschutz zustimmung drin haben?)
 -  coole datenschutz bestätigen animation
 -  therapytypes allowed in zod schemes
+-  therapeut teilen
 
 -  tests vom be umziehen, dann types importieren
 
@@ -28,7 +36,8 @@
 -  info page: wie funktioniert das? -> Therapeuten Prozess erklären
 -  therapeutendaten teilen ausbauen
 -  e2e tests auf playwright umstellen?
-   q
+-  reset button zentral
+-  button styles definieren (line, voll bestätigen zurück)
 
 ## Backend
 

@@ -1,4 +1,4 @@
-import { UniqueItem } from '@buddy/base-utils'
+import { Address, UniqueItem } from '@buddy/base-utils'
 
 // used as trackBy function in HTML template to correctly trigger angular templateupdates of ngFor Directives
 export function trackById(index, uniqueItem: UniqueItem) {
@@ -27,6 +27,8 @@ export function hasVisitedBefore() {
 export function setHasVisited(state: boolean = true) {
    localStorage.setItem(HAS_VISITED_STORAGE_KEY, state.toString())
 }
+
+export function generateAddressString(address: Address) {}
 
 /**
  * scrolls to bottom of html-element if its children are bigger than their parent

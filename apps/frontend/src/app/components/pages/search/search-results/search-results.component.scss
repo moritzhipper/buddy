@@ -1,0 +1,125 @@
+@use '_index' as *;
+
+@include small-screen {
+   .header {
+      display: none;
+   }
+   .table {
+      grid-template-columns: 1fr;
+
+      .row {
+         grid-template-columns: 1fr min-content;
+         border-radius: $border-radius-2;
+         grid-template-areas:
+            'a b'
+            'c c'
+            'd d'
+            'e e';
+      }
+
+      .cell {
+         overflow: hidden;
+      }
+      .intro {
+         grid-area: a;
+         font-size: $font-size-2;
+      }
+
+      .types {
+         grid-area: c;
+      }
+      .contact {
+         grid-area: d;
+      }
+      .adress {
+         grid-area: e;
+      }
+      .add {
+         grid-area: b;
+      }
+   }
+}
+
+@include big-screen {
+   .row {
+      grid-template-columns: 150px 1fr 1fr 1fr min-content;
+   }
+}
+
+.table {
+   width: 100%;
+   display: grid;
+   gap: 16px;
+
+   .row {
+      display: grid;
+      gap: 16px;
+      border-radius: $border-radius-2;
+      color: $font-color;
+      font-size: $font-size-1;
+      border: 1px solid $line-color-light;
+      padding: 16px;
+      transition-property: transform, box-shadow, background-color;
+      text-align: left;
+      transition-duration: 0.2s;
+      background-color: dim($accent-color-2, 44);
+
+      .cell {
+         display: flex;
+         flex-direction: column;
+         gap: 4px;
+         min-width: 0;
+
+         span {
+            @include ellipsis-overflow;
+            &.empty {
+               opacity: 0.7;
+               user-select: none;
+            }
+         }
+
+         &.types {
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 8px;
+
+            span:not(.empty) {
+               text-align: center;
+               padding: 4px 8px;
+               background-color: dim($accent-color-3, 10);
+               border-radius: $border-radius-2;
+            }
+         }
+      }
+
+      .add {
+         overflow: visible;
+      }
+
+      &:hover,
+      &:focus-within {
+         @include shadow;
+         background-color: dim($accent-color-2, aa);
+         transform: translateY(-2px);
+
+         svg {
+            transform: scale(1.3);
+            border: 2px solid $line-color;
+            @include shimmer-animation;
+         }
+      }
+      svg {
+         opacity: 0.7;
+         border: 2px solid transparent;
+         border-radius: 100%;
+         transition: transform 0.3s, border 0.3s;
+      }
+   }
+   .types {
+      flex-direction: row;
+   }
+   .intro {
+      font-weight: bold;
+   }
+}

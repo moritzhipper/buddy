@@ -37,6 +37,7 @@
    border-radius: $border-radius-3;
    color: $accent-color-3;
    background-color: $accent-color-2;
+
    @include shadow;
 
    .header-wrapper {

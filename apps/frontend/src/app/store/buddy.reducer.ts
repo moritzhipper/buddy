@@ -1,6 +1,7 @@
 import { UniqueItem } from '@buddy/base-utils'
 import { ActionReducer, createReducer, INIT, MetaReducer, on, UPDATE } from '@ngrx/store'
-import { profileActions, therapistActions } from './buddy.actions'
+import { profileActions, searchActions, therapistActions } from './buddy.actions'
+import { SearchState } from './buddy.state'
 
 export const therapistsReducer = createReducer(
    [],
@@ -13,6 +14,13 @@ export const profileReducer = createReducer(
    {},
    on(profileActions.createProfileSuccess, profileActions.loadProfileSuccess, (state, { profile }) => profile),
    on(profileActions.updateSuccess, (state, { profile }) => ({ ...state, ...profile }))
+)
+
+export const searchReducer = createReducer(
+   {} as SearchState,
+   on(searchActions.saveSearch, (state, { props }) => ({ ...state, ...{ parameters: { ...state.parameters, ...props } } })),
+   on(searchActions.saveSearchResults, (state, { results }) => ({ ...state, ...{ results } })),
+   on(searchActions.resetFilter, () => ({}))
 )
 
 export function storeSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {

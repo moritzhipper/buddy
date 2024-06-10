@@ -38,7 +38,7 @@ export class InputTherapistComponent implements OnDestroy {
                if (v.length <= 2) {
                   return of([])
                } else {
-                  return this.ba.getSuggestions({ name: v }).pipe(catchError(() => of([])))
+                  return this.ba.searchTherapists({ name: v }).pipe(catchError(() => of([])))
                }
             })
          )

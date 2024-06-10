@@ -1,6 +1,6 @@
 import { Therapist, UserProfile } from '@buddy/base-utils'
 import { createSelector } from '@ngrx/store'
-import { BuddyState } from './buddy.state'
+import { BuddyState, SearchState } from './buddy.state'
 
 export const selectTherapists = createSelector(
    (state: BuddyState) => state.therapists,
@@ -10,4 +10,9 @@ export const selectTherapists = createSelector(
 export const selectUserProfile = createSelector(
    (state: BuddyState) => state.profile,
    (profile: UserProfile) => profile
+)
+
+export const selectSearch = createSelector(
+   (state: BuddyState) => state.search,
+   (search: SearchState) => search
 )

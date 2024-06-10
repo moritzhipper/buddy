@@ -1,0 +1,137 @@
+@use '_index' as *;
+
+.header-wrapper {
+   padding: 40px 16px 36px 16px;
+
+   h1 {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .city,
+      .sub {
+         font-weight: normal;
+      }
+      .sub {
+         width: 100%;
+         font-size: $font-size-2;
+      }
+   }
+}
+
+@include small-screen {
+   .search-buttons {
+      flex-direction: column;
+      margin: 32px 16px;
+   }
+   .placeholder-wrapper {
+      flex-direction: column;
+   }
+}
+
+@include big-screen {
+   .search-buttons {
+      flex-direction: row;
+      margin: 16px;
+   }
+   .placeholder-wrapper {
+      flex-direction: row;
+      justify-content: center;
+      align-items: start;
+
+      .note {
+         max-width: 400px;
+      }
+   }
+}
+.body-wrapper {
+   padding: 8px 16px 16px 16px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   .search-wrapper {
+      border-top: 1px solid $line-color;
+      border-bottom: 1px solid $line-color;
+      padding: 16px 0;
+      width: 100%;
+
+      .no-results {
+         text-align: center;
+         opacity: 0.7;
+         margin: 7vh 0;
+      }
+   }
+
+   .placeholder-wrapper {
+      display: flex;
+      width: 100%;
+      margin-top: 16px;
+      gap: 16px;
+
+      .note {
+         h3 {
+            font-weight: bold;
+            margin: 0 0 16px 0;
+            font-size: $font-size-1;
+         }
+         p {
+            margin-bottom: 0;
+         }
+
+         border: 1px solid $line-color;
+         padding: 16px;
+         border-radius: $border-radius-1;
+
+         button {
+            white-space: nowrap;
+            @include resetButton;
+            padding: 8px 32px;
+            border: 1px solid $accent-color-1;
+            border-radius: $border-radius-2;
+            width: 100%;
+         }
+      }
+   }
+}
+
+.search-buttons {
+   gap: 8px;
+   display: flex;
+   justify-content: center;
+
+   &.something-set {
+      justify-content: start;
+      flex-direction: row;
+      overflow-x: scroll;
+      margin: 0;
+      padding: 0 16px 8px 16px;
+      button {
+         padding: 6px 16px;
+
+         animation: none;
+      }
+   }
+
+   button {
+      @include resetButton;
+      @include shimmer-animation;
+      border: 1px solid $accent-color-1;
+      border-radius: $border-radius-2;
+      padding: 8px 32px;
+      white-space: nowrap;
+
+      &:nth-child(2) {
+         animation-delay: 1s;
+      }
+
+      &:nth-child(3) {
+         animation-delay: 2s;
+      }
+   }
+}
+
+p {
+   margin-bottom: 0;
+}

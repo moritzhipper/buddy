@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BuddyRoutes, Therapist, UniqueItem, UserProfile } from '@buddy/base-utils'
+import { BuddyRoutes, Therapist, TherapistSearch, UniqueItem, UserProfile } from '@buddy/base-utils'
 import { Observable, map } from 'rxjs'
 import { environment } from '../../environments/environment'
 
@@ -35,8 +35,8 @@ export class BackendAdapterService {
       return this._httpClient.delete(this.SERVICE_URL + route + '/' + id).pipe(map(() => id))
    }
 
-   getSuggestions(filter: any): Observable<Therapist[]> {
-      return this._httpClient.post<Therapist[]>(this.SERVICE_URL + BuddyRoutes.THERAPISTS + '/find', filter)
+   searchTherapists(search: TherapistSearch): Observable<Therapist[]> {
+      return this._httpClient.post<Therapist[]>(this.SERVICE_URL + BuddyRoutes.THERAPISTS + '/search', search)
    }
 
    createProfile(): Observable<UserProfile> {

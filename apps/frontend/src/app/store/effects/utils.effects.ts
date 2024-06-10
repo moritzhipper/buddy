@@ -60,7 +60,7 @@ export class StateSyncEffects {
          this.actions$.pipe(
             ofType(profileActions.loadProfileSuccess),
             tap(() => {
-               this.router.navigateByUrl('/find')
+               this.router.navigateByUrl('/list')
             })
          ),
       { dispatch: false }

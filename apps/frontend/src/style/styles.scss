@@ -1,16 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
 @use '_index' as *;
 
 @font-face {
    font-family: 'Public Sans';
-   src: local('Public Sans'),
-      url(./../assets/fonts/PublicSans-Light.ttf) format('truetype');
+   src: local('Public Sans'), url(./../assets/fonts/PublicSans-Light.ttf) format('truetype');
 }
 
 @font-face {
    font-family: 'Chivo Mono';
-   src: local('Chivo Mono'),
-      url(./../assets/fonts/ChivoMono-Light.ttf) format('truetype');
+   src: local('Chivo Mono'), url(./../assets/fonts/ChivoMono-Light.ttf) format('truetype');
 }
 
 @keyframes shimmer {
