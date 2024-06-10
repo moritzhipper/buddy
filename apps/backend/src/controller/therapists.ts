@@ -33,7 +33,7 @@ therapistsRoute.get(
             therapistBasics = mergeTherapistsWithCallTimes(therapistBasics, callTimes)
 
             let addresses: AddressHavingID[] = await t.manyOrNone(generateUsersAddressesQuery(therapistIDList))
-            therapistBasics = mergeTherapistsWithAddress(therapistBasics, addresses)
+            therapistBasics = mergeTherapistsWithAddresses(therapistBasics, addresses)
          }
 
          return therapistBasics
@@ -187,14 +187,14 @@ therapistsRoute.delete(
 //get therapistlist by namesegment for therapistssearch
 // TODO: implement filters
 therapistsRoute.post(
-   '/find',
+   '/search',
    validateReqBody(TherapistSearchSchema),
    expressAsyncHandler(async (req, res) => {
       const searchParams: TherapistSearch = req.body
 
       const flatTherapistList = await buddyDB.manyOrNone<Therapist & Address>(
          `SELECT * FROM shared_therapists t LEFT JOIN shared_addresses a ON t.id = a.therapist_id WHERE $1`,
-         [generateQuery(searchParams)]
+         [getAndConditionsAsRawtype(searchParams)]
       )
 
       const unflattenedTherapist = flatTherapistList.map((t) => unflattenTherapist(t))
@@ -203,13 +203,20 @@ therapistsRoute.post(
 )
 
 // Helpers
-// shared
-const generateQuery = (params: TherapistSearch) => ({
+
+/**
+ * pg-promise specific functionality that allows inserting procedurally built query
+ * see:https://github.com/vitaly-t/pg-promise#custom-type-formatting
+ *
+ * @param params
+ * @returns
+ */
+const getAndConditionsAsRawtype = (params: TherapistSearch) => ({
    rawType: true,
-   toPostgres: () => generateFindSharedTherapistsQuery(params),
+   toPostgres: () => generateAndConditionsForSearch(params),
 })
 
-function generateFindSharedTherapistsQuery(params: TherapistSearch) {
+function generateAndConditionsForSearch(params: TherapistSearch) {
    let whereStatements = []
 
    // check contains
@@ -233,13 +240,24 @@ function generateFindSharedTherapistsQuery(params: TherapistSearch) {
       whereStatements.push(pgp.as.format('therapy_types @> ARRAY[$1:csv]::varchar[]', [params.therapyTypes]))
    }
 
-   if (whereStatements.length === 0) throw createHttpError(400, 'No viable search params given')
-   console.log(whereStatements.join(' AND '))
-
    return whereStatements.join(' AND ')
 }
 
-//users
+/**
+ * Because it was necessary to join to table for the search, the response object has a depth of one containing all adress and therapist values
+ * This function remaps the adress attributes in its own attribute
+ *
+ * @param flatTher
+ * @returns
+ */
+function unflattenTherapist(flatTher: Therapist & Address): Therapist {
+   const { postalCode, city, street, number }: Address = flatTher
+   const { id, name, therapyTypes, phone, email }: Therapist = flatTher
+
+   return { id, name, therapyTypes, phone, email, address: { postalCode, city, street, number } }
+}
+
+// user specific helper functions
 function generateUsersTherapistsQuery(userID: string): string {
    const query = pgp.as.format(
       `
@@ -285,7 +303,7 @@ function mergeTherapistsWithCallTimes(therapists: Therapist[], callTimes: Callti
    })
 }
 
-function mergeTherapistsWithAddress(therapists: Therapist[], address: AddressHavingID[]): Therapist[] {
+function mergeTherapistsWithAddresses(therapists: Therapist[], address: AddressHavingID[]): Therapist[] {
    return therapists.map((th) => {
       const addressOfTh = address.find((ad) => ad.therapistID === th.id)
 
@@ -295,17 +313,6 @@ function mergeTherapistsWithAddress(therapists: Therapist[], address: AddressHav
       }
       return th
    })
-}
-
-/**
- * because it was necessary to join to table for the search, the response object is flat.
- * This function remaps the adress attributes in its own attribute
- */
-function unflattenTherapist(flatTher: Therapist & Address): Therapist {
-   const { postalCode, city, street, number }: Address = flatTher
-   const { id, name, therapyTypes, phone, email }: Therapist = flatTher
-
-   return { id, name, therapyTypes, phone, email, address: { postalCode, city, street, number } }
 }
 
 export = therapistsRoute

@@ -36,7 +36,7 @@ export class BackendAdapterService {
    }
 
    searchTherapists(search: TherapistSearch): Observable<Therapist[]> {
-      return this._httpClient.post<Therapist[]>(this.SERVICE_URL + BuddyRoutes.THERAPISTS + '/find', search)
+      return this._httpClient.post<Therapist[]>(this.SERVICE_URL + BuddyRoutes.THERAPISTS + '/search', search)
    }
 
    createProfile(): Observable<UserProfile> {

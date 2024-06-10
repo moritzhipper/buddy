@@ -39,8 +39,8 @@ export const appRoutes: Route[] = [
             canActivate: [IsLoggedInGuard],
             title: 'Buddy | Einstellungen',
          },
-         { path: '', redirectTo: '/find', pathMatch: 'full' },
-         { path: '**', redirectTo: '/find', pathMatch: 'full' },
+         { path: '', redirectTo: '/list', pathMatch: 'full' },
+         { path: '**', redirectTo: '/list', pathMatch: 'full' },
       ],
    },
 ]

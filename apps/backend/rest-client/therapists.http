@@ -3,18 +3,19 @@
 
 ### 
 
-POST {{base}}/therapists/find
+POST {{base}}/therapists/search
 secret: {{secret}}
 content-type: application/json
 
 {
-    "therapyTypes": ["Verhaltenstherapie"]
+    # "therapyTypes": ["Verhaltenstherapie"]
 }
 
 ###
 
 GET {{base}}/therapists
-sessionID: 9dfc6e5d-8abb-4bc8-9b68-fbf480219672
+secret: {{secret}}
+content-type: application/json
 
 
 

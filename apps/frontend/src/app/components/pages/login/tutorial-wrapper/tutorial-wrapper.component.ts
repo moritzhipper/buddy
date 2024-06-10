@@ -70,7 +70,7 @@ export class TutorialWrapperComponent implements OnInit, OnDestroy {
       } else if (this.userNeedsToAcceptDataprivacy()) {
          this.store.dispatch(profileActions.createProfile())
       } else if (this.userIsOnLastPage()) {
-         this.router.navigate(['/find'])
+         this.router.navigate(['/list'])
          this.activePage = 0
       }
    }

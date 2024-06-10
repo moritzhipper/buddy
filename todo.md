@@ -4,16 +4,10 @@
 
 ### Right now
 
--  rename find page to 'Meine Liste'
--  saveSearch sucht nur nach neueste ränderung
--  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie
--  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
-
--  input-wrapper
-   -  löschen nur zeigen, wenn preset nicht null
-
 ### Soon
 
+-  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
+-  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie -> wie umgehen, wenn therapieart nicht angegeben?
 -  auf datenschutzseite Feld: Was speichern wir von dir? mit feldbasierter antwort. Verweis auf datenschutzpage
 -  merken seite refaktoren: oben a la search: therapeut anlegen
 -  therapeutensektionen: frei in der zukunf
