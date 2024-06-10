@@ -51,6 +51,22 @@
    display: grid;
    gap: 16px;
 
+   .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 4px 16px;
+
+      button {
+         font-weight: bold;
+         @include resetButton;
+      }
+      .page-indicator {
+         font-weight: bold;
+         margin-right: auto;
+      }
+   }
+
    .row {
       display: grid;
       gap: 16px;

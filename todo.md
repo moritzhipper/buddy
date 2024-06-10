@@ -7,6 +7,7 @@
 ### Soon
 
 -  Loading spinner für suche
+-  plz suche geht nicht
 -  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
 -  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie -> wie umgehen, wenn therapieart nicht angegeben?
 -  auf datenschutzseite Feld: Was speichern wir von dir? mit feldbasierter antwort. Verweis auf datenschutzpage

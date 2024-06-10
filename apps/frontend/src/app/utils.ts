@@ -56,3 +56,7 @@ export function scrollToBottomIfChildrenOverflow(parentElement: HTMLElement, sta
       }, timeOutMS)
    }
 }
+
+export function scrollToTop() {
+   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
