@@ -66,18 +66,17 @@
          width: 64px;
          height: 64px;
          border-radius: $border-radius-2;
-         transition-property: box-shadow, border-color;
+         transition-property: box-shadow, border-color, background-color;
          transition-duration: 0.2s;
+         background-color: dim($background-color, 44);
          backdrop-filter: blur(10px);
-         background-color: dim($background-color, aa);
          border: 1px solid transparent;
 
          &:hover,
          &.active,
          &:focus {
-            border: 1px solid $line-color;
-            // background-color: dim($accent-color-2, ff);
             @include shadow-topdown;
+            border: 1px solid $line-color;
          }
       }
    }

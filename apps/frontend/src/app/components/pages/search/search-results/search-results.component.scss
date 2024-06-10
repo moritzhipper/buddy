@@ -69,10 +69,11 @@
    }
 
    .row {
-      border: 1px solid $line-color;
+      border: 1px solid $line-color-light;
       padding: 16px;
       transition-property: transform, box-shadow, background-color;
       transition-duration: 0.2s;
+      background-color: dim($accent-color-2, 44);
 
       .cell {
          display: flex;
@@ -80,9 +81,12 @@
          gap: 4px;
          min-width: 0;
 
-         span.empty {
-            opacity: 0.7;
-            user-select: none;
+         span {
+            @include ellipsis-overflow;
+            &.empty {
+               opacity: 0.7;
+               user-select: none;
+            }
          }
 
          &.types {
@@ -94,7 +98,7 @@
             span:not(.empty) {
                text-align: center;
                padding: 4px 8px;
-               background-color: dim($accent-color-2, 50);
+               background-color: dim($accent-color-3, 10);
                border-radius: $border-radius-2;
             }
          }
@@ -107,7 +111,7 @@
       &:hover,
       &:focus-within {
          @include shadow;
-         background-color: dim($accent-color-2, 66);
+         background-color: dim($accent-color-2, aa);
          transform: translateY(-2px);
 
          button {
