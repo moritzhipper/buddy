@@ -192,8 +192,10 @@ therapistsRoute.post(
    expressAsyncHandler(async (req, res) => {
       const searchParams: TherapistSearch = req.body
 
-      const flatTherapistList = await buddyDB.manyOrNone<Therapist & Address>(generateFindSharedTherapistsQuery(searchParams))
-      // const addresses = await buddyDB.manyOrNone(generateSharedAddressesQuery(therapists))
+      const flatTherapistList = await buddyDB.manyOrNone<Therapist & Address>(
+         `SELECT * FROM shared_therapists t LEFT JOIN shared_addresses a ON t.id = a.therapist_id WHERE $1`,
+         [generateQuery(searchParams)]
+      )
 
       const unflattenedTherapist = flatTherapistList.map((t) => unflattenTherapist(t))
       res.send(unflattenedTherapist)
@@ -202,27 +204,39 @@ therapistsRoute.post(
 
 // Helpers
 // shared
-function generateFindSharedTherapistsQuery(searchParams: TherapistSearch): string {
-   const query2 = pgp.as.format(
-      `SELECT * FROM shared_therapists t LEFT JOIN shared_addresses a ON t.id = a.therapist_id WHERE name ILIKE $1`,
-      `%${searchParams.name}%`
-   )
+const generateQuery = (params: TherapistSearch) => ({
+   rawType: true,
+   toPostgres: () => generateFindSharedTherapistsQuery(params),
+})
 
-   return query2
-}
+function generateFindSharedTherapistsQuery(params: TherapistSearch) {
+   let whereStatements = []
 
-function generateSharedCallTimesQuery(therapistIDs: string[]): string {
-   const whereClause = pgp.as.format('WHERE therapist_id IN ($1:csv)', [therapistIDs])
-   const query = `SELECT "from", "to", "weekday", "therapist_id" FROM shared_call_times ${whereClause}`
+   // check contains
+   if (params.city) {
+      whereStatements.push(pgp.as.format('city ILIKE $1', `%${params.city}%`))
+   }
 
-   return query
-}
+   //check contains
+   if (params.name) {
+      whereStatements.push(pgp.as.format('name ILIKE $1', `%${params.name}%`))
+   }
 
-function generateSharedAddressesQuery(therapistIDs: string[]): string {
-   const whereClause = pgp.as.format('WHERE therapist_id IN ($1:csv)', [therapistIDs])
-   const query = `SELECT * FROM shared_address ${whereClause}`
+   // check equals
+   if (params.postalCode) {
+      // todo: add in, when search for postal array is implemented
+      whereStatements.push(pgp.as.format('postal_code = $1', params.postalCode))
+   }
 
-   return query
+   // check contains all selected values
+   if (params?.therapyTypes?.length > 0) {
+      whereStatements.push(pgp.as.format('therapy_types @> ARRAY[$1:csv]::varchar[]', [params.therapyTypes]))
+   }
+
+   if (whereStatements.length === 0) throw createHttpError(400, 'No viable search params given')
+   console.log(whereStatements.join(' AND '))
+
+   return whereStatements.join(' AND ')
 }
 
 //users
@@ -289,9 +303,9 @@ function mergeTherapistsWithAddress(therapists: Therapist[], address: AddressHav
  */
 function unflattenTherapist(flatTher: Therapist & Address): Therapist {
    const { postalCode, city, street, number }: Address = flatTher
-   const { name, therapyTypes, phone, email }: Therapist = flatTher
+   const { id, name, therapyTypes, phone, email }: Therapist = flatTher
 
-   return { name, therapyTypes, phone, email, address: { postalCode, city, street, number } }
+   return { id, name, therapyTypes, phone, email, address: { postalCode, city, street, number } }
 }
 
 export = therapistsRoute

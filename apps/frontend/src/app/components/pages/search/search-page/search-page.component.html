@@ -34,7 +34,7 @@
 @if(!allFiltersEmpty) {
 <div class="body-wrapper">
    <div class="search-wrapper">
-      @if(results && results.length > 1) {
+      @if(results && results.length >= 1) {
       <app-search-results [therapists]="results" />
       } @else {
       <div class="no-results">Keine Treffer für deine Suchkriterien.</div>
