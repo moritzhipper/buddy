@@ -18,6 +18,7 @@ import { scrollToTop } from 'apps/frontend/src/app/utils'
 export class SearchResultsComponent {
    @Input() set therapists(therapists: Therapist[]) {
       const pagesize = 10
+      this.pages = []
 
       for (let i = 0; i < therapists.length; i += pagesize) {
          const therapistsChunk = therapists.slice(i, i + pagesize)

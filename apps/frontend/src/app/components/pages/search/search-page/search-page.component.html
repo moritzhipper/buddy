@@ -37,10 +37,10 @@
       @if(results && results.length >= 1) {
       <app-search-results [therapists]="results" />
       } @else {
-      <div class="no-results">Keine Treffer für deine Suchkriterien.</div>
+      <div class="no-results">Keine Treffer für deine Suchkriterien</div>
       }
    </div>
-   <div class="placeholder-wrapper">
+   <div class="notes-wrapper">
       <div class="note">
          <h3>Du findest die Person hier nicht?</h3>
          <button (click)="addTherapist()">Lege sie einfach selber an</button>

@@ -25,7 +25,7 @@
       flex-direction: column;
       margin: 32px 16px;
    }
-   .placeholder-wrapper {
+   .notes-wrapper {
       flex-direction: column;
    }
 }
@@ -35,7 +35,7 @@
       flex-direction: row;
       margin: 16px;
    }
-   .placeholder-wrapper {
+   .notes-wrapper {
       flex-direction: row;
       justify-content: center;
       align-items: start;
@@ -46,31 +46,32 @@
    }
 }
 .body-wrapper {
-   padding: 8px 16px 16px 16px;
+   padding: 0 16px 16px 16px;
    display: flex;
    flex-direction: column;
    align-items: center;
-
+   gap: 32px;
    .search-wrapper {
-      border-top: 1px solid $line-color;
-      border-bottom: 1px solid $line-color;
-      padding: 16px 0;
       width: 100%;
 
       .no-results {
+         border-top: 1px solid $line-color;
+         border-bottom: 1px solid $line-color;
+         opacity: 0.8;
+         margin-top: 16px;
          text-align: center;
-         opacity: 0.7;
-         margin: 7vh 0;
+         padding: 9vh 0;
       }
    }
 
-   .placeholder-wrapper {
+   .notes-wrapper {
       display: flex;
       width: 100%;
-      margin-top: 16px;
       gap: 16px;
 
       .note {
+         background-color: dim($background-color, bb);
+
          h3 {
             font-weight: bold;
             margin: 0 0 16px 0;
@@ -110,7 +111,7 @@
       flex-direction: row;
       overflow-x: scroll;
       margin: 0;
-      padding: 0 16px 8px 16px;
+      padding: 0 16px 16px 16px;
       button {
          padding: 6px 16px;
 
