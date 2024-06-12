@@ -58,5 +58,6 @@ export function scrollToBottomIfChildrenOverflow(parentElement: HTMLElement, sta
 }
 
 export function scrollToTop() {
-   window.scrollTo({ top: 0, behavior: 'smooth' })
+   // set timeout to skip after potential viewupdates by the calling function are made
+   setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 10)
 }

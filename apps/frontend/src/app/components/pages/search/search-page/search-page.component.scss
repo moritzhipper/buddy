@@ -119,12 +119,10 @@
    }
 
    button {
-      @include resetButton;
+      @include buttonSmall;
       @include shimmer-animation;
-      border: 1px solid $accent-color-1;
-      border-radius: $border-radius-2;
+      font-size: $font-size-1;
       padding: 8px 32px;
-      white-space: nowrap;
 
       &:nth-child(2) {
          animation-delay: 1s;

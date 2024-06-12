@@ -48,7 +48,6 @@
 
       .name-wrapper {
          @include resetButton;
-         cursor: pointer;
          width: 100%;
          padding: 24px;
          font-weight: bold;
@@ -111,11 +110,8 @@
             }
 
             button {
-               padding: 6px;
-               cursor: pointer;
-               font-size: $font-size-1;
-
-               border-radius: $border-radius-2;
+               @include buttonSmall;
+               padding: 8px;
 
                @include medium-small-screen {
                   width: 100%;
@@ -152,13 +148,10 @@
                }
 
                button.calltime {
+                  @include buttonSmall;
                   display: flex;
                   flex-wrap: wrap;
                   justify-content: center;
-                  box-sizing: border-box;
-                  background-color: transparent;
-
-                  color: $font-color;
                   border: 1px solid $font-color;
 
                   &.selected {
@@ -175,10 +168,8 @@
                flex-wrap: wrap;
 
                button.describe-item {
-                  background-color: transparent;
+                  @include buttonSmall;
                   border: 1px solid $accent-color-1;
-                  color: $accent-color-1;
-                  white-space: nowrap;
                   animation: fadeIn 0.5s;
 
                   &.expand {

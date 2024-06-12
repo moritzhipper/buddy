@@ -82,21 +82,16 @@
          display: none;
       }
 
-      button.change,
-      label {
-         border-radius: $border-radius-2;
-         padding: 8px 0;
+      button.change {
+         @include buttonSmall;
          min-width: 100px;
-         text-align: center;
-         background-color: transparent;
-         color: $accent-color-1;
-         border: 1px solid $accent-color-1;
          font-size: 14px;
+         padding: 8px 0;
 
          &.delete {
-            color: black;
             background-color: $accent-color-5;
             border: $accent-color-5;
+            font-weight: bold;
          }
       }
    }
