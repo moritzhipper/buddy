@@ -11,4 +11,5 @@ import { CommonModule } from '@angular/common'
 })
 export class BackgroundPictureComponent {
    @Input() name: string
+   @Input() isLight = false
 }

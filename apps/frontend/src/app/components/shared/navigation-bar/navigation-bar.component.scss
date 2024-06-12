@@ -60,10 +60,10 @@
    .bar-wrapper {
       width: 500px;
       border: none;
-      margin: 8px;
+      margin: 16px;
       border: 1px solid $background-color;
       border-radius: $border-radius-3;
-      background-color: dim($background-color, 55);
+      background-color: dim($background-color, bb);
       justify-content: space-between;
 
       .link {
@@ -78,6 +78,7 @@
          backdrop-filter: blur(10px);
          border: 1px solid transparent;
          @include shadow-topdown;
+         border: 1px solid $line-color-light;
 
          &:hover,
          &.active,

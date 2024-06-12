@@ -230,9 +230,9 @@ function generateAndConditionsForSearch(params: TherapistSearch) {
    }
 
    // check equals
-   if (params.postalCode) {
+   if (params?.postalCodes?.length > 0) {
       // todo: add in, when search for postal array is implemented
-      whereStatements.push(pgp.as.format('postal_code = $1', params.postalCode))
+      whereStatements.push(pgp.as.format('postal_code in ($1:csv)', params.postalCodes))
    }
 
    // check contains one of selected values

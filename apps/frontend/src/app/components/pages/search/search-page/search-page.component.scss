@@ -70,8 +70,7 @@
       gap: 16px;
 
       .note {
-         background-color: dim($background-color, bb);
-
+         background-color: $background-color;
          h3 {
             font-weight: bold;
             margin: 0 0 16px 0;
