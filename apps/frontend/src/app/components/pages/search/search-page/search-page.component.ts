@@ -7,13 +7,14 @@ import { Subscription } from 'rxjs'
 import { InputResolveTypes, InputService, InputTypes } from '../../../../services/input.service'
 import { ToastService } from '../../../../services/toast.service'
 import { searchActions, therapistActions } from '../../../../store/buddy.actions'
+import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { SearchResultsComponent } from '../search-results/search-results.component'
 
 @Component({
    selector: 'app-search-page',
    standalone: true,
-   imports: [CommonModule, PagePlaceholderTextComponent, SearchResultsComponent],
+   imports: [CommonModule, PagePlaceholderTextComponent, SearchResultsComponent, BackgroundPictureComponent],
    templateUrl: './search-page.component.html',
    styleUrl: './search-page.component.scss',
 })
@@ -23,30 +24,26 @@ export class SearchPageComponent implements OnInit, OnDestroy {
    store = inject(Store)
 
    // 'raw' filters
-   city: string
-   postalCode: string
-   types: string[]
+   parameters: TherapistSearch
    results: Therapist[]
 
    // 'prose' filters
    citiyAsProse: string
    typesAsProse: string
 
-   allFiltersEmpty = true
-
    private subscription: Subscription
 
    ngOnInit(): void {
       this.subscription = this.store.select(selectSearch).subscribe((searchState) => {
          this.results = searchState.results
-         const parameters = searchState.parameters || {}
-
-         this.allFiltersEmpty = !parameters.city && !parameters.postalCode && !parameters?.therapyTypes?.length
-
-         this.city = parameters?.city
-         this.postalCode = parameters?.postalCode
-         this.types = parameters?.therapyTypes
-         this.mapFiltersToProse(parameters)
+         if (searchState.parameters) {
+            this.parameters = searchState.parameters
+            this.mapFiltersToProse(searchState.parameters)
+         } else {
+            this.parameters = null
+            this.citiyAsProse = null
+            this.typesAsProse = null
+         }
       })
    }
 
@@ -65,7 +62,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
             label: 'Stadt',
             type: InputTypes.TEXT_SHORT,
             canRemove: true,
-            preset: this.city,
+            preset: this?.parameters?.city,
          })
          .then((v) => {
             if (v.type !== InputResolveTypes.DISCARD) {
@@ -78,14 +75,16 @@ export class SearchPageComponent implements OnInit, OnDestroy {
       this.inputService
          .openInputDialogue({
             header: 'Spezifiziere die Postleitzahl',
-            label: 'Postleitzahl',
+            description: 'Trenne mehrere mit Komma oder Leerzeichen',
+            label: 'Postleitzahl(en)',
             type: InputTypes.TEXT_SHORT,
             canRemove: true,
-            preset: this.postalCode,
+            preset: this?.parameters?.postalCodes,
          })
          .then((v) => {
             if (v.type !== InputResolveTypes.DISCARD) {
-               this.updateSearch({ postalCode: v.value })
+               const list = this.mapStringToStringToList(v.value)
+               this.updateSearch({ postalCodes: list })
             }
          })
    }
@@ -97,7 +96,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
             description: 'Wurden dir bei der Anamnese Empfehlungen ausgesprochen?',
             type: InputTypes.THERAPYTYPE,
             canRemove: true,
-            preset: this.types,
+            preset: this?.parameters?.therapyTypes,
          })
          .then((v) => {
             if (v.type !== InputResolveTypes.DISCARD) {
@@ -120,27 +119,46 @@ export class SearchPageComponent implements OnInit, OnDestroy {
          .then((v) => {
             if (v.type === InputResolveTypes.CONFIRM) {
                this.store.dispatch(therapistActions.create({ props: v.value }))
-               this.toastService.sendToast({ text: 'Du findest deine Therapeut*innen unter "Finden"' })
+               this.toastService.sendToast({ text: 'Du findest deine Therapeut*innen unter "Liste"' })
             }
          })
    }
 
    private mapFiltersToProse(params: TherapistSearch): void {
-      // set city
-      const cityString = [params.postalCode, params.city].filter(Boolean).join(', ')
-      this.citiyAsProse = cityString ? `in ${cityString}` : null
+      const cityList = [...(params?.postalCodes || []), params?.city].filter(Boolean)
+      if (cityList.length > 0) {
+         this.citiyAsProse = `in ${this.mapListToProse(cityList)}`
+      } else {
+         this.citiyAsProse = null
+      }
 
-      // set types
-      const types = !!this.types?.length ? [...this.types] : []
-      if (types.length === 0) {
+      if (params?.therapyTypes?.length > 0) {
+         this.typesAsProse = `nach ${this.mapListToProse(params.therapyTypes)}`
+      } else {
          this.typesAsProse = null
-      } else if (types.length === 1) {
-         this.typesAsProse = `nach ${types[0]}`
-      } else if (types.length === 2) {
-         this.typesAsProse = `nach ${types[0]} und ${types[1]}`
-      } else if (this.types.length > 2) {
-         const lastType = types.pop()
-         this.typesAsProse = `nach ${types.join(', ')} und ${lastType}`
+      }
+   }
+
+   private mapListToProse(list: string[]): string {
+      let prose = ''
+      if (!list || list.length === 0) {
+         prose = null
+      } else if (list.length === 1) {
+         prose = list[0]
+      } else if (list.length === 2) {
+         prose = `${list[0]} und ${list[1]}`
+      } else if (list.length > 2) {
+         const lastType = list.pop()
+         prose = `${list.join(', ')} und ${lastType}`
+      }
+      return prose
+   }
+
+   private mapStringToStringToList(listString: string): string[] {
+      if (listString) {
+         return listString.split(/,\s*|\s+/).filter((item) => item !== '')
+      } else {
+         return undefined
       }
    }
 }

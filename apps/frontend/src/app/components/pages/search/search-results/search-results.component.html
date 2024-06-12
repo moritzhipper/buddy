@@ -1,5 +1,5 @@
 <div class="table">
-   @for (therapist of therapists; track $index) {
+   @for (therapist of pages[activePage]; track $index) {
    <button class="row" (click)="addTherapist(therapist)">
       <div class="cell intro">{{ therapist.name }}</div>
       <div class="cell types">
@@ -10,7 +10,6 @@
       <div class="cell adress">
          @if (therapist?.address) {
          <span>{{ therapist.address.postalCode }} {{ therapist.address.city }}</span>
-         <span></span>
          <span>{{ therapist.address.street }} {{ therapist.address.number }}</span>
          } @else {
          <span class="empty">keine Adresse hinterlegt </span>
@@ -33,5 +32,11 @@
          </svg>
       </div>
    </button>
+   } @if (pageCount > 1) {
+   <div class="pagination">
+      <div class="page-indicator">Seite {{ activePage + 1 }} von {{ pageCount }}</div>
+      <button (click)="goToLastPage()" [disabled]="activePage === 0">zurück</button>
+      <button (click)="goToNextPage()" [disabled]="activePage === pageCount - 1">weiter</button>
+   </div>
    }
 </div>

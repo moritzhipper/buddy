@@ -12,13 +12,14 @@ import { map } from 'rxjs'
 import { PagePlaceholderTextComponent } from '../../../shared/page-placeholder-text/page-placeholder-text.component'
 import { TherapistCalendarComponent } from '../therapist-calendar/therapist-calendar.component'
 import { TherapistListItemComponent } from '../therapist-list-item/therapist-list-item.component'
+import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 
 @Component({
    selector: 'app-list-page',
    templateUrl: './list-page.component.html',
    styleUrls: ['./list-page.component.scss'],
    standalone: true,
-   imports: [CommonModule, PagePlaceholderTextComponent, TherapistCalendarComponent, TherapistListItemComponent],
+   imports: [CommonModule, PagePlaceholderTextComponent, TherapistCalendarComponent, TherapistListItemComponent, BackgroundPictureComponent],
    animations: [fadeOutAnimation, fadeInAnimation],
 })
 export class ListPageComponent {

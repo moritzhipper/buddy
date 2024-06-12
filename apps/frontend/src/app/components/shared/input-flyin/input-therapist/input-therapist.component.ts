@@ -35,7 +35,7 @@ export class InputTherapistComponent implements OnDestroy {
          .pipe(
             map((v) => v.therapist),
             switchMap((v) => {
-               if (v.length <= 2) {
+               if (v.length <= 3) {
                   return of([])
                } else {
                   return this.ba.searchTherapists({ name: v }).pipe(catchError(() => of([])))

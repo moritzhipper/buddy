@@ -8,13 +8,16 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+   &::-webkit-scrollbar {
+      display: none;
+   }
 
    input[type='checkbox'] {
       display: none;
 
       + label {
          background-color: dim($accent-color-2, 66);
-         color: $accent-color-3;
+         color: $font-color;
          border-radius: $border-radius-2;
 
          padding: 10px 8px;

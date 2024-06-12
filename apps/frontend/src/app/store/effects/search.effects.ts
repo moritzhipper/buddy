@@ -25,12 +25,21 @@ export class SearchEffects {
       this.actions$.pipe(
          ofType(searchActions.fetchSearchResults),
          switchMap(() => this.searchState$.pipe(take(1))),
-         switchMap((parameters) =>
-            this.backendAdapter.searchTherapists(parameters).pipe(
-               map((results) => searchActions.saveSearchResults({ results })),
-               catchError((error) => of(httpErrorAction({ error })))
-            )
-         )
+         switchMap((parameters) => {
+            // reset search if all values are undefined
+            const valuesInRequest = Object.values(parameters)
+               .map(Boolean)
+               .some((v) => v === true)
+
+            if (valuesInRequest) {
+               return this.backendAdapter.searchTherapists(parameters).pipe(
+                  map((results) => searchActions.saveSearchResults({ results })),
+                  catchError((error) => of(httpErrorAction({ error })))
+               )
+            } else {
+               return of(searchActions.resetFilter())
+            }
+         })
       )
    )
 }

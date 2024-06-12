@@ -51,18 +51,39 @@
    display: grid;
    gap: 16px;
 
+   .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+
+      button {
+         font-weight: bold;
+         @include resetButton;
+
+         &[disabled] {
+            opacity: 0.5;
+            font-weight: normal;
+         }
+      }
+      .page-indicator {
+         margin-right: auto;
+      }
+   }
+
    .row {
       display: grid;
       gap: 16px;
       border-radius: $border-radius-2;
       color: $font-color;
       font-size: $font-size-1;
-      border: 1px solid $line-color-light;
+      border: 1px solid $line-color;
       padding: 16px;
       transition-property: transform, box-shadow, background-color;
       text-align: left;
       transition-duration: 0.2s;
-      background-color: dim($accent-color-2, 44);
+      background-color: mix($background-color, $accent-color-2, 60%);
+      // background-color: dim($background-color, ff);
 
       .cell {
          display: flex;
@@ -100,13 +121,13 @@
       &:hover,
       &:focus-within {
          @include shadow;
-         background-color: dim($accent-color-2, aa);
+         background-color: $accent-color-2;
+
          transform: translateY(-2px);
 
          svg {
             transform: scale(1.3);
             border: 2px solid $line-color;
-            @include shimmer-animation;
          }
       }
       svg {

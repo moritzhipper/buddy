@@ -1,0 +1,36 @@
+@use '_index' as *;
+
+:host {
+   position: fixed;
+   right: 0;
+   bottom: 0;
+   box-sizing: border-box;
+   z-index: -1;
+   max-width: 100vw;
+
+   img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: bottom center;
+      opacity: 0.2;
+      &.is-light {
+         opacity: 0.1;
+      }
+   }
+}
+
+@include small-screen {
+   :host {
+      // account for nav-bar at bottom
+      padding: 0 8px 76px 8px;
+   }
+}
+
+@include big-screen {
+   :host {
+      height: 70vh;
+      padding: 0 32px;
+   }
+}

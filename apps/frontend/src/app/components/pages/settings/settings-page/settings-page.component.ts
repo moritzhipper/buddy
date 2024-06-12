@@ -10,6 +10,7 @@ import { selectUserProfile } from '../../../../store/buddy.selectors'
 import { BuddyState } from '../../../../store/buddy.state'
 import { vibrateWarning } from '../../../../utils'
 import { QrCodeComponent } from '../../../shared/qr-code/qr-code.component'
+import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 
 export class AppSettings {
    calltimeReminderMinutesAdvance: number = 15
@@ -21,7 +22,7 @@ export class AppSettings {
    selector: 'app-settings-page',
    templateUrl: './settings-page.component.html',
    standalone: true,
-   imports: [QrCodeComponent, CommonModule],
+   imports: [QrCodeComponent, CommonModule, BackgroundPictureComponent],
    styleUrls: ['./settings-page.component.scss'],
 })
 export class SettingsPageComponent {

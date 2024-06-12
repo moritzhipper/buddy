@@ -9,7 +9,7 @@
    </h1>
 </div>
 
-@if (allFiltersEmpty) {
+@if (!parameters) {
 <app-page-placeholder-text>
    <ng-container header>Durchsuche die Datenbank </ng-container>
    <ng-container body>
@@ -24,23 +24,23 @@
 </app-page-placeholder-text>
 }
 
-<div class="search-buttons" [class.something-set]="!allFiltersEmpty">
-   <button (click)="addFilterCity()">{{ city ? 'Stadt ändern' : 'Stadt angeben' }}</button>
-   <button (click)="addFilterPostal()">{{ postalCode ? 'Postleitzahl ändern' : 'Postleitzahl angeben' }}</button>
-   <button (click)="addFilterType()">{{ types?.length > 0 ? 'Therapierarten ändern' : 'Therapierarten angeben' }}</button>
-   <button (click)="resetFilters()" *ngIf="!allFiltersEmpty">Filter zurücksetzen</button>
+<div class="search-buttons" [class.something-set]="parameters">
+   <button (click)="addFilterCity()">{{ parameters?.city ? 'Stadt ändern' : 'Stadt angeben' }}</button>
+   <button (click)="addFilterPostal()">{{ parameters?.postalCodes?.length > 0 ? 'Postleitzahl ändern' : 'Postleitzahl angeben' }}</button>
+   <button (click)="addFilterType()">{{ parameters?.therapyTypes?.length > 0 ? 'Therapierarten ändern' : 'Therapierarten angeben' }}</button>
+   <button (click)="resetFilters()" *ngIf="parameters">Filter zurücksetzen</button>
 </div>
 
-@if(!allFiltersEmpty) {
+@if(parameters) {
 <div class="body-wrapper">
    <div class="search-wrapper">
       @if(results && results.length >= 1) {
       <app-search-results [therapists]="results" />
       } @else {
-      <div class="no-results">Keine Treffer für deine Suchkriterien.</div>
+      <div class="no-results">Keine Treffer für deine Suchkriterien</div>
       }
    </div>
-   <div class="placeholder-wrapper">
+   <div class="notes-wrapper">
       <div class="note">
          <h3>Du findest die Person hier nicht?</h3>
          <button (click)="addTherapist()">Lege sie einfach selber an</button>
@@ -55,3 +55,4 @@
    </div>
 </div>
 }
+<app-background-picture name="undraw_lost_re_xqjt.svg" />
