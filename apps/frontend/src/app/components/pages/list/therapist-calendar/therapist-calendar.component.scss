@@ -3,7 +3,7 @@
 :host {
    @include info-box-light;
    @include shadow;
-   background-color: dim($accent-color-4, aa);
+   background-color: $accent-color-4;
    display: flex;
    flex-direction: column;
    box-sizing: border-box;
@@ -54,7 +54,7 @@ h3 {
 
       .call-item {
          &:not(:last-child) {
-            border-bottom: 1px solid dim($accent-color-2, 44);
+            border-bottom: 1px solid $line-color-light;
             padding-bottom: 4px;
          }
 

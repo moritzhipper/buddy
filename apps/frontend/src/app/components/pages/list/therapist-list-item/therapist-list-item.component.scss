@@ -188,7 +188,7 @@
                   &.delete {
                      font-weight: bold;
                      border: none;
-                     background-color: dim($accent-color-3, 55);
+                     background-color: $accent-color-5;
                      color: $accent-color-2;
                   }
                }
@@ -199,7 +199,6 @@
                flex-direction: column;
                gap: 4px;
                font-size: $font-size-0;
-               color: dim($accent-color-3, 90);
             }
          }
       }

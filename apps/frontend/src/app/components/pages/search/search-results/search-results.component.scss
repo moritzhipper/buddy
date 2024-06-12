@@ -82,7 +82,8 @@
       transition-property: transform, box-shadow, background-color;
       text-align: left;
       transition-duration: 0.2s;
-      background-color: dim($background-color, ff);
+      background-color: mix($background-color, $accent-color-2, 60%);
+      // background-color: dim($background-color, ff);
 
       .cell {
          display: flex;
