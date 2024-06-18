@@ -32,7 +32,7 @@
             border-color: $background-color;
             font-weight: bold;
             background-color: $accent-color-1;
-            @include shadow_topdown;
+            @include shadow;
          }
       }
    }

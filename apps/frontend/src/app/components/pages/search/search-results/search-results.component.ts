@@ -55,15 +55,15 @@ export class SearchResultsComponent {
 
    goToNextPage() {
       if (this.activePage < this.pageCount - 1) {
-         this.activePage = this.activePage + 1
          scrollToTop()
+         this.activePage = this.activePage + 1
       }
    }
 
    goToLastPage() {
       if (this.activePage > 0) {
-         this.activePage = this.activePage - 1
          scrollToTop()
+         this.activePage = this.activePage - 1
       }
    }
 }

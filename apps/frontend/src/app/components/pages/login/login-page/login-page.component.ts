@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core'
+import { Component, ElementRef, NgZone, OnDestroy, ViewChild, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { UserProfile } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
@@ -41,6 +41,7 @@ export class LoginPageComponent implements OnDestroy {
    private tutorialStateWasSetOnce = false
 
    private router = inject(Router)
+   private zone = inject(NgZone)
 
    constructor(private _toastService: ToastService) {
       this.subscription = this.profile$.subscribe((profile) => {
@@ -91,7 +92,9 @@ export class LoginPageComponent implements OnDestroy {
    }
 
    resolveScan(result: any) {
-      this.loginViaQRKey(result.data)
+      this.zone.run(() => {
+         this.loginViaQRKey(result.data)
+      })
       setTimeout(() => this.toggleScanner(false), 100)
    }
 

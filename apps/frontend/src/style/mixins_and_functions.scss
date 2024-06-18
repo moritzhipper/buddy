@@ -27,6 +27,17 @@
    display: block;
 }
 
+@mixin buttonSmall {
+   @include resetButton;
+   border-radius: $border-radius-2;
+   border: 1px solid $accent-color-1;
+   color: $font-color;
+   font-size: $font-size-1;
+   cursor: pointer;
+   padding: 6px 12px;
+   white-space: nowrap;
+}
+
 @mixin info-box-light {
    padding: 16px;
    border: 1px solid $line-color;
@@ -41,12 +52,7 @@
 }
 
 @mixin shimmer-animation {
-   background: linear-gradient(
-      -45deg,
-      transparent 40%,
-      dim($accent-color-0, 77) 50%,
-      transparent 60%
-   );
+   background: linear-gradient(-45deg, transparent 40%, dim($accent-color-0, 77) 50%, transparent 60%);
    background-size: 300%;
    background-position-x: 100%;
    animation: shimmer 7s infinite linear;

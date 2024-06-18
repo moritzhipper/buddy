@@ -4,17 +4,13 @@
 
 <div class="body-wrapper" *ngIf="userProfile$ | async as profile">
    <div class="settings-element-wrapper personal-info">
-      <div class="qr-key">
-         <div class="details-wrapper">
-            <span>
-               <h3>
-                  QR-Key
-                  <button (click)="copyToClipboard()" class="change">als Text kopieren</button>
-               </h3>
-            </span>
-            <p>Speichere ihn als Screenshot oder Text. Mit ihm kannst dich später wieder anmelden</p>
-         </div>
+      <div class="key-wrapper">
          <app-qr-code />
+      </div>
+      <div class="details-wrapper">
+         <h3>Dein persönlicher QR-Key</h3>
+         <p>Speichere ihn als Screenshot oder Text. Mit ihm kannst dich später wieder anmelden.</p>
+         <button (click)="copyToClipboard()">als Text kopieren</button>
       </div>
    </div>
 

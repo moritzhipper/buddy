@@ -5,9 +5,6 @@
 ### Right now
 
 -  Loading spinner für suche
--  plz suche geht nicht
--  therapytypes suche geht nicht
--  suche geht, aber die chunklogik geht nicht?
 
 ### Soon
 
