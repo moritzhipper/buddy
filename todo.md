@@ -34,6 +34,7 @@
 
 ## Frontend
 
+-  replace two medie query types with types and conteiner query
 -  info page: wie funktioniert das? -> Therapeuten Prozess erklären
 -  therapeutendaten teilen ausbauen
 -  e2e tests auf playwright umstellen?

@@ -3,14 +3,14 @@
    <button (click)="sendToast()">toast</button>
    <button (click)="showDebugButtons = !showDebugButtons">hide</button>
 </div>
-<div class="offline-note" *ngIf="isOffline">
-   Du bist nicht mit dem Internet verbunden.
-</div>
+<div class="offline-note" *ngIf="isOffline">Du bist nicht mit dem Internet verbunden.</div>
+<app-loading-indicator />
 <div class="content-wrapper">
    <div class="content">
       <router-outlet />
    </div>
 </div>
+
 <app-navigation-bar />
 <app-input-wrapper />
 <app-toast />

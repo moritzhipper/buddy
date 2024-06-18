@@ -5,6 +5,7 @@ import { Therapist } from '@buddy/base-utils'
 import { Store, StoreModule } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { InputWrapperComponent } from './components/shared/input-flyin/input-wrapper/input-wrapper.component'
+import { LoadingIndicatorComponent } from './components/shared/loading-indicator/loading-indicator.component'
 import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
 import { ToastComponent } from './components/shared/toast/toast.component'
 import { ToastType } from './models'
@@ -16,7 +17,7 @@ import { BuddyState } from './store/buddy.state'
 @Component({
    selector: 'app-root',
    standalone: true,
-   imports: [RouterModule, StoreModule, ToastComponent, InputWrapperComponent, NavigationBarComponent, CommonModule],
+   imports: [RouterModule, StoreModule, ToastComponent, InputWrapperComponent, NavigationBarComponent, CommonModule, LoadingIndicatorComponent],
    templateUrl: './app.component.html',
    styleUrls: ['./app.component.scss'],
 })

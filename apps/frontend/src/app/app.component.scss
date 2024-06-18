@@ -1,12 +1,11 @@
-@use 'standards';
-@use 'colors';
+@use '_index' as *;
 
 .content-wrapper {
    display: flex;
    justify-content: center;
 
    .content {
-      max-width: standards.$content-max-width;
+      max-width: $content-max-width;
       width: 100%;
    }
 }
@@ -14,11 +13,10 @@
    width: 100%;
    position: fixed;
    top: 0;
-   background-color: colors.$accent-color-5;
+   background-color: $accent-color-5;
    padding: 4px 8px;
    text-align: center;
    z-index: 20;
-   backdrop-filter: blur(5px);
 }
 
 .debug {

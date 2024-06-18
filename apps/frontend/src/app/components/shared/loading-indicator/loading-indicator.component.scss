@@ -1,0 +1,84 @@
+@use '_index' as *;
+
+// loading indicator from here
+@include big-screen {
+   :host {
+      padding: 32px;
+      width: 100vw;
+      .lds-ellipsis div {
+         opacity: 0.8;
+      }
+   }
+}
+
+@include small-screen {
+   :host {
+      left: 0;
+      padding: 16px;
+      .lds-ellipsis div {
+         opacity: 0.5;
+      }
+   }
+}
+
+:host {
+   display: flex;
+   justify-content: center;
+   position: fixed;
+   z-index: 30;
+   top: 0;
+}
+
+$distance: 20px;
+$circle-size: 12px;
+
+.lds-ellipsis {
+   position: relative;
+   box-sizing: border-box;
+   display: flex;
+   align-items: center;
+
+   div {
+      display: block;
+      width: $circle-size;
+      height: $circle-size;
+      border-radius: 50%;
+      background: currentColor;
+      @include shadow;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+      &:nth-child(1) {
+         animation: lds-ellipsis1 0.6s infinite;
+      }
+      &:nth-child(2) {
+         margin-right: $distance;
+      }
+      &:nth-child(4) {
+         animation: lds-ellipsis3 0.6s infinite;
+      }
+   }
+}
+
+@keyframes lds-ellipsis1 {
+   0% {
+      width: 0;
+      height: 0;
+   }
+   100% {
+      margin-right: $distance;
+      width: $circle-size;
+      height: $circle-size;
+   }
+}
+@keyframes lds-ellipsis3 {
+   0% {
+      width: $circle-size;
+      height: $circle-size;
+      margin-left: $distance;
+   }
+   100% {
+      width: 0;
+      height: 0;
+      margin-left: 0;
+   }
+}
