@@ -8,6 +8,7 @@ import { InputWrapperComponent } from './components/shared/input-flyin/input-wra
 import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
 import { ToastComponent } from './components/shared/toast/toast.component'
 import { ToastType } from './models'
+import { LoadingIdicatorService } from './services/loading-idicator.service'
 import { NotificationService } from './services/notification.service'
 import { ToastService } from './services/toast.service'
 import { therapistActions } from './store/buddy.actions'
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
    isOffline = false
    profilePageIsOpen$: Observable<boolean>
    private _store = inject(Store<BuddyState>)
+   isLoading: Observable<boolean> = inject(LoadingIdicatorService).loadingState
 
    private notificationService = inject(NotificationService)
    private toastService = inject(ToastService)

@@ -9,7 +9,7 @@ import { appRoutes } from './app.routes'
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { provideEffects } from '@ngrx/effects'
 import { environment } from '../environments/environment'
-import { authInterceptorFn } from './interceptors/auth-interceptor-fn'
+import { authInterceptorFn, loadingInterceptorFn } from './interceptors/interceptors'
 import { metaReducers, profileReducer, searchReducer, therapistsReducer } from './store/buddy.reducer'
 import { ProfileEffects } from './store/effects/profile.effects'
 import { SearchEffects } from './store/effects/search.effects'
@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
       provideEffects(StateSyncEffects, ProfileEffects, TherapistsEffects, SearchEffects),
       provideStoreDevtools(),
       provideAnimations(),
-      provideHttpClient(withInterceptors([authInterceptorFn])),
+      provideHttpClient(withInterceptors([authInterceptorFn, loadingInterceptorFn])),
       provideServiceWorker('ngsw-worker.js', {
          enabled: environment.production,
          // Register the ServiceWorker as soon as the application is stable
