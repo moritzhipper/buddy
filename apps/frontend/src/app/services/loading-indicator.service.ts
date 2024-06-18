@@ -9,7 +9,7 @@ export class LoadingIdicatorService {
    private loadingTimeout: any
    loadingState = this.loadingSubject.asObservable()
 
-   // Timeout magic only shows spinner if the loading time is bigger than .3 seconds
+   // Timeout magic only shows spinner if the loading time is longer than .2 seconds
    setIsLoading() {
       if (this.loadingTimeout) {
          clearTimeout(this.loadingTimeout)
@@ -17,7 +17,7 @@ export class LoadingIdicatorService {
 
       this.loadingTimeout = setTimeout(() => {
          this.loadingSubject.next(true)
-      }, 300)
+      }, 200)
    }
    setNotLoading() {
       if (this.loadingTimeout) {

@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angul
 import { inject } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Observable, catchError, finalize, first, mergeMap, throwError } from 'rxjs'
-import { LoadingIdicatorService } from '../services/loading-idicator.service'
+import { LoadingIdicatorService } from '../services/loading-indicator.service'
 import { selectUserProfile } from '../store/buddy.selectors'
 
 // todo: nur über cookie regeln

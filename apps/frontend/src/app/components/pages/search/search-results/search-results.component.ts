@@ -49,7 +49,7 @@ export class SearchResultsComponent {
          const { id } = therapist
 
          this.store.dispatch(therapistActions.create({ props: { id } }))
-         this.toastService.sendToast({ text: `${therapist.name} wurde in deine Liste aufgenommen`, type: ToastType.SUCCESS })
+         this.toastService.sendToast({ text: `Du kannst ${therapist.name} in deiner Liste verwalten.`, type: ToastType.SUCCESS })
       }
    }
 

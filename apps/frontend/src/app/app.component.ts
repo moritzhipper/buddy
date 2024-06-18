@@ -1,4 +1,3 @@
-import { animate, style, transition, trigger } from '@angular/animations'
 import { CommonModule } from '@angular/common'
 import { Component, OnInit, inject } from '@angular/core'
 import { RouterModule } from '@angular/router'
@@ -6,10 +5,10 @@ import { Therapist } from '@buddy/base-utils'
 import { Store, StoreModule } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { InputWrapperComponent } from './components/shared/input-flyin/input-wrapper/input-wrapper.component'
+import { LoadingIndicatorComponent } from './components/shared/loading-indicator/loading-indicator.component'
 import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
 import { ToastComponent } from './components/shared/toast/toast.component'
 import { ToastType } from './models'
-import { LoadingIdicatorService } from './services/loading-idicator.service'
 import { NotificationService } from './services/notification.service'
 import { ToastService } from './services/toast.service'
 import { therapistActions } from './store/buddy.actions'
@@ -18,15 +17,9 @@ import { BuddyState } from './store/buddy.state'
 @Component({
    selector: 'app-root',
    standalone: true,
-   imports: [RouterModule, StoreModule, ToastComponent, InputWrapperComponent, NavigationBarComponent, CommonModule],
+   imports: [RouterModule, StoreModule, ToastComponent, InputWrapperComponent, NavigationBarComponent, CommonModule, LoadingIndicatorComponent],
    templateUrl: './app.component.html',
    styleUrls: ['./app.component.scss'],
-   animations: [
-      trigger('fadeInOut', [
-         transition(':enter', [style({ opacity: 0, transform: 'scale(.2)' }), animate('300ms ease', style({ opacity: 1, transform: 'scale(1)' }))]),
-         transition(':leave', [style({ opacity: 1 }), animate('300ms', style({ opacity: 0, transform: 'scale(.8)' }))]),
-      ]),
-   ],
 })
 export class AppComponent implements OnInit {
    showDebugButtons = false
@@ -34,7 +27,6 @@ export class AppComponent implements OnInit {
    isOffline = false
    profilePageIsOpen$: Observable<boolean>
    private _store = inject(Store<BuddyState>)
-   isLoading: Observable<boolean> = inject(LoadingIdicatorService).loadingState
 
    private notificationService = inject(NotificationService)
    private toastService = inject(ToastService)
