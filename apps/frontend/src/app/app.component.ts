@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations'
 import { CommonModule } from '@angular/common'
 import { Component, OnInit, inject } from '@angular/core'
 import { RouterModule } from '@angular/router'
@@ -20,6 +21,12 @@ import { BuddyState } from './store/buddy.state'
    imports: [RouterModule, StoreModule, ToastComponent, InputWrapperComponent, NavigationBarComponent, CommonModule],
    templateUrl: './app.component.html',
    styleUrls: ['./app.component.scss'],
+   animations: [
+      trigger('fadeInOut', [
+         transition(':enter', [style({ opacity: 0, transform: 'scale(.2)' }), animate('300ms ease', style({ opacity: 1, transform: 'scale(1)' }))]),
+         transition(':leave', [style({ opacity: 1 }), animate('300ms', style({ opacity: 0, transform: 'scale(.8)' }))]),
+      ]),
+   ],
 })
 export class AppComponent implements OnInit {
    showDebugButtons = false

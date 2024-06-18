@@ -5,6 +5,7 @@
 ### Right now
 
 -  Loading spinner für suche
+-  show indicator only with 1 second delay
 
 ### Soon
 

@@ -6,12 +6,24 @@ import { BehaviorSubject } from 'rxjs'
 })
 export class LoadingIdicatorService {
    private loadingSubject = new BehaviorSubject<boolean>(false)
+   private loadingTimeout: any
    loadingState = this.loadingSubject.asObservable()
 
+   // Timeout magic only shows spinner if the loading time is bigger than .3 seconds
    setIsLoading() {
-      this.loadingSubject.next(true)
+      if (this.loadingTimeout) {
+         clearTimeout(this.loadingTimeout)
+      }
+
+      this.loadingTimeout = setTimeout(() => {
+         this.loadingSubject.next(true)
+      }, 300)
    }
    setNotLoading() {
+      if (this.loadingTimeout) {
+         clearTimeout(this.loadingTimeout)
+      }
+
       this.loadingSubject.next(false)
    }
 }

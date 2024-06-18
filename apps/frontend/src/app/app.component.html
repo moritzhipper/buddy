@@ -4,7 +4,7 @@
    <button (click)="showDebugButtons = !showDebugButtons">hide</button>
 </div>
 <div class="offline-note" *ngIf="isOffline">Du bist nicht mit dem Internet verbunden.</div>
-<div class="loading-indicator" *ngIf="isLoading | async">
+<div class="loading-indicator" *ngIf="isLoading | async" @fadeInOut>
    <div class="lds-ellipsis">
       <div></div>
       <div></div>
@@ -17,6 +17,7 @@
       <router-outlet />
    </div>
 </div>
+
 <app-navigation-bar />
 <app-input-wrapper />
 <app-toast />
