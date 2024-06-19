@@ -1,4 +1,6 @@
 import { Route } from '@angular/router'
+import { DatenschutzPageComponent } from './components/pages/datenschutz/datenschutz-page.component'
+import { ImpressumPageComponent } from './components/pages/impressum/impressum-page.component'
 import { InfoPageComponent } from './components/pages/info/info-page/info-page.component'
 import { ListPageComponent } from './components/pages/list/list-page/list-page.component'
 import { LoginPageComponent } from './components/pages/login/login-page/login-page.component'
@@ -38,6 +40,18 @@ export const appRoutes: Route[] = [
             component: SettingsPageComponent,
             canActivate: [IsLoggedInGuard],
             title: 'Buddy | Einstellungen',
+         },
+         {
+            path: 'impressum',
+            component: ImpressumPageComponent,
+            canActivate: [IsLoggedInGuard],
+            title: 'Buddy | Impressum',
+         },
+         {
+            path: 'datenschutz',
+            component: DatenschutzPageComponent,
+            canActivate: [IsLoggedInGuard],
+            title: 'Buddy | Datenschutz',
          },
          { path: '', redirectTo: '/list', pathMatch: 'full' },
          { path: '**', redirectTo: '/list', pathMatch: 'full' },

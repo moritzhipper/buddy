@@ -4,7 +4,7 @@
 
 ### Right now
 
--  Loading spinner für suche
+-  find solution for impressum and datenschutz
 
 ### Soon
 
