@@ -81,4 +81,10 @@ body {
       font-weight: bold;
       color: $font-color;
    }
+
+   .header-wrapper {
+      box-sizing: border-box;
+
+      padding: 40px 16px;
+   }
 }

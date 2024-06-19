@@ -5,6 +5,7 @@
 ### Right now
 
 -  find solution for impressum and datenschutz
+   -  wenn wirklich auf jeder seite verlink sein muss, dann lösung für footer finden. sieht echt hässlich aus so wtf
 
 ### Soon
 
