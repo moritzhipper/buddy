@@ -6,6 +6,7 @@
    width: 100%;
    display: flex;
    justify-content: center;
+   z-index: 25;
 
    .toast-body {
       display: flex;
@@ -20,7 +21,6 @@
       color: $background-color;
       backdrop-filter: blur(10px);
       border-radius: $border-radius-3;
-      z-index: 25;
       @include shadow();
    }
 

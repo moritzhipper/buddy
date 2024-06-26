@@ -133,16 +133,11 @@
 }
 
 button.add {
-   background-color: #0000;
-   border: 1px solid $accent-color-1;
-   border-radius: 50%;
-   width: 50px;
-   height: 50px;
-   font-size: $font-size-4;
-   color: $accent-color-1;
+   @include buttonSmall;
+   padding: 8px 32px;
 
    &.empty-page {
-      margin-top: 32px;
+      margin-top: 16px;
       @include shimmer-animation;
    }
 }
