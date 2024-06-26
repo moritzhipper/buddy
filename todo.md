@@ -6,9 +6,7 @@
 
 -  find solution for impressum and datenschutz
    -  wenn wirklich auf jeder seite verlink sein muss, dann lösung für footer finden. sieht echt hässlich aus so wtf
-   -  fullscreen: unten recht in der ecke
-   -  mobile: über dem navbar, mit wenig opacity?
-      losgelößt, mit umriss und hintergrund. potentiell nur anzeigen ganz oben und anz unten auf der seite?
+   -  wo im login?
 
 ### Soon
 

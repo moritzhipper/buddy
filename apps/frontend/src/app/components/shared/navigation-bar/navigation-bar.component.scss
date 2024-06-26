@@ -66,13 +66,15 @@
 
 .spacer {
    width: 100%;
-   height: 110px;
+   height: 136px;
 }
 
 @include medium-small-screen {
    .impressum-and-datenschutz-wrapper {
       grid-row: 1;
       padding: 8px;
+      animation: scaleProgress auto linear;
+      animation-timeline: scroll(root);
    }
    .links-wrapper {
       grid-row: 2;
@@ -122,5 +124,21 @@
             border: 1px solid $line-color;
          }
       }
+   }
+}
+
+@keyframes scaleProgress {
+   0% {
+      opacity: 0;
+      visibility: hidden;
+   }
+   90% {
+      opacity: 0;
+      transform: translateY(20px);
+      visibility: visible;
+   }
+   100% {
+      transform: translateY(0);
+      opacity: 1;
    }
 }
