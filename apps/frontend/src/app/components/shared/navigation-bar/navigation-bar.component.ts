@@ -13,11 +13,16 @@ import { filter, map } from 'rxjs/operators'
 })
 export class NavigationBarComponent {
    activeRoute: Observable<string>
+   private hiddenRoutes = ['/datenschutz', '/impressum', '/login']
 
    constructor(private _router: Router) {
       this.activeRoute = this._router.events.pipe(
          filter((event) => event instanceof NavigationEnd),
          map((event: NavigationEnd) => event.urlAfterRedirects)
       )
+   }
+
+   isVisibleRoute(route: string): boolean {
+      return !this.hiddenRoutes.includes(route)
    }
 }

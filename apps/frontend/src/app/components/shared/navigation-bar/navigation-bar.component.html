@@ -1,5 +1,5 @@
 <div class="main-wrapper" *ngIf="activeRoute | async as route">
-   <div class="bar-wrapper" *ngIf="route !== '/login'">
+   <div class="bar-wrapper" *ngIf="isVisibleRoute(route)">
       <div class="links-wrapper">
          <a class="link" [ngClass]="{ active: route === '/list' }" routerLink="/find">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -2 24 24" width="24" height="24" fill="currentColor">
