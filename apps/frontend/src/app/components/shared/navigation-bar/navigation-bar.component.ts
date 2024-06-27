@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { Component } from '@angular/core'
+import { Component, OnDestroy, inject } from '@angular/core'
 import { NavigationEnd, Router, RouterModule } from '@angular/router'
-import { Observable } from 'rxjs'
+import { Store } from '@ngrx/store'
+import { Observable, Subscription, combineLatest } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
+import { selectUserProfile } from '../../../store/buddy.selectors'
 
 @Component({
    selector: 'app-navigation-bar',
@@ -11,18 +13,48 @@ import { filter, map } from 'rxjs/operators'
    templateUrl: './navigation-bar.component.html',
    styleUrls: ['./navigation-bar.component.scss'],
 })
-export class NavigationBarComponent {
-   activeRoute: Observable<string>
-   private hiddenRoutes = ['/datenschutz', '/impressum', '/login']
+export class NavigationBarComponent implements OnDestroy {
+   private loginRoute = '/login'
+   private legalRoute = '/legal'
+   isBarVisible: Observable<boolean>
 
-   constructor(private _router: Router) {
-      this.activeRoute = this._router.events.pipe(
+   activeRoute: Observable<string>
+   private router = inject(Router)
+   private profile = inject(Store).select(selectUserProfile)
+
+   route: string
+   isNotLogin = false
+   isOnLegal = false
+   isLoggedIn = false
+
+   showLoggedInView = false
+   showNotLoggedInView = false
+
+   subscriptions: Subscription[]
+
+   constructor() {
+      this.activeRoute = this.router.events.pipe(
          filter((event) => event instanceof NavigationEnd),
          map((event: NavigationEnd) => event.urlAfterRedirects)
       )
-   }
 
-   isVisibleRoute(route: string): boolean {
-      return !this.hiddenRoutes.includes(route)
+      combineLatest([this.activeRoute, this.profile]).subscribe(([route, profile]) => {
+         this.route = route
+
+         const isLogin = route === this.loginRoute
+         const userNotLoggedInOnInfoPages = !profile.secret && route.includes(this.legalRoute)
+         this.showLoggedInView = !isLogin && !userNotLoggedInOnInfoPages
+
+         this.showNotLoggedInView = !isLogin && userNotLoggedInOnInfoPages
+      })
+
+      this.profile.subscribe((profile) => {
+         console.log(!!profile?.secret)
+
+         this.isLoggedIn = !!profile?.secret
+      })
+   }
+   ngOnDestroy(): void {
+      // throw new Error('Method not implemented.')
    }
 }

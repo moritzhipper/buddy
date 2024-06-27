@@ -18,16 +18,26 @@
          height: 64px;
          align-items: center;
          flex-direction: row;
+
          .link {
-            font-size: $font-size-0;
-            text-decoration: none;
-            color: dim($accent-color-3, 'bb');
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
+            text-decoration: none;
+
+            &.single {
+               width: 100%;
+               text-decoration: none;
+               text-align: center;
+               line-height: 64px;
+            }
 
             .linktext {
+               color: dim($accent-color-3, 'bb');
+
+               font-size: $font-size-0;
+
                height: 0;
                opacity: 0;
                transition: height 0.2s, opacity 0.2s;
@@ -46,11 +56,6 @@
          align-self: end;
          justify-self: end;
          gap: 8px;
-
-         &:hover a,
-         &:focus-within a {
-            color: $font-color;
-         }
 
          a {
             backdrop-filter: blur(10px);

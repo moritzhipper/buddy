@@ -5,8 +5,9 @@
 ### Right now
 
 -  find solution for impressum and datenschutz
-   -  wenn wirklich auf jeder seite verlink sein muss, dann lösung für footer finden. sieht echt hässlich aus so wtf
-   -  wo im login?
+   -  da, wo navbar: in navbar (weil ist auch navigation) -> erstmal egal, ob direkt drüber oder als seitenelement
+-  da wo kein navbar, manuell einbauen. Neue unterseitenstruktur: Impressum, Datenschutz, About
+   -  wenn angemeldet, dann backlink mit 'zur app' -> geht einfach auf list
 
 ### Soon
 

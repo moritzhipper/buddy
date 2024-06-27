@@ -1,7 +1,9 @@
 import { Route } from '@angular/router'
-import { DatenschutzPageComponent } from './components/pages/datenschutz/datenschutz-page.component'
-import { ImpressumPageComponent } from './components/pages/impressum/impressum-page.component'
 import { InfoPageComponent } from './components/pages/info/info-page/info-page.component'
+import { AboutPageComponent } from './components/pages/legal/about/about-page.component'
+import { DatenschutzPageComponent } from './components/pages/legal/datenschutz/datenschutz-page.component'
+import { ImpressumPageComponent } from './components/pages/legal/impressum/impressum-page.component'
+import { LegalPageComponent } from './components/pages/legal/legal-page/legal-page.component'
 import { ListPageComponent } from './components/pages/list/list-page/list-page.component'
 import { LoginPageComponent } from './components/pages/login/login-page/login-page.component'
 import { SearchPageComponent } from './components/pages/search/search-page/search-page.component'
@@ -42,16 +44,26 @@ export const appRoutes: Route[] = [
             title: 'Buddy | Einstellungen',
          },
          {
-            path: 'impressum',
-            component: ImpressumPageComponent,
-            canActivate: [IsLoggedInGuard],
-            title: 'Buddy | Impressum',
-         },
-         {
-            path: 'datenschutz',
-            component: DatenschutzPageComponent,
-            canActivate: [IsLoggedInGuard],
-            title: 'Buddy | Datenschutz',
+            path: 'legal',
+            component: LegalPageComponent,
+            children: [
+               {
+                  path: 'impressum',
+                  component: ImpressumPageComponent,
+                  title: 'Buddy | Impressum',
+               },
+               {
+                  path: 'datenschutz',
+                  component: DatenschutzPageComponent,
+                  title: 'Buddy | Datenschutz',
+               },
+               {
+                  path: 'about',
+                  component: AboutPageComponent,
+                  title: 'Buddy | About',
+               },
+               { path: '', redirectTo: '/list', pathMatch: 'full' },
+            ],
          },
          { path: '', redirectTo: '/list', pathMatch: 'full' },
          { path: '**', redirectTo: '/list', pathMatch: 'full' },

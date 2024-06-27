@@ -137,7 +137,7 @@ button.add {
    padding: 8px 32px;
 
    &.empty-page {
-      margin-top: 16px;
+      margin-top: 32px;
       @include shimmer-animation;
    }
 }
