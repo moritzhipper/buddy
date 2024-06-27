@@ -15,22 +15,16 @@ import { selectUserProfile } from '../../../store/buddy.selectors'
 })
 export class NavigationBarComponent implements OnDestroy {
    private loginRoute = '/login'
-   private legalRoute = '/legal'
-   isBarVisible: Observable<boolean>
 
-   activeRoute: Observable<string>
+   private activeRoute: Observable<string>
    private router = inject(Router)
    private profile = inject(Store).select(selectUserProfile)
 
    route: string
-   isNotLogin = false
-   isOnLegal = false
-   isLoggedIn = false
-
    showLoggedInView = false
    showNotLoggedInView = false
 
-   subscriptions: Subscription[]
+   subscription: Subscription
 
    constructor() {
       this.activeRoute = this.router.events.pipe(
@@ -38,23 +32,17 @@ export class NavigationBarComponent implements OnDestroy {
          map((event: NavigationEnd) => event.urlAfterRedirects)
       )
 
-      combineLatest([this.activeRoute, this.profile]).subscribe(([route, profile]) => {
+      this.subscription = combineLatest([this.activeRoute, this.profile]).subscribe(([route, profile]) => {
          this.route = route
+         const isOnLoginPage = route === this.loginRoute
 
-         const isLogin = route === this.loginRoute
-         const userNotLoggedInOnInfoPages = !profile.secret && route.includes(this.legalRoute)
-         this.showLoggedInView = !isLogin && !userNotLoggedInOnInfoPages
+         const userIsLoggedIn = !!profile.secret
 
-         this.showNotLoggedInView = !isLogin && userNotLoggedInOnInfoPages
-      })
-
-      this.profile.subscribe((profile) => {
-         console.log(!!profile?.secret)
-
-         this.isLoggedIn = !!profile?.secret
+         this.showLoggedInView = !isOnLoginPage && userIsLoggedIn
+         this.showNotLoggedInView = !isOnLoginPage && !userIsLoggedIn
       })
    }
    ngOnDestroy(): void {
-      // throw new Error('Method not implemented.')
+      this.subscription.unsubscribe()
    }
 }

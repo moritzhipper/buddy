@@ -95,6 +95,7 @@
    .bar-wrapper {
       grid-template-columns: 1fr 1fr 1fr;
       margin: 8px;
+      gap: 8px;
    }
    .impressum-and-datenschutz-wrapper {
       grid-column: 3;

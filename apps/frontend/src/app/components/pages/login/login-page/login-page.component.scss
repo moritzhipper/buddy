@@ -7,13 +7,19 @@
    justify-content: center;
    align-items: center;
    flex-direction: column;
-   box-sizing: content-box;
 }
 
-app-tutorial-wrapper,
-.box {
-   flex: 1;
+app-tutorial-wrapper {
+   min-height: 0;
    animation: slowAppear 1s;
+}
+
+.page-wrapper {
+   flex: 1;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
 }
 
 .video-wrapper {
@@ -40,7 +46,7 @@ app-tutorial-wrapper,
    position: fixed;
    top: 0;
    right: 0;
-   z-index: 10;
+   z-index: 40;
    animation: flyIn 3s;
    background-color: transparent;
    border: none;
@@ -147,7 +153,7 @@ h1 {
 
 @include medium-small-screen {
    .legal-links {
-      border-bottom: 1px solid $line-color;
+      border-top: 1px solid $line-color;
       font-weight: normal;
       background-color: $font-color;
       padding: 8px;
@@ -163,7 +169,10 @@ h1 {
       position: fixed;
       bottom: 0;
       right: 0;
-      padding: 16px;
+      padding: 8px;
+      a {
+         padding: 4px;
+      }
    }
 }
 
