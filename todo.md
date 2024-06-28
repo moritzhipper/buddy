@@ -4,11 +4,6 @@
 
 ### Right now
 
--  find solution for impressum and datenschutz
-   -  da, wo navbar: in navbar (weil ist auch navigation) -> erstmal egal, ob direkt drüber oder als seitenelement
--  da wo kein navbar, manuell einbauen. Neue unterseitenstruktur: Impressum, Datenschutz, About
-   -  wenn angemeldet, dann backlink mit 'zur app' -> geht einfach auf list
-
 ### Soon
 
 -  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
