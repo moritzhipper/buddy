@@ -5,9 +5,10 @@
    "scripts": {
       "backend-dev": "nx run backend:serve:development",
       "backend-prod": "nx run backend:serve:production",
+      "push-service-dev": "nx run push-service:serve:development",
       "frontend-dev": "nx run frontend:serve:development",
       "frontend-prod": "nx run frontend:serve-pwa-prod",
-      "all-dev": "nx run-many -t serve -p backend frontend"
+      "all-dev": "nx run-many -t serve -p backend frontend push-service"
    },
    "private": true,
    "dependencies": {

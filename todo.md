@@ -4,6 +4,11 @@
 
 ### Right now
 
+-  add save subscriptions endpoint to backend
+-  read subscriptions from db in push service
+-  create new db-adapter in shared utils
+-  create logger in shared utils
+
 ### Soon
 
 -  impressum, about und info page updaten und texte gerade ziehen
@@ -43,3 +48,7 @@
 ## Backend
 
 -  e2e tests in projekt migrieren
+
+##
+
+{"publicKey":"BBZYBgvEegKC57oonu8SiZ64A0Xq3MktHLTgs7oJYaw2iQ7j5Qa_TVaHTrmS3gXGIn_lRtq0BJopaEIpu0755ao","privateKey":"QD71gGi7PZlv-HHGQK-HSWbMCXsUNOt2Sb9dV9C93OU"}
