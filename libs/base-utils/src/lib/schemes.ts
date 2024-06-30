@@ -87,3 +87,14 @@ export const AddTherapistSchema = z
       id: UUIDSchema.optional(),
    })
    .strict()
+
+export const PushSubscriptionSchema = z
+   .object({
+      endpoint: z.string(),
+      expirationTime: z.null(),
+      keys: z.object({
+         p265dh: z.string(),
+         auth: z.string(),
+      }),
+   })
+   .strict()

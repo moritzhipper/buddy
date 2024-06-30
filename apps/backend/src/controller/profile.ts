@@ -14,7 +14,7 @@ profileRoute.post(
    '/',
    expressAsyncHandler(async (req, res) => {
       const profile = await buddyDB.one<UserProfile>(
-         'INSERT INTO users(id, secret, call_precaution_time) VALUES (DEFAULT, DEFAULT, DEFAULT) RETURNING secret, call_precaution_time'
+         'INSERT INTO users (id, secret, call_precaution_time) VALUES (DEFAULT, DEFAULT, DEFAULT) RETURNING secret, call_precaution_time'
       )
 
       res.send({ ...profile, secret: encodeBuddySecret(profile.secret) })

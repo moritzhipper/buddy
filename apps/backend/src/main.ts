@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express, { Express } from 'express'
 import profileRoute from './controller/profile'
+import subscriptionsRoute from './controller/subscriptions'
 import therapistsRoute from './controller/therapists'
 import { authorize } from './utils/authoriztion-utils'
 import { testDBConnection } from './utils/buddy-db'
@@ -32,6 +33,7 @@ app.use(validateSecret)
 app.use(authorize)
 app.use(BuddyRoutes.PROFILE, profileRoute)
 app.use(BuddyRoutes.THERAPISTS, therapistsRoute)
+app.use(BuddyRoutes.SUBSCRIPTION, subscriptionsRoute)
 app.use(errorHandler)
 
 const server = app.listen(PORT, async () => {

@@ -6,8 +6,11 @@
 
 -  add save subscriptions endpoint to backend
 -  read subscriptions from db in push service
--  create new db-adapter in shared utils
--  create logger in shared utils
+-  allow multiple subscriptions for user
+-  implement deletion of subscription
+-  move new db-adapter in shared utils
+-  store subscription stuff encrypted
+-  move logger in shared utils
 
 ### Soon
 
