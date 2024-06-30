@@ -1,8 +1,8 @@
 <button class="tutorial-toggle" (click)="toggleTutorial()" *ngIf="!profileExists">
    {{ tutorialIsOpen ? 'Ich habe schon ein Profil' : 'Ich bin neu hier' }}
 </button>
-
-<ng-container *ngIf="!tutorialIsOpen">
+@if(!tutorialIsOpen) {
+<div class="page-wrapper">
    <h1>Login</h1>
 
    <!-- user is logged in -->
@@ -83,6 +83,15 @@
          </button>
       </div>
    </ng-container>
-</ng-container>
+</div>
 
-<app-tutorial-wrapper *ngIf="tutorialIsOpen" />
+} @else {
+<app-tutorial-wrapper />
+
+}
+
+<div class="legal-links">
+   <a routerLink="/about">About</a>
+   <a routerLink="/impressum">Impressum</a>
+   <a routerLink="/datenschutz">Datenschutz</a>
+</div>

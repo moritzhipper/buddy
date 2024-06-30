@@ -1,0 +1,12 @@
+@use '_index' as *;
+h2 {
+   margin: 32px 0 16px 0;
+   &:first-of-type {
+      margin: 0 0 16px 0;
+   }
+}
+img {
+   border-radius: $border-radius-1;
+   @include shadow;
+   width: 300px;
+}

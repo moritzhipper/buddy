@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { AccordionComponent } from '../accordion/accordion.component'
 import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
+import { AccordionComponent } from '../accordion/accordion.component'
 
 @Component({
    selector: 'app-info-page',

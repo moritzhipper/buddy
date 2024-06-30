@@ -6,7 +6,6 @@
    display: flex;
    justify-content: center;
    align-items: center;
-
    background-color: $accent-color-4;
 }
 
@@ -23,8 +22,11 @@
       grid-template-rows: 1fr auto auto;
 
       .page-element-wrapper {
-         &.image img {
-            transform: translateX(-20vw);
+         &.image {
+            padding-top: 32px;
+            img {
+               transform: translateX(-20vw);
+            }
          }
 
          &.text {
@@ -84,7 +86,11 @@
       &.image {
          img {
             opacity: 0.7;
+            width: 100%;
             max-height: 100%;
+            display: block;
+            object-fit: contain;
+            object-position: bottom left;
          }
 
          .overlay {

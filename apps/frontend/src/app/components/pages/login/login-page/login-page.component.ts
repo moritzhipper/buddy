@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, ElementRef, NgZone, OnDestroy, ViewChild, inject } from '@angular/core'
-import { Router } from '@angular/router'
+import { Router, RouterModule } from '@angular/router'
 import { UserProfile } from '@buddy/base-utils'
 import { Store } from '@ngrx/store'
 import { ToastType } from 'apps/frontend/src/app/models'
@@ -17,7 +17,7 @@ import { TutorialWrapperComponent } from '../tutorial-wrapper/tutorial-wrapper.c
    templateUrl: './login-page.component.html',
    styleUrls: ['./login-page.component.scss'],
    standalone: true,
-   imports: [CommonModule, TutorialWrapperComponent],
+   imports: [CommonModule, TutorialWrapperComponent, RouterModule],
 })
 export class LoginPageComponent implements OnDestroy {
    @ViewChild('webcamPreview', { static: false })
