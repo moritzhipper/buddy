@@ -8,6 +8,8 @@ type EnvironmentType = {
    dbPW: string
    dbPort: string
    host: string
+   vapidKeyPublic: string
+   vapidKeyPrivate: string
 }
 
 const environment: EnvironmentType = {
@@ -18,6 +20,8 @@ const environment: EnvironmentType = {
    dbPW: env.DB_PW,
    dbPort: env.DB_PORT,
    host: env.HOST,
+   vapidKeyPrivate: env.VAPID_KEY_PRIVATE,
+   vapidKeyPublic: env.VAPID_KEY_PUBLIC,
 }
 
 // verify that all values are set.

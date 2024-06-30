@@ -4,15 +4,14 @@
 
 ### Right now
 
--  add save subscriptions endpoint to backend
 -  read subscriptions from db in push service
 -  allow multiple subscriptions for user
 -  implement deletion of subscription
--  move new db-adapter in shared utils
 -  store subscription stuff encrypted
--  move logger in shared utils
 -  bei profile lesen auslesen, ob notifications gesendet werden dürfen (geht das?)
--  subscription als json abspeichern? ist einfacher
+-  bei abmeldung notifications disablen
+-  hat ein nutzer mehrer anrufbare therapeuten, dann müssen die in einer nachricht geschickt werden
+-  change user for pushservice to read only for few tables?
 
 https://blog.angular-university.io/angular-push-notifications/
 
