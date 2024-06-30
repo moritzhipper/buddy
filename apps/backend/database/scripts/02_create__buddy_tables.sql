@@ -49,10 +49,9 @@ CREATE TABLE "shared_addresses" (
   "postal_code" VARCHAR(10)
 );
 
-CREATE TABLE "sessions" (
+CREATE TABLE "subscriptions" (
   "user_id" uuid NOT NULL,
-  "id" TEXT UNIQUE NOT NULL,
-  "created_at" TIMESTAMP DEFAULT (now())
+  "subscription" JSON NOT NULL
 );
 
 CREATE TABLE "users" (
@@ -69,15 +68,15 @@ CREATE INDEX ON "users_call_times" ("therapist_id");
 
 CREATE INDEX ON "users_addresses" ("therapist_id");
 
+CREATE INDEX ON "shared_therapists" ("name");
+
 CREATE INDEX ON "shared_call_times" ("therapist_id");
 
 CREATE INDEX ON "shared_addresses" ("therapist_id");
 
-CREATE UNIQUE INDEX ON "sessions" ("user_id");
-
 ALTER TABLE "users_therapists" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "sessions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
+ALTER TABLE "subscriptions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
 ALTER TABLE "users_call_times" ADD FOREIGN KEY ("therapist_id") REFERENCES "users_therapists" ("id") ON DELETE CASCADE;
 

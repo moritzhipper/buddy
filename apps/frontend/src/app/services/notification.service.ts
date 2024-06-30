@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core'
 import { SwPush } from '@angular/service-worker'
 import { ToastType } from '../models'
 import { ToastService } from './toast.service'
+import { BackendAdapterService } from './backend-adapter.service'
 
 @Injectable({
    providedIn: 'root',
@@ -11,6 +12,7 @@ export class NotificationService {
 
    swPush = inject(SwPush)
    toastService = inject(ToastService)
+   backendService = inject(BackendAdapterService)
 
    readonly VAPID_PUBLIC_KEY = 'BBZYBgvEegKC57oonu8SiZ64A0Xq3MktHLTgs7oJYaw2iQ7j5Qa_TVaHTrmS3gXGIn_lRtq0BJopaEIpu0755ao'
 
@@ -20,6 +22,7 @@ export class NotificationService {
             serverPublicKey: this.VAPID_PUBLIC_KEY,
          })
          .then((sub) => {
+            this.backendService.addSubscription(sub)
             console.log(sub)
          })
          .catch((err) => {

@@ -11,6 +11,10 @@
 -  move new db-adapter in shared utils
 -  store subscription stuff encrypted
 -  move logger in shared utils
+-  bei profile lesen auslesen, ob notifications gesendet werden dürfen (geht das?)
+-  subscription als json abspeichern? ist einfacher
+
+https://blog.angular-university.io/angular-push-notifications/
 
 ### Soon
 

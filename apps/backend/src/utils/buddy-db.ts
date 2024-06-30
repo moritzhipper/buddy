@@ -1,5 +1,5 @@
+import { environment } from '@buddy/base-utils'
 import pgPromise from 'pg-promise'
-import environment from './environment-adapter'
 import { logger } from './logger'
 import { remapKeys } from './mapper'
 

@@ -7,7 +7,7 @@
       "backend-prod": "nx run backend:serve:production",
       "push-service-dev": "nx run push-service:serve:development",
       "frontend-dev": "nx run frontend:serve:development",
-      "frontend-prod": "nx run frontend:serve-pwa-prod",
+      "frontend-prod": "nx run frontend:serve-static:production",
       "all-dev": "nx run-many -t serve -p backend frontend push-service"
    },
    "private": true,
@@ -24,6 +24,7 @@
       "@ngrx/effects": "^17.2.0",
       "@ngrx/store": "^17.2.0",
       "@nx/angular": "19.0.2",
+      "@types/web-push": "^3.6.3",
       "angularx-qrcode": "^17.0.1",
       "axios": "^1.6.0",
       "cookie-parser": "^1.4.6",
@@ -37,6 +38,7 @@
       "qr-scanner": "^1.4.2",
       "rxjs": "~7.8.0",
       "tslib": "^2.3.0",
+      "web-push": "^3.6.7",
       "zod": "^3.23.8",
       "zone.js": "~0.14.3"
    },

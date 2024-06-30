@@ -73,16 +73,9 @@ Table shared_addresses {
   }
 }
 
-
-
-Table sessions {
+Table subscriptions {
   user_id uuid [not null]
-  id TEXT [unique, not null]
-  created_at TIMESTAMP [default: `now()`]
-
-  Indexes {
-    (user_id) [unique]
-  }
+  subscription JSON [not null]
 }
 
 Table users {
@@ -95,7 +88,7 @@ Table users {
 
 
 Ref: users.id < users_therapists.user_id [delete: cascade]
-Ref: users.id < sessions.user_id [delete: cascade]
+Ref: users.id < subscriptions.user_id [delete: cascade]
 
 Ref: users_therapists.id <  users_call_times.therapist_id [delete: cascade]
 Ref: users_therapists.id - users_addresses.therapist_id [delete: cascade]

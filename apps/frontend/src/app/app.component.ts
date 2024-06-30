@@ -22,7 +22,7 @@ import { BuddyState } from './store/buddy.state'
    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-   showDebugButtons = false
+   showDebugButtons = true
    private _toastIterator = 1
    isOffline = false
    profilePageIsOpen$: Observable<boolean>
@@ -47,10 +47,6 @@ export class AppComponent implements OnInit {
 
    sendNotification() {
       this.notificationService.askPermission()
-      this.notificationService.send({
-         title: 'Test notification header',
-         body: 'Test notification bodytext',
-      })
    }
 
    sendToast() {

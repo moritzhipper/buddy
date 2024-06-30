@@ -93,8 +93,8 @@ export const PushSubscriptionSchema = z
       endpoint: z.string(),
       expirationTime: z.null(),
       keys: z.object({
-         p265dh: z.string(),
          auth: z.string(),
+         p256dh: z.string(),
       }),
    })
    .strict()

@@ -16,10 +16,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "apps/frontend/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-               "apps/frontend/src/assets",
-               "apps/frontend/src/manifest.webmanifest"
-            ],
+            "assets": ["apps/frontend/src/assets", "apps/frontend/src/manifest.webmanifest"],
             "styles": ["apps/frontend/src/style/styles.scss"],
             "stylePreprocessorOptions": {
                "includePaths": ["apps/frontend/src/style"]

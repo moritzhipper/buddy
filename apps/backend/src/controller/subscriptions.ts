@@ -11,13 +11,8 @@ subscriptionsRoute.post(
    '/',
    validateReqBody(PushSubscriptionSchema),
    expressAsyncHandler(async (req, res) => {
-      // save subscription in DB here
-      const endpoint = req.body.endpoint
-      const p265dh = req.body.keys.p265dh
-      const key = req.body.keys.auth
-
-      const insert = pgp.helpers.insert({ endpoint, p265dh, key }, null, 'subscriptions')
-      const saveSuccesfull = buddyDB.result(insert, [res.locals.userID, endpoint, p265dh, key], (res) => res.rowCount === 1)
+      const insert = pgp.helpers.insert({ user_id: res.locals.userID, subscription: req.body }, null, 'subscriptions')
+      const saveSuccesfull = buddyDB.result(insert, null, (res) => res.rowCount === 1)
 
       if (saveSuccesfull) {
          res.send()

@@ -1,4 +1,4 @@
-import { BuddyRoutes } from '@buddy/base-utils'
+import { BuddyRoutes, environment } from '@buddy/base-utils'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -8,7 +8,6 @@ import subscriptionsRoute from './controller/subscriptions'
 import therapistsRoute from './controller/therapists'
 import { authorize } from './utils/authoriztion-utils'
 import { testDBConnection } from './utils/buddy-db'
-import environment from './utils/environment-adapter'
 import { errorHandler } from './utils/error-handler'
 import { logger, loggerMiddleware } from './utils/logger'
 import { validateSecretFromHeaderOrCookie as validateSecret } from './utils/schema-validators'
@@ -33,7 +32,7 @@ app.use(validateSecret)
 app.use(authorize)
 app.use(BuddyRoutes.PROFILE, profileRoute)
 app.use(BuddyRoutes.THERAPISTS, therapistsRoute)
-app.use(BuddyRoutes.SUBSCRIPTION, subscriptionsRoute)
+app.use(BuddyRoutes.SUBSCRIPTIONS, subscriptionsRoute)
 app.use(errorHandler)
 
 const server = app.listen(PORT, async () => {
