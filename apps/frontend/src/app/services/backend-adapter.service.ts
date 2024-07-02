@@ -55,7 +55,8 @@ export class BackendAdapterService {
       return this._httpClient.delete(this.SERVICE_URL + BuddyRoutes.PROFILE)
    }
 
-   addSubscription(pushSubscription: any): void {
-      this._httpClient.post(this.SERVICE_URL + BuddyRoutes.SUBSCRIPTIONS, pushSubscription).subscribe()
+   addSubscription(pushSubscription: any): Observable<any> {
+      debugger
+      return this._httpClient.post(this.SERVICE_URL + BuddyRoutes.SUBSCRIPTIONS, pushSubscription)
    }
 }

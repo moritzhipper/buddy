@@ -4,6 +4,14 @@
 
 ### Right now
 
+-  in store einbauen methoden aus notification service
+   -  browserissetupcorrectly
+   -  backendknowsofsubscription
+   -  dann okay an service
+-  in store einbauen
+   -  remove notifications
+-  dann auch in settings ergänzen
+
 -  read subscriptions from db in push service
 -  allow multiple subscriptions for user
 -  implement deletion of subscription

@@ -34,10 +34,10 @@ export class StateSyncEffects {
       () =>
          this.actions$.pipe(
             ofType(errorToastAction),
-            tap(() => {
+            tap((action) => {
                this.toastService.sendToast({
                   type: ToastType.ERROR,
-                  text: 'Es ist ein Fehler aufgetreten. Versuche es später erneut.',
+                  text: action.message,
                })
             })
          ),

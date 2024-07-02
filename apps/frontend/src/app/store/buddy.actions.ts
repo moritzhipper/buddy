@@ -43,5 +43,14 @@ export const searchActions = createActionGroup({
    },
 })
 
+export const localConfigActions = createActionGroup({
+   source: 'Local Config',
+   events: {
+      'Verify Notifications Permission': emptyProps(),
+      'Notification Verification Successfull': emptyProps(),
+      'Remove Notification Permission': emptyProps(),
+      'Notification Removal Successfull': emptyProps(),
+   },
+})
 export const httpErrorAction = createAction('Http Error', props<{ error: HttpErrorResponse }>())
 export const errorToastAction = createAction('Error Toast', props<{ message: string }>())

@@ -11,7 +11,7 @@ import { ToastComponent } from './components/shared/toast/toast.component'
 import { ToastType } from './models'
 import { NotificationService } from './services/notification.service'
 import { ToastService } from './services/toast.service'
-import { therapistActions } from './store/buddy.actions'
+import { localConfigActions, therapistActions } from './store/buddy.actions'
 import { BuddyState } from './store/buddy.state'
 
 @Component({
@@ -34,12 +34,10 @@ export class AppComponent implements OnInit {
    ngOnInit(): void {
       window.addEventListener('online', this.updateOnlineStatus.bind(this))
       window.addEventListener('offline', this.updateOnlineStatus.bind(this))
-      this.notificationService.verifySubscriptionExists()
    }
 
    verifyNotifications() {
-      console.log('wtf')
-      this.notificationService.verifySubscriptionExists()
+      this._store.dispatch(localConfigActions.verifyNotificationsPermission())
    }
 
    private updateOnlineStatus(): void {

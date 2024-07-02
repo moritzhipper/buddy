@@ -1,7 +1,7 @@
 import { UniqueItem } from '@buddy/base-utils'
 import { ActionReducer, createReducer, INIT, MetaReducer, on, UPDATE } from '@ngrx/store'
-import { profileActions, searchActions, therapistActions } from './buddy.actions'
-import { SearchState } from './buddy.state'
+import { localConfigActions, profileActions, searchActions, therapistActions } from './buddy.actions'
+import { LocalConfigState, SearchState } from './buddy.state'
 
 export const therapistsReducer = createReducer(
    [],
@@ -14,6 +14,12 @@ export const profileReducer = createReducer(
    {},
    on(profileActions.createProfileSuccess, profileActions.loadProfileSuccess, (state, { profile }) => profile),
    on(profileActions.updateSuccess, (state, { profile }) => ({ ...state, ...profile }))
+)
+
+export const localConfigReducer = createReducer(
+   { notificationsEnabled: false } as LocalConfigState,
+   on(localConfigActions.notificationVerificationSuccessfull, () => ({ notificationsEnabled: true })),
+   on(localConfigActions.notificationRemovalSuccessfull, () => ({ notificationsEnabled: false }))
 )
 
 export const searchReducer = createReducer(

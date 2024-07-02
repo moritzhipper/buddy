@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { NotificationService } from 'apps/frontend/src/app/services/notification.service'
+import { Store } from '@ngrx/store'
+import { localConfigActions } from 'apps/frontend/src/app/store/buddy.actions'
 import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 import { AccordionComponent } from '../accordion/accordion.component'
 
@@ -12,8 +13,8 @@ import { AccordionComponent } from '../accordion/accordion.component'
    imports: [AccordionComponent, RouterModule, BackgroundPictureComponent],
 })
 export class InfoPageComponent {
-   private notificationService = inject(NotificationService)
+   private store = inject(Store)
    verifySubscriptionExists() {
-      this.notificationService.verifySubscriptionExists()
+      this.store.dispatch(localConfigActions.verifyNotificationsPermission())
    }
 }
