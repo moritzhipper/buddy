@@ -1,5 +1,4 @@
-import webpush from 'web-push'
-import { buddyWebpush, logger } from './tools'
+import { logger } from './tools'
 import { fetchOpenNotifications, generateNotification } from './utils'
 
 // setInterval(notify, 1000 * 60)
@@ -15,8 +14,8 @@ async function notify() {
 
       let notificationRequests = []
       for (let subscription of subscriptions) {
-         const notification = generateNotification('Felia flieder', '14:15')
-         notificationRequests.push(buddyWebpush.sendNotification(subscription.subscription, notification))
+         const notificationObjAsString = generateNotification('Felia flieder', '14:15')
+         // notificationRequests.push(buddyWebpush.sendNotification(subscription.subscription, notification))
       }
 
       try {
@@ -29,4 +28,4 @@ async function notify() {
    }
 }
 
-notify()
+// notify()

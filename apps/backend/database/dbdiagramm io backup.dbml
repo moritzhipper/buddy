@@ -22,7 +22,7 @@ Table users_call_times {
   reminder BOOLEAN [default: FALSE]
 
   Indexes {
-    therapist_id
+    (therapist_id, from)
   }
 }
 
@@ -74,7 +74,7 @@ Table shared_addresses {
 }
 
 Table subscriptions {
-  user_id uuid [not null]
+  user_id uuid [unique, not null]
   subscription JSON [not null]
 }
 

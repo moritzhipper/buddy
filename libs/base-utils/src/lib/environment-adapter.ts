@@ -1,5 +1,3 @@
-const env = process.env as { [key: string]: string }
-
 type EnvironmentType = {
    nodeEnv: string
    port: string
@@ -8,24 +6,31 @@ type EnvironmentType = {
    dbPW: string
    dbPort: string
    host: string
-   vapidKeyPublic: string
    vapidKeyPrivate: string
+   vapidKeyPublic: string
 }
 
-const environment: EnvironmentType = {
-   nodeEnv: env.NODE_ENV,
-   port: env.PORT,
-   logLevel: env.LOG_LEVEL,
-   dbUser: env.DB_USER,
-   dbPW: env.DB_PW,
-   dbPort: env.DB_PORT,
-   host: env.HOST,
-   vapidKeyPrivate: env.VAPID_KEY_PRIVATE,
-   vapidKeyPublic: env.VAPID_KEY_PUBLIC,
+function readEnvironmentKeys(processEnv: any): EnvironmentType {
+   return {
+      nodeEnv: processEnv['NODE_ENV'],
+      port: processEnv['PORT'],
+      logLevel: processEnv['LOG_LEVEL'],
+      dbUser: processEnv['DB_USER'],
+      dbPW: processEnv['DB_PW'],
+      dbPort: processEnv['DB_PORT'],
+      host: processEnv['HOST'],
+      vapidKeyPrivate: processEnv['VAPID_KEY_PRIVATE'],
+      vapidKeyPublic: processEnv['VAPID_KEY_PUBLIC'],
+   }
 }
 
-// verify that all values are set.
-const emptyKeys = Object.keys(environment).filter((key) => !(environment as any)[key])
-if (emptyKeys.length > 0) throw Error(`Missing env values for ${JSON.stringify(emptyKeys)}`)
+function verifyAllEnvironmentKeysAreSet(environment: any): void {
+   const emptyKeys = Object.keys(environment).filter((key) => !environment[key])
+   if (emptyKeys.length > 0) throw Error(`Missing env values for ${JSON.stringify(emptyKeys)}`)
+}
 
-export { EnvironmentType, environment }
+export function getEnvironmentKeys(processEnv: any): EnvironmentType {
+   const environment = readEnvironmentKeys(processEnv)
+   verifyAllEnvironmentKeysAreSet(environment)
+   return environment
+}

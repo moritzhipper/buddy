@@ -32,9 +32,14 @@ export class AppComponent implements OnInit {
    private toastService = inject(ToastService)
 
    ngOnInit(): void {
-      this.updateOnlineStatus()
       window.addEventListener('online', this.updateOnlineStatus.bind(this))
       window.addEventListener('offline', this.updateOnlineStatus.bind(this))
+      this.notificationService.verifySubscriptionExists()
+   }
+
+   verifyNotifications() {
+      console.log('wtf')
+      this.notificationService.verifySubscriptionExists()
    }
 
    private updateOnlineStatus(): void {
@@ -43,10 +48,6 @@ export class AppComponent implements OnInit {
       if (!this.isOffline) {
          this.toastService.sendToast({ text: 'Du bist wieder online' })
       }
-   }
-
-   sendNotification() {
-      this.notificationService.askPermission()
    }
 
    sendToast() {

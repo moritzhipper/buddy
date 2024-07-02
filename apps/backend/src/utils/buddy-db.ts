@@ -1,7 +1,7 @@
-import { environment } from '@buddy/base-utils'
 import pgPromise from 'pg-promise'
 import { logger } from './logger'
 import { remapKeys } from './mapper'
+import { environment } from './environment'
 
 const pgp = pgPromise({
    receive(e) {

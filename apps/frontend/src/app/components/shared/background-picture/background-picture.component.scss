@@ -21,14 +21,14 @@
    }
 }
 
-@include small-screen {
+@include medium-small-screen {
    :host {
       // account for nav-bar at bottom
       padding: 0 8px 76px 8px;
    }
 }
 
-@include big-screen {
+@include medium-big-screen {
    :host {
       height: 70vh;
       padding: 0 32px;

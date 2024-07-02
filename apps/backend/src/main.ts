@@ -1,4 +1,4 @@
-import { BuddyRoutes, environment } from '@buddy/base-utils'
+import { BuddyRoutes } from '@buddy/base-utils'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -11,6 +11,7 @@ import { testDBConnection } from './utils/buddy-db'
 import { errorHandler } from './utils/error-handler'
 import { logger, loggerMiddleware } from './utils/logger'
 import { validateSecretFromHeaderOrCookie as validateSecret } from './utils/schema-validators'
+import { environment } from './utils/environment'
 
 const app: Express = express()
 const PORT = environment.port

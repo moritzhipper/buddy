@@ -41,5 +41,45 @@ export async function fetchOpenNotifications(): Promise<TherapistNotification[]>
    // ziehe userIDS von usern, die eine subscription haben
    // ziehe therapeuten, die den zeitstring haben
    // schicke notifications
-   return await buddyDB.manyOrNone<{ subscription: webpush.PushSubscription }>('SELECT subscription FROM subscriptions')
+
+   //------
+
+   const timeIn15Minutes = '08:00'
+   const weekday = 'mo'
+
+   // edgecases: multiple therapists callable
+   // multiple subscriptions active
+   // multiple entries for the same subscription
+   const dbResponse = await buddyDB.manyOrNone<{ subscription: webpush.PushSubscription }>(
+      `SELECT s.subscription, ut.name AS therapist_name, ut.user_id
+      FROM subscriptions s
+      JOIN users_therapists ut ON s.user_id = ut.user_id
+      JOIN users_call_times uct ON ut.id = uct.therapist_id
+      WHERE uct."from" = $1 AND uct.weekday = $2`,
+      [timeIn15Minutes, weekday]
+   )
+
+   for (let row of dbResponse) {
+   }
+
+   type NotificatableByUser = { id: string; names: string[]; subscriptions: any[] }
+
+   // fetch all callable names per user and map them to an array
+   // fetch all subscriptions per user
+
+   // generate a TherapistNotification for every subscript
+   // map those name on one instance of TherapisNotification
+   // fetch all subscriptions per user
+   //
+
+   return
 }
+
+// const dbResponse = await buddyDB.manyOrNone<{ subscription: webpush.PushSubscription }>(
+//    `SELECT s.subscription, ut.name AS therapist_name, ut.user_id
+//    FROM subscriptions s
+//    JOIN users_therapists ut ON s.user_id = ut.user_id
+//    JOIN users_call_times uct ON ut.id = uct.therapist_id
+//    WHERE uct.from = '08:00' AND uct.weekday = 'mo'`,
+//    timeIn15Minutes
+// )

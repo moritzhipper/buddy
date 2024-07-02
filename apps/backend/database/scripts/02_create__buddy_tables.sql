@@ -50,7 +50,7 @@ CREATE TABLE "shared_addresses" (
 );
 
 CREATE TABLE "subscriptions" (
-  "user_id" uuid NOT NULL,
+  "user_id" uuid UNIQUE NOT NULL,
   "subscription" JSON NOT NULL
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE "users" (
 
 CREATE UNIQUE INDEX ON "users_therapists" ("id", "user_id");
 
-CREATE INDEX ON "users_call_times" ("therapist_id");
+CREATE INDEX ON "users_call_times" ("therapist_id", "from");
 
 CREATE INDEX ON "users_addresses" ("therapist_id");
 

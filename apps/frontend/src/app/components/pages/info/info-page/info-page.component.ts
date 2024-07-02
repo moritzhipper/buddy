@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { RouterModule } from '@angular/router'
+import { NotificationService } from 'apps/frontend/src/app/services/notification.service'
 import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
 import { AccordionComponent } from '../accordion/accordion.component'
 
@@ -10,4 +11,9 @@ import { AccordionComponent } from '../accordion/accordion.component'
    standalone: true,
    imports: [AccordionComponent, RouterModule, BackgroundPictureComponent],
 })
-export class InfoPageComponent {}
+export class InfoPageComponent {
+   private notificationService = inject(NotificationService)
+   verifySubscriptionExists() {
+      this.notificationService.verifySubscriptionExists()
+   }
+}

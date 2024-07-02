@@ -1,6 +1,5 @@
 @use '_index' as *;
 
-
 .body-wrapper {
    padding: 0 16px 16px 16px;
 
@@ -8,14 +7,21 @@
       margin-top: 16px;
       font-weight: bold;
    }
+   button {
+      @include buttonSmall;
+      margin: 8px;
+      display: inline-block;
+   }
 
-   p.important {
-      display: flex;
-      align-items: center;
+   p {
+      &.important {
+         display: flex;
+         align-items: center;
 
-      span:first-child {
-         margin-right: 10px;
-         font-size: 2em;
+         span:first-child {
+            margin-right: 10px;
+            font-size: 2em;
+         }
       }
    }
 

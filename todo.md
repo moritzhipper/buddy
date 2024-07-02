@@ -8,15 +8,30 @@
 -  allow multiple subscriptions for user
 -  implement deletion of subscription
 -  store subscription stuff encrypted
--  bei profile lesen auslesen, ob notifications gesendet werden dürfen (geht das?)
 -  bei abmeldung notifications disablen
 -  hat ein nutzer mehrer anrufbare therapeuten, dann müssen die in einer nachricht geschickt werden
 -  change user for pushservice to read only for few tables?
+-  wie handle ich mehrere subscriptions? eigentlich muss ich ein distinct check auf die subscription-url machen
+-  bei profile lesen auslesen, ob notifications gesendet werden dürfen (geht das?)
+-  benachrichtigungsstatus in den settings: erlauben/verbieten
+
+SELECT
+s.user_id,
+STRING_AGG(ut.name, ', ') AS therapist_names,
+s.subscription
+FROM subscriptions s
+JOIN users_therapists ut ON s.user_id = ut.user_id
+JOIN users_call_times uct ON ut.id = uct.therapist_id
+WHERE uct."from" = '13:15'
+GROUP BY s.user_id, s.subscription;
+der geht, ausser equality operation auf subscription
 
 https://blog.angular-university.io/angular-push-notifications/
+https://v17.angular.io/guide/service-worker-notifications
 
 ### Soon
 
+-  Toasts -> toast Erfolgsmeldungen auch über store regeln (Löschen von therapeuten, etc, einfach im code nach toasts suchen)
 -  impressum, about und info page updaten und texte gerade ziehen
 -  Tipps in app anzeigen 'Du hast auch eine Adresse gefunden? Üertrage sie doch auch, damit andree Suchende davon profitieren können :)' -> Dazu sweete hintergrundbilder für sympathie und hilfsbereitschaft
 -  wenn therapeut keine infos ztu feld hat, anzeigen unter 'noch nicht angegeben' kategorie -> wie umgehen, wenn therapieart nicht angegeben?
