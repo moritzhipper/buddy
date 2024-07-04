@@ -13,20 +13,34 @@ export class NotificationService {
 
    private readonly VAPID_PUBLIC_KEY = environment.vapidKeyPublic
 
-   async verifyBrowserPermissions(): Promise<boolean> {
-      const pwaIsNotInstalled = !this.pwaIsInstalled()
+   async setupPushSubscriptions(): Promise<PushSubscription> {
+      const isAllowedToNotify = await this.notificationPermissionIsGiven()
+      const isInstalled = this.pwaIsInstalled()
+
+      if (isAllowedToNotify && isInstalled) {
+         return await this.getSubscriptionFrombrowser()
+      } else {
+         return undefined
+      }
+   }
+
+   private async getSubscriptionFrombrowser(): Promise<PushSubscription> {
+      try {
+         return await this.swPush.requestSubscription({ serverPublicKey: this.VAPID_PUBLIC_KEY })
+      } catch (e) {
+         // todo log to backend here
+         console.log('Error getting subscription from Browser even though user permitted it')
+         return undefined
+      }
+   }
+
+   private async notificationPermissionIsGiven(): Promise<boolean> {
       await Notification.requestPermission()
 
-      if (pwaIsNotInstalled) {
+      if (Notification.permission === 'denied') {
          this.toastService.sendToast({
             type: ToastType.ERROR,
-            text: `Installiere die App, um Benachrichtigungen zu erhalten. Lese dies unter 'Infos' nach`,
-         })
-         return false
-      } else if (Notification.permission === 'denied') {
-         this.toastService.sendToast({
-            type: ToastType.ERROR,
-            text: `Du hast Benachrichtigungen deaktiviert. Lese unter 'Info' nach, wie du sie wieder aktivieren kannst.`,
+            text: `Du hast Benachrichtigungen noch nicht zugestimmt.`,
          })
          return false
       }
@@ -34,19 +48,17 @@ export class NotificationService {
       return true
    }
 
-   async getSubscriptionFromBrowser(): Promise<PushSubscription> {
-      const browserIsSetupCorrectly = await this.verifyBrowserPermissions()
+   private pwaIsInstalled(): boolean {
+      const isInstalled = window.matchMedia('(display-mode: standalone)').matches || ('standalone' in navigator && navigator.standalone === true)
 
-      if (!browserIsSetupCorrectly) throw Error('')
+      if (!isInstalled) {
+         this.toastService.sendToast({
+            type: ToastType.ERROR,
+            text: `Die App ist noch nicht installiert.`,
+         })
+         return false
+      }
 
-      const pushSubscription = await this.swPush.requestSubscription({ serverPublicKey: this.VAPID_PUBLIC_KEY })
-
-      if (!pushSubscription) throw Error()
-
-      return pushSubscription
-   }
-
-   private pwaIsInstalled() {
-      return window.matchMedia('(display-mode: standalone)').matches || ('standalone' in navigator && navigator.standalone === true)
+      return true
    }
 }

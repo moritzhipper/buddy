@@ -19,7 +19,9 @@
          <h3>Anruferinnerung</h3>
          <button class="change" (click)="changeCalltimeRimender(profile.callPrecautionTime)">ändern</button>
       </span>
-      <b>{{ profile.callPrecautionTime }}</b> Minuten früher
+      <p>
+         <b>{{ profile.callPrecautionTime }}</b> Minuten früher.
+      </p>
    </div>
 
    <div class="settings-element-wrapper">
@@ -27,7 +29,22 @@
          <h3>QR-Key neu generieren</h3>
          <button class="change" (click)="generateNewQrCode()">generieren</button>
       </span>
-      Generiere einen Neuen QR-Key, um deinen alten unbenutzbar zu machen.
+      <p>Generiere einen Neuen QR-Key, um deinen alten unbenutzbar zu machen.</p>
+   </div>
+
+   <div class="settings-element-wrapper">
+      <span>
+         <h3>Benachrichtigungen</h3>
+         @if(notificationsEnabled$ | async) {
+         <button class="change" (click)="deactivateNotifications()">deaktivieren</button>
+         } @else {
+         <button class="change" (click)="activateNotifications()">aktivieren</button>
+         }
+      </span>
+      <p>
+         Nur wenn du diese Option angeschaltet hast, kannst du rechtzeitig an Anrufzeiten erinnert werden. Sie sind für dieses Gerät
+         <b> {{ (notificationsEnabled$ | async) ? 'aktiviert' : 'deaktiviert' }}. </b>
+      </p>
    </div>
 
    <div class="settings-element-wrapper">
@@ -35,14 +52,14 @@
          <h3>Abmelden</h3>
          <button class="change" (click)="logout()">abmelden</button>
       </span>
-      Nutze einen QR-Key, um ein anderes profil zu verbinden
+      <p>Nutze einen QR-Key, um ein anderes profil zu verbinden</p>
    </div>
    <div class="settings-element-wrapper">
       <span>
          <h3>Profil löschen</h3>
          <button class="change delete" (click)="deleteAllUserData()">löschen</button>
       </span>
-      Lösche alle deine Persönlichen Daten
+      <p>Lösche alle deine Persönlichen Daten.</p>
    </div>
 </div>
 

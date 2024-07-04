@@ -4,6 +4,7 @@
 
 ### Right now
 
+-  effect und errorhandling gerade ziehen
 -  in store einbauen methoden aus notification service
    -  browserissetupcorrectly
    -  backendknowsofsubscription

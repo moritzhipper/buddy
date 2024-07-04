@@ -26,7 +26,7 @@ subscriptionsRoute.post(
 subscriptionsRoute.delete(
    '/',
    expressAsyncHandler(async (req, res) => {
-      const result = await buddyDB.result(`DELETE FROM subscriptions WHERE user_id = $1`)
+      const result = await buddyDB.result(`DELETE FROM subscriptions WHERE user_id = $1`, [res.locals.userID])
       logger.info(`${result.rowCount} rows affected by deletion`)
 
       res.send()

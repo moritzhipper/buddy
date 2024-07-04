@@ -98,8 +98,14 @@
             auswählen
          </p>
          <h3>2. Benachrichtigungen für diese App aktiviert</h3>
+         @if(notificationsEnabled$ | async) {
+         <p><b>Benachrichtigungen sind Bereits aktiviert.</b></p>
+         } @else {
          <p>Klicke einfach hier: <button (click)="verifySubscriptionExists()">Benachrichtigungen aktivieren</button></p>
+
+         }
          <p>Wenn du sie aus Versehen deaktiviert hast, Navigiere zu den Einstellungen deines Browsers // TODO: fertig erklären</p>
+         <p>Manche Browser, darunter Firefox, erlauben das leider nicht.</p>
       </div>
    </app-accordion>
    <app-accordion>

@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { from, switchMap, take } from 'rxjs'
+import { from, map, switchMap, take } from 'rxjs'
 import { ToastType } from '../../../../models'
 import { InputResolveTypes, InputService, InputTypes } from '../../../../services/input.service'
 import { ToastService } from '../../../../services/toast.service'
-import { profileActions } from '../../../../store/buddy.actions'
-import { selectUserProfile } from '../../../../store/buddy.selectors'
+import { localConfigActions, profileActions } from '../../../../store/buddy.actions'
+import { selectLocalConfig, selectUserProfile } from '../../../../store/buddy.selectors'
 import { BuddyState } from '../../../../store/buddy.state'
 import { vibrateWarning } from '../../../../utils'
-import { QrCodeComponent } from '../../../shared/qr-code/qr-code.component'
 import { BackgroundPictureComponent } from '../../../shared/background-picture/background-picture.component'
+import { QrCodeComponent } from '../../../shared/qr-code/qr-code.component'
 
 export class AppSettings {
    calltimeReminderMinutesAdvance: number = 15
@@ -27,6 +27,7 @@ export class AppSettings {
 })
 export class SettingsPageComponent {
    userProfile$ = this._store.select(selectUserProfile)
+   notificationsEnabled$ = this._store.select(selectLocalConfig).pipe(map((conf) => conf.notificationsEnabled))
 
    constructor(private _inputService: InputService, private _store: Store<BuddyState>, private _toastService: ToastService) {}
 
@@ -108,5 +109,13 @@ export class SettingsPageComponent {
                this._store.dispatch(profileActions.logout())
             }
          })
+   }
+
+   deactivateNotifications() {
+      this._store.dispatch(localConfigActions.removeNotificationPermission())
+   }
+
+   activateNotifications() {
+      this._store.dispatch(localConfigActions.verifyNotificationsPermission())
    }
 }
