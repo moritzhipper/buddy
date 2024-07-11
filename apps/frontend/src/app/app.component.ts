@@ -37,7 +37,6 @@ export class AppComponent implements OnInit {
    }
 
    verifyNotifications() {
-      this._store.dispatch(localConfigActions.verifyNotificationsPermission())
    }
 
    private updateOnlineStatus(): void {

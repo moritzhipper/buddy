@@ -14,23 +14,21 @@ export class LocalConfigEffects {
    verifyNotificationPermission$ = createEffect(() =>
       this.actions$.pipe(
          ofType(localConfigActions.verifyNotificationsPermission),
-         switchMap(() => this.notificationService.setupPushSubscriptions()),
-         switchMap((pushSubscription) => {
-            if (pushSubscription) {
-               return this.backendAdapter.addSubscription(pushSubscription).pipe(
-                  map(() => localConfigActions.notificationVerificationSuccessfull()),
-                  catchError((error) => of(httpErrorAction({ error })))
-               )
-            } else {
-               return of(errorToastAction({ message: `Lese unter 'Infos' nach, wie du Benachrichtigungen aktivierst.` }))
-            }
-         })
+         switchMap(() => this.notificationService.getPushSubscription()),
+         switchMap((pushSubscription) =>
+            this.backendAdapter.addSubscription(pushSubscription).pipe(
+               map(() => localConfigActions.notificationVerificationSuccessfull()),
+               catchError((error) => of(httpErrorAction({ error })))
+            )
+         ),
+         catchError((e) => of(errorToastAction({ message: e.message })))
       )
    )
 
    removeNotificationPermission$ = createEffect(() =>
       this.actions$.pipe(
          ofType(localConfigActions.removeNotificationPermission),
+         switchMap(() => this.notificationService.unsubscribePushSubscription()),
          switchMap(() => {
             return this.backendAdapter.removeSubscription().pipe(
                map(() => localConfigActions.notificationRemovalSuccessfull()),

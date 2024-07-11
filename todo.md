@@ -4,6 +4,13 @@
 
 ### Right now
 
+-  check if subscription acitvated
+
+   -  no installation necessary, because service worker always is
+      installed via turthyness of swPush (because its only avalable if serviceworker is available )
+
+-  unsubscribe action aus service bei unsubscribe
+   -  wie asyn in service????
 -  effect und errorhandling gerade ziehen
 -  in store einbauen methoden aus notification service
    -  browserissetupcorrectly

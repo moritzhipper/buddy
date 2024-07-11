@@ -84,11 +84,19 @@
          <h2>Wie man Benachrichtigungen aktiviert</h2>
       </div>
       <div content>
-         <h3>1. App Installieren</h3>
-         <p>
-            Nur, wenn diese App installiert ist, kann sie dir Benachrichtigungen schicken und dich an Anrufzeiten erinnern. Die beliebtesten Browser,
-            darunter Safari, Chrome, Edge und Samsungs Internet ermöglichen dir aber die Installation dieser Webapp auf deinem Gerät.
-         </p>
+         @if(notificationsEnabled$ | async) {
+         <p><b>Benachrichtigungen sind Bereits aktiviert.</b></p>
+         } @else {
+         <p>Klicke einfach hier: <button (click)="verifySubscriptionExists()">Benachrichtigungen aktivieren</button></p>
+         }
+         <p>Wenn du sie aus Versehen deaktiviert hast, Navigiere zu den Einstellungen deines Browsers // TODO: fertig erklären</p>
+      </div>
+   </app-accordion>
+   <app-accordion>
+      <div header>
+         <h2>Wie man die App installiert</h2>
+      </div>
+      <div content>
          <p>
             <b> Auf Chrome, Edge und Samsung Internet</b>
             musst du die das drei Punkte Menü öffnen und dann die Option 'App installieren' asuwählen
@@ -97,15 +105,6 @@
             <b>Auf Safari</b> musst du das Teilensymbol (das Viereck mit dem Pfeil nach oben) berühren und dann die Option 'Zum Home Bildschirm'
             auswählen
          </p>
-         <h3>2. Benachrichtigungen für diese App aktiviert</h3>
-         @if(notificationsEnabled$ | async) {
-         <p><b>Benachrichtigungen sind Bereits aktiviert.</b></p>
-         } @else {
-         <p>Klicke einfach hier: <button (click)="verifySubscriptionExists()">Benachrichtigungen aktivieren</button></p>
-
-         }
-         <p>Wenn du sie aus Versehen deaktiviert hast, Navigiere zu den Einstellungen deines Browsers // TODO: fertig erklären</p>
-         <p>Manche Browser, darunter Firefox, erlauben das leider nicht.</p>
       </div>
    </app-accordion>
    <app-accordion>

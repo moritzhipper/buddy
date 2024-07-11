@@ -25,8 +25,8 @@
       }
    }
 
-   app-accordion:not(:last-child) {
-      border-bottom: 1px solid $line-color-light;
+   app-accordion {
+      border-top: 1px solid $line-color-light;
    }
 
    a.page {

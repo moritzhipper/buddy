@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core'
 import { SwPush } from '@angular/service-worker'
 import { environment } from '../../environments/environment'
-import { ToastType } from '../models'
 import { ToastService } from './toast.service'
 
 @Injectable({
@@ -13,52 +12,33 @@ export class NotificationService {
 
    private readonly VAPID_PUBLIC_KEY = environment.vapidKeyPublic
 
-   async setupPushSubscriptions(): Promise<PushSubscription> {
-      const isAllowedToNotify = await this.notificationPermissionIsGiven()
-      const isInstalled = this.pwaIsInstalled()
+   async getPushSubscription(): Promise<PushSubscription> {
+      // do this seperatly from swPush method to be able to give user explicit cause of error
+      const isAllowedToNotify = (await Notification.requestPermission()) === 'granted'
 
-      if (isAllowedToNotify && isInstalled) {
-         return await this.getSubscriptionFrombrowser()
-      } else {
-         return undefined
+      if (!isAllowedToNotify) {
+         throw new Error('Du hast benachrichtigungen nicht zugestimmt.')
       }
-   }
 
-   private async getSubscriptionFrombrowser(): Promise<PushSubscription> {
       try {
-         return await this.swPush.requestSubscription({ serverPublicKey: this.VAPID_PUBLIC_KEY })
+         const subscription = await this.swPush.requestSubscription({ serverPublicKey: this.VAPID_PUBLIC_KEY })
+         return subscription
       } catch (e) {
          // todo log to backend here
-         console.log('Error getting subscription from Browser even though user permitted it')
-         return undefined
+         console.log(e)
+         throw new Error('Es ist ein unerwarteter Fehler aufgetreten.')
       }
    }
 
-   private async notificationPermissionIsGiven(): Promise<boolean> {
-      await Notification.requestPermission()
-
-      if (Notification.permission === 'denied') {
-         this.toastService.sendToast({
-            type: ToastType.ERROR,
-            text: `Du hast Benachrichtigungen noch nicht zugestimmt.`,
-         })
-         return false
+   /**
+    * Ignore results, because backend will stop sending notifications nevertheless as backend call removing subscription follows
+    */
+   async unsubscribePushSubscription(): Promise<void> {
+      try {
+         await this.swPush.unsubscribe()
+      } catch (e) {
+         // todo log to backend here
+         console.log(e)
       }
-
-      return true
-   }
-
-   private pwaIsInstalled(): boolean {
-      const isInstalled = window.matchMedia('(display-mode: standalone)').matches || ('standalone' in navigator && navigator.standalone === true)
-
-      if (!isInstalled) {
-         this.toastService.sendToast({
-            type: ToastType.ERROR,
-            text: `Die App ist noch nicht installiert.`,
-         })
-         return false
-      }
-
-      return true
    }
 }

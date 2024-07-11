@@ -24,6 +24,8 @@ export class StateSyncEffects {
 
                return profileActions.logout()
             } else {
+               // todo: ans backend schicken
+               console.log(action.error)
                return errorToastAction({ message: 'Es ist ein Fehler aufgetreten. Versuche es später erneut.' })
             }
          })
