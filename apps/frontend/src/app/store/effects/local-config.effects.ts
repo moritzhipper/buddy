@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { catchError, map, of, switchMap } from 'rxjs'
+import { catchError, map, of, startWith, switchMap } from 'rxjs'
 import { BackendAdapterService } from '../../services/backend-adapter.service'
 import { NotificationService } from '../../services/notification.service'
 import { errorToastAction, httpErrorAction, localConfigActions } from '../buddy.actions'
@@ -21,7 +21,7 @@ export class LocalConfigEffects {
                catchError((error) => of(httpErrorAction({ error })))
             )
          ),
-         catchError((e) => of(errorToastAction({ message: e.message })))
+         catchError((e, source) => source.pipe(startWith(errorToastAction({ message: e.message }))))
       )
    )
 
