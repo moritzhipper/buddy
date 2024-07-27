@@ -1,8 +1,8 @@
-import { TherapistNotificationResult } from './models'
-import { buddyDB, logger } from './tools'
+import { logger } from './tools'
 import { fetchOpenNotifications, handleFailedNotificationSends, sendSingleNotification } from './utils'
 
 // setInterval(notify, 1000 * 60)
+
 async function notify() {
    logger.info('Checking for open Notifications')
 

@@ -5,27 +5,14 @@
 ### Right now
 
 -  prominente meldung in browser, wenn subscriptions nicht enabled
-
--  hat ein nutzer mehrer anrufbare therapeuten, dann müssen die in einer nachricht geschickt werden
--  change user for pushservice to read only for few tables?
--  nur auf einem gerät benachrichtigungen möglich -> benamsung der buttons ändern: dieses gerät für benachrichtigungen wählen
+-  push service laufen lassend machen
+-  im push service zeit und tag generieren
 
 Flow:
 
--  bei anmeldung prüfen: sind benachrichtigungne aktiviert? einfach fragen und ans backend senden
--  bei deaktivieren: nicht delete afrufen, wpa push beschwert sich schon
-
-SELECT STRING_AGG(ut.name, ', ') AS therapist_names,
-s.subscription
-FROM subscriptions s
-JOIN users_therapists ut ON s.user_id = ut.user_id
-JOIN users_call_times uct ON ut.id = uct.therapist_id
-WHERE uct."from" = '12:12' AND weekday = ''
-GROUP BY s.subscription;
-der geht, ausser equality operation auf subscription
-
-https://blog.angular-university.io/angular-push-notifications/
-https://v17.angular.io/guide/service-worker-notifications
+-  bei anmeldung prüfen: sind benachrichtigungne aktiviert? wenn erlaubt, dann subscription ans backend senden
+-  nur auf einem gerät benachrichtigungen möglich -> benamsung der buttons ändern: dieses gerät für benachrichtigungen wählen
+-  'DIESES GERÄT IST FÜR BENACHRICHTIGUNGEN AKTIVIERT' anzeigen
 
 ### Soon
 

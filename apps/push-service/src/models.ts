@@ -4,11 +4,12 @@ export type TherapistNotification = {
    subscription: PushSubscription
    timeString: string
    therapistNames: string
+   userID: string
 }
 
 export type TherapistNotificationResult = {
    success: boolean
-   subscriptionID?: string
+   userID?: string
    error?: WebPushError
    result?: SendResult
 }
