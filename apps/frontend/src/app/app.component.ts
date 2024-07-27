@@ -9,7 +9,6 @@ import { LoadingIndicatorComponent } from './components/shared/loading-indicator
 import { NavigationBarComponent } from './components/shared/navigation-bar/navigation-bar.component'
 import { ToastComponent } from './components/shared/toast/toast.component'
 import { ToastType } from './models'
-import { NotificationService } from './services/notification.service'
 import { ToastService } from './services/toast.service'
 import { localConfigActions, therapistActions } from './store/buddy.actions'
 import { BuddyState } from './store/buddy.state'
@@ -28,16 +27,15 @@ export class AppComponent implements OnInit {
    profilePageIsOpen$: Observable<boolean>
    private _store = inject(Store<BuddyState>)
 
-   private notificationService = inject(NotificationService)
    private toastService = inject(ToastService)
 
    ngOnInit(): void {
       window.addEventListener('online', this.updateOnlineStatus.bind(this))
       window.addEventListener('offline', this.updateOnlineStatus.bind(this))
+      this._store.dispatch(localConfigActions.verifyNotificationsPermission())
    }
 
-   verifyNotifications() {
-   }
+   verifyNotifications() {}
 
    private updateOnlineStatus(): void {
       this.isOffline = !window.navigator.onLine

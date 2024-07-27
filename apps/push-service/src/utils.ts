@@ -1,5 +1,6 @@
-import webpush from 'web-push'
-import { buddyDB } from './tools'
+import { PushSubscription } from 'web-push'
+import { TherapistNotification, TherapistNotificationResult } from './models'
+import { buddyDB, logger } from './tools'
 
 export function generateNotification(therapistName: string, timeString: string): string {
    const notificationObject = {
@@ -25,10 +26,32 @@ export function generateNotification(therapistName: string, timeString: string):
    return JSON.stringify(notificationObject)
 }
 
-export type TherapistNotification = {
-   subscription: webpush.PushSubscription
-   timeString: string
-   therapistNames: string[]
+export function handleFailedNotificationSends(errorList: TherapistNotificationResult[]) {
+   const deadSubscriptionIDs = errorList.filter((error) => error.error.statusCode === 410).map((error) => error.subscriptionID)
+   const otherErrors = errorList.filter((error) => error.error.statusCode !== 410).map((error) => error.error)
+
+   logger.error(`Failed to send ${errorList.length} notifications.`)
+   // see here: https://pushpad.xyz/blog/web-push-error-410-the-push-subscription-has-expired-or-the-user-has-unsubscribed/
+   logger.error(`${deadSubscriptionIDs.length} subscriptions are expired or cancelled by user`)
+   logger.error(`${otherErrors.length} subscription could not be delivered because of other errors`, otherErrors)
+
+   removeDeadSubscriptions(deadSubscriptionIDs)
+}
+
+// todo -> wie identifiziere ich die toten subscriptions ohne alle direkt zu löschen?
+export async function removeDeadSubscriptions(subscriptionIDList: string[]): Promise<void> {
+   logger.info(`Deleting ${subscriptionIDList.length} dead push subscriptions`)
+
+   try {
+      const affectedRowsCount = buddyDB.result(
+         'DELETE FROM subscriptions WHERE subscription_id in ($1:csv)',
+         subscriptionIDList,
+         (result) => result.rowCount
+      )
+      logger.info(`Deleted ${affectedRowsCount} dead push subscriptions`)
+   } catch (e) {
+      logger.error('An error occured deleting dead subscriptions')
+   }
 }
 
 /**
@@ -44,42 +67,34 @@ export async function fetchOpenNotifications(): Promise<TherapistNotification[]>
 
    //------
 
-   const timeIn15Minutes = '08:00'
+   const timeIn15Minutes = '00:12'
    const weekday = 'mo'
 
-   // edgecases: multiple therapists callable
-   // multiple subscriptions active
-   // multiple entries for the same subscription
-   const dbResponse = await buddyDB.manyOrNone<{ subscription: webpush.PushSubscription }>(
-      `SELECT s.subscription, ut.name AS therapist_name, ut.user_id
-      FROM subscriptions s
-      JOIN users_therapists ut ON s.user_id = ut.user_id
-      JOIN users_call_times uct ON ut.id = uct.therapist_id
-      WHERE uct."from" = $1 AND uct.weekday = $2`,
+   const dbResponseRows = await buddyDB.manyOrNone<{ therapist_names: string; subscription: PushSubscription }>(
+      `SELECT STRING_AGG(ut.name, ', ') AS therapist_names, s.subscription
+       FROM subscriptions s
+       JOIN users_therapists ut ON s.user_id = ut.user_id
+       JOIN users_call_times uct ON ut.id = uct.therapist_id
+       WHERE reminder = true AND uct.from = $1 AND weekday = $2
+       GROUP BY s.subscription`,
       [timeIn15Minutes, weekday]
    )
+   const therapistNotifications: TherapistNotification[] = dbResponseRows.map((res) => ({
+      therapistNames: res.therapist_names,
+      subscription: res.subscription,
+      timeString: timeIn15Minutes,
+   }))
 
-   for (let row of dbResponse) {
-   }
-
-   type NotificatableByUser = { id: string; names: string[]; subscriptions: any[] }
-
-   // fetch all callable names per user and map them to an array
-   // fetch all subscriptions per user
-
-   // generate a TherapistNotification for every subscript
-   // map those name on one instance of TherapisNotification
-   // fetch all subscriptions per user
-   //
-
-   return
+   return therapistNotifications
 }
 
-// const dbResponse = await buddyDB.manyOrNone<{ subscription: webpush.PushSubscription }>(
-//    `SELECT s.subscription, ut.name AS therapist_name, ut.user_id
-//    FROM subscriptions s
-//    JOIN users_therapists ut ON s.user_id = ut.user_id
-//    JOIN users_call_times uct ON ut.id = uct.therapist_id
-//    WHERE uct.from = '08:00' AND uct.weekday = 'mo'`,
-//    timeIn15Minutes
-// )
+export async function sendSingleNotification(therapistNotification: TherapistNotification): Promise<TherapistNotificationResult> {
+   const notification = generateNotification('Felia', '12:15')
+
+   try {
+      const result = await buddyWebpush.sendNotification(therapistNotification.subscription, notification)
+      return { success: true, result }
+   } catch (error) {
+      return { success: false, error, userID: therapistNotification.userID }
+   }
+}

@@ -4,42 +4,24 @@
 
 ### Right now
 
--  check if subscription acitvated
+-  prominente meldung in browser, wenn subscriptions nicht enabled
 
-   -  no installation necessary, because service worker always is
-      installed via turthyness of swPush (because its only avalable if serviceworker is available )
-
--  unsubscribe action aus service bei unsubscribe
-   -  wie asyn in service????
--  effect und errorhandling gerade ziehen
--  in store einbauen methoden aus notification service
-   -  browserissetupcorrectly
-   -  backendknowsofsubscription
-   -  dann okay an service
--  in store einbauen
-   -  remove notifications
--  dann auch in settings ergänzen
-
--  read subscriptions from db in push service
--  allow multiple subscriptions for user
--  implement deletion of subscription
--  store subscription stuff encrypted
--  bei abmeldung notifications disablen
 -  hat ein nutzer mehrer anrufbare therapeuten, dann müssen die in einer nachricht geschickt werden
 -  change user for pushservice to read only for few tables?
--  wie handle ich mehrere subscriptions? eigentlich muss ich ein distinct check auf die subscription-url machen
--  bei profile lesen auslesen, ob notifications gesendet werden dürfen (geht das?)
--  benachrichtigungsstatus in den settings: erlauben/verbieten
+-  nur auf einem gerät benachrichtigungen möglich -> benamsung der buttons ändern: dieses gerät für benachrichtigungen wählen
 
-SELECT
-s.user_id,
-STRING_AGG(ut.name, ', ') AS therapist_names,
+Flow:
+
+-  bei anmeldung prüfen: sind benachrichtigungne aktiviert? einfach fragen und ans backend senden
+-  bei deaktivieren: nicht delete afrufen, wpa push beschwert sich schon
+
+SELECT STRING_AGG(ut.name, ', ') AS therapist_names,
 s.subscription
 FROM subscriptions s
 JOIN users_therapists ut ON s.user_id = ut.user_id
 JOIN users_call_times uct ON ut.id = uct.therapist_id
-WHERE uct."from" = '13:15'
-GROUP BY s.user_id, s.subscription;
+WHERE uct."from" = '12:12' AND weekday = ''
+GROUP BY s.subscription;
 der geht, ausser equality operation auf subscription
 
 https://blog.angular-university.io/angular-push-notifications/

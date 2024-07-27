@@ -14,7 +14,9 @@ const userFeBeMap: BeFeValueMap = [['call_precaution_time', 'callPrecautionTime'
 
 const addressFeBeMap: BeFeValueMap = [['street_number', 'streetNumber']]
 
-const allMaps: BeFeValueMap = [...therapistFeBeMap, ...userFeBeMap, ...addressFeBeMap]
+const subscriptionFeBeMap: BeFeValueMap = [['subscription_id', 'ssubscriptionID']]
+
+const allMaps: BeFeValueMap = [...therapistFeBeMap, ...userFeBeMap, ...addressFeBeMap, ...subscriptionFeBeMap]
 
 /**
  * Remap object key names from fronted to values used by DBs tables and vice versa

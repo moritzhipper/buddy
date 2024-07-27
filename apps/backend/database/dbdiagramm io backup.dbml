@@ -75,7 +75,7 @@ Table shared_addresses {
 
 Table subscriptions {
   user_id uuid [unique, not null]
-  subscription JSON [not null]
+  subscription JSONB [unique, not null]
 }
 
 Table users {

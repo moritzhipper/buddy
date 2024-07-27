@@ -51,7 +51,7 @@ CREATE TABLE "shared_addresses" (
 
 CREATE TABLE "subscriptions" (
   "user_id" uuid UNIQUE NOT NULL,
-  "subscription" JSON NOT NULL
+  "subscription" JSONB UNIQUE NOT NULL
 );
 
 CREATE TABLE "users" (

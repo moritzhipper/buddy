@@ -13,7 +13,6 @@ export class NotificationService {
    private readonly VAPID_PUBLIC_KEY = environment.vapidKeyPublic
 
    async getPushSubscription(): Promise<PushSubscription> {
-      // do this seperatly from swPush method to be able to give user explicit cause of error
       const isAllowedToNotify = (await Notification.requestPermission()) === 'granted'
 
       if (!isAllowedToNotify) {

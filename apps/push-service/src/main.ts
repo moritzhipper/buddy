@@ -1,30 +1,28 @@
-import { buddyWebpush, logger } from './tools'
-import { fetchOpenNotifications, generateNotification } from './utils'
+import { TherapistNotificationResult } from './models'
+import { buddyDB, logger } from './tools'
+import { fetchOpenNotifications, handleFailedNotificationSends, sendSingleNotification } from './utils'
 
 // setInterval(notify, 1000 * 60)
 async function notify() {
    logger.info('Checking for open Notifications')
 
-   const subscriptions = await fetchOpenNotifications()
+   const therapistNotifications = await fetchOpenNotifications()
 
-   logger.info(`Found ${subscriptions.length} subscriptions`)
+   logger.info(`Found ${therapistNotifications.length} open notifications`)
 
-   if (subscriptions.length >= 1) {
-      const startExecutionTime = performance.now()
+   try {
+      const results = await Promise.all(therapistNotifications.map(sendSingleNotification))
 
-      let notificationRequests = []
-      for (let subscription of subscriptions) {
-         const notificationObjAsString = generateNotification('Felia flieder', '14:15')
-         notificationRequests.push(buddyWebpush.sendNotification(subscription.subscription, notificationObjAsString))
+      const successful = results.filter((result) => result.success)
+      const failed = results.filter((results) => !results.success)
+
+      console.log(`Successfully sent ${successful.length}`)
+
+      if (failed.length > 0) {
+         handleFailedNotificationSends(failed)
       }
-
-      try {
-         await Promise.all(notificationRequests)
-         const executionTime = performance.now() - startExecutionTime
-         logger.info(`Sent ${subscriptions.length} Notifications in ${executionTime}`)
-      } catch (e) {
-         logger.error(e)
-      }
+   } catch (error) {
+      console.error('Error occured while trying to notify users of call times', error)
    }
 }
 

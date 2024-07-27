@@ -87,9 +87,18 @@
          @if(notificationsEnabled$ | async) {
          <p><b>Benachrichtigungen sind Bereits aktiviert.</b></p>
          } @else {
-         <p>Klicke einfach hier: <button (click)="verifySubscriptionExists()">Benachrichtigungen aktivieren</button></p>
+         <p>Klicke einfach hier: <button (click)="verifySubscriptionExists()" class="activate-subscription">Benachrichtigungen aktivieren</button></p>
          }
-         <p>Wenn du sie aus Versehen deaktiviert hast, Navigiere zu den Einstellungen deines Browsers // TODO: fertig erklären</p>
+         <p>
+            Benachrichtigungen müssen für jedes Gerät einzeln aktiviert werden. Willst du zusätzlich auf deinem Computer oder Smartphone
+            benachrichtigt werden, musst sie dort auch erlauben.
+         </p>
+         <p>Wenn du sie aus Versehen deaktiviert hast, kannst du folgendes tun:</p>
+         <p>
+            <b> Auf Chrome, Edge und Samsung Internet</b>
+            // TODO
+         </p>
+         <p><b>Auf Safari</b> // TODO</p>
       </div>
    </app-accordion>
    <app-accordion>

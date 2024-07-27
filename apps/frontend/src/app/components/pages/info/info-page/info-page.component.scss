@@ -1,5 +1,11 @@
 @use '_index' as *;
 
+@include small-screen {
+   button.activate-subscription {
+      width: 100%;
+   }
+}
+
 .body-wrapper {
    padding: 0 16px 16px 16px;
 
@@ -7,9 +13,9 @@
       margin-top: 16px;
       font-weight: bold;
    }
-   button {
+   button.activate-subscription {
       @include buttonSmall;
-      margin: 8px;
+      margin: 8px 0;
       display: inline-block;
    }
 
