@@ -12,11 +12,10 @@ async function notify() {
 
    try {
       const results = await Promise.all(therapistNotifications.map(sendSingleNotification))
-
       const successful = results.filter((result) => result.success)
       const failed = results.filter((results) => !results.success)
 
-      console.log(`Successfully sent ${successful.length}`)
+      console.log(`Successfully sent ${successful.length} Notifications`)
 
       if (failed.length > 0) {
          handleFailedNotificationSends(failed)

@@ -50,6 +50,7 @@ CREATE TABLE "shared_addresses" (
 );
 
 CREATE TABLE "subscriptions" (
+  "id" uuid UNIQUE PRIMARY KEY NOT NULL DEFAULT (gen_random_uuid()),
   "user_id" uuid UNIQUE NOT NULL,
   "subscription" JSONB UNIQUE NOT NULL
 );

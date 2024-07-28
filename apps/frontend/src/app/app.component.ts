@@ -35,8 +35,6 @@ export class AppComponent implements OnInit {
       this._store.dispatch(localConfigActions.verifyNotificationsPermission())
    }
 
-   verifyNotifications() {}
-
    private updateOnlineStatus(): void {
       this.isOffline = !window.navigator.onLine
 

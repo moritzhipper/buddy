@@ -3,13 +3,13 @@ import { PushSubscription, SendResult, WebPushError } from 'web-push'
 export type TherapistNotification = {
    subscription: PushSubscription
    timeString: string
-   therapistNames: string
-   userID: string
+   therapistNames: string[]
+   subscriptionID: string
 }
 
 export type TherapistNotificationResult = {
    success: boolean
-   userID?: string
+   subscriptionID?: string
    error?: WebPushError
    result?: SendResult
 }

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { catchError, map, of, startWith, switchMap } from 'rxjs'
+import { catchError, map, of, startWith, switchMap, tap } from 'rxjs'
 import { BackendAdapterService } from '../../services/backend-adapter.service'
 import { NotificationService } from '../../services/notification.service'
 import { errorToastAction, httpErrorAction, localConfigActions } from '../buddy.actions'
@@ -25,16 +25,12 @@ export class LocalConfigEffects {
       )
    )
 
-   removeNotificationPermission$ = createEffect(() =>
-      this.actions$.pipe(
-         ofType(localConfigActions.removeNotificationPermission),
-         switchMap(() => this.notificationService.unsubscribePushSubscription()),
-         switchMap(() => {
-            return this.backendAdapter.removeSubscription().pipe(
-               map(() => localConfigActions.notificationRemovalSuccessfull()),
-               catchError((error) => of(httpErrorAction({ error })))
-            )
-         })
-      )
+   removeNotificationPermission$ = createEffect(
+      () =>
+         this.actions$.pipe(
+            ofType(localConfigActions.removeNotificationPermission),
+            tap(() => this.notificationService.unsubscribePushSubscription())
+         ),
+      { dispatch: false }
    )
 }

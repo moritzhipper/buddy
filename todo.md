@@ -7,6 +7,7 @@
 -  prominente meldung in browser, wenn subscriptions nicht enabled
 -  push service laufen lassend machen
 -  im push service zeit und tag generieren
+-  therapist names mit komma und und trennen
 
 Flow:
 

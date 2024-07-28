@@ -2,7 +2,7 @@ import { PushSubscription } from 'web-push'
 import { TherapistNotification, TherapistNotificationResult } from './models'
 import { buddyDB, buddyWebpush, logger } from './tools'
 
-export function generateNotification(therapistNames: string, timeString: string): string {
+export function generateNotification(therapistNames: string[], timeString: string): string {
    const notificationObject = {
       notification: {
          title: 'Es ist so weit',
@@ -35,8 +35,8 @@ export async function fetchOpenNotifications(): Promise<TherapistNotification[]>
    const timeIn15Minutes = '00:12'
    const weekday = 'mo'
 
-   const dbResponseRows = await buddyDB.manyOrNone<{ therapist_names: string; user_id: string; subscription: PushSubscription }>(
-      `SELECT STRING_AGG(ut.name, ', ') AS therapist_names, s.subscription, s.user_id
+   const dbResponseRows = await buddyDB.manyOrNone<{ therapist_names: string[]; id: string; subscription: PushSubscription }>(
+      `SELECT JSON_AGG(ut.name) AS therapist_names, s.subscription, s.id
        FROM subscriptions s
        JOIN users_therapists ut ON s.user_id = ut.user_id
        JOIN users_call_times uct ON ut.id = uct.therapist_id
@@ -49,28 +49,29 @@ export async function fetchOpenNotifications(): Promise<TherapistNotification[]>
       therapistNames: res.therapist_names,
       subscription: res.subscription,
       timeString: timeIn15Minutes,
-      userID: res.user_id,
+      subscriptionID: res.id,
    }))
 
    return therapistNotifications
 }
 
 export async function sendSingleNotification(therapistNotification: TherapistNotification): Promise<TherapistNotificationResult> {
-   const notification = generateNotification('Felia', '12:15')
+   const notification = generateNotification(['Felia'], '12:15')
 
    try {
       const result = await buddyWebpush.sendNotification(therapistNotification.subscription, notification)
       return { success: true, result }
    } catch (error) {
-      return { success: false, error, userID: therapistNotification.userID }
+      return { success: false, error, subscriptionID: therapistNotification.subscriptionID }
    }
 }
 
 export function handleFailedNotificationSends(errorList: TherapistNotificationResult[]) {
-   const deadSubscriptionIDs = errorList.filter((error) => error.error.statusCode === 410).map((error) => error.userID)
+   const deadSubscriptionIDs = errorList.filter((error) => error.error.statusCode === 410).map((error) => error.subscriptionID)
    const otherErrors = errorList.filter((error) => error.error.statusCode !== 410).map((error) => error.error)
 
    logger.error(`Failed to send ${errorList.length} notifications.`)
+
    // see here: https://pushpad.xyz/blog/web-push-error-410-the-push-subscription-has-expired-or-the-user-has-unsubscribed/
    logger.error(`${deadSubscriptionIDs.length} subscriptions are expired or cancelled by user`)
    logger.error(`${otherErrors.length} subscription could not be delivered because of other errors`, otherErrors)
@@ -83,7 +84,7 @@ async function removeDeadSubscriptions(subscriptionIDList: string[]): Promise<vo
 
    try {
       const affectedRowsCount = await buddyDB.result(
-         'DELETE FROM subscriptions WHERE user_id in ($1:csv)',
+         'DELETE FROM subscriptions WHERE id in ($1:csv)',
          subscriptionIDList,
          (result) => result.rowCount
       )

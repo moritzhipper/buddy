@@ -74,6 +74,7 @@ Table shared_addresses {
 }
 
 Table subscriptions {
+  id uuid [pk, unique, not null, default: `gen_random_uuid()`]
   user_id uuid [unique, not null]
   subscription JSONB [unique, not null]
 }

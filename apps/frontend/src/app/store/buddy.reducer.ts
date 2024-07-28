@@ -19,7 +19,7 @@ export const profileReducer = createReducer(
 export const localConfigReducer = createReducer(
    { notificationsEnabled: false } as LocalConfigState,
    on(localConfigActions.notificationVerificationSuccessfull, () => ({ notificationsEnabled: true })),
-   on(localConfigActions.notificationRemovalSuccessfull, () => ({ notificationsEnabled: false }))
+   on(localConfigActions.removeNotificationPermission, () => ({ notificationsEnabled: false }))
 )
 
 export const searchReducer = createReducer(
