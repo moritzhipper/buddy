@@ -15,7 +15,7 @@ async function notify() {
       const successful = results.filter((result) => result.success)
       const failed = results.filter((results) => !results.success)
 
-      console.log(`Successfully sent ${successful.length} Notifications`)
+      logger.info(`Successfully sent ${successful.length} Notifications`)
 
       if (failed.length > 0) {
          handleFailedNotificationSends(failed)
@@ -25,4 +25,4 @@ async function notify() {
    }
 }
 
-// notify()
+notify()

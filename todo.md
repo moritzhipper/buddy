@@ -12,8 +12,8 @@
 Flow:
 
 -  bei anmeldung prüfen: sind benachrichtigungne aktiviert? wenn erlaubt, dann subscription ans backend senden
--  nur auf einem gerät benachrichtigungen möglich -> benamsung der buttons ändern: dieses gerät für benachrichtigungen wählen
--  'DIESES GERÄT IST FÜR BENACHRICHTIGUNGEN AKTIVIERT' anzeigen
+-  wenn für das gerät schon eine subscription existiert, wird im backend die user_id für den neu angemeldeten user aktualisiert
+-  löschen der subscription unsubscribed nur im browser. das backend räumt die subscription auf, wenn es einen 'dead subscription' fehler beim senden bekommt
 
 ### Soon
 

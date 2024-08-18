@@ -5,7 +5,7 @@ import { LocalConfigState, SearchState } from './buddy.state'
 
 export const therapistsReducer = createReducer(
    [],
-   on(therapistActions.save, (state, { props }) => updateArrayByID(state, props)),
+   on(therapistActions.save, (state, { props }) => upsertArray(state, props)),
    on(therapistActions.saveMany, (state, { props }) => props),
    on(therapistActions.deleteSuccess, (state, { id }) => state.filter((item) => item.id !== id))
 )
@@ -71,7 +71,7 @@ export const metaReducers: MetaReducer<any>[] = [storeSyncReducer, resetUserData
  * @param newItem
  * @returns []
  */
-function updateArrayByID<T extends UniqueItem>(currentState: T[], newItem: T): T[] {
+function upsertArray<T extends UniqueItem>(currentState: T[], newItem: T): T[] {
    const stateHavingObWIthID = currentState.some((item) => item.id === newItem.id)
    // if object containig id exists: update. Else just append to array
    if (stateHavingObWIthID) {

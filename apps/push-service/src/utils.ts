@@ -41,7 +41,7 @@ export async function fetchOpenNotifications(): Promise<TherapistNotification[]>
        JOIN users_therapists ut ON s.user_id = ut.user_id
        JOIN users_call_times uct ON ut.id = uct.therapist_id
        WHERE reminder = true AND uct.from = $1 AND weekday = $2
-       GROUP BY s.subscription`,
+       GROUP BY s.id`,
       [timeIn15Minutes, weekday]
    )
 
