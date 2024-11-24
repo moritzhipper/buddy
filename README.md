@@ -1,69 +1,47 @@
-# BuddyMono
+# Buddy
 
-## Local Setup
+## Features
 
-### Set environment Variables
+### 🛠 **Manage Your Therapists**
 
-See [Docu](https://nx.dev/recipes/tips-n-tricks/define-environment-variables)
+- Add, edit, and delete therapists you find interesting.
+- Save detailed therapist profiles, including:
+  - Contact information
+  - Availability (times when they can be called)
+  - Specific areas of expertise
+  - Any additional notes or important details.
 
--  Duplicate `.env.local-TEMPLATE`, rename to `.env.local`
--  Fill out
+### ⏰ **Get Notified**
 
-## Important Infos
+- Receive reminders shortly before therapists are callable.
 
-## Integrate with editors
+### 🤝 **Collaborative Therapist Database**
 
-Enhance your Nx experience by installing [Nx Console](https://nx.dev/nx-console) for your favorite editor. Nx Console
-provides an interactive UI to view your projects, run tasks, generate code, and more! Available for VSCode, IntelliJ and
-comes with a LSP for Vim users.
+- Your saved therapists are stored locally and in a shared database.
+- The shared database allows all users to contribute and benefit from a growing, consolidated repository of therapists.
+- Simplifies the process of finding a therapist by leveraging community-driven data.
 
-## Start the application
+---
 
-Run `npx nx serve frontend` to start the development server. Happy coding!
+## Tech Stack
 
-## Build for production
+### **Frontend**
 
-Run `npx nx build frontend` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
+- **Angular**: For building a responsive, mobile-friendly PWA.
+- **PWA**: Supports offline functionality and push notifications.
 
-## Running tasks
+### **Backend**
 
-To execute tasks with Nx use the following syntax:
+- **Express.js**: Provides a robust REST API for managing therapist data and user actions.
 
-```
-npx nx <target> <project> <...options>
-```
+### **Database**
 
-You can also run multiple targets:
+- **PostgreSQL**: Ensures reliable and efficient data storage for user and shared therapist records.
 
-```
-npx nx run-many -t <target1> <target2>
-```
+### **Monorepo Management**
 
-..or add `-p` to filter specific projects
+- **NX**: Streamlines development by managing both the Angular frontend and Express backend in a single monorepo.
 
-```
-npx nx run-many -t <target1> <target2> -p <proj1> <proj2>
-```
+## Questions?
 
-Targets can be defined in the `package.json` or `projects.json`. Learn more [in the docs](https://nx.dev/features/run-tasks).
-
-## Set up CI!
-
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
-
--  [Set up remote caching](https://nx.dev/features/share-your-cache)
--  [Set up task distribution across multiple machines](https://nx.dev/nx-cloud/features/distribute-task-execution)
--  [Learn more how to setup CI](https://nx.dev/recipes/ci)
-
-## Explore the project graph
-
-Run `npx nx graph` to show the graph of the workspace.
-It will show tasks that you can run with Nx.
-
--  [Learn more about Exploring the Project Graph](https://nx.dev/core-features/explore-graph)
-
-## Connect with us!
-
--  [Join the community](https://nx.dev/community)
--  [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
--  [Follow us on Twitter](https://twitter.com/nxdevtools)
+Feel free to reach out by opening an issue or contributing directly. Together, we can make finding the right therapist easier for everyone! 💙
