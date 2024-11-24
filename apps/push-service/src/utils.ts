@@ -90,6 +90,6 @@ async function removeDeadSubscriptions(subscriptionIDList: string[]): Promise<vo
       )
       logger.info(`Deleted ${affectedRowsCount} dead push subscriptions`)
    } catch (e) {
-      logger.error('An error occured deleting dead subscriptions')
+      logger.error('An error occured deleting dead push subscriptions')
    }
 }

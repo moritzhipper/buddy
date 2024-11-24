@@ -29,6 +29,7 @@ if (ENVIRONMENT === 'development') {
 }
 
 app.use(loggerMiddleware)
+
 app.use(validateSecret)
 app.use(authorize)
 app.use(BuddyRoutes.PROFILE, profileRoute)

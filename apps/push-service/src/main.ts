@@ -7,6 +7,7 @@ async function notify() {
    logger.info('Checking for open Notifications')
 
    const therapistNotifications = await fetchOpenNotifications()
+   console.log(therapistNotifications)
 
    logger.info(`Found ${therapistNotifications.length} open notifications`)
 
